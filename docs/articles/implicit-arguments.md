@@ -6,10 +6,10 @@ author: Xie Yuheng
 # Implicit function insertion
 
 ```cicada
-check! (x) => x: (implicit A: Type, A) -> A
+check (x) => x: (implicit A: Type, A) -> A
 
 // Elaboration
-check! (implicit A, x) => x: (implicit A: Type, A) -> A
+check (implicit A, x) => x: (implicit A: Type, A) -> A
 ```
 
 1. `(x) => x` is not an implicit function
@@ -79,10 +79,10 @@ function my_list_cons(vague A: Type, head: A, tail: List(A)): List(A) {
 }
 
 // Check
-check! my_list_cons("abc", List.null): List(String)
+check my_list_cons("abc", List.null): List(String)
 
 // Elaboration
-check! my_list_cons(vague String, "abc", List.null): List(String)
+check my_list_cons(vague String, "abc", List.null): List(String)
 ```
 
 1. Infer `(vague A: Type, head: A, tail: List(A)) -> List(A)` for `my_list_cons`

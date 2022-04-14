@@ -1,4 +1,3 @@
-- [syntax] `check` instead of `check!`
 - [syntax] `same_as_chart` instead of `same_as_chart!`
 
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`

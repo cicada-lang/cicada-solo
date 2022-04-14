@@ -20,18 +20,18 @@ datatype List(E: Type) {
 After the definition, `List` taken a `Type` is a `Type`.
 
 ```cicada
-check! List: (E: Type) -> Type
-check! List(String): Type
-check! List(Trivial): Type
+check List: (E: Type) -> Type
+check List(String): Type
+check List(Trivial): Type
 ```
 
 Let construct a `List` of "a", "b", "c", step by step.
 
 ```cicada
-check! List.null: List(String)
-check! List.cons("a", List.null): List(String)
-check! List.cons("a", List.cons("b", List.null)): List(String)
-check! List.cons("a", List.cons("b", List.cons("c", List.null))): List(String)
+check List.null: List(String)
+check List.cons("a", List.null): List(String)
+check List.cons("a", List.cons("b", List.null)): List(String)
+check List.cons("a", List.cons("b", List.cons("c", List.null))): List(String)
 ```
 
 # About induction over List

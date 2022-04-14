@@ -28,29 +28,29 @@ Vector.null(vague Nat)
 
 Vector.cons
 
-check! Vector.null: Vector(String, zero)
-check! Vector.cons(one, Vector.null): Vector(Nat, one)
-check! Vector.cons(vague Nat, one, Vector.null): Vector(Nat, one)
-check! Vector.cons(vague Nat, vague zero, one, Vector.null): Vector(Nat, one)
+check Vector.null: Vector(String, zero)
+check Vector.cons(one, Vector.null): Vector(Nat, one)
+check Vector.cons(vague Nat, one, Vector.null): Vector(Nat, one)
+check Vector.cons(vague Nat, vague zero, one, Vector.null): Vector(Nat, one)
 
-check! Vector.cons("a", Vector.null): Vector(String, one)
-check! Vector.cons(vague String, "a", Vector.null): Vector(String, one)
-check! Vector.cons(vague String, vague zero, "a", Vector.null): Vector(String, one)
+check Vector.cons("a", Vector.null): Vector(String, one)
+check Vector.cons(vague String, "a", Vector.null): Vector(String, one)
+check Vector.cons(vague String, vague zero, "a", Vector.null): Vector(String, one)
 
-check! Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.null))): Vector(String, three)
+check Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.null))): Vector(String, three)
 ```
 
 We can bind partly applied data constructor to local variable.
 
 ```cicada
-check! {
+check {
   let f = Vector.cons(vague Nat, vague zero, one)
   return f(Vector.null)
 }: Vector(Nat, one)
 
 // NOTE But remind that vague function can not be (auto) curried.
 //   thus the following code is not valid.
-// check! {
+// check {
 //   let f = Vector.cons(one)
 //   return f(Vector.null)
 // }: Vector(Nat, one)
@@ -58,7 +58,7 @@ check! {
 // NOTE Although we can *not* get a curried data constructor for free,
 //   we can define a vague function by hand,
 //   as an abstraction over data construction.
-check! {
+check {
   function f(
     vague prev: Nat,
     tail: Vector(String, prev),
@@ -72,7 +72,7 @@ check! {
 
 ```cicada
 // NOTE Application to given vague argument can be curried.
-check! {
+check {
   let f = Vector.cons(vague String)
   return f
 }: (
@@ -81,7 +81,7 @@ check! {
   tail: Vector(String, prev),
 ) -> Vector(String, Nat.add1(prev))
 
-check! {
+check {
   let f = Vector.cons(vague String)
   return f("a", Vector.null)
 }: Vector(String, one)

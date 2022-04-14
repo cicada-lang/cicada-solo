@@ -1,5 +1,5 @@
 // NOTE C should not be in scope.
-check! (
+check (
   implicit A,
   implicit B,
   triple,

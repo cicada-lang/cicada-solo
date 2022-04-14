@@ -11,11 +11,11 @@ title: Built-in Types
 Type
 ```
 
-We can use `check! <exp>: <type>`,
+We can use `check <exp>: <type>`,
 to make assertion about an expression's type.
 
 ```cicada
-check! Type: Type
+check Type: Type
 ```
 
 Don't forget that code blocks on our website are interactive,
@@ -28,7 +28,7 @@ hovering over them to see a menu button.
 ```cicada
 String
 
-check! String: Type
+check String: Type
 ```
 
 We use double-quoted `String`.
@@ -36,7 +36,7 @@ We use double-quoted `String`.
 ```cicada
 "Hello, World!"
 
-check! "Hello, World!": String
+check "Hello, World!": String
 ```
 
 We can use `let <name> = <exp>` to do assignment.
@@ -52,8 +52,8 @@ my_name
 `Trivial` is a `Type`, and `sole` is its only element.
 
 ```cicada
-check! Trivial: Type
-check! sole: Trivial
+check Trivial: Type
+check sole: Trivial
 ```
 
 `let` can be nested in `{ ...; return ... }`.
@@ -74,13 +74,13 @@ result
 `Pair` taken two `Type`s, is a `Type`.
 
 ```cicada
-check! Pair(String, Trivial): Type
+check Pair(String, Trivial): Type
 ```
 
 We can use `cons` to construct `Pair`.
 
 ```cicada
-check! cons("abc", sole): Pair(String, Trivial)
+check cons("abc", sole): Pair(String, Trivial)
 ```
 
 And using `car` to get a `Pair`'s first element,
@@ -95,8 +95,8 @@ using `cdr` to get a `Pair`'s second element.
 ```cicada
 let pair: Pair(String, Trivial) = cons("abc", sole)
 
-check! car(pair): String
-check! cdr(pair): Trivial
+check car(pair): String
+check cdr(pair): Trivial
 ```
 
 We use `Both` as another name of `Pair`,
@@ -114,8 +114,8 @@ Both(String, Trivial)
 We can write nested `Pair`.
 
 ```cicada
-check! Pair(Type, Pair(String, Trivial)): Type
-check! cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
+check Pair(Type, Pair(String, Trivial)): Type
+check cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
 ```
 
 # Sigma
@@ -134,10 +134,10 @@ while for `Sigma`, when the first expression is different,
 the second type can change,
 
 ```cicada
-check! exists (x: Pair(Type, Type)) car(x): Type
+check exists (x: Pair(Type, Type)) car(x): Type
 
-check! cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
-check! cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
+check cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
+check cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
 ```
 
 `Pair` is actually a special form of `Sigma`.
@@ -160,17 +160,17 @@ where `A` is the **argument type**,
 and `R` is the **return type**.
 
 ```cicada
-check! (String) -> Trivial: Type
-check! (Pair(String, Trivial)) -> Pair(Trivial, String): Type
+check (String) -> Trivial: Type
+check (Pair(String, Trivial)) -> Pair(Trivial, String): Type
 ```
 
 We use `(x) => ...` to construct **anonymous function**,
 which is also famously called **lambda**.
 
 ```cicada
-check! (x) => sole: (String) -> Trivial
+check (x) => sole: (String) -> Trivial
 
-check! (pair) => cons(cdr(pair), car(pair)):
+check (pair) => cons(cdr(pair), car(pair)):
   (Pair(String, Trivial)) -> Pair(Trivial, String)
 ```
 
@@ -179,7 +179,7 @@ We can use `let <name>: <type> = <exp>` to give an anonymous function a name.
 ```cicada
 let very_trivial: (String) -> Trivial = (x) => sole
 
-check! very_trivial("any string"): Trivial
+check very_trivial("any string"): Trivial
 ```
 
 We can also use `function` to define a function.
@@ -191,8 +191,8 @@ function swap_pair(
   return cons(cdr(pair), car(pair))
 }
 
-check! pair: Pair(String, Trivial)
-check! swap_pair(pair): Pair(Trivial, String)
+check pair: Pair(String, Trivial)
+check swap_pair(pair): Pair(Trivial, String)
 ```
 
 # Pi
@@ -214,8 +214,8 @@ while for `Pi`, when the argument expression is different,
 the return type can change.
 
 ```cicada
-check! (T: Type) -> (T) -> T: Type
-check! forall (T: Type) (T) -> T: Type
+check (T: Type) -> (T) -> T: Type
+check forall (T: Type) (T) -> T: Type
 ```
 
 The return type of the above `Pi` is `(T) -> T`,
@@ -243,7 +243,7 @@ function the(T: Type, x: T): T {
 `Absurd` is a very special `Type`, because it has no elements.
 
 ```cicada
-check! Absurd: Type
+check Absurd: Type
 ```
 
 We have a built-in function called `from_falsehood_anything`,
@@ -252,7 +252,7 @@ If you have a element of type `Absurd`,
 you can use it to prove anything.
 
 ```cicada
-check! from_falsehood_anything:
+check from_falsehood_anything:
   (target: Absurd, motive: Type) -> motive
 ```
 
@@ -271,22 +271,22 @@ Given a `Type`, and two expressions of that `Type`,
 we can create a new `Type` to express the two expressions are the same.
 
 ```cicada
-check! Equal(String, "abc", "abc"): Type
-check! Equal(Trivial, sole, sole): Type
+check Equal(String, "abc", "abc"): Type
+check Equal(Trivial, sole, sole): Type
 ```
 
 We can use `the_same` to construct elements of this type.
 
 ```cicada
-check! the_same(String, "abc"): Equal(String, "abc", "abc")
-check! the_same(Trivial, sole): Equal(Trivial, sole, sole)
+check the_same(String, "abc"): Equal(String, "abc", "abc")
+check the_same(Trivial, sole): Equal(Trivial, sole, sole)
 ```
 
 If we want to omit the first argument, we can use `same`.
 
 ```cicada
-check! same("abc"): Equal(String, "abc", "abc")
-check! same(sole): Equal(Trivial, sole, sole)
+check same("abc"): Equal(String, "abc", "abc")
+check same(sole): Equal(Trivial, sole, sole)
 ```
 
 If we want to omit all arguments, we can use `refl`, which means "reflection".
@@ -294,8 +294,8 @@ If we want to omit all arguments, we can use `refl`, which means "reflection".
 - We can omit all arguments, because after all, all the informations are already in the type.
 
 ```cicada
-check! refl: Equal(String, "abc", "abc")
-check! refl: Equal(Trivial, sole, sole)
+check refl: Equal(String, "abc", "abc")
+check refl: Equal(Trivial, sole, sole)
 ```
 
 If the two elements are actually not the same,
@@ -305,7 +305,7 @@ but we will not be able to construct any elements of this type.
 ```cicada
 // NOTE There is no way by which we can construct
 //   an element of the following type.
-check! Equal(String, "abc", "de"): Type
+check Equal(String, "abc", "de"): Type
 ```
 
 By the way, we use `// ...` to write comments in code,

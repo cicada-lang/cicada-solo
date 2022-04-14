@@ -12,7 +12,7 @@ datatype MyEqual(T: Type) (from: T, to: T) {
 
 ```cicada
 MyEqual.refl
-check! MyEqual.refl: MyEqual(String, "a", "a")
+check MyEqual.refl: MyEqual(String, "a", "a")
 ```
 
 # my_equal_replace

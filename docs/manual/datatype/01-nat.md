@@ -21,17 +21,17 @@ datatype Nat {
 After the definition, `Nat` is a `Type`.
 
 ```cicada
-check! Nat: Type
+check Nat: Type
 ```
 
 And we can use `Nat`'s constructors to construct `Nat`.
 
 ```cicada
-check! Nat.zero: Nat
-check! Nat.add1: (Nat) -> Nat
+check Nat.zero: Nat
+check Nat.add1: (Nat) -> Nat
 
-check! Nat.add1(Nat.zero): Nat
-check! Nat.add1(Nat.add1(Nat.zero)): Nat
+check Nat.add1(Nat.zero): Nat
+check Nat.add1(Nat.add1(Nat.zero)): Nat
 ```
 
 We define some common natural numbers,
@@ -104,9 +104,9 @@ will return another function that takes one argument.
 This is called **currying**.
 
 ```cicada
-check! add: (Nat, Nat) -> Nat
-check! add(one): (Nat) -> Nat
-check! add(one, one): Nat
+check add: (Nat, Nat) -> Nat
+check add(one): (Nat) -> Nat
+check add(one, one): Nat
 ```
 
 We often use `same_as_chart!` to write test.

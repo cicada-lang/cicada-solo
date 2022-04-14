@@ -173,11 +173,11 @@ list_ref(two, abc)
 list_ref(three, abc)
 list_ref(four, abc)
 
-check! list_ref(zero, abc): Maybe(String)
-check! list_ref(one, abc): Maybe(String)
-check! list_ref(two, abc): Maybe(String)
-check! list_ref(three, abc): Maybe(String)
-check! list_ref(four, abc): Maybe(String)
+check list_ref(zero, abc): Maybe(String)
+check list_ref(one, abc): Maybe(String)
+check list_ref(two, abc): Maybe(String)
+check list_ref(three, abc): Maybe(String)
+check list_ref(four, abc): Maybe(String)
 ```
 
 ## list_ref_vague
@@ -196,15 +196,15 @@ function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
 }
 
 list_ref_vague(vague String, zero, abc)
-check! list_ref_vague(vague String, zero, abc): Maybe(String)
+check list_ref_vague(vague String, zero, abc): Maybe(String)
 
-check! list_ref_vague(zero, abc): Maybe(String)
+check list_ref_vague(zero, abc): Maybe(String)
 ```
 
 ```cicada
-check! list_ref_vague(zero, abc): Maybe(String)
-check! list_ref_vague(one, abc): Maybe(String)
-check! list_ref_vague(two, abc): Maybe(String)
-check! list_ref_vague(three, abc): Maybe(String)
-check! list_ref_vague(four, abc): Maybe(String)
+check list_ref_vague(zero, abc): Maybe(String)
+check list_ref_vague(one, abc): Maybe(String)
+check list_ref_vague(two, abc): Maybe(String)
+check list_ref_vague(three, abc): Maybe(String)
+check list_ref_vague(four, abc): Maybe(String)
 ```

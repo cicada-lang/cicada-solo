@@ -170,7 +170,6 @@ export const sequence_entry = {
     ],
     "sequence_entry:check": [
       '"check"',
-      '"!"',
       { exp: "exp" },
       '":"',
       { t: "exp" },

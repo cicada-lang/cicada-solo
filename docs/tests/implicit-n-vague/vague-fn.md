@@ -15,7 +15,7 @@ datatype List(E: Type) {
 # vague-fn insertion -- on implicit-fn
 
 ```cicada
-check! (
+check (
   vague A,
   vague B,
   vague C,
@@ -29,7 +29,7 @@ check! (
   x: T,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), Type)))
 
-check! (
+check (
   vague A,
   vague B,
   implicit T,
@@ -42,7 +42,7 @@ check! (
   x: T,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), Type)))
 
-check! (
+check (
   vague A,
   implicit T,
   x,
@@ -54,7 +54,7 @@ check! (
   x: T,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), Type)))
 
-check! (
+check (
   implicit T,
   x,
 ) => cons(List.null, cons(List.null, cons(List.null, T))): (
@@ -69,7 +69,7 @@ check! (
 # vague-fn insertion -- on sigma
 
 ```cicada
-check! (
+check (
   vague A,
   vague B,
   vague C,
@@ -81,7 +81,7 @@ check! (
   vague D: Type,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), List(D))))
 
-check! (
+check (
   vague A,
   vague B,
   vague C,
@@ -92,7 +92,7 @@ check! (
   vague D: Type,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), List(D))))
 
-check! (
+check (
   vague A,
   vague B,
 ) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
@@ -102,7 +102,7 @@ check! (
   vague D: Type,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), List(D))))
 
-check! (
+check (
   vague A,
 ) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
   vague A: Type,
@@ -111,7 +111,7 @@ check! (
   vague D: Type,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), List(D))))
 
-check! cons(List.null, cons(List.null, cons(List.null, List.null))): (
+check cons(List.null, cons(List.null, cons(List.null, List.null))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,

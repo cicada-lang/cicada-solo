@@ -1,9 +1,9 @@
 class ABC { a: Type, b: a, c: String }
 
-check! ABC: Type
-check! ABC(Trivial): Type
-check! ABC(Trivial, sole): Type
-check! ABC(Trivial, sole, "c"): Type
+check ABC: Type
+check ABC(Trivial): Type
+check ABC(Trivial, sole): Type
+check ABC(Trivial, sole, "c"): Type
 
 // ABC :> ABC(Trivial) :> ABC(Trivial, sole) :> ABC(Trivial, sole, "c")
 

@@ -17,7 +17,7 @@ class ABC {
 After the definition, `ABC` is a `Type`.
 
 ```cicada
-check! ABC: Type
+check ABC: Type
 ```
 
 Note that, the field `b` depends on the expression `a` from previous fields,
@@ -55,9 +55,9 @@ let my_abc: ABC = {
 We can get the fields of an object by the **dot notation**.
 
 ```cicada
-check! my_abc.a: Type
-check! my_abc.b: Trivial
-check! my_abc.c: String
+check my_abc.a: Type
+check my_abc.b: Trivial
+check my_abc.c: String
 ```
 
 Being **dependent record type** means that
@@ -72,9 +72,9 @@ let another_abc: ABC = {
   c: "c",
 }
 
-check! another_abc.a: Type
-check! another_abc.b: String
-check! another_abc.c: String
+check another_abc.a: Type
+check another_abc.b: String
+check another_abc.c: String
 ```
 
 # Extra Fields
@@ -137,13 +137,13 @@ let c = "c"
 Then, instead of repeating the same name twice for each fields,
 
 ```cicada
-check! { a: a, b: b, c: c }: ABC
+check { a: a, b: b, c: c }: ABC
 ```
 
 We can use the following shorthand.
 
 ```cicada
-check! { a, b, c }: ABC
+check { a, b, c }: ABC
 ```
 
 # Object Spread
@@ -161,5 +161,5 @@ let bc: class { b: Trivial, c: String } = {
 We can spread it out using `...bc`.
 
 ```cicada
-check! { a: Trivial, ...bc }: ABC
+check { a: Trivial, ...bc }: ABC
 ```

@@ -15,23 +15,23 @@ its fields will be fulfilled one by one.
 ```cicada
 import { ABC } from "./01-class-n-object.md"
 
-check! ABC: Type
+check ABC: Type
 
-check! ABC(Trivial): Type
-check! ABC(Trivial, sole): Type
-check! ABC(Trivial, sole, "c"): Type
+check ABC(Trivial): Type
+check ABC(Trivial, sole): Type
+check ABC(Trivial, sole, "c"): Type
 
-check! ABC(String): Type
-check! ABC(String, "b"): Type
-check! ABC(String, "b", "c"): Type
+check ABC(String): Type
+check ABC(String, "b"): Type
+check ABC(String, "b", "c"): Type
 ```
 
 The object construction works as usual.
 
 ```cicada
-check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial)
-check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole)
-check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole, "c")
+check { a: Trivial, b: sole, c: "c" }: ABC(Trivial)
+check { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole)
+check { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole, "c")
 ```
 
 **NOTE Subtyping is working in progress.**
@@ -52,7 +52,7 @@ class PrefilledABC {
   c: String,
 }
 
-check! {
+check {
   a: Trivial,
   b: sole,
   c: "c",
@@ -70,7 +70,7 @@ class PrefilledABCDE {
   e: String
 }
 
-check! {
+check {
   a: Trivial,
   b: sole,
   c: "c",
@@ -83,7 +83,7 @@ Prefilled `class` can also be fulfilled by applying the `class` to arguments,
 note that the prefilled fields must be the same.
 
 ```cicada
-check! {
+check {
   a: Trivial,
   b: sole,
   c: "c",

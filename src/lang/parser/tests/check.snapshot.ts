@@ -8,13 +8,13 @@ function example(
   f: (Either(A, (A) -> B)) -> B,
 ): B {
   function g(x: A): B {
-    check! inl(x): Either(A, (A) -> B)
-    check! f(inl(x)): B
+    check inl(x): Either(A, (A) -> B)
+    check f(inl(x)): B
     return f(inl(x))
   }
 
-  check! inr(g): Either(A, (A) -> B)
-  check! f(inr(g)): B
+  check inr(g): Either(A, (A) -> B)
+  check f(inr(g)): B
   return f(inr(g))
 }
 
@@ -22,7 +22,7 @@ function example(
 
 tester.echoStmts(`
 
-check! inl(x): Either(A, (A) -> B)
-check! f(inl(x)): B
+check inl(x): Either(A, (A) -> B)
+check f(inl(x)): B
 
 `)
