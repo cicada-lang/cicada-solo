@@ -20,7 +20,7 @@ export * from "./the-value"
 export * from "./todo-value"
 export * from "./todo-note-value"
 
-export * from "./type-value"
+export * from "./type/type-value"
 
 export * from "./sequence/begin"
 export * from "./sequence/let"

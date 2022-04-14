@@ -1,5 +1,5 @@
-import * as Exps from "../exps"
-import { Value } from "../value"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class TypeValue extends Exps.BuiltInValue {
   name = "Type"
