@@ -6,7 +6,7 @@ import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import * as StmtOutputs from "../stmt/stmt-outputs"
 import { readback } from "../value"
 
-export class Show extends Stmt {
+export class Compute extends Stmt {
   meta: StmtMeta
   exp: Exp
 

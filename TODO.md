@@ -1,7 +1,14 @@
+- [syntax] use explicit `compute` keyword
+
+  - to reduce ambiguities introduced by allowing `exp` as `stmt`
+  - we do not use `eval` or `evaluate` as keyword,
+    because it will confuse js programmerss
+
+- [syntax] disallow using `exp` as `stmt`
+
 - [refactor] `Stmt` be able to `undo`
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
-- [syntax] [maybe] use explicit `eval` keyword
-  - to reduce ambiguities introduced by allowing `exp` as `stmt`
+
 
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible

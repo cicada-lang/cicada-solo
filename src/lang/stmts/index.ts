@@ -1,6 +1,6 @@
 export * from "./class"
 export * from "./class-extends"
+export * from "./compute"
 export * from "./datatype"
 export * from "./import"
 export * from "./let"
-export * from "./show"

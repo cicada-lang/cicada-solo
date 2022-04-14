@@ -33,7 +33,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       ),
     "stmt:check": ({ t, exp }, { span }) =>
-      new Stmts.Show(
+      new Stmts.Compute(
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
           span: pt.span_closure([t.span, exp.span]),
         }),
@@ -72,7 +72,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       )
     },
     "stmt:exp": ({ exp }, { span }) =>
-      new Stmts.Show(exp_matcher(exp), { span }),
+      new Stmts.Compute(exp_matcher(exp), { span }),
     "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(
         pt.str(name),
