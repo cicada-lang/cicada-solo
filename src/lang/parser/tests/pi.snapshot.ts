@@ -4,6 +4,9 @@ tester.echoExp(`(A) -> C`)
 tester.echoExp(`(A, B) -> C`)
 tester.echoExp(`(a: A, b: B) -> C(a, b)`)
 
+tester.echoExp(`forall (a: A, b: B) C(a, b)`)
+tester.echoExp(`forall (a: A) forall (b: B) C(a, b)`)
+
 tester.echoExp(`(x) => body`)
 tester.echoExp(`(x) => { body }`)
 

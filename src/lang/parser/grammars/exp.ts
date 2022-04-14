@@ -59,6 +59,13 @@ export const operand = {
       '">"',
       { ret_t: "exp" },
     ],
+    "operand:pi_forall": [
+      '"forall"',
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      { ret_t: "exp" },
+    ],
     "operand:fn": [
       '"("',
       { names: "names" },
@@ -67,7 +74,7 @@ export const operand = {
       '">"',
       { ret: "exp" },
     ],
-    "operand:sigma": [
+    "operand:sigma_exists": [
       '"exists"',
       '"("',
       { bindings: "simple_bindings" },

@@ -203,7 +203,9 @@ but this time, `x` might occur in `R`, or say, `R` depends on `x`.
 
 This is why `Pi` is also called **dependent function type**.
 
-We read `(x: A) -> R` as
+Another way of writing `(x: A) -> R` is `forall (x: A) R`.
+
+And we read it `forall (x: A) R` as
 
 > For all `x` in `A`, `R` is true.
 
@@ -213,6 +215,7 @@ the return type can change.
 
 ```cicada
 check! (T: Type) -> (T) -> T: Type
+check! forall (T: Type) (T) -> T: Type
 ```
 
 The return type of the above `Pi` is `(T) -> T`,

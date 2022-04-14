@@ -28,6 +28,7 @@ sole: Trivial
 cons("abc", sole): exists (_: String) Trivial
 cons(sole, "abc"): exists (_: Trivial) String
 (T: Type, _: T) -> T: Type
+(T: Type, _: T) -> T: Type
 "abc": String
 sole: Trivial
 (T, _) => _: (T: Type, _: T) -> T
