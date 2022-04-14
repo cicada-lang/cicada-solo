@@ -10,9 +10,9 @@ let abc: ABC = {
   a: Trivial, b: sole, c: "c"
 }
 
-abc
+compute abc
 
-abc.a
-abc.b
-abc.c
+compute abc.a
+compute abc.b
+compute abc.c
 ```

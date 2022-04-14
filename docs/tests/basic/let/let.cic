@@ -3,4 +3,4 @@ let x = {
   return y
 }
 
-x
+compute x

@@ -24,4 +24,4 @@ class OrderInlined {
 
 import { Order } from "./order.cic"
 
-the(Equal(Type, Order, OrderInlined), refl)
+compute the(Equal(Type, Order, OrderInlined), refl)

@@ -26,10 +26,10 @@ function id(implicit A: Type, x: A): A {
 }
 
 // Infer
-id("abc")
+compute id("abc")
 
 // Elaboration
-id(implicit String, "abc")
+compute id(implicit String, "abc")
 ```
 
 1. Infer `(implicit A: Type, A) -> A` for `id`

@@ -7,6 +7,6 @@ to right hand side (to) of Equal:
   "baguette"
 
 docs/tests/equality/not-the-same-string.error.cic:
- 1 |the(Equal(String, "ratatouille", "baguette"), refl)
+ 1 |compute the(Equal(String, "ratatouille", "baguette"), refl)
  2 |
 

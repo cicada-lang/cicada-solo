@@ -1,4 +1,4 @@
-the(
+compute the(
   Equal(
     Pair(String, String),
     cons("ratatouille", "baguette"),

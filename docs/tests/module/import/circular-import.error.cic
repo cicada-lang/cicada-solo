@@ -2,4 +2,4 @@ import { y } from "./circular-import.error.cic"
 
 let x = "x"
 
-x
+compute x

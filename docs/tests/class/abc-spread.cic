@@ -6,8 +6,8 @@ let bc: class { b: Trivial, c: String } = {
 
 let abc: ABC = { a: Trivial, ...bc }
 
-abc
+compute abc
 
-abc.a
-abc.b
-abc.c
+compute abc.a
+compute abc.b
+compute abc.c

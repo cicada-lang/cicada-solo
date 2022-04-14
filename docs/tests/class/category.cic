@@ -37,4 +37,4 @@ class Category {
     compose(x, z, w)(compose(x, y, z)(f, g), h))
 }
 
-Category
+compute Category

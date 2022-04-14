@@ -8,7 +8,7 @@ docs/tests/class/duplicated-object-field-names.error.cic:
   4 |  b: String
   5 |}
   6 |
-  7 |the(Test, {
+  7 |compute the(Test, {
   8 |  a: "1",
   9 |  b: "2",
  10 |  b: "6",

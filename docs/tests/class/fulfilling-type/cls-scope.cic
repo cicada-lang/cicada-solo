@@ -8,7 +8,7 @@ class Test {
   equal: Equal(Type, String, X)
 }
 
-the(Test, {
+compute the(Test, {
   X: a,
   a: "a",
   b: "b",

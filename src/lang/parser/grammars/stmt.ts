@@ -26,7 +26,7 @@ export const stmt = {
       { ret_t: "exp" },
       { sequence: "sequence" },
     ],
-    "stmt:exp": [{ exp: "exp" }],
+    "stmt:compute": ['"compute"', { exp: "exp" }],
     "stmt:class": [
       '"class"',
       { name: "identifier" },

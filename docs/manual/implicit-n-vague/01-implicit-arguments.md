@@ -24,8 +24,8 @@ It takes a type and an argument of that type,
 then simply returns the second argument.
 
 ```cicada
-the(String, "abc")
-the(Trivial, sole)
+compute the(String, "abc")
+compute the(Trivial, sole)
 ```
 
 It already looks good, but there is one problem -- it takes two arguments.
@@ -43,8 +43,8 @@ function id(implicit T: Type, x: T): T {
 Now `id` can be applied to one argument.
 
 ```cicada
-id("abc")
-id(sole)
+compute id("abc")
+compute id(sole)
 ```
 
 # How it works?
@@ -52,7 +52,7 @@ id(sole)
 First, implicit `Pi` type is a `Type`.
 
 ```cicada
-(implicit T: Type, x: T) -> T
+compute (implicit T: Type, x: T) -> T
 ```
 
 If we omit an implicit argument in a function application,
@@ -69,7 +69,7 @@ Suppose I am the type checker, when I see `id("abc")`,
 Thus the following expressions are the same.
 
 ```cicada
-same_as_chart (String) [
+compute same_as_chart (String) [
   id("abc"),
   id(implicit String, "abc"),
 ]
@@ -86,8 +86,8 @@ function typeof(implicit T: Type, T): Type {
   return T
 }
 
-typeof("abc")  // String
-typeof(sole)   // Trivial
+compute typeof("abc")  // String
+compute typeof(sole)   // Trivial
 ```
 
 # Multiple implicit arguments
@@ -105,7 +105,7 @@ function car_type(
 
 let pair: Pair(Trivial, String) = cons(sole, "a")
 
-car_type(pair)  // Trivial
+compute car_type(pair)  // Trivial
 ```
 
 # Limits

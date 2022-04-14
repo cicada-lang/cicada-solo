@@ -2,5 +2,5 @@ import { a } from "./a.cic"
 
 let b = "b"
 
-a
-b
+compute a
+compute b

@@ -118,10 +118,10 @@ let my_xyz: XYZ = {
   z: my_abc,
 }
 
-my_xyz.z
-my_xyz.z.a
-my_xyz.z.b
-my_xyz.z.c
+compute my_xyz.z
+compute my_xyz.z.a
+compute my_xyz.z.b
+compute my_xyz.z.c
 ```
 
 # Object Shorthand

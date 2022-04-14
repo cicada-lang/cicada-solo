@@ -71,7 +71,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       )
     },
-    "stmt:exp": ({ exp }, { span }) =>
+    "stmt:compute": ({ exp }, { span }) =>
       new Stmts.Compute(exp_matcher(exp), { span }),
     "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(

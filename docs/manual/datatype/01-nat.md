@@ -91,11 +91,11 @@ Note that,
 Let's write some tests.
 
 ```cicada
-add(zero, zero)
-add(zero, one)
-add(one, zero)
-add(one, one)
-add(two, two)
+compute add(zero, zero)
+compute add(zero, one)
+compute add(one, zero)
+compute add(one, one)
+compute add(two, two)
 ```
 
 Applying a function that takes two arguments to only one argument,
@@ -112,7 +112,7 @@ check add(one, one): Nat
 We often use `same_as_chart` to write test.
 
 ```cicada
-same_as_chart (Nat) [
+compute same_as_chart (Nat) [
   add(two, three),
   add(three, two),
   five,
@@ -188,7 +188,7 @@ we use `{ ...; return ... }` to make the name `twelve`
 only visible inside the following `{ ... }`.
 
 ```cicada
-{
+compute {
   let twelve = add(ten, two)
   return same_as_chart (Nat) [
     mul(four, three),
@@ -229,7 +229,7 @@ function power(base: Nat, n: Nat): Nat {
 Some tests.
 
 ```cicada
-same_as_chart (Nat) [
+compute same_as_chart (Nat) [
   power(four, three),
   power_of(three, four),
   add(mul(six, ten), four),
@@ -257,7 +257,7 @@ function gauss(n: Nat): Nat {
 Tests.
 
 ```cicada
-same_as_chart (Nat) [
+compute same_as_chart (Nat) [
   gauss(ten),
   add(mul(five, ten), five),
 ]
@@ -283,7 +283,7 @@ function factorial(n: Nat): Nat {
 Tests.
 
 ```cicada
-same_as_chart (Nat) [
+compute same_as_chart (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
 ]
@@ -340,11 +340,11 @@ function fibonacci(n: Nat): Nat {
 Tests.
 
 ```cicada
-fibonacci(zero)
-fibonacci(one)
-fibonacci(two)
-fibonacci(three)
-fibonacci(four)
-fibonacci(five)
-fibonacci(six)
+compute fibonacci(zero)
+compute fibonacci(one)
+compute fibonacci(two)
+compute fibonacci(three)
+compute fibonacci(four)
+compute fibonacci(five)
+compute fibonacci(six)
 ```

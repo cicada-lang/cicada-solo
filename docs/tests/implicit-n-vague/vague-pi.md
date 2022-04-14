@@ -15,7 +15,7 @@ function my_cons(
   return cons(x, y)
 }
 
-my_cons
+compute my_cons
 
 // TODO unification fail
 // check my_cons("ratatouille", "baguette"): Pair(String, String)

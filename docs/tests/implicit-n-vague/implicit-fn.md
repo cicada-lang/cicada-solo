@@ -48,7 +48,7 @@ function pick_second_type(
   return B
 }
 
-pick_second_type
+compute pick_second_type
 
 check (
   implicit A,
@@ -103,7 +103,7 @@ function pick_third_type(
   return C
 }
 
-pick_third_type
+compute pick_third_type
 
 check (
   implicit A,

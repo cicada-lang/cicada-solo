@@ -1,1 +1,1 @@
-the(Type, cons(String, String))
+compute the(Type, cons(String, String))

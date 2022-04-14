@@ -15,7 +15,7 @@ datatype LessThan() (j: Nat, k: Nat) {
   ): LessThan(add1(j), add1(k))
 }
 
-LessThan
-LessThan(add1(zero))
-LessThan(add1(zero), add1(add1(zero)))
+compute LessThan
+compute LessThan(add1(zero))
+compute LessThan(add1(zero), add1(add1(zero)))
 ```

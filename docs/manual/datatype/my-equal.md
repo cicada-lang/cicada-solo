@@ -11,7 +11,7 @@ datatype MyEqual(T: Type) (from: T, to: T) {
 ```
 
 ```cicada
-MyEqual.refl
+compute MyEqual.refl
 check MyEqual.refl: MyEqual(String, "a", "a")
 ```
 

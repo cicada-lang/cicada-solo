@@ -67,4 +67,4 @@ class Functor {
     cod.id(map(x)))
 }
 
-Functor
+compute Functor

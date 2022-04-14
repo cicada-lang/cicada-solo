@@ -18,13 +18,13 @@ function id1(implicit A: Type, x: A): A {
 let id2: (implicit A: Type, x: A) -> A = (x) => x
 let id3: (implicit A: Type, x: A) -> A = (implicit A, x) => x
 
-id1
-id2
-id3
+compute id1
+compute id2
+compute id3
 
-id1("a")
-id2("a")
-id3("a")
+compute id1("a")
+compute id2("a")
+compute id3("a")
 ```
 
 # return implicit value
@@ -34,8 +34,8 @@ function typeof(implicit T: Type, T): Type {
   return T
 }
 
-typeof(sole)
-typeof("abc")
+compute typeof(sole)
+compute typeof("abc")
 ```
 
 # multiple implicit arguments
@@ -48,7 +48,7 @@ function k(
   return x
 }
 
-k("abc", sole)
+compute k("abc", sole)
 ```
 
 # record of implicit arguments
@@ -60,7 +60,7 @@ let car_type_t = (
   pair: Pair(A, B),
 ) -> Type
 
-car_type_t
+compute car_type_t
 
 function car_type(
   implicit A: Type,
@@ -70,7 +70,7 @@ function car_type(
   return A
 }
 
-car_type
+compute car_type
 
 let car_type_again: (
   implicit A: Type,
@@ -79,10 +79,10 @@ let car_type_again: (
 ) -> Type = (implicit A, implicit B, pair) => A
 
 
-car_type_again
+compute car_type_again
 
-car_type(the(Pair(Trivial, String), cons(sole, "a")))
-car_type_again(the(Pair(Trivial, String), cons(sole, "a")))
+compute car_type(the(Pair(Trivial, String), cons(sole, "a")))
+compute car_type_again(the(Pair(Trivial, String), cons(sole, "a")))
 
 // `cdr_type` -- only the idiomatic way:
 
@@ -94,7 +94,7 @@ function cdr_type(
   return B
 }
 
-cdr_type(the(Pair(Trivial, String), cons(sole, "a")))
+compute cdr_type(the(Pair(Trivial, String), cons(sole, "a")))
 ```
 
 # do _not_ support implicit argument over implicit argument
@@ -136,7 +136,7 @@ function my_car(
   return car(pair)
 }
 
-my_car
+compute my_car
 
 function my_cdr(
   implicit A: Type,
@@ -146,5 +146,5 @@ function my_cdr(
   return cdr(pair)
 }
 
-my_cdr
+compute my_cdr
 ```

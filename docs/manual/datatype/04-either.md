@@ -64,12 +64,12 @@ function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ```cicada
-same_as_chart (Maybe(String)) [
+compute same_as_chart (Maybe(String)) [
   maybe_head(the(List(String), List.null)),
   Maybe.nothing,
 ]
 
-same_as_chart (Maybe(String)) [
+compute same_as_chart (Maybe(String)) [
   maybe_head(a),
   maybe_head(ab),
   maybe_head(abc),
@@ -89,22 +89,22 @@ function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
 ```
 
 ```cicada
-same_as_chart (Maybe(List(String))) [
+compute same_as_chart (Maybe(List(String))) [
   maybe_tail(the(List(String), List.null)),
   Maybe.nothing(vague List(String)),
 ]
 
-same_as_chart (Maybe(List(String))) [
+compute same_as_chart (Maybe(List(String))) [
   maybe_tail(a),
   Maybe.just(the(List(String), List.null)),
 ]
 
-same_as_chart (Maybe(List(String))) [
+compute same_as_chart (Maybe(List(String))) [
   maybe_tail(ab),
   Maybe.just(the(List(String), List.cons("b", List.null))),
 ]
 
-same_as_chart (Maybe(List(String))) [
+compute same_as_chart (Maybe(List(String))) [
   maybe_tail(abc),
   Maybe.just(the(List(String), List.cons("b", List.cons("c", List.null)))),
 ]
@@ -134,11 +134,11 @@ function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) 
 ```
 
 ```cicada
-list_ref_direct(zero, abc)
-list_ref_direct(one, abc)
-list_ref_direct(two, abc)
-list_ref_direct(three, abc)
-list_ref_direct(four, abc)
+compute list_ref_direct(zero, abc)
+compute list_ref_direct(one, abc)
+compute list_ref_direct(two, abc)
+compute list_ref_direct(three, abc)
+compute list_ref_direct(four, abc)
 ```
 
 ## list_ref_aux
@@ -167,11 +167,11 @@ function list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ```cicada
-list_ref(zero, abc)
-list_ref(one, abc)
-list_ref(two, abc)
-list_ref(three, abc)
-list_ref(four, abc)
+compute list_ref(zero, abc)
+compute list_ref(one, abc)
+compute list_ref(two, abc)
+compute list_ref(three, abc)
+compute list_ref(four, abc)
 
 check list_ref(zero, abc): Maybe(String)
 check list_ref(one, abc): Maybe(String)
@@ -195,9 +195,7 @@ function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
   }
 }
 
-list_ref_vague(vague String, zero, abc)
 check list_ref_vague(vague String, zero, abc): Maybe(String)
-
 check list_ref_vague(zero, abc): Maybe(String)
 ```
 

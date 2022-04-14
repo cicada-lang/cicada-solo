@@ -58,7 +58,7 @@ let eight = Nat.add1(seven)
 let nine = Nat.add1(eight)
 let ten = Nat.add1(nine)
 
-the(
+compute the(
   IntegerEqual(
     { left: eight, right: five },
     { left: ten, right: seven }),

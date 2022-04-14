@@ -12,6 +12,6 @@ datatype Fin() (n: Nat) {
   add1(vague k: Nat, prev: Fin(k)): Fin(Nat.add1(k))
 }
 
-Fin.zero
-Fin.add1
+compute Fin.zero
+compute Fin.add1
 ```

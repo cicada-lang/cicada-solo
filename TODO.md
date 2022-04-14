@@ -1,14 +1,9 @@
-- [syntax] use explicit `compute` keyword
+- [syntax] `same_as_chart` as stmt
 
-  - to reduce ambiguities introduced by allowing `exp` as `stmt`
-  - we do not use `eval` or `evaluate` as keyword,
-    because it will confuse js programmerss
-
-- [syntax] disallow using `exp` as `stmt`
+  ambr "compute same_as_chart" "same_as_chart"
 
 - [refactor] `Stmt` be able to `undo`
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
-
 
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible
@@ -41,7 +36,7 @@
   - https://readonly.link/manuals/gitlab.com/cicada-lang/cicada/-/datatype/01-nat.md#fibonacci
 
 > If the ambition of this project is too much pressure,
->   use refactoring as a therapy.
+> use refactoring as a therapy.
 
 - [question] Is it ok that `TypeCtorValue` should be `readback` to `TypeCtorCore`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
@@ -51,7 +46,7 @@
   but when we try to use `induction` to define `vector_head` and `vector_tail`,
   it became very complicated. Why?
 
-  ``` typescript
+  ```typescript
   // NOTE `infer` of `vector_head`
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
@@ -114,6 +109,7 @@
 # subtype
 
 - `check` use `subtype` instead of `conversion`
+
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
   - `subtype` function default to `conversion`
   - `Value.subtype` call `subtype` for recursion
@@ -163,7 +159,7 @@
 
   in `07.md`:
 
-  ``` cicada
+  ```cicada
   drop_last(String, three, Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.cons("d", Vector.null)))))
   ```
 
@@ -197,15 +193,18 @@
 # books
 
 - [books] [EWD1240a] A little bit of lattice theory
+
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.
   - Learn from the story line for teaching.
 
 - [book] formalize infinite descent as a consequence of induction on natural number:
+
   - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
   - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
 
 - [book] formalize complete induction as a consequence of induction on natural number:
+
   - https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
 
 - [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure

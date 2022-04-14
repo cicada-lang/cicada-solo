@@ -3,6 +3,6 @@ import { b } from "./b.cic"
 
 let c = "c"
 
-a
-b
-c
+compute a
+compute b
+compute c

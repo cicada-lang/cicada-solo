@@ -8,7 +8,7 @@ title: Built-in Types
 `Type` is a `Type`.
 
 ```cicada
-Type
+compute Type
 ```
 
 We can use `check <exp>: <type>`,
@@ -26,16 +26,12 @@ hovering over them to see a menu button.
 `String` is a `Type`.
 
 ```cicada
-String
-
 check String: Type
 ```
 
 We use double-quoted `String`.
 
 ```cicada
-"Hello, World!"
-
 check "Hello, World!": String
 ```
 
@@ -44,7 +40,7 @@ We can use `let <name> = <exp>` to do assignment.
 ```cicada
 let my_name = "Xie Yuheng"
 
-my_name
+compute my_name
 ```
 
 # Trivial
@@ -66,7 +62,7 @@ let result = {
   return z
 }
 
-result
+compute result
 ```
 
 # Pair (Both)
@@ -107,8 +103,8 @@ because we read `Pair(A, C)` as
 The following two expressions are the same `Type`.
 
 ```cicada
-Pair(String, Trivial)
-Both(String, Trivial)
+check Pair(String, Trivial): Type
+check Both(String, Trivial): Type
 ```
 
 We can write nested `Pair`.
@@ -147,7 +143,7 @@ We can use `same_as_chart` to assert that
 many expressions of a given type are the same.
 
 ```cicada
-same_as_chart (Type) [
+compute same_as_chart (Type) [
   Pair(String, Trivial),
   exists (_: String) Trivial,
 ]
@@ -225,9 +221,9 @@ We have a built-in function of the above type,
 and we call this function `the`.
 
 ```cicada
-the(String, "abc")
-the(Trivial, sole)
-the((T: Type) -> (T) -> T, the)
+compute the(String, "abc")
+compute the(Trivial, sole)
+compute the((T: Type) -> (T) -> T, the)
 ```
 
 It is defined as the following:

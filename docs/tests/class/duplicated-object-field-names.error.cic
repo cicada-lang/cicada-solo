@@ -4,7 +4,7 @@ class Test {
   b: String
 }
 
-the(Test, {
+compute the(Test, {
   a: "1",
   b: "2",
   b: "6",

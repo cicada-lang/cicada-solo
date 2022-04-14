@@ -35,10 +35,10 @@ let abcefg: ABCEFG = {
 So does the **dot notation**.
 
 ```cicada
-abcefg.a
-abcefg.b
-abcefg.c
-abcefg.e
-abcefg.f
-abcefg.g
+compute abcefg.a
+compute abcefg.b
+compute abcefg.c
+compute abcefg.e
+compute abcefg.f
+compute abcefg.g
 ```

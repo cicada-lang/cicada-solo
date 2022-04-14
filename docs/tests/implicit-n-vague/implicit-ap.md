@@ -10,8 +10,8 @@ function id(implicit A: Type, x: A): A {
   return x
 }
 
-id("a")
-id(implicit String, "a")
+compute id("a")
+compute id(implicit String, "a")
 ```
 
 # multiple implicit arguments
@@ -24,8 +24,8 @@ function k(
   return x
 }
 
-k(sole, "abc")
-k(implicit Trivial, sole, "abc")
-k(sole, implicit String, "abc")
-k(implicit Trivial, sole, implicit String, "abc")
+compute k(sole, "abc")
+compute k(implicit Trivial, sole, "abc")
+compute k(sole, implicit String, "abc")
+compute k(implicit Trivial, sole, implicit String, "abc")
 ```

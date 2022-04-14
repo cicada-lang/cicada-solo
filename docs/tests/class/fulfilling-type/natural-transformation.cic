@@ -84,7 +84,7 @@ class NaturalTransformation {
     cod.compose(src.map(x), src.map(y), tar.map(y))(src.fmap(x, y)(f), component(y)))
 }
 
-NaturalTransformation
+compute NaturalTransformation
 
 class NaturalTransformation2 {
   dom: Category
@@ -104,10 +104,10 @@ class NaturalTransformation2 {
     cod.compose(src.map(x), src.map(y), tar.map(y))(src.fmap(x, y)(f), component(y)))
 }
 
-NaturalTransformation2
+compute NaturalTransformation2
 
 
-the(
+compute the(
   Equal(
     Type,
     NaturalTransformation,

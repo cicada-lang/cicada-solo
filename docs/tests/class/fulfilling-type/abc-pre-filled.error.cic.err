@@ -18,4 +18,4 @@ docs/tests/class/fulfilling-type/abc-pre-filled.error.cic:
  28 |  e: "e",
  29 |}
  30 |
- 31 |abcde
+ 31 |compute abcde

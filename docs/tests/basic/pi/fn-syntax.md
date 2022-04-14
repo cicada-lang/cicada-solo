@@ -16,9 +16,9 @@ let id3: (A: Type, x: A) -> A =
   //   does not need to be the same.
   (B, y) => y
 
-id1(String, "a")
-id2(String, "a")
-id3(String, "a")
+compute id1(String, "a")
+compute id2(String, "a")
+compute id3(String, "a")
 ```
 
 # sugar for multi-argument function
@@ -29,14 +29,14 @@ We can write both `(x, y) => ...` and `(x) => (y) => ...` for function of two ar
 let f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) => sole
 
-f
-f(sole)
-f(sole, sole)
+compute f
+compute f(sole)
+compute f(sole, sole)
 
 let g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => sole
 
-g
-g(sole)
-g(sole, sole)
+compute g
+compute g(sole)
+compute g(sole, sole)
 ```

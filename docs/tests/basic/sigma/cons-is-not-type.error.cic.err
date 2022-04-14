@@ -3,6 +3,6 @@ but the asserted class is: SigmaValue.
 
 
 docs/tests/basic/sigma/cons-is-not-type.error.cic:
- 1 |the(Type, cons(String, String))
+ 1 |compute the(Type, cons(String, String))
  2 |
 

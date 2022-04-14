@@ -6,11 +6,11 @@ let abc: ABC(Trivial, sole) = {
   c: "c",
 }
 
-abc
+compute abc
 
-abc.a
-abc.b
-abc.c
+compute abc.a
+compute abc.b
+compute abc.c
 
 class ABCDE {
   a: Type
@@ -28,10 +28,10 @@ let abcde: ABCDE(Trivial, sole, "d") = {
   e: "e",
 }
 
-abcde
+compute abcde
 
-abcde.a
-abcde.b
-abcde.c
-abcde.d
-abcde.e
+compute abcde.a
+compute abcde.b
+compute abcde.c
+compute abcde.d
+compute abcde.e

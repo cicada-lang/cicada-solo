@@ -1,8 +1,6 @@
 Type: Type
 Type: Type
 String: Type
-String: Type
-"Hello, World!": String
 "Hello, World!": String
 "Xie Yuheng": String
 Trivial: Type

@@ -21,8 +21,8 @@ For example,
 ```cicada
 import { Nat } from "../datatype/01-nat.md"
 
-Nat.zero
-Nat.add1(Nat.zero)
+compute Nat.zero
+compute Nat.add1(Nat.zero)
 ```
 
 # Import from URL
@@ -39,6 +39,6 @@ import {
   Nat as NatFromURL
 } from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatype/01-nat.md"
 
-NatFromURL.zero
-NatFromURL.add1(NatFromURL.zero)
+compute NatFromURL.zero
+compute NatFromURL.add1(NatFromURL.zero)
 ```

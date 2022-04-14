@@ -14,9 +14,9 @@ let xyz: class {
   z: abc,
 }
 
-xyz
+compute xyz
 
-xyz.z
-xyz.z.a
-xyz.z.b
-xyz.z.c
+compute xyz.z
+compute xyz.z.a
+compute xyz.z.b
+compute xyz.z.c

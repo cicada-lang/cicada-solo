@@ -6,8 +6,8 @@ let c = "c"
 
 let abc: ABC = { a, b, c }
 
-abc
+compute abc
 
-abc.a
-abc.b
-abc.c
+compute abc.a
+compute abc.b
+compute abc.c

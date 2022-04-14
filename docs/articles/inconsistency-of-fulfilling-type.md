@@ -13,7 +13,7 @@ class C { T: Type, x: String }
 Take `C` as an example, the type of `C` is `Type`:
 
 ```cicada
-C
+compute C
 ```
 
 ```cicada output
@@ -26,7 +26,7 @@ class {
 But we can also use `C` as a `(Type) -> Type`:
 
 ```cicada
-C(String)
+compute C(String)
 ```
 
 ```cicada output
@@ -39,7 +39,7 @@ class {
 And we can also use `C` as a `(Type, String) -> Type`:
 
 ```cicada
-C(String, "a")
+compute C(String, "a")
 ```
 
 ```cicada output

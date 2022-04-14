@@ -8,13 +8,13 @@ let b: Trivial = TODO_NOTE("It's not Trivial")
 let c: Absurd = TODO_NOTE("Absurd!")
 let d: Absurd = TODO // NOTE Even without a note?
 
-a
-b
-c
-d
+compute a
+compute b
+compute c
+compute d
 
 function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
   return TODO_NOTE("tertium non datur")
 }
 
-law_of_excluded_middle
+compute law_of_excluded_middle
