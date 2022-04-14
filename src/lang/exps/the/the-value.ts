@@ -1,8 +1,8 @@
-import { evaluate } from "../core"
-import { Env } from "../env"
-import * as Exps from "../exps"
-import { Value } from "../value"
-import { BuiltInApHandler } from "./built-in/built-in-ap-handler"
+import { evaluate } from "../../core"
+import { Env } from "../../env"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
 export class TheValue extends Exps.BuiltInValue {
   name = "the"

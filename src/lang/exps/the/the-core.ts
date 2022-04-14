@@ -1,6 +1,6 @@
-import { AlphaCtx, Core, evaluate } from "../core"
-import { Env } from "../env"
-import { Value } from "../value"
+import { AlphaCtx, Core, evaluate } from "../../core"
+import { Env } from "../../env"
+import { Value } from "../../value"
 
 export class TheCore extends Core {
   t: Core

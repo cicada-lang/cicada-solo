@@ -1,5 +1,4 @@
 - [refactor] move `exps/todo-*` to `exps/todo/`
-- [refactor] move `exps/the-*` to `exps/the/`
 
 - [refactor] `Stmt` be able to `undo`
 

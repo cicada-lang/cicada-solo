@@ -13,9 +13,9 @@ export * from "./built-in/built-in-value"
 // TODO Maybe we should improve this by
 // - handle `let_the` in different way
 // - handle `Value.readback` special case on `AbsurdValue` in different way
-export * from "./the"
-export * from "./the-core"
-export * from "./the-value"
+export * from "./the/the"
+export * from "./the/the-core"
+export * from "./the/the-value"
 
 export * from "./todo-value"
 export * from "./todo-note-value"
