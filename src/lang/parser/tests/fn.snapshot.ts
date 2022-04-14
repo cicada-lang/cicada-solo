@@ -17,6 +17,14 @@ let id: (A: Type, x: A) -> A =
   (A, x) => x
 
 let id: (A: Type, x: A) -> A =
+  function (A, x) x
+
+let id: (A: Type, x: A) -> A =
+  function (A, x) {
+    return x
+  }
+
+let id: (A: Type, x: A) -> A =
   // NOTE The scope is different,
   //   thus the name of bound variables
   //   does not need to be the same.

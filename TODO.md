@@ -1,11 +1,3 @@
-- [syntax] `function (x: A) b(x)` as an alternative to `(x: A) => b(x)`
-
-  - to be symmetric with `exists (x: A) B(x)`
-
-  - no need to always write `{ ... }` -- different from javascript
-
-    - `function (x: A) { return b(x) }`
-
 - [syntax] `check` instead of `check!`
 - [syntax] `same_as_chart` instead of `same_as_chart!`
 

@@ -135,6 +135,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:pi": pi_handler,
     "operand:pi_forall": pi_handler,
     "operand:fn": fn_handler,
+    "operand:fn_function": fn_handler,
     "operand:sigma_exists": sigma_handler,
     "operand:cons": ({ car, cdr }, { span }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr), { span }),

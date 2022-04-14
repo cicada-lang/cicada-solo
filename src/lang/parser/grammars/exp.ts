@@ -74,6 +74,13 @@ export const operand = {
       '">"',
       { ret: "exp" },
     ],
+    "operand:fn_function": [
+      '"function"',
+      '"("',
+      { names: "names" },
+      '")"',
+      { ret: "exp" },
+    ],
     "operand:sigma_exists": [
       '"exists"',
       '"("',
