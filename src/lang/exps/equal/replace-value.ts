@@ -48,38 +48,38 @@ export class ReplaceValue extends Exps.BuiltInValue {
         new Exps.BuiltInCore("Type"),
         new Exps.ImplicitPiCore(
           "from",
-          new Exps.VariableCore("T"),
+          new Exps.VarCore("T"),
           new Exps.ImplicitPiCore(
             "to",
-            new Exps.VariableCore("T"),
+            new Exps.VarCore("T"),
             new Exps.PiCore(
               "target",
               new Exps.ApCore(
                 new Exps.ApCore(
                   new Exps.ApCore(
                     new Exps.BuiltInCore("Equal"),
-                    new Exps.VariableCore("T")
+                    new Exps.VarCore("T")
                   ),
-                  new Exps.VariableCore("from")
+                  new Exps.VarCore("from")
                 ),
-                new Exps.VariableCore("to")
+                new Exps.VarCore("to")
               ),
               new Exps.PiCore(
                 "motive",
                 new Exps.PiCore(
                   "_",
-                  new Exps.VariableCore("T"),
+                  new Exps.VarCore("T"),
                   new Exps.BuiltInCore("Type")
                 ),
                 new Exps.PiCore(
                   "base",
                   new Exps.ApCore(
-                    new Exps.VariableCore("motive"),
-                    new Exps.VariableCore("from")
+                    new Exps.VarCore("motive"),
+                    new Exps.VarCore("from")
                   ),
                   new Exps.ApCore(
-                    new Exps.VariableCore("motive"),
-                    new Exps.VariableCore("to")
+                    new Exps.VarCore("motive"),
+                    new Exps.VarCore("to")
                   )
                 )
               )

@@ -41,10 +41,10 @@ export class EqualValue extends Exps.BuiltInValue {
         new Exps.BuiltInCore("Type"),
         new Exps.PiCore(
           "from",
-          new Exps.VariableCore("T"),
+          new Exps.VarCore("T"),
           new Exps.PiCore(
             "to",
-            new Exps.VariableCore("T"),
+            new Exps.VarCore("T"),
             new Exps.BuiltInCore("Type")
           )
         )

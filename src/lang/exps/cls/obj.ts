@@ -165,7 +165,7 @@ export class FieldShorthandProp extends Prop {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Exps.Variable(this.name).free_names(bound_names)
+    return new Exps.Var(this.name).free_names(bound_names)
   }
 
   solution(name: string, exp: Exp): Prop {
@@ -173,7 +173,7 @@ export class FieldShorthandProp extends Prop {
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {
-    return [[this.name, new Exps.Variable(this.name)]]
+    return [[this.name, new Exps.Var(this.name)]]
   }
 
   format(): string {

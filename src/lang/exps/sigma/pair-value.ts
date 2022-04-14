@@ -18,11 +18,7 @@ export class PairValue extends Exps.BuiltInValue {
         Env.init()
           .extend("A", arg_value_entries[0].value)
           .extend("B", arg_value_entries[1].value),
-        new Exps.SigmaCore(
-          "_",
-          new Exps.VariableCore("A"),
-          new Exps.VariableCore("B")
-        )
+        new Exps.SigmaCore("_", new Exps.VarCore("A"), new Exps.VarCore("B"))
       ),
   })
 

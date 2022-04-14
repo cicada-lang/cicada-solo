@@ -3,7 +3,7 @@ import { Env } from "../env"
 import { ExpTrace } from "../errors"
 import { Value } from "../value"
 
-export class VariableCore extends Core {
+export class VarCore extends Core {
   name: string
 
   constructor(name: string) {

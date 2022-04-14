@@ -29,7 +29,7 @@ export class DataValue extends Value {
       })
 
       let result_core: Core = new Exps.DotCore(
-        new Exps.VariableCore(this.data_ctor.type_ctor.name),
+        new Exps.VarCore(this.data_ctor.type_ctor.name),
         this.data_ctor.name
       )
 

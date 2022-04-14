@@ -36,16 +36,16 @@ export class ReflValue extends Exps.BuiltInValue {
         new Exps.BuiltInCore("Type"),
         new Exps.VaguePiCore(
           "x",
-          new Exps.VariableCore("T"),
+          new Exps.VarCore("T"),
           new Exps.ApCore(
             new Exps.ApCore(
               new Exps.ApCore(
                 new Exps.BuiltInCore("Equal"),
-                new Exps.VariableCore("T")
+                new Exps.VarCore("T")
               ),
-              new Exps.VariableCore("x")
+              new Exps.VarCore("x")
             ),
-            new Exps.VariableCore("x")
+            new Exps.VarCore("x")
           )
         )
       )

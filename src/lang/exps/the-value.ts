@@ -27,11 +27,7 @@ export class TheValue extends Exps.BuiltInValue {
       new Exps.PiCore(
         "T",
         new Exps.BuiltInCore("Type"),
-        new Exps.PiCore(
-          "x",
-          new Exps.VariableCore("T"),
-          new Exps.VariableCore("T")
-        )
+        new Exps.PiCore("x", new Exps.VarCore("T"), new Exps.VarCore("T"))
       )
     )
   }

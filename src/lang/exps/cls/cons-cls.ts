@@ -70,7 +70,7 @@ export class ConsCls extends Exps.Cls {
         fresh_name,
         subst(this.field_t, name, exp),
         subst(
-          subst(this.rest_t, this.local_name, new Exps.Variable(fresh_name)),
+          subst(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
           name,
           exp
         ) as Exps.Cls,
@@ -95,11 +95,7 @@ export class ConsCls extends Exps.Cls {
     const fresh_name = ctx.freshen(this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
-    const rest_t = subst(
-      this.rest_t,
-      this.local_name,
-      new Exps.Variable(fresh_name)
-    )
+    const rest_t = subst(this.rest_t, this.local_name, new Exps.Var(fresh_name))
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value),
       rest_t,

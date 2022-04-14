@@ -116,14 +116,14 @@ export class DataCtorValue extends Value {
 
   private build_data_pattern(fixed_arg_names: Array<string>): Core {
     let data_core: Core = new Exps.DotCore(
-      new Exps.VariableCore(this.type_ctor.name),
+      new Exps.VarCore(this.type_ctor.name),
       this.name
     )
 
     for (const fixed_arg_name of fixed_arg_names) {
       data_core = new Exps.VagueApCore(
         data_core,
-        new Exps.VariableCore(fixed_arg_name)
+        new Exps.VarCore(fixed_arg_name)
       )
     }
 
@@ -203,7 +203,7 @@ export class DataCtorValue extends Value {
   }
 
   private is_direct_positive_recursive_arg_t(arg_t: Core): boolean {
-    if (arg_t instanceof Exps.VariableCore) {
+    if (arg_t instanceof Exps.VarCore) {
       if (arg_t.name === this.type_ctor.name) {
         return true
       } else {
@@ -225,7 +225,7 @@ export class DataCtorValue extends Value {
     for (const binding of [
       ...this.direct_positive_recursive_bindings,
     ].reverse()) {
-      const target = new Exps.VariableCore(binding.name)
+      const target = new Exps.VarCore(binding.name)
       const case_ret_t = this.build_case_ret_t(motive, binding.core, target)
       almost_t = new Exps.ConsClsCore(
         binding.original_name,
@@ -244,14 +244,11 @@ export class DataCtorValue extends Value {
   ): Core {
     switch (binding.kind) {
       case "plain":
-        return new Exps.ApCore(core, new Exps.VariableCore(binding.name))
+        return new Exps.ApCore(core, new Exps.VarCore(binding.name))
       case "implicit":
-        return new Exps.ImplicitApCore(
-          core,
-          new Exps.VariableCore(binding.name)
-        )
+        return new Exps.ImplicitApCore(core, new Exps.VarCore(binding.name))
       case "vague":
-        return new Exps.VagueApCore(core, new Exps.VariableCore(binding.name))
+        return new Exps.VagueApCore(core, new Exps.VarCore(binding.name))
     }
   }
 
@@ -266,7 +263,7 @@ export class DataCtorValue extends Value {
       this.type_ctor.name,
       new Exps.NotYetValue(
         this.type_ctor.self_type(),
-        new Exps.VariableNeutral(this.type_ctor.name)
+        new Exps.VarNeutral(this.type_ctor.name)
       )
     )
 
@@ -276,10 +273,7 @@ export class DataCtorValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    return new Exps.DotCore(
-      new Exps.VariableCore(this.type_ctor.name),
-      this.name
-    )
+    return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

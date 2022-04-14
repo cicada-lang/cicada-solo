@@ -1,9 +1,9 @@
-- rename `Variable` to `Var`
-- move `exps/var-*` to `exps/var/`
-- move `exps/todo-*` to `exps/todo/`
-- move `exps/the-*` to `exps/the/`
-- rename `TypeValue` to `TheTypeValue`
-- move `exps/the-type-*` to `exps/the-type/`
+- [refactor] move `exps/var-*` to `exps/var/`
+- [refactor] move `exps/todo-*` to `exps/todo/`
+- [refactor] move `exps/the-*` to `exps/the/`
+- [refactor] move `exps/type-*` to `exps/type/`
+
+- [refactor] `Stmt` be able to `undo`
 
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 

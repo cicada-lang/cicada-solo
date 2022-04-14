@@ -5,7 +5,7 @@ import { ExpTrace } from "../errors"
 import { check_by_infer, Exp, ExpMeta } from "../exp"
 import { Value } from "../value"
 
-export class Variable extends Exp {
+export class Var extends Exp {
   meta?: ExpMeta
   name: string
 
@@ -38,7 +38,7 @@ export class Variable extends Exp {
       if (found_t instanceof Exps.VaguePiValue) {
         return found_t.vague_inserter.insert_vague_ap(
           ctx,
-          new Exps.VariableCore(this.name),
+          new Exps.VarCore(this.name),
           [],
           t
         )
@@ -72,7 +72,7 @@ export class Variable extends Exp {
     if (found_t !== undefined) {
       return {
         t: found_t,
-        core: new Exps.VariableCore(this.name),
+        core: new Exps.VarCore(this.name),
       }
     }
 

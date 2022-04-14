@@ -35,7 +35,7 @@ export class TodoValue extends Exps.BuiltInValue {
       new Exps.VaguePiCore(
         "T",
         new Exps.BuiltInCore("Type"),
-        new Exps.VariableCore("T")
+        new Exps.VarCore("T")
       )
     )
   }

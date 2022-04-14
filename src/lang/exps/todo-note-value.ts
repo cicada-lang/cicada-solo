@@ -53,7 +53,7 @@ export class TodoNoteValue extends Exps.BuiltInValue {
         new Exps.PiCore(
           "note",
           new Exps.BuiltInCore("String"),
-          new Exps.VariableCore("T")
+          new Exps.VarCore("T")
         )
       )
     )

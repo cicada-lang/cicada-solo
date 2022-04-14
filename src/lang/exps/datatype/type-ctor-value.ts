@@ -143,7 +143,7 @@ export class TypeCtorValue extends Value {
         result.ctx.define(
           this.name,
           self_type,
-          new Exps.NotYetValue(self_type, new Exps.VariableNeutral(this.name))
+          new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name))
         )
       )
 
@@ -182,7 +182,7 @@ export class TypeCtorValue extends Value {
       fixed_args: (index, { arg_t }) =>
         new Exps.NotYetValue(
           arg_t,
-          new Exps.VariableNeutral(this.fixed_arg_names[index])
+          new Exps.VarNeutral(this.fixed_arg_names[index])
         ),
     })
   }
@@ -204,7 +204,7 @@ export class TypeCtorValue extends Value {
     let env = result.env
     for (const [name, arg_t_core] of Object.entries(this.varied)) {
       const arg_t = evaluate(env, arg_t_core)
-      const arg = new Exps.NotYetValue(arg_t, new Exps.VariableNeutral(name))
+      const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(name))
       varied[name] = arg_t
       env = env.extend(name, arg)
     }
@@ -256,7 +256,7 @@ export class TypeCtorValue extends Value {
 
     let counter = 0
     while (true) {
-      if (datatype instanceof Exps.VariableCore) break
+      if (datatype instanceof Exps.VarCore) break
       if (!(datatype instanceof Exps.ApCore)) {
         throw new ExpTrace(
           [

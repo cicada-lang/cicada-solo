@@ -40,7 +40,7 @@ export class FromFalsehoodAnythingValue extends Exps.BuiltInValue {
         new Exps.PiCore(
           "motive",
           new Exps.BuiltInCore("Type"),
-          new Exps.VariableCore("motive")
+          new Exps.VarCore("motive")
         )
       )
     )
