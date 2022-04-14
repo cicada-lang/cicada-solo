@@ -1,3 +1,10 @@
+- rename `Variable` to `Var`
+- move `exps/var-*` to `exps/var/`
+- move `exps/todo-*` to `exps/todo/`
+- move `exps/the-*` to `exps/the/`
+- rename `TypeValue` to `TheTypeValue`
+- move `exps/the-type-*` to `exps/the-type/`
+
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 
 - [syntax] [maybe] `recursion` (without `motive`) v.s. `induction` (with `motive`)
