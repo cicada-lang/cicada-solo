@@ -82,13 +82,6 @@ export const operand = {
       { cdr: "exp" },
       '")"',
     ],
-    "operand:cons_sugar": [
-      '"["',
-      { exps: "exps" },
-      '"|"',
-      { tail: "exp" },
-      '"]"',
-    ],
     "operand:cls": [
       '"class"',
       '"{"',

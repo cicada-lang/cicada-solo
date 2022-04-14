@@ -10,8 +10,5 @@ tester.echoExp(`Pair(A, B)`)
 tester.echoExp(`cons(a, b)`)
 tester.echoExp(`cons(a, cons(b, c))`)
 
-tester.echoExp(`[a | b]`)
-tester.echoExp(`[a, b | c]`)
-
 tester.echoExp(`car(target)`)
 tester.echoExp(`cdr(target)`)

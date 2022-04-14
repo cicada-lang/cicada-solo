@@ -18,10 +18,10 @@ export class ConsCore extends Core {
   }
 
   format(): string {
-    return `[${this.car.format()} | ${this.cdr.format()}]`
+    return `cons(${this.car.format()}, ${this.cdr.format()})`
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    return `[${this.car.alpha_format(ctx)} | ${this.cdr.alpha_format(ctx)}]`
+    return `cons(${this.car.alpha_format(ctx)}, ${this.cdr.alpha_format(ctx)})`
   }
 }

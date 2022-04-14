@@ -111,32 +111,11 @@ Pair(String, Trivial)
 Both(String, Trivial)
 ```
 
-Writing `cons(<exp>, <exp>)` is the same as writing `[<exp> | <exp>]`.
-
-```cicada
-check! ["abc" | sole]: Pair(String, Trivial)
-```
-
 We can write nested `Pair`.
 
 ```cicada
 check! Pair(Type, Pair(String, Trivial)): Type
-check! [String | ["abc" | sole]]: Pair(Type, Pair(String, Trivial))
-```
-
-We can use `same_as_chart!` to assert that
-many expressions of a given type are the same.
-
-For example, the following four expressions in `[ ... ]`,
-are different ways for writing the same thing.
-
-```cicada
-same_as_chart! (Pair(Type, Pair(String, Trivial))) [
-  [String, "abc" | sole],
-  [String | ["abc" | sole]],
-  cons(String, ["abc" | sole]),
-  cons(String, cons("abc", sole)),
-]
+check! cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
 ```
 
 # Sigma
@@ -157,12 +136,15 @@ the second type can change,
 ```cicada
 check! exists (x: Pair(Type, Type)) car(x): Type
 
-check! [cons(String, Trivial) | "ABC"]: exists (x: Pair(Type, Type)) car(x)
-check! [cons(Trivial, String) | sole]: exists (x: Pair(Type, Type)) car(x)
+check! cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
+check! cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
 ```
 
 `Pair` is actually a special form of `Sigma`.
 The following two types are the same.
+
+We can use `same_as_chart!` to assert that
+many expressions of a given type are the same.
 
 ```cicada
 same_as_chart! (Type) [

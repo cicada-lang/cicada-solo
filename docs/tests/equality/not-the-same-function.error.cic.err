@@ -2,9 +2,9 @@ I am expecting the following two values to be the same (_: String, _1: String) -
 But they are not.
 
 from left hand side (from) of Equal:
-  (x, y) => [x | y]
+  (x, y) => cons(x, y)
 to right hand side (to) of Equal:
-  (y, x) => [x | y]
+  (y, x) => cons(x, y)
 
 docs/tests/equality/not-the-same-function.error.cic:
  3 |    (String) -> (String) -> Pair(String, String),

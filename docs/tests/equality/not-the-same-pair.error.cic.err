@@ -2,9 +2,9 @@ I am expecting the following two values to be the same exists (_: String) String
 But they are not.
 
 from left hand side (from) of Equal:
-  ["ratatouille" | "baguette"]
+  cons("ratatouille", "baguette")
 to right hand side (to) of Equal:
-  ["baguette" | "ratatouille"]
+  cons("baguette", "ratatouille")
 
 docs/tests/equality/not-the-same-pair.error.cic:
  3 |    Pair(String, String),

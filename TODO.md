@@ -1,5 +1,3 @@
-- [syntax] remove `[x | y]` -- use `cons(x, y)` instead
-
 - [syntax] `forall (x: A) B(x)` as an alternative to `(x: A) -> B(x)`
 
   - to be symmetric with `exists (x: A) B(x)`

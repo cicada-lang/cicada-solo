@@ -1,4 +1,4 @@
-(vague A, vague B, x, y) => [x | y]: (vague A: Type, vague B: (_: A) -> Type, x: A, y: B(x)) -> exists (x1: A) B(x1)
+(vague A, vague B, x, y) => cons(x, y): (vague A: Type, vague B: (_: A) -> Type, x: A, y: B(x)) -> exists (x1: A) B(x1)
 List.null(vague String): List(String)
 List.null(vague String): List(String)
 List.cons(vague String, "abc", List.null(vague String)): List(String)
@@ -8,28 +8,28 @@ List.cons(vague String, "abc", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.null(vague String))): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.null(vague String)))): List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-(vague B) => [List.null(vague String) | List.null(vague B)]: (vague B: Type) -> exists (_: List(String)) List(B)
-(vague A, vague B) => [List.null(vague A) | List.null(vague B)]: (vague A: Type, vague B: Type) -> exists (_: List(A)) List(B)
-[List.null(vague String) | List.null(vague String)]: exists (_: List(String)) List(String)
-(vague B) => [List.null(vague String) | List.null(vague B)]: (vague B: Type) -> exists (_: List(String)) List(B)
-[List.null(vague String) | String]: exists (_: List(String)) Type
-[List.null(vague String) | String]: exists (_: List(String)) Type
-[List.null(vague String) | String]: exists (_: List(String)) Type
-[List.null(vague String) | String]: exists (_: List(String)) Type
-[List.cons(vague String, "a", List.null(vague String)) | String]: exists (_: List(String)) Type
-[List.cons(vague String, "a", List.null(vague String)) | String]: exists (_: List(String)) Type
-[List.cons(vague String, "a", List.null(vague String)) | String]: exists (_: List(String)) Type
-[List.cons(vague String, "a", List.null(vague String)) | String]: exists (_: List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
-[[List.null(vague String) | List.null(vague String)] | String]: exists (_: exists (_: List(String)) List(String)) Type
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+(vague B) => cons(List.null(vague String), List.null(vague B)): (vague B: Type) -> exists (_: List(String)) List(B)
+(vague A, vague B) => cons(List.null(vague A), List.null(vague B)): (vague A: Type, vague B: Type) -> exists (_: List(A)) List(B)
+cons(List.null(vague String), List.null(vague String)): exists (_: List(String)) List(String)
+(vague B) => cons(List.null(vague String), List.null(vague B)): (vague B: Type) -> exists (_: List(String)) List(B)
+cons(List.null(vague String), String): exists (_: List(String)) Type
+cons(List.null(vague String), String): exists (_: List(String)) Type
+cons(List.null(vague String), String): exists (_: List(String)) Type
+cons(List.null(vague String), String): exists (_: List(String)) Type
+cons(List.cons(vague String, "a", List.null(vague String)), String): exists (_: List(String)) Type
+cons(List.cons(vague String, "a", List.null(vague String)), String): exists (_: List(String)) Type
+cons(List.cons(vague String, "a", List.null(vague String)), String): exists (_: List(String)) Type
+cons(List.cons(vague String, "a", List.null(vague String)), String): exists (_: List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
+cons(cons(List.null(vague String), List.null(vague String)), String): exists (_: exists (_: List(String)) List(String)) Type
