@@ -8,7 +8,7 @@ import readdirp from "readdirp"
 import app from "../../app/node-app"
 import * as BlockParsers from "../../lang/block/block-parsers"
 import { ModLoader } from "../../lang/mod"
-import { BookConfigSchema } from "../../types"
+import { BookConfigSchema } from "../../datatypes"
 import { Runner } from "../runner"
 
 type Args = { book?: string }
