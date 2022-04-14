@@ -1,8 +1,8 @@
 // organize-imports-ignore
 
-export * from "./var"
-export * from "./var-core"
-export * from "./var-neutral"
+export * from "./var/var"
+export * from "./var/var-core"
+export * from "./var/var-neutral"
 
 export * from "./built-in/built-in-core"
 export * from "./built-in/built-in-value"

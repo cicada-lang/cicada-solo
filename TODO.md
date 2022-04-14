@@ -1,4 +1,3 @@
-- [refactor] move `exps/var-*` to `exps/var/`
 - [refactor] move `exps/todo-*` to `exps/todo/`
 - [refactor] move `exps/the-*` to `exps/the/`
 - [refactor] move `exps/type-*` to `exps/type/`
