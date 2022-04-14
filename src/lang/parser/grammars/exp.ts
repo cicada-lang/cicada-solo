@@ -119,7 +119,6 @@ export const operand = {
     ],
     "operand:same_as_chart": [
       '"same_as_chart"',
-      '"!"',
       '"("',
       { t: "exp" },
       '")"',

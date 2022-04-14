@@ -60,6 +60,6 @@ export class SameAsChart extends Exp {
 
   format(): string {
     const exps = this.exps.map((exp) => exp.format()).join(", ")
-    return `same_as_chart! (${this.t.format()}) [ ${exps} ]`
+    return `same_as_chart (${this.t.format()}) [ ${exps} ]`
   }
 }

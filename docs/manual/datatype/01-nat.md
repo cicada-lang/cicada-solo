@@ -109,10 +109,10 @@ check add(one): (Nat) -> Nat
 check add(one, one): Nat
 ```
 
-We often use `same_as_chart!` to write test.
+We often use `same_as_chart` to write test.
 
 ```cicada
-same_as_chart! (Nat) [
+same_as_chart (Nat) [
   add(two, three),
   add(three, two),
   five,
@@ -166,7 +166,7 @@ only visible inside the following `{ ... }`.
 ```cicada
 {
   let twelve = add(ten, two)
-  return same_as_chart! (Nat) [
+  return same_as_chart (Nat) [
     mul(four, three),
     mul(three, four),
     twelve,
@@ -205,7 +205,7 @@ function power(base: Nat, n: Nat): Nat {
 Some tests.
 
 ```cicada
-same_as_chart! (Nat) [
+same_as_chart (Nat) [
   power(four, three),
   power_of(three, four),
   add(mul(six, ten), four),
@@ -233,7 +233,7 @@ function gauss(n: Nat): Nat {
 Tests.
 
 ```cicada
-same_as_chart! (Nat) [
+same_as_chart (Nat) [
   gauss(ten),
   add(mul(five, ten), five),
 ]
@@ -259,7 +259,7 @@ function factorial(n: Nat): Nat {
 Tests.
 
 ```cicada
-same_as_chart! (Nat) [
+same_as_chart (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
 ]

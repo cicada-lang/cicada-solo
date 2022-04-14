@@ -1,5 +1,3 @@
-- [syntax] `same_as_chart` instead of `same_as_chart!`
-
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 
 - [syntax] [maybe] `recursion` (without `motive`) v.s. `induction` (with `motive`)

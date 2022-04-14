@@ -1,4 +1,4 @@
-same_as_chart! (String) [
+same_as_chart (String) [
   "abc",
   "abcd",
   "abc",

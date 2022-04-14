@@ -143,11 +143,11 @@ check cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
 `Pair` is actually a special form of `Sigma`.
 The following two types are the same.
 
-We can use `same_as_chart!` to assert that
+We can use `same_as_chart` to assert that
 many expressions of a given type are the same.
 
 ```cicada
-same_as_chart! (Type) [
+same_as_chart (Type) [
   Pair(String, Trivial),
   exists (_: String) Trivial,
 ]

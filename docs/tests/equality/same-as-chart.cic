@@ -1,13 +1,13 @@
-same_as_chart! (String) [
+same_as_chart (String) [
   "abc",
 ]
 
-same_as_chart! (String) [
+same_as_chart (String) [
   "abc",
   "abc",
 ]
 
-same_as_chart! (String) [
+same_as_chart (String) [
   "abc",
   "abc",
   "abc",

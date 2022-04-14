@@ -10,7 +10,7 @@ export const identifier = pt.grammars.pattern_unless_preserved("identifier", [
   "datatype",
   "induction",
   "check",
-  // "same_as_chart",
+  "same_as_chart",
   // built-in
   "car",
   "cdr",

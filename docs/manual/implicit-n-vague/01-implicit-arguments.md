@@ -69,7 +69,7 @@ Suppose I am the type checker, when I see `id("abc")`,
 Thus the following expressions are the same.
 
 ```cicada
-same_as_chart! (String) [
+same_as_chart (String) [
   id("abc"),
   id(implicit String, "abc"),
 ]
