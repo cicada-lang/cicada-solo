@@ -26,7 +26,7 @@ export * from "./sequence/begin"
 export * from "./sequence/let"
 export * from "./sequence/let-core"
 
-export * from "./not-yet-value"
+export * from "./not-yet/not-yet-value"
 
 export * from "./pi/pi"
 export * from "./pi/pi-core"
