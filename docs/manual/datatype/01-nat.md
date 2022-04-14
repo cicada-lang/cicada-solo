@@ -55,13 +55,13 @@ let ten = add1(nine)
 
 # add
 
-We can use the `induction` keyword to define functions that operates over `Nat`.
+We can use the `recursion` keyword to define functions that operates over `Nat`.
 
 `add` is one of the most basic function, it adds two `Nat`s togather.
 
 ```cicada
 function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
+  return recursion (x) {
     // If `x` is `zero`,
     //   the result of `add` is simply `y`.
     case zero => y
@@ -79,7 +79,7 @@ Note that,
 
   - i.e. `almost.prev` is the same as `add(prev)`.
 
-  - i.e. `induction` is like pattern matching,
+  - i.e. `recursive` is like pattern matching,
     but an extra argument called `almost` is given to the caller,
     in which we can get the results of recursive calls.
 
@@ -119,13 +119,37 @@ same_as_chart (Nat) [
 ]
 ```
 
+# About recursion over Nat
+
+By using `recursion`, we are defining function using **recursive combinator**.
+
+If we view `recursion` over `Nat` as a function, it roughly has the following definition.
+
+```cicada
+function recursion_nat(
+  target: Nat,
+  implicit T: Type,
+  case_of_zero: T,
+  case_of_add1: (
+    prev: Nat,
+    almost: class { prev: T },
+  ) -> T,
+): T {
+  return recursion (target) {
+    case zero => case_of_zero
+    case add1(prev, almost) => case_of_add1(prev, almost)
+  }
+}
+```
+
 # About induction over Nat
 
-By using `induction`, we are defining function using **recursive combinator**.
+The `induction` keyword is like `recursion`,
+but the return type can depend on the `target`,
+we use a function to specify the return type,
+and we call this function `motive`.
 
 If we view `induction` over `Nat` as a function, it roughly has the following definition.
-
-- The `motive` argument can be omitted (as we did), when the return type is simple.
 
 ```cicada
 function induction_nat(
@@ -152,7 +176,7 @@ we naturally want to define `mul`.
 
 ```cicada
 function mul(x: Nat, y: Nat): Nat {
-  return induction (x) {
+  return recursion (x) {
     case zero => zero
     case add1(_prev, almost) => add(almost.prev, y)
   }
@@ -182,7 +206,7 @@ Next we define power function.
 
 ```cicada
 function power_of(x: Nat, y: Nat): Nat {
-  return induction (x) {
+  return recursion (x) {
     case zero => add1(zero)
     case add1(prev, almost) => mul(almost.prev, y)
   }
@@ -223,7 +247,7 @@ his teacher gave him a task: adding the numbers from 1 to 100.
 
 ```cicada
 function gauss(n: Nat): Nat {
-  return induction (n) {
+  return recursion (n) {
     case zero => zero
     case add1(prev, almost) => add(add1(prev), almost.prev)
   }
@@ -249,7 +273,7 @@ Let's end this chapter with this famous function.
 
 ```cicada
 function factorial(n: Nat): Nat {
-  return induction (n) {
+  return recursion (n) {
     case zero => add1(zero)
     case add1(prev, almost) => mul(add1(prev), almost.prev)
   }
@@ -296,7 +320,7 @@ First, we define a helper function -- `fibonacci_iter`, for the iterative proces
 
 ```cicada
 function fibonacci_iter(count: Nat): (current: Nat, next: Nat) -> Nat {
-  return induction (count) {
+  return recursion (count) {
     case zero =>
       (current, next) => current
     case add1(_prev, almost) =>

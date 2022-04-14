@@ -10,14 +10,14 @@ datatype Nat {
 }
 
 function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
+  return recursion (x) {
     case zero => y
     case add1(prev, almost) => Nat.add1(almost.prev)
   }
 }
 
 function mul(x: Nat, y: Nat): Nat {
-  return induction (x) {
+  return recursion (x) {
     case zero => Nat.zero
     case add1(_prev, almost) => add(almost.prev, y)
   }

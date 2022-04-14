@@ -9,6 +9,7 @@ export const identifier = pt.grammars.pattern_unless_preserved("identifier", [
   "import",
   "datatype",
   "induction",
+  "recursion",
   "check",
   "same_as_chart",
   // built-in

@@ -31,16 +31,13 @@ Under some URLs, there are files.
 
 We can even `import` from them.
 
-For example, a file in a GitHub repository,
-can be fetched from a URL of [jsdelivr](https://www.jsdelivr.com).
-
 Since the name `Nat` is already imported, and we can not redefine names.
 We use `Nat: NatFromURL` to rename the imported definition.
 
 ```cicada
 import {
   Nat as NatFromURL
-} from "https://cdn.jsdelivr.net/gh/xieyuheng/the-little-typer-exercises@0.0.2/src/02.md"
+} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatype/01-nat.md"
 
 NatFromURL.zero
 NatFromURL.add1(NatFromURL.zero)

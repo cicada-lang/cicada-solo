@@ -190,7 +190,7 @@ export class Induction extends Exp {
       const motive = this.motive.format()
       return `induction (${target}) { ${motive} ${case_entries} }`
     } else {
-      return `induction (${target}) { ${case_entries} }`
+      return `recursion (${target}) { ${case_entries} }`
     }
   }
 }

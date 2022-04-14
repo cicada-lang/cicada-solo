@@ -113,14 +113,14 @@ export function operator_matcher(tree: pt.Tree): Exp {
         ),
     "operator:the": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
-    "operator:induction": ({ target, case_entries }, { span }) =>
+    "operator:recursion": ({ target, case_entries }, { span }) =>
       new Exps.Induction(
         exp_matcher(target),
         undefined,
         pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
         { span }
       ),
-    "operator:induction_motive": ({ target, motive, case_entries }, { span }) =>
+    "operator:induction": ({ target, motive, case_entries }, { span }) =>
       new Exps.Induction(
         exp_matcher(target),
         exp_matcher(motive),

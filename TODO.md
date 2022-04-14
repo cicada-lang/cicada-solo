@@ -1,11 +1,6 @@
 - [refactor] `Stmt` be able to `undo`
-
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
-
-- [syntax] [maybe] `recursion` (without `motive`) v.s. `induction` (with `motive`)
-
 - [syntax] [maybe] use explicit `eval` keyword
-
   - to reduce ambiguities introduced by allowing `exp` as `stmt`
 
 - `Pi` -- `readback` to `Arrow` if possible

@@ -27,8 +27,8 @@ export const operator = {
         },
       },
     ],
-    "operator:induction": [
-      '"induction"',
+    "operator:recursion": [
+      '"recursion"',
       '"("',
       { target: "exp" },
       '")"',
@@ -36,7 +36,7 @@ export const operator = {
       { case_entries: { $ap: ["zero_or_more", "case_entry"] } },
       '"}"',
     ],
-    "operator:induction_motive": [
+    "operator:induction": [
       '"induction"',
       '"("',
       { target: "exp" },

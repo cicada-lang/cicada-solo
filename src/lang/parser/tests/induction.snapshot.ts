@@ -2,6 +2,11 @@ import { tester } from "../parser-tester-instance"
 
 tester.echoStmts(`
 
+recursion (x) {
+  case zero => y
+  case add1(_prev, almost) => Nat.add1(almost.prev)
+}
+
 induction (x) {
   (_) => Nat
   case zero => y
