@@ -1,8 +1,8 @@
-import { evaluate } from "../core"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import * as Exps from "../exps"
-import { readback, Value } from "../value"
+import { evaluate } from "../../core"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import * as Exps from "../../exps"
+import { readback, Value } from "../../value"
 
 export class TodoNoteValue extends Exps.BuiltInValue {
   name = "TODO_NOTE"

@@ -17,8 +17,8 @@ export * from "./the/the"
 export * from "./the/the-core"
 export * from "./the/the-value"
 
-export * from "./todo-value"
-export * from "./todo-note-value"
+export * from "./todo/todo-value"
+export * from "./todo/todo-note-value"
 
 export * from "./type/type-value"
 
