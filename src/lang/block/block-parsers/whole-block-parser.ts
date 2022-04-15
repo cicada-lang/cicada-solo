@@ -3,7 +3,7 @@ import { BlockParser, BlockResource } from "../../block"
 import { ParsingError } from "../../errors"
 import { Parser } from "../../parser"
 
-export class CicBlockParser extends BlockParser {
+export class WholeBlockParser extends BlockParser {
   parseBlocks(text: string): BlockResource {
     const blocks = new BlockResource()
 
