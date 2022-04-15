@@ -1,6 +1,5 @@
 > [refactor] improve `Mod` -- learn from `cicada-lang/lambda`
 
-- `BlockLoader`
 - `ModLoader` has `blockLoader: BlockLoader`
 - simplify `BlockResource` -- use `Stmt.undo`
 
