@@ -42,7 +42,7 @@ export class RunCommand extends Command<Args, Opts> {
       ``,
       `We can also run a URL directly.`,
       ``,
-      blue(`  ${runner.name} ${this.name} "https://cdn.jsdelivr.net/gh/xieyuheng/the-little-typer-exercises@0.0.2/src/02.md"`),
+      blue(`  ${runner.name} ${this.name} "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatype/01-nat.md"`),
       ``,
       `You can use ${blue("--watch")} to let the program stand by, and react to changes.`,
       ``,

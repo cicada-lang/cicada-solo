@@ -1,4 +1,3 @@
-import ty from "@xieyuheng/ty"
 import { BlockResource } from "../block"
 import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
@@ -21,12 +20,14 @@ export class Mod {
     this.blocks = opts.blocks
   }
 
-  async import(url: URL): Promise<Mod> {
-    return await this.loader.load(url)
+  async import(url: URL | string): Promise<Mod> {
+    return await this.loader.loadAndExecute(
+      typeof url === "string" ? this.resolve(url) : url
+    )
   }
 
-  resolve(path: string): URL {
-    return ty.uri().isValid(path) ? new URL(path) : new URL(path, this.url)
+  resolve(href: string): URL {
+    return new URL(href, this.url)
   }
 
   extendTypedCore(name: string, inferred: { t: Value; core: Core }): void {

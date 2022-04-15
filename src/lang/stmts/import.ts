@@ -29,18 +29,6 @@ export class Import extends Stmt {
     }
 
     const imported_mod = await mod.import(url)
-
-    try {
-      await imported_mod.runAll()
-    } catch (error) {
-      throw new Errors.ExpTrace(
-        [
-          `I fail to import from path: ${this.path}`,
-          `because there are errors in that module.`,
-        ].join("\n")
-      )
-    }
-
     for (const { name, alias } of this.entries) {
       const t = imported_mod.ctx.find_type(name)
       const value = imported_mod.env.find_value(name)
