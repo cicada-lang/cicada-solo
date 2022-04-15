@@ -9,6 +9,6 @@ export interface StmtMeta {
 export abstract class Stmt {
   abstract meta: StmtMeta
 
-  abstract execute(mod: Mod): Promise<StmtOutput | undefined>
+  abstract execute(mod: Mod): Promise<StmtOutput | void>
   abstract format(): string
 }

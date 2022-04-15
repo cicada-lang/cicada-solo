@@ -15,11 +15,10 @@ export class ClassExtends extends Stmt {
     this.ext = ext
   }
 
-  async execute(mod: Mod): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | void> {
     const t = new Exps.TypeValue()
     const core = check(mod.ctx, this.ext, t)
     mod.extendTypedCore(this.name, { t, core })
-    return undefined
   }
 
   format(): string {

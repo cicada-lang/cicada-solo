@@ -16,7 +16,7 @@ export class Import extends Stmt {
     this.entries = entries
   }
 
-  async execute(mod: Mod): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | void> {
     const url = mod.resolve(this.path)
     if (url.href === mod.url.href) {
       throw new Errors.ExpTrace(
@@ -59,8 +59,6 @@ export class Import extends Stmt {
       mod.ctx = mod.ctx.extend(alias || name, t, value)
       mod.env = mod.env.extend(alias || name, value)
     }
-
-    return undefined
   }
 
   format(): string {

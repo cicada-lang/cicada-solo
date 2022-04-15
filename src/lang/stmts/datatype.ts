@@ -21,9 +21,8 @@ export class Datatype extends Stmt {
     this.datatype = new Exps.TypeCtor(name, fixed, varied, ctors)
   }
 
-  async execute(mod: Mod): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | void> {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.datatype))
-    return undefined
   }
 
   format(): string {

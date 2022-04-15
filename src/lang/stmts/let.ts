@@ -14,9 +14,8 @@ export class Let extends Stmt {
     this.exp = exp
   }
 
-  async execute(mod: Mod): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | void> {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.exp))
-    return undefined
   }
 
   format(): string {

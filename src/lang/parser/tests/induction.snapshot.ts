@@ -1,6 +1,5 @@
 import { tester } from "../parser-tester-instance"
 
-
 tester.echoExp(`
 
 recursion (x) {

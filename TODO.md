@@ -4,6 +4,9 @@
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible
 
+- inline repl from `enchanterjs` to `infra/`
+- mark a code block as `cicada compute` to compute one expression
+
 # manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`
