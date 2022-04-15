@@ -1,3 +1,4 @@
+import { BlockResource } from "../block"
 import { Parser } from "../parser"
 import { Stmt, StmtOutput } from "../stmt"
 
@@ -8,6 +9,7 @@ export type BlockEntry = {
 
 export class Block {
   constructor(
+    public blocks: BlockResource,
     public id: number,
     public code: string,
     public entries: Array<BlockEntry>

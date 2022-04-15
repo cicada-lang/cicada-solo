@@ -14,7 +14,7 @@ export class BlockResource {
   }
 
   put(id: number, code: string, entries: Array<BlockEntry>): Block {
-    const block = new Block(id, code, entries)
+    const block = new Block(this, id, code, entries)
     this.blocks.push(block)
     return block
   }
@@ -83,6 +83,7 @@ export class BlockResource {
     const id = this.nextId()
     this.blocks.push(
       new Block(
+        this,
         id,
         code,
         stmts.map((stmt) => ({ stmt }))
