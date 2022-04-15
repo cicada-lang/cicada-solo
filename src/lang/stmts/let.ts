@@ -18,6 +18,10 @@ export class Let extends Stmt {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.exp))
   }
 
+  undo(mod: Mod): void {
+    mod.remove(this.name)
+  }
+
   format(): string {
     return `let ${this.name} = ${this.exp.format()}`
   }

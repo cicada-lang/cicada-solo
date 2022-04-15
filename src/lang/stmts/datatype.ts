@@ -25,6 +25,10 @@ export class Datatype extends Stmt {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.datatype))
   }
 
+  undo(mod: Mod): void {
+    mod.remove(this.name)
+  }
+
   format(): string {
     return this.datatype.format()
   }

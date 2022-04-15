@@ -61,6 +61,12 @@ export class Import extends Stmt {
     }
   }
 
+  undo(mod: Mod): void {
+    for (const { name, alias } of this.entries) {
+      mod.remove(alias || name)
+    }
+  }
+
   format(): string {
     const entries = this.entries
       .map(({ name, alias }) => (alias ? `${name} as ${alias}` : name))

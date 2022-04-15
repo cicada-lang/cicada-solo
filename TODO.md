@@ -1,4 +1,3 @@
-- [refactor] `Stmt` be able to `undo`
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 
 - `Pi` -- `readback` to `Arrow` if possible

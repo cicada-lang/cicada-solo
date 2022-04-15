@@ -25,6 +25,8 @@ export class Compute extends Stmt {
     })
   }
 
+  undo(mod: Mod): void {}
+
   format(): string {
     return this.exp.format()
   }

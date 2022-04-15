@@ -36,6 +36,11 @@ export class Mod {
     this.env = this.env.extend(name, evaluate(this.env, inferred.core))
   }
 
+  remove(name: string): void {
+    this.ctx = this.ctx.remove(name)
+    this.env = this.env.remove(name)
+  }
+
   private async step(): Promise<Array<undefined | StmtOutput>> {
     const block = this.blocks.nextOrFail({ env: this.env, ctx: this.ctx })
 
