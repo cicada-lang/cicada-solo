@@ -14,15 +14,8 @@ export abstract class Env {
 }
 
 class ExtendEnv extends Env {
-  name: string
-  value: Value
-  rest: Env
-
-  constructor(name: string, value: Value, rest: Env) {
+  constructor(public name: string, public value: Value, public rest: Env) {
     super()
-    this.name = name
-    this.value = value
-    this.rest = rest
   }
 
   find_value(name: string): undefined | Value {

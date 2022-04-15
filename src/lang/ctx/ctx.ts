@@ -9,6 +9,7 @@ import { Highlighter } from "./highlighter"
 export abstract class Ctx {
   abstract names: Array<string>
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
+  abstract remove(name: string): Ctx
   abstract to_env(): Env
 
   static observers: Array<CtxObserver> = [
@@ -56,7 +57,7 @@ export abstract class Ctx {
   }
 
   define(name: string, t: Value, value?: Value): Ctx {
-    return new ExtendCtx({ name, t, value, rest: this })
+    return new ExtendCtx(name, t, value, this)
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
@@ -104,17 +105,13 @@ export abstract class Ctx {
 }
 
 class ExtendCtx extends Ctx {
-  name: string
-  t: Value
-  value?: Value
-  rest: Ctx
-
-  constructor(opts: { name: string; t: Value; value?: Value; rest: Ctx }) {
+  constructor(
+    public name: string,
+    public t: Value,
+    public value: Value | undefined,
+    public rest: Ctx
+  ) {
     super()
-    this.name = opts.name
-    this.t = opts.t
-    this.value = opts.value
-    this.rest = opts.rest
   }
 
   get names(): Array<string> {
@@ -126,6 +123,19 @@ class ExtendCtx extends Ctx {
       return { t: this.t, value: this.value }
     } else {
       return this.rest.find_entry(name)
+    }
+  }
+
+  remove(name: string): Ctx {
+    if (name === this.name) {
+      return this.rest
+    } else {
+      return new ExtendCtx(
+        this.name,
+        this.t,
+        this.value,
+        this.rest.remove(name)
+      )
     }
   }
 
@@ -142,6 +152,10 @@ class EmptyCtx extends Ctx {
 
   find_entry(name: string): undefined | { t: Value; value?: Value } {
     return undefined
+  }
+
+  remove(name: string): Ctx {
+    return this
   }
 
   to_env(): Env {
