@@ -1,10 +1,5 @@
-import pt from "@cicada-lang/partech"
 import { Mod } from "../mod"
-import { StmtOutput } from "./stmt-output"
-
-export interface StmtMeta {
-  span: pt.Span
-}
+import { StmtMeta, StmtOutput } from "../stmt"
 
 export abstract class Stmt {
   abstract meta: StmtMeta

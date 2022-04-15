@@ -1,11 +1,7 @@
-import pt from "@cicada-lang/partech"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { ExpMeta } from "../exp"
 import { Value } from "../value"
-
-export interface ExpMeta {
-  span?: pt.Span
-}
 
 export abstract class Exp {
   meta?: ExpMeta

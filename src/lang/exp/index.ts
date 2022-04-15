@@ -1,4 +1,5 @@
 export * from "./check"
 export * from "./exp"
+export * from "./exp-meta"
 export * from "./infer"
 export * from "./subst"
