@@ -1,7 +1,7 @@
 import { Parser } from "../parser"
 import { Stmt, StmtOutput } from "../stmt"
 
-export type StmtEntry = {
+export type BlockEntry = {
   stmt: Stmt
   output?: StmtOutput
 }
@@ -10,7 +10,7 @@ export class Block {
   constructor(
     public id: number,
     public code: string,
-    public entries: Array<StmtEntry>
+    public entries: Array<BlockEntry>
   ) {}
 
   get outputs(): Array<undefined | StmtOutput> {

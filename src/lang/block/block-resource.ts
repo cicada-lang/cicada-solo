@@ -2,24 +2,30 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Parser } from "../parser"
 import { StmtOutput } from "../stmt"
-import { Block } from "./block"
+import { Block, BlockEntry } from "./block"
 
 export class BlockResource {
-  array: Array<Block> = []
+  blocks: Array<Block> = []
   counter: number = 0
   backups: Array<{ env: Env; ctx: Ctx }> = []
 
   constructor(array: Array<Block>) {
-    this.array = array
+    this.blocks = array
   }
 
   get length(): number {
-    return this.array.length
+    return this.blocks.length
+  }
+
+  put(id: number, code: string, entries: Array<BlockEntry>): Block {
+    const block = new Block(id, code, entries)
+    this.blocks.push(block)
+    return block
   }
 
   next(backup: { env: Env; ctx: Ctx }): Block | undefined {
     this.backups.push(backup)
-    return this.array[this.counter++]
+    return this.blocks[this.counter++]
   }
 
   nextOrFail(backup: { env: Env; ctx: Ctx }): Block {
@@ -36,11 +42,11 @@ export class BlockResource {
   }
 
   remain(): Array<Block> {
-    return this.array.slice(this.counter)
+    return this.blocks.slice(this.counter)
   }
 
   encountered(id: number): boolean {
-    const index = this.array.findIndex((block) => block.id === id)
+    const index = this.blocks.findIndex((block) => block.id === id)
     return index !== -1 && index < this.counter
   }
 
@@ -51,7 +57,7 @@ export class BlockResource {
       )
     }
 
-    const index = this.array.findIndex((block) => block.id === id)
+    const index = this.blocks.findIndex((block) => block.id === id)
     this.counter = index
     const backup = this.backups[index]
     this.backups = this.backups.slice(0, index)
@@ -60,7 +66,7 @@ export class BlockResource {
   }
 
   private eraseOutputFrom(index: number): void {
-    for (const [i, block] of this.array.entries()) {
+    for (const [i, block] of this.blocks.entries()) {
       if (i >= index) {
         for (const entry of block.entries) {
           delete entry.output
@@ -70,16 +76,16 @@ export class BlockResource {
   }
 
   nextId(): number {
-    if (this.array.length === 0) return 0
+    if (this.blocks.length === 0) return 0
 
-    return Math.max(...this.array.map(({ id }) => id)) + 1
+    return Math.max(...this.blocks.map(({ id }) => id)) + 1
   }
 
   appendCode(code: string): void {
     const parser = new Parser()
     const stmts = parser.parseStmts(code)
     const id = this.nextId()
-    this.array.push(
+    this.blocks.push(
       new Block(
         id,
         code,
@@ -89,7 +95,7 @@ export class BlockResource {
   }
 
   get(id: number): Block | undefined {
-    return this.array.find((block) => block.id === id)
+    return this.blocks.find((block) => block.id === id)
   }
 
   getOrFail(id: number): Block {
@@ -115,6 +121,6 @@ export class BlockResource {
   }
 
   get allOutputs(): Array<undefined | StmtOutput> {
-    return this.array.flatMap(({ outputs }) => outputs)
+    return this.blocks.flatMap(({ outputs }) => outputs)
   }
 }

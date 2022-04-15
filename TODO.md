@@ -1,4 +1,10 @@
-- [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
+> [refactor] improve `Mod` -- learn from `cicada-lang/lambda`
+
+- `Block` has `blocks: BlockResource`
+- `BlockParser.parseBlocks` -- return `BlockResource` instead of `Array`
+- `BlockLoader`
+- `ModLoader` has `blockLoader: BlockLoader`
+- simplify `BlockResource` -- use `Stmt.undo`
 
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible

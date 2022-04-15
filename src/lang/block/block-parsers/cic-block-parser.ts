@@ -1,6 +1,6 @@
+import { BlockParser } from "../../block"
 import { Parser } from "../../parser"
 import { Block } from "../block"
-import { BlockParser } from "../block-parser"
 
 export class CicBlockParser extends BlockParser {
   parseBlocks(text: string): Array<Block> {
