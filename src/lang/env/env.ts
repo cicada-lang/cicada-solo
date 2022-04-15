@@ -2,6 +2,7 @@ import { Value } from "../value"
 
 export abstract class Env {
   abstract find_value(name: string): undefined | Value
+  abstract remove(name: string): Env
 
   static init(): EmptyEnv {
     return new EmptyEnv()
@@ -31,10 +32,22 @@ class ExtendEnv extends Env {
       return this.rest.find_value(name)
     }
   }
+
+  remove(name: string): Env {
+    if (this.name === name) {
+      return this.rest
+    } else {
+      return new ExtendEnv(this.name, this.value, this.rest.remove(name))
+    }
+  }
 }
 
 class EmptyEnv extends Env {
   find_value(name: string): undefined | Value {
     return undefined
+  }
+
+  remove(name: string): Env {
+    return this
   }
 }
