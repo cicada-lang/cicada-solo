@@ -1,6 +1,6 @@
 > [refactor] improve `Mod` -- learn from `cicada-lang/lambda`
 
-- simplify `BlockResource` -- use `Stmt.undo`
+- simplify `BlockResource` -- using `Stmt.undo`
 
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible
