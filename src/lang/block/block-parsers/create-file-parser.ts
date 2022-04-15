@@ -1,5 +1,5 @@
-import * as BlockParsers from "."
 import { BlockParser } from "../block-parser"
+import * as BlockParsers from "../block-parsers"
 
 export function createBlockParser(url: URL): BlockParser {
   if (url.protocol === "repl:") {

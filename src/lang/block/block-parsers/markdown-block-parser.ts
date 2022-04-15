@@ -1,29 +1,36 @@
+import pt from "@cicada-lang/partech"
 import * as commonmark from "commonmark"
+import { BlockParser, BlockResource } from "../../block"
+import { ParsingError } from "../../errors"
 import { Parser } from "../../parser"
-import { Block } from "../block"
-import { BlockParser } from "../block-parser"
 
 export class MarkdownBlockParser extends BlockParser {
-  parseBlocks(text: string): Array<Block> {
+  parseBlocks(text: string): BlockResource {
+    const blocks = new BlockResource()
     const parser = new Parser()
-    return collectBlocks(text)
-      .filter(({ info }) => info === "cicada")
-      .map(
-        ({ index, text, offset }) =>
-          new Block(
-            index,
-            text,
-            parser.parseStmts(text, offset).map((stmt) => ({ stmt }))
-          )
-      )
+    for (const { index, code } of collectBlocks(text).filter(
+      ({ info }) => info === "cicada"
+    )) {
+      try {
+        const stmts = parser.parseStmts(code)
+        const entries = stmts.map((stmt) => ({ stmt }))
+        blocks.put(index, code, entries)
+      } catch (error) {
+        if (error instanceof ParsingError) {
+          console.error(pt.report(error.span, text))
+        }
+
+        throw error
+      }
+    }
+    return blocks
   }
 }
 
 function collectBlocks(text: string): Array<{
   index: number
   info: string
-  text: string
-  offset: number
+  code: string
 }> {
   const reader = new commonmark.Parser()
   const parsed: commonmark.Node = reader.parse(text)
@@ -44,16 +51,10 @@ function collectBlocks(text: string): Array<{
       blocks.push({
         index: counter++,
         info: node.info || "",
-        text: node.literal || "",
-        offset: offsetFromPosition(text, row, col),
+        code: node.literal || "",
       })
     }
   }
 
   return blocks
-}
-
-function offsetFromPosition(text: string, row: number, col: number): number {
-  const lines = text.split("\n")
-  return lines.slice(0, row).join("\n").length + col
 }

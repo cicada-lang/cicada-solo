@@ -1,7 +1,6 @@
 > [refactor] improve `Mod` -- learn from `cicada-lang/lambda`
 
 - `Block` has `blocks: BlockResource`
-- `BlockParser.parseBlocks` -- return `BlockResource` instead of `Array`
 - `BlockLoader`
 - `ModLoader` has `blockLoader: BlockLoader`
 - simplify `BlockResource` -- use `Stmt.undo`

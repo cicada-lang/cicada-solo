@@ -1,6 +1,5 @@
-import { Block } from "../block"
+import { BlockResource } from "../block"
 
 export abstract class BlockParser {
-  abstract parseBlocks(text: string): Array<Block>
-  // abstract parseBlocks(text: string): BlockResource
+  abstract parseBlocks(text: string): BlockResource
 }

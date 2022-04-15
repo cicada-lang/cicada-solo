@@ -1,17 +1,13 @@
+import { Block, BlockEntry } from "../block"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Parser } from "../parser"
 import { StmtOutput } from "../stmt"
-import { Block, BlockEntry } from "./block"
 
 export class BlockResource {
   blocks: Array<Block> = []
   counter: number = 0
   backups: Array<{ env: Env; ctx: Ctx }> = []
-
-  constructor(array: Array<Block>) {
-    this.blocks = array
-  }
 
   get length(): number {
     return this.blocks.length
