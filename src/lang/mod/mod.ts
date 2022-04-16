@@ -1,5 +1,4 @@
 import { BlockResource } from "../block"
-import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { ModLoader } from "../mod"
@@ -30,11 +29,10 @@ export class Mod {
     return new URL(href, this.url)
   }
 
-  extendTypedCore(name: string, inferred: { t: Value; core: Core }): void {
-    const inferred_value = evaluate(this.ctx.toEnv(), inferred.core)
-    this.ctx.assertNotRedefine(name, inferred.t, inferred_value)
-    this.ctx = this.ctx.extend(name, inferred.t, inferred_value)
-    this.env = this.env.extend(name, evaluate(this.env, inferred.core))
+  define(name: string, t: Value, value: Value): void {
+    this.ctx.assertNotRedefine(name, t, value)
+    this.ctx = this.ctx.extend(name, t, value)
+    this.env = this.env.extend(name, value)
   }
 
   remove(name: string): void {

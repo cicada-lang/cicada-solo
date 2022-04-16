@@ -1,3 +1,4 @@
+import { evaluate } from "../core"
 import { Exp, infer } from "../exp"
 import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -15,7 +16,9 @@ export class Let extends Stmt {
   }
 
   async execute(mod: Mod): Promise<StmtOutput | void> {
-    mod.extendTypedCore(this.name, infer(mod.ctx, this.exp))
+    const { t, core } = infer(mod.ctx, this.exp)
+    const value = evaluate(mod.env, core)
+    mod.define(this.name, t, value)
   }
 
   undo(mod: Mod): void {

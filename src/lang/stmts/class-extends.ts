@@ -1,3 +1,4 @@
+import { evaluate } from "../core"
 import { check } from "../exp"
 import * as Exps from "../exps"
 import { Mod } from "../mod"
@@ -18,7 +19,8 @@ export class ClassExtends extends Stmt {
   async execute(mod: Mod): Promise<StmtOutput | void> {
     const t = new Exps.TypeValue()
     const core = check(mod.ctx, this.ext, t)
-    mod.extendTypedCore(this.name, { t, core })
+    const value = evaluate(mod.env, core)
+    mod.define(this.name, t, value)
   }
 
   undo(mod: Mod): void {

@@ -1,3 +1,4 @@
+import { evaluate } from "../core"
 import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
 import { Mod } from "../mod"
@@ -22,7 +23,9 @@ export class Datatype extends Stmt {
   }
 
   async execute(mod: Mod): Promise<StmtOutput | void> {
-    mod.extendTypedCore(this.name, infer(mod.ctx, this.datatype))
+    const { t, core } = infer(mod.ctx, this.datatype)
+    const value = evaluate(mod.env, core)
+    mod.define(this.name, t, value)
   }
 
   undo(mod: Mod): void {
