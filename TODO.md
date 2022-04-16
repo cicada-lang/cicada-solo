@@ -1,9 +1,5 @@
-> Improve `Mod` -- learn from `cicada-lang/lambda`
-
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible
-
-- inline repl from `enchanterjs` to `infra/`
 
 - mark a code block as `cicada compute` to compute one expression
   - to be able to run markdown files in `xieyuheng/cicada-monologues`
@@ -11,11 +7,8 @@
 # manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`
-
   - Mathematical Structure as Class
-
 - [manual] `equality/01-equal-utilities.md`
-
 - [manual] `datatype/02-list.md`
 - [manual] `datatype/03-vector.md`
 
@@ -27,16 +20,6 @@
   - can we add this to cicada?
 
 # inductive datatype -- questions
-
-- it will be more natural to define fibonacci function by recursion
-
-  - we can do this if we can continue an induction for "the previous of the previous",
-    instead of starting a new induction for it.
-
-  - https://readonly.link/manuals/gitlab.com/cicada-lang/cicada/-/datatype/01-nat.md#fibonacci
-
-> If the ambition of this project is too much pressure,
-> use refactoring as a therapy.
 
 - [question] Is it ok that `TypeCtorValue` should be `readback` to `TypeCtorCore`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
@@ -71,6 +54,15 @@
     - Which can be solved by special `apply` field.
 
   - Should we support "every thing is object"?
+
+# continued induction
+
+- it will be more natural to define fibonacci function by recursion
+
+  - we can do this if we can continue an induction for "the previous of the previous",
+    instead of starting a new induction for it.
+
+  - https://readonly.link/manuals/gitlab.com/cicada-lang/cicada/-/datatype/01-nat.md#fibonacci
 
 # errors
 
@@ -175,7 +167,6 @@
 
 - [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
-- [maybe] offset in `Block`
 - [maybe] support using `let name = exp` to do local definitions in class
 
 - [general macro] `li [...]` and `vec [...]` can be general macro,

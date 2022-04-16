@@ -1,8 +1,8 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import { ReadlineRepl } from "@enchanterjs/enchanter/lib/repls/readline-repl"
 import Path from "path"
 import app from "../../app/node-app"
+import { ReadlineRepl } from "../../infra/repls/readline-repl"
 
 type Args = {}
 

@@ -1,6 +1,6 @@
-import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import fs from "fs"
 import { Config } from "../config"
+import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
