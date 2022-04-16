@@ -21,7 +21,7 @@ export class Runner {
     try {
       const mod = await this.loader.loadAndExecute(url)
 
-      const output = mod.blocks.allOutputs
+      const output = mod.blocks.outputs
         .filter((output) => output !== undefined)
         .map((output) => (output as StmtOutput).formatForConsole())
         .join("\n")

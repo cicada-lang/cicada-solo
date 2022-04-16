@@ -51,7 +51,7 @@ export class Block {
     this.executed = true
   }
 
-  update(code: string): void {
+  private update(code: string): void {
     this.code = code
     this.reparse()
   }
