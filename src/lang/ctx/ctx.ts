@@ -1,4 +1,5 @@
-import * as ut from "../../ut"
+import { freshen } from "../../ut/freshen"
+import { colors } from "../../ut/colors"
 import { Env } from "../env"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
@@ -27,11 +28,11 @@ export abstract class Ctx {
     highlight: (tag, text) => {
       switch (tag) {
         case "code":
-          return ut.colors.blue(text)
+          return colors.blue(text)
         case "warn":
-          return ut.colors.red(text)
+          return colors.red(text)
         case "note":
-          return ut.colors.yellow(text)
+          return colors.yellow(text)
         default:
           return text
       }
@@ -53,7 +54,7 @@ export abstract class Ctx {
   }
 
   freshen(name: string): string {
-    return ut.freshen(new Set(this.names), name)
+    return freshen(new Set(this.names), name)
   }
 
   define(name: string, t: Value, value?: Value): Ctx {

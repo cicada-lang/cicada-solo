@@ -127,7 +127,7 @@ export class BlockResource {
   updateCode(id: number, code: string): void {
     const block = this.get(id)
     if (block) {
-      block.updateCode(code)
+      block.update(code)
     } else {
       console.warn(`I can not update non-existing code block of id: ${id}`)
     }

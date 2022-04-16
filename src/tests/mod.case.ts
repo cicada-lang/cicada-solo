@@ -41,7 +41,38 @@ export default class extends TestCase {
     this.assertModHasValue(mod, "x")
   }
 
-  async "A Mod can undo its block."() {
-    //
+  async "A Mod can run a given block, will undo blocks after it."() {
+    const loader = new ModLoader()
+    loader.fetcher.register("mock", (url) =>
+      [
+        "# Church Numerals",
+
+        "```cicada",
+        'let a = "a"',
+        "```",
+
+        "```cicada",
+        'let b = "b"',
+        "```",
+
+        "```cicada",
+        'let c = "c"',
+        "```",
+      ].join("\n")
+    )
+
+    const mod = await loader.loadAndExecute(new URL("mock:example.md"))
+
+    this.assertModHasValue(mod, "a")
+    this.assertModHasValue(mod, "b")
+    this.assertModHasValue(mod, "c")
+
+    const block = mod.blocks.getOrFail(1)
+    // await block.run(mod, 'let d = "d"')
+
+    // this.assertModHasValue(mod, "a")
+    // this.assertModHasValue(mod, "d")
+    // this.assertModHasNotValue(mod, "b")
+    // this.assertModHasNotValue(mod, "c")
   }
 }
