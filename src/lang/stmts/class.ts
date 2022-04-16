@@ -24,7 +24,7 @@ export class Class extends Stmt {
   }
 
   undo(mod: Mod): void {
-    mod.remove(this.name)
+    mod.delete(this.name)
   }
 
   format(): string {

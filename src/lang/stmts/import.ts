@@ -51,7 +51,7 @@ export class Import extends Stmt {
 
   undo(mod: Mod): void {
     for (const { name, alias } of this.entries) {
-      mod.remove(alias || name)
+      mod.delete(alias || name)
     }
   }
 

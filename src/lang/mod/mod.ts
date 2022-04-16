@@ -35,7 +35,7 @@ export class Mod {
     this.env = this.env.extend(name, value)
   }
 
-  remove(name: string): void {
+  delete(name: string): void {
     this.ctx = this.ctx.remove(name)
     this.env = this.env.remove(name)
   }
