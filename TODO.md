@@ -1,5 +1,8 @@
 > Improve `Mod` -- learn from `cicada-lang/lambda`
 
+- [refactor] inline `mod.runAll`
+- [refactor] make `Block.update` private
+
 - simplify `BlockResource` -- frontend client should use `Block.run` instead
 
 - `Pi` -- `readback` to `Arrow` if possible
