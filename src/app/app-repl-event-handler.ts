@@ -32,11 +32,11 @@ export class AppReplEventHandler extends ReplEventHandler {
   private async execute(text: string): Promise<boolean> {
     text = text.trim()
     const url = new URL("repl:")
-
     const mod = await this.loader.load(url)
 
     try {
-      mod.blocks.appendCode(text)
+      const block = mod.blocks.create()
+      block.update(text)
       await mod.execute()
       const outputs = mod.blocks.outputs
       for (const output of outputs) {

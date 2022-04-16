@@ -1,5 +1,4 @@
 import { Block, BlockEntry } from "../block"
-import { Parser } from "../parser"
 import { StmtOutput } from "../stmt"
 
 export class BlockResource {
@@ -58,17 +57,10 @@ export class BlockResource {
     return Math.max(...this.blocks.map(({ id }) => id)) + 1
   }
 
-  appendCode(code: string): void {
-    const parser = new Parser()
-    const stmts = parser.parseStmts(code)
+  create(): Block {
     const id = this.nextId()
-    this.blocks.push(
-      new Block(
-        this,
-        id,
-        code,
-        stmts.map((stmt) => ({ stmt }))
-      )
-    )
+    const block = new Block(this, id, "", [])
+    this.blocks.push(block)
+    return block
   }
 }

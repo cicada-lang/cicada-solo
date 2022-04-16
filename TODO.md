@@ -1,7 +1,5 @@
 > Improve `Mod` -- learn from `cicada-lang/lambda`
 
-- [refactor] `BlockResource.appendCode`
-
 - `Pi` -- `readback` to `Arrow` if possible
 - `Sigma` -- `readback` to `Pair` if possible
 
