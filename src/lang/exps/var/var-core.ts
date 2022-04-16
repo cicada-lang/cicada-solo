@@ -12,7 +12,7 @@ export class VarCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const value = env.find_value(this.name)
+    const value = env.findValue(this.name)
     if (value === undefined) {
       throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
     }

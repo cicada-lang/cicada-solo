@@ -43,7 +43,7 @@ export class Dot extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 
-    const target = evaluate(ctx.to_env(), inferred.core)
+    const target = evaluate(ctx.toEnv(), inferred.core)
     if (target.dot_handler?.infer_by_target) {
       return target.dot_handler.infer_by_target(ctx, inferred.core, this.name)
     }
@@ -53,7 +53,7 @@ export class Dot extends Exp {
       // Because of `ClsValue` can be partially fulfilled by value,
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
-      const target_value = evaluate(ctx.to_env(), inferred.core)
+      const target_value = evaluate(ctx.toEnv(), inferred.core)
       const value = inferred.t.get_value(target_value, this.name)
       const t = inferred.t.get_type(target_value, this.name)
       return {

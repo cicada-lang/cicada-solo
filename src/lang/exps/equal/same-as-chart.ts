@@ -33,10 +33,10 @@ export class SameAsChart extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t_core = check(ctx, this.t, new Exps.TypeValue())
-    const t = evaluate(ctx.to_env(), t_core)
+    const t = evaluate(ctx.toEnv(), t_core)
 
     const cores = this.exps.map((exp) => check(ctx, exp, t))
-    const values = cores.map((core) => evaluate(ctx.to_env(), core))
+    const values = cores.map((core) => evaluate(ctx.toEnv(), core))
 
     for (let i = 0; i < values.length; i++) {
       const value = values[i]

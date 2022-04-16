@@ -9,7 +9,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   //   (before `readback` `arg_t` in `ImApInsertion`).
 
   if (t instanceof Exps.NotYetValue && t.neutral instanceof Exps.VarNeutral) {
-    const entry = ctx.find_entry(t.neutral.name)
+    const entry = ctx.findEntry(t.neutral.name)
     if (entry && entry.value) {
       t = entry.value
     }
@@ -19,7 +19,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     value instanceof Exps.NotYetValue &&
     value.neutral instanceof Exps.VarNeutral
   ) {
-    const entry = ctx.find_entry(value.neutral.name)
+    const entry = ctx.findEntry(value.neutral.name)
     if (entry && entry.value) {
       value = entry.value
     }

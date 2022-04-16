@@ -203,7 +203,7 @@ function check_arg_entry(
     (t instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
   ) {
     const arg_core = check(ctx, arg_entry.exp, t.arg_t)
-    const arg_value = evaluate(ctx.to_env(), arg_core)
+    const arg_value = evaluate(ctx.toEnv(), arg_core)
     return {
       arg_core_entries: [{ kind: arg_entry.kind, core: arg_core }],
       t: t.ret_t_cl.apply(arg_value),
@@ -211,7 +211,7 @@ function check_arg_entry(
   } else if (t instanceof Exps.ImplicitPiValue) {
     const inferred_arg = infer(ctx, arg_entry.exp)
     const arg_core = inferred_arg.core
-    const arg_value = evaluate(ctx.to_env(), arg_core)
+    const arg_value = evaluate(ctx.toEnv(), arg_core)
     const result = t.implicit_inserter.collect_implicit_ap_entries(
       ctx,
       inferred_arg.t,

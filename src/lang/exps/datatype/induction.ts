@@ -54,7 +54,7 @@ export class Induction extends Exp {
     const { datatype, target_core } = this.infer_target(ctx)
 
     const motive_core = this.build_motive_core_from_type(ctx, datatype, t)
-    const motive_value = evaluate(ctx.to_env(), motive_core)
+    const motive_value = evaluate(ctx.toEnv(), motive_core)
 
     return new Exps.InductionCore(
       target_core,
@@ -92,12 +92,12 @@ export class Induction extends Exp {
     const { datatype, target_core } = this.infer_target(ctx)
 
     const motive_core = check(ctx, this.motive, datatype.build_motive_t())
-    const motive_value = evaluate(ctx.to_env(), motive_core)
+    const motive_value = evaluate(ctx.toEnv(), motive_core)
 
     return {
       t: Exps.apply_args(motive_value, [
         ...datatype.varied_args,
-        evaluate(ctx.to_env(), target_core),
+        evaluate(ctx.toEnv(), target_core),
       ]),
       core: new Exps.InductionCore(
         target_core,

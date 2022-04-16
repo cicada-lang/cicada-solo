@@ -35,9 +35,7 @@ export class ConsClsValue extends Exps.ClsValue {
     }
 
     const field_core = check(ctx, exp, this.field_t)
-    const rest_t_value = this.rest_t_cl.apply(
-      evaluate(ctx.to_env(), field_core)
-    )
+    const rest_t_value = this.rest_t_cl.apply(evaluate(ctx.toEnv(), field_core))
 
     return new Map([
       [this.field_name, field_core],

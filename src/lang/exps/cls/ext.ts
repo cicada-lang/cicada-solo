@@ -76,7 +76,7 @@ export class Ext extends Exp {
 
   private get_parent_value(ctx: Ctx): Exps.ClsValue {
     const inferred_parent = infer(ctx, this.parent)
-    const parent_value = evaluate(ctx.to_env(), inferred_parent.core)
+    const parent_value = evaluate(ctx.toEnv(), inferred_parent.core)
 
     if (!(parent_value instanceof Exps.ClsValue)) {
       throw new ExpTrace(

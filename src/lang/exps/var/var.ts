@@ -33,7 +33,7 @@ export class Var extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const found_t = ctx.find_type(this.name)
+    const found_t = ctx.findType(this.name)
     if (found_t !== undefined) {
       if (found_t instanceof Exps.VaguePiValue) {
         return found_t.vague_inserter.insert_vague_ap(
@@ -68,7 +68,7 @@ export class Var extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const found_t = ctx.find_type(this.name)
+    const found_t = ctx.findType(this.name)
     if (found_t !== undefined) {
       return {
         t: found_t,

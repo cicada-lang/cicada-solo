@@ -20,7 +20,6 @@ export class Block {
     return this.entries.map(({ output }) => output)
   }
 
-
   async execute(mod: Mod, options?: { silent?: boolean }): Promise<void> {
     for (const entry of this.entries) {
       const output = await entry.stmt.execute(mod)

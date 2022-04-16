@@ -3,12 +3,12 @@ import { Mod, ModLoader } from "../lang/mod"
 
 export default class extends TestCase {
   assertModHasValue(mod: Mod, name: string): void {
-    const value = mod.env.find_value(name)
+    const value = mod.env.findValue(name)
     this.assert(value)
   }
 
   assertModHasNotValue(mod: Mod, name: string): void {
-    const value = mod.env.find_value(name)
+    const value = mod.env.findValue(name)
     this.assert(!value)
   }
 

@@ -25,7 +25,7 @@ export class Cdr extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const sigma = expect(ctx, inferred_target.t, Exps.SigmaValue)
-    const target_value = evaluate(ctx.to_env(), inferred_target.core)
+    const target_value = evaluate(ctx.toEnv(), inferred_target.core)
     const car = Exps.CarCore.apply(target_value)
 
     return {

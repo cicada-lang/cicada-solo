@@ -56,7 +56,7 @@ export class VaguePi extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
-    const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
+    const arg_t_value = evaluate(ctx.toEnv(), arg_t_core)
     const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),

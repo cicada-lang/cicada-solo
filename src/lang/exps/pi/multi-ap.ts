@@ -45,7 +45,7 @@ export class MultiAp extends Exp {
     const inferred = infer(ctx, this.target)
     const first_arg_entry = this.arg_entries[0]
 
-    const inferred_value = evaluate(ctx.to_env(), inferred.core)
+    const inferred_value = evaluate(ctx.toEnv(), inferred.core)
     if (inferred_value instanceof Exps.BuiltInValue) {
       inferred_value.before_check(ctx, this.arg_entries, t)
     }

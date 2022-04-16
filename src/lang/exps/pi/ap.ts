@@ -36,7 +36,7 @@ export class Ap extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 
-    const target = evaluate(ctx.to_env(), inferred.core)
+    const target = evaluate(ctx.toEnv(), inferred.core)
     if (target.ap_handler?.infer_by_target) {
       return target.ap_handler.infer_by_target(ctx, inferred.core, this.arg)
     }
@@ -52,7 +52,7 @@ export class Ap extends Exp {
     if (inferred.t instanceof Exps.PiValue) {
       const { arg_t, ret_t_cl } = inferred.t
       const arg_core = check(ctx, this.arg, arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
+      const arg_value = evaluate(ctx.toEnv(), arg_core)
       return {
         t: ret_t_cl.apply(arg_value),
         core: new Exps.ApCore(inferred.core, arg_core),

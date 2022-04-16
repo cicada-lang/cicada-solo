@@ -1,5 +1,5 @@
-import { freshen } from "../../ut/freshen"
 import { colors } from "../../ut/colors"
+import { freshen } from "../../ut/freshen"
 import { Env } from "../env"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
@@ -9,9 +9,9 @@ import { Highlighter } from "./highlighter"
 
 export abstract class Ctx {
   abstract names: Array<string>
-  abstract find_entry(name: string): undefined | { t: Value; value?: Value }
+  abstract findEntry(name: string): undefined | { t: Value; value?: Value }
   abstract remove(name: string): Ctx
-  abstract to_env(): Env
+  abstract toEnv(): Env
 
   static observers: Array<CtxObserver> = [
     {
@@ -77,8 +77,8 @@ export abstract class Ctx {
     return this.define(name, t, value)
   }
 
-  find_type(name: string): undefined | Value {
-    const entry = this.find_entry(name)
+  findType(name: string): undefined | Value {
+    const entry = this.findEntry(name)
     if (entry) {
       return entry.t
     } else {
@@ -86,8 +86,8 @@ export abstract class Ctx {
     }
   }
 
-  assert_not_redefine(name: string, t: Value, value?: Value): void {
-    const old_t = this.find_type(name)
+  assertNotRedefine(name: string, t: Value, value?: Value): void {
+    const old_t = this.findType(name)
     if (old_t) {
       const old_t_format = readback(this, new Exps.TypeValue(), old_t).format()
       const t_format = readback(this, new Exps.TypeValue(), t).format()
@@ -119,11 +119,11 @@ class ExtendCtx extends Ctx {
     return [this.name, ...this.rest.names]
   }
 
-  find_entry(name: string): undefined | { t: Value; value?: Value } {
+  findEntry(name: string): undefined | { t: Value; value?: Value } {
     if (name === this.name) {
       return { t: this.t, value: this.value }
     } else {
-      return this.rest.find_entry(name)
+      return this.rest.findEntry(name)
     }
   }
 
@@ -140,18 +140,18 @@ class ExtendCtx extends Ctx {
     }
   }
 
-  to_env(): Env {
+  toEnv(): Env {
     const value =
       this.value || new Exps.NotYetValue(this.t, new Exps.VarNeutral(this.name))
 
-    return this.rest.to_env().extend(this.name, value)
+    return this.rest.toEnv().extend(this.name, value)
   }
 }
 
 class EmptyCtx extends Ctx {
   names = []
 
-  find_entry(name: string): undefined | { t: Value; value?: Value } {
+  findEntry(name: string): undefined | { t: Value; value?: Value } {
     return undefined
   }
 
@@ -159,7 +159,7 @@ class EmptyCtx extends Ctx {
     return this
   }
 
-  to_env(): Env {
+  toEnv(): Env {
     return Env.init()
   }
 }

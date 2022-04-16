@@ -1,6 +1,7 @@
 > Improve `Mod` -- learn from `cicada-lang/lambda`
 
-- fix naming conventions for `env` and `ctx`
+- `Env` and `Ctx` -- can get `names`
+
 - `mod.case.ts` -- "A Mod can run a given block, will undo blocks after it."
 
 - simplify `BlockResource` -- frontend client should use `Block.run` instead

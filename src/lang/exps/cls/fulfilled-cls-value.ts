@@ -43,7 +43,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
     }
 
     const field_core = check(ctx, exp, this.field_t)
-    const field_value = evaluate(ctx.to_env(), field_core)
+    const field_value = evaluate(ctx.toEnv(), field_core)
 
     check_conversion(ctx, this.field_t, field_value, this.field, {
       description: {

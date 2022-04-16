@@ -81,7 +81,7 @@ export class TypeCtor extends Exp {
     const result = this.infer_fixed(ctx)
     const varied = this.infer_varied(result.ctx)
     const self_type = evaluate(
-      ctx.to_env(),
+      ctx.toEnv(),
       TypeCtor.self_type_core(result.fixed, varied)
     )
     const data_ctors = this.infer_data_ctors(
@@ -102,7 +102,7 @@ export class TypeCtor extends Exp {
     for (const [name, t] of Object.entries(this.fixed)) {
       const core = check(ctx, t, new Exps.TypeValue())
       fixed[name] = core
-      ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
+      ctx = ctx.extend(name, evaluate(ctx.toEnv(), core))
     }
 
     return { fixed, ctx }
@@ -113,7 +113,7 @@ export class TypeCtor extends Exp {
     for (const [name, t] of Object.entries(this.varied)) {
       const core = check(ctx, t, new Exps.TypeValue())
       varied[name] = core
-      ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
+      ctx = ctx.extend(name, evaluate(ctx.toEnv(), core))
     }
 
     return varied

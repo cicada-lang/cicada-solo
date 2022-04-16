@@ -98,9 +98,9 @@ export class FulfilledCls extends Exps.Cls {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
-    const field_t_value = evaluate(ctx.to_env(), field_t_core)
+    const field_t_value = evaluate(ctx.toEnv(), field_t_core)
     const field_core = check(ctx, this.field, field_t_value)
-    const field_value = evaluate(ctx.to_env(), field_core)
+    const field_value = evaluate(ctx.toEnv(), field_core)
     const rest_t = subst(this.rest_t, this.local_name, new Exps.Var(fresh_name))
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value, field_value),

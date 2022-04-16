@@ -51,7 +51,7 @@ export class ImplicitInserter {
     }
 
     return {
-      t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
+      t: result.ret_t_cl.apply(evaluate(ctx.toEnv(), inferred_arg.core)),
       core: new Exps.ApCore(result_core, inferred_arg.core),
     }
   }

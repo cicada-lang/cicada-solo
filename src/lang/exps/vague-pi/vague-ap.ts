@@ -39,7 +39,7 @@ export class VagueAp extends Exp {
     if (inferred.t instanceof Exps.VaguePiValue) {
       const { arg_t, ret_t_cl } = inferred.t
       const arg_core = check(ctx, this.arg, arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
+      const arg_value = evaluate(ctx.toEnv(), arg_core)
       return {
         t: ret_t_cl.apply(arg_value),
         core: new Exps.VagueApCore(inferred.core, arg_core),
