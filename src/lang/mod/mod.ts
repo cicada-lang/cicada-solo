@@ -2,7 +2,6 @@ import { BlockResource } from "../block"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { ModLoader } from "../mod"
-import { StmtOutput } from "../stmt"
 import { Value } from "../value"
 
 export class Mod {
@@ -40,44 +39,9 @@ export class Mod {
     this.env = this.env.remove(name)
   }
 
-  private async step(): Promise<Array<undefined | StmtOutput>> {
-    const block = this.blocks.nextOrFail({ env: this.env, ctx: this.ctx })
-    await block.execute(this)
-    return block.outputs
-  }
-
-  async runWithNewCode(
-    id: number,
-    code: string
-  ): Promise<Array<undefined | StmtOutput>> {
-    if (this.blocks.encountered(id)) {
-      const backup = this.blocks.backTo(id)
-      this.ctx = backup.ctx
-      this.env = backup.env
+  async execute(): Promise<void> {
+    for (const block of this.blocks.all()) {
+      await block.execute(this)
     }
-
-    this.blocks.updateCode(id, code)
-    return await this.runTo(id)
-  }
-
-  async runTo(id: number): Promise<Array<undefined | StmtOutput>> {
-    for (const block of this.blocks.remain()) {
-      const outputs = await this.step()
-
-      if (block.id === id) {
-        return outputs
-      }
-    }
-
-    throw new Error(`I can not find code block with id: ${id}`)
-  }
-
-  async runAll(): Promise<Array<undefined | StmtOutput>> {
-    const outputs = []
-    while (!this.blocks.finished()) {
-      outputs.push(...(await this.step()))
-    }
-
-    return outputs
   }
 }

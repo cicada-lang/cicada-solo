@@ -30,7 +30,7 @@ export class ModLoader {
 
   async loadAndExecute(url: URL): Promise<Mod> {
     const mod = await this.load(url)
-    await mod.runAll()
+    await mod.execute()
     return mod
   }
 }

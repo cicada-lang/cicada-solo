@@ -19,9 +19,7 @@ export class Runner {
     opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.loader.load(url)
-
-      await mod.runAll()
+      const mod = await this.loader.loadAndExecute(url)
 
       const output = mod.blocks.allOutputs
         .filter((output) => output !== undefined)
