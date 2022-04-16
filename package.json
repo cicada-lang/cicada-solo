@@ -1,6 +1,6 @@
 {
   "name": "@cicada-lang/cicada",
-  "version": "0.6.16",
+  "version": "0.6.17",
   "repository": "github:cicada-lang/cicada",
   "files": [
     "lib"
