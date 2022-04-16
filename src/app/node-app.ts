@@ -1,4 +1,4 @@
-import * as Loggers from "@enchanterjs/enchanter/lib/loggers"
+import * as Loggers from "../infra/loggers"
 import { AppHomeFileStore } from "./app-home-file-store"
 import { GenericApp } from "./generic-app"
 
