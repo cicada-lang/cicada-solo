@@ -1,6 +1,7 @@
 import { Value } from "../value"
 
 export abstract class Env {
+  abstract names: Array<string>
   abstract findValue(name: string): undefined | Value
   abstract remove(name: string): Env
 
@@ -16,6 +17,10 @@ export abstract class Env {
 class ExtendEnv extends Env {
   constructor(public name: string, public value: Value, public rest: Env) {
     super()
+  }
+
+  get names(): Array<string> {
+    return [this.name, ...this.rest.names]
   }
 
   findValue(name: string): undefined | Value {
@@ -36,6 +41,8 @@ class ExtendEnv extends Env {
 }
 
 class EmptyEnv extends Env {
+  names = []
+
   findValue(name: string): undefined | Value {
     return undefined
   }
