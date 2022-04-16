@@ -1,11 +1,11 @@
 @module datatype
 
 @given K: Type, V: Type
-@judgment Map.Lookup(map: Map(K, V), key: K, value: V) {
-  Map.Lookup(Map.extend(map, key, value), key, value)
+@judgment Map.Find(map: Map(K, V), key: K, value: V) {
+  Map.Find(Map.extend(map, key, value), key, value)
   --------------------------------------------------- here
 
-  Map.Lookup(Map.extend(rest, any_key, any_value), key, value)
+  Map.Find(Map.extend(rest, any_key, any_value), key, value)
   ------------------------------------------------------------ there
-  prev: Map.Lookup(rest, key, value)
+  prev: Map.Find(rest, key, value)
 }

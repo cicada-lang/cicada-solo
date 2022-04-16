@@ -3,7 +3,7 @@
 @judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
   Check(ctx, Exp.v(name), t)
   -------------------------------- v
-  Map.Lookup(ctx, name, t)
+  Map.Find(ctx, name, t)
 
   Check(ctx, Exp.pi(name, arg_t, ret_t), Value.type)
   -------------------------------------------------- pi

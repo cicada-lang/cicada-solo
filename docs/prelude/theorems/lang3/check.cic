@@ -17,7 +17,7 @@
 
   Check(ctx, Exp.obj(properties), Value.cls(tel))
   ---------------------------------------------------------------- obj_next
-  Map.Lookup(properties, name, exp)
+  Map.Find(properties, name, exp)
   Check(ctx, exp, t)
   Check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
   @where {

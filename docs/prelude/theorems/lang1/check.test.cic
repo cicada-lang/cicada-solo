@@ -9,8 +9,8 @@
     ------------------------------------------- Check.fn
     Check(Map.extend(ctx, "x", A), x, A)
     ------------------------------------------- Check.v
-    Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-    ------------------------------------------- Map.Lookup.here }
+    Map.Find(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Find.here }
 }
 
 {
@@ -25,10 +25,10 @@
     ------------------------------------------------------------------ Check.fn
     Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
     ---------------------------------------------------------------- Check.v
-    Map.Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
-    ----------------------------------------------------------------- Map.Lookup.there
-    Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-    ------------------------------------------- Map.Lookup.here }
+    Map.Find(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
+    ----------------------------------------------------------------- Map.Find.there
+    Map.Find(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Find.here }
 }
 
 {
@@ -44,10 +44,10 @@
       ---------------------------------------- Check.fn
       Check(Map.extend(ctx, "x", A), x, A)
       ----------------------------------------------- Check.v
-      Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-      ---------------------------------------------- Map.Lookup.here }
+      Map.Find(Map.extend(ctx, "x", A), "x", A)
+      ---------------------------------------------- Map.Find.here }
     { Check(ctx, y, A)
       ---------------------------------------- Check.v
-      Map.Lookup(ctx, "y", A)
-      ---------------------------------------- Map.Lookup.here } }
+      Map.Find(ctx, "y", A)
+      ---------------------------------------- Map.Find.here } }
 }
