@@ -68,11 +68,11 @@ export default class extends TestCase {
     this.assertModHasValue(mod, "c")
 
     const block = mod.blocks.getOrFail(1)
-    // await block.run(mod, 'let d = "d"')
+    await block.run(mod, 'let d = "d"')
 
-    // this.assertModHasValue(mod, "a")
-    // this.assertModHasValue(mod, "d")
-    // this.assertModHasNotValue(mod, "b")
-    // this.assertModHasNotValue(mod, "c")
+    this.assertModHasValue(mod, "a")
+    this.assertModHasValue(mod, "d")
+    this.assertModHasNotValue(mod, "b")
+    this.assertModHasNotValue(mod, "c")
   }
 }

@@ -44,12 +44,7 @@ export class Mod {
 
   private async step(): Promise<Array<undefined | StmtOutput>> {
     const block = this.blocks.nextOrFail({ env: this.env, ctx: this.ctx })
-
-    for (const entry of block.entries) {
-      const output = await entry.stmt.execute(this)
-      if (output) entry.output = output
-    }
-
+    await block.execute(this)
     return block.outputs
   }
 
