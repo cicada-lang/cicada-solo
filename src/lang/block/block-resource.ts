@@ -19,6 +19,22 @@ export class BlockResource {
     return block
   }
 
+  after(block: Block): Array<Block> {
+    const index = this.blocks.findIndex(({ id }) => id === block.id)
+    if (index === -1) return []
+    return this.blocks.slice(index)
+  }
+
+  before(block: Block): Array<Block> {
+    const index = this.blocks.findIndex(({ id }) => id === block.id)
+    if (index === -1) return []
+    return this.blocks.slice(0, index)
+  }
+
+  all(): Array<Block> {
+    return this.blocks
+  }
+
   next(backup: { env: Env; ctx: Ctx }): Block | undefined {
     this.backups.push(backup)
     return this.blocks[this.counter++]
