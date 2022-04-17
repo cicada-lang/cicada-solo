@@ -1,15 +1,20 @@
 import pt from "@cicada-lang/partech"
 import * as commonmark from "commonmark"
 import { BlockParser, BlockResource } from "../../block"
-import { ParsingError } from "../../errors"
+import { ParsingError, InternalError } from "../../errors"
 import { Parser } from "../../parser"
+import * as Stmts from "../../stmts"
 
 export class MarkdownBlockParser extends BlockParser {
   parseBlocks(text: string): BlockResource {
     const blocks = new BlockResource()
     for (const entry of collect(text)) {
+      if (!entry.info.startsWith("cicada")) continue
+
       if (entry.info === "cicada") {
         defaultHandler(blocks, entry)
+      } else if ((entry.info + " ").includes(" compute ")) {
+        computeHandler(blocks, entry)
       }
     }
 
@@ -17,15 +22,30 @@ export class MarkdownBlockParser extends BlockParser {
   }
 }
 
+function computeHandler(blocks: BlockResource, entry: Entry): void {
+  try {
+    const parser = new Parser()
+    const exp = parser.parseExp(entry.code)
+    if (exp.meta?.span === undefined)
+      throw new InternalError("I expect exp.meta.span")
+    const stmt = new Stmts.Compute(exp, { span: exp.meta.span })
+    const entries = [{ stmt }]
+    blocks.put(entry.index, entry.code, entries)
+  } catch (error) {
+    if (error instanceof ParsingError) {
+      console.error(pt.report(error.span, entry.code))
+    }
+
+    throw error
+  }
+}
+
 function defaultHandler(blocks: BlockResource, entry: Entry): void {
   try {
     const parser = new Parser()
     const stmts = parser.parseStmts(entry.code)
-    blocks.put(
-      entry.index,
-      entry.code,
-      stmts.map((stmt) => ({ stmt }))
-    )
+    const entries = stmts.map((stmt) => ({ stmt }))
+    blocks.put(entry.index, entry.code, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
       console.error(pt.report(error.span, entry.code))
