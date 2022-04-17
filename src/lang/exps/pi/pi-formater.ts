@@ -4,6 +4,7 @@ interface PiOptions {
     format(): string
   }
   ret_t: {
+    free_names(bound_names: Set<string>): Set<string>
     format(): string
     pi_formater?: PiFormater
   }
@@ -30,15 +31,22 @@ export class PiFormater {
   }
 
   private format_bindings(): Array<string> {
-    const binding = this.decorate_binding
-      ? this.decorate_binding(`${this.pi.name}: ${this.pi.arg_t.format()}`)
-      : `${this.pi.name}: ${this.pi.arg_t.format()}`
+    let binding = this.format_binding()
+    if (this.decorate_binding) {
+      binding = this.decorate_binding(binding)
+    }
 
     if (this.pi.ret_t.pi_formater) {
       return [binding, ...this.pi.ret_t.pi_formater.format_bindings()]
     } else {
       return [binding]
     }
+  }
+
+  private format_binding(): string {
+    return this.pi.ret_t.free_names(new Set()).has(this.pi.name)
+      ? `${this.pi.name}: ${this.pi.arg_t.format()}`
+      : `${this.pi.arg_t.format()}`
   }
 
   private format_ret_t(): string {

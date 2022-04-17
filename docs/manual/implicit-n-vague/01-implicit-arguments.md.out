@@ -2,7 +2,7 @@
 sole: Trivial
 "abc": String
 sole: Trivial
-(implicit T: Type, x: T) -> T: Type
+(implicit T: Type, T) -> T: Type
 refl: Equal(String, "abc", "abc")
 String: Type
 Trivial: Type

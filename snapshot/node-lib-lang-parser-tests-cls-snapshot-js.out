@@ -11,7 +11,7 @@ class {
 class {
   a: A
   b: B(a)
-  c: (E: Type) -> C(a, b) = (E) => { f(a, b) }
+  c: (Type) -> C(a, b) = (E) => { f(a, b) }
 }
 { a, b, c }
 { a, b, c }

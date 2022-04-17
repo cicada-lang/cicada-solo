@@ -18,20 +18,20 @@ exists (x: Pair(Type, Type)) car(x): Type
 cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
 cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
 refl: Equal(Type, Pair(String, Trivial), Pair(String, Trivial))
-(_: String) -> Trivial: Type
-(_: Pair(String, Trivial)) -> Pair(Trivial, String): Type
-(x) => sole: (_: String) -> Trivial
-(pair1) => cons(sole, car(pair1)): (_: Pair(String, Trivial)) -> Pair(Trivial, String)
+(String) -> Trivial: Type
+(Pair(String, Trivial)) -> Pair(Trivial, String): Type
+(x) => sole: (String) -> Trivial
+(pair1) => cons(sole, car(pair1)): (Pair(String, Trivial)) -> Pair(Trivial, String)
 sole: Trivial
 cons("abc", sole): Pair(String, Trivial)
 cons(sole, "abc"): Pair(Trivial, String)
-(T: Type, _: T) -> T: Type
-(T: Type, _: T) -> T: Type
+(T: Type, T) -> T: Type
+(T: Type, T) -> T: Type
 "abc": String
 sole: Trivial
-(T, _) => _: (T: Type, _: T) -> T
+(T, _) => _: (T: Type, T) -> T
 Absurd: Type
-(target, motive) => from_falsehood_anything(target, motive): (target: Absurd, motive: Type) -> motive
+(target, motive) => from_falsehood_anything(target, motive): (Absurd, motive: Type) -> motive
 Equal(String, "abc", "abc"): Type
 Equal(Trivial, sole, sole): Type
 refl(vague String, vague "abc"): Equal(String, "abc", "abc")

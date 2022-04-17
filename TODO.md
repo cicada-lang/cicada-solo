@@ -1,6 +1,3 @@
-- `Arrow` as buildin -- like `Pair`
-- `Pi` -- `readback` to `Arrow` (`BuiltInCore`) if possible
-
 - mark a code block as `cicada compute` to compute one expression
   - to be able to run markdown files in `xieyuheng/cicada-monologues`
 

@@ -1,4 +1,4 @@
-(E) => List(E): (E: Type) -> Type
+(E) => List(E): (Type) -> Type
 List(String): Type
 List(Trivial): Type
 List.null(vague String): List(String)

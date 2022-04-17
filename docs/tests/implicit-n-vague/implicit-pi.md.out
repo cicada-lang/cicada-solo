@@ -1,17 +1,17 @@
-(implicit A, x) => x: (implicit A: Type, x: A) -> A
-(implicit A, x) => x: (implicit A: Type, x: A) -> A
-(implicit A, x) => x: (implicit A: Type, x: A) -> A
+(implicit A, x) => x: (implicit A: Type, A) -> A
+(implicit A, x) => x: (implicit A: Type, A) -> A
+(implicit A, x) => x: (implicit A: Type, A) -> A
 "a": String
 "a": String
 "a": String
 Trivial: Type
 String: Type
 "abc": String
-(implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type: Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type
+(implicit A: Type, implicit B: Type, Pair(A, B)) -> Type: Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, Pair(A, B)) -> Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, Pair(A, B)) -> Type
 Trivial: Type
 Trivial: Type
 String: Type
-(implicit A, implicit B, pair) => car(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: exists (x: A) B(x)) -> A
-(implicit A, implicit B, pair) => cdr(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: exists (x: A) B(x)) -> B(car(pair))
+(implicit A, implicit B, pair) => car(pair): (implicit A: Type, implicit B: (A) -> Type, exists (x: A) B(x)) -> A
+(implicit A, implicit B, pair) => cdr(pair): (implicit A: Type, implicit B: (A) -> Type, pair: exists (x: A) B(x)) -> B(car(pair))

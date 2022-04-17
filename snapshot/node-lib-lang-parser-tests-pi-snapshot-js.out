@@ -1,5 +1,5 @@
-(_: A) -> C
-(_: A, _: B) -> C
+(A) -> C
+(A, B) -> C
 (a: A, b: B) -> C(a, b)
 (a: A, b: B) -> C(a, b)
 (a: A, b: B) -> C(a, b)

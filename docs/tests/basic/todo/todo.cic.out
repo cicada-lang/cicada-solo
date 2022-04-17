@@ -11,10 +11,10 @@ TODO
   Absurd
 
 TODO_NOTE("tertium non datur")
-  Either(A, (_: A) -> Absurd)
+  Either(A, (A) -> Absurd)
 
 TODO_NOTE(vague String, "A trivial String"): String
 sole: Trivial
 TODO_NOTE(vague Absurd, "Absurd!"): Absurd
 TODO(vague Absurd): Absurd
-(A) => TODO_NOTE(vague Either(A, (_: A) -> Absurd), "tertium non datur"): (A: Type) -> Either(A, (_: A) -> Absurd)
+(A) => TODO_NOTE(vague Either(A, (A) -> Absurd), "tertium non datur"): (A: Type) -> Either(A, (A) -> Absurd)

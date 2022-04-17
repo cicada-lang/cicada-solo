@@ -1,19 +1,19 @@
 refl(vague Type, vague class {
   Element: Type
-  Under: (_: Element, _1: Element) -> Type
+  Under: (Element, Element) -> Type
   reflexive: (x: Element) -> Under(x, x)
-  transitive: (implicit x: Element, implicit y: Element, _: Under(x, y), implicit z: Element, _1: Under(y, z)) -> Under(x, z)
-  antisymmetric: (implicit x: Element, implicit y: Element, _: Under(x, y), _1: Under(y, x)) -> Equal(Element, x, y)
+  transitive: (implicit x: Element, implicit y: Element, Under(x, y), implicit z: Element, Under(y, z)) -> Under(x, z)
+  antisymmetric: (implicit x: Element, implicit y: Element, Under(x, y), Under(y, x)) -> Equal(Element, x, y)
 }): Equal(Type, class {
   Element: Type
-  Under: (_: Element, _1: Element) -> Type
+  Under: (Element, Element) -> Type
   reflexive: (x: Element) -> Under(x, x)
-  transitive: (implicit x: Element, implicit y: Element, _: Under(x, y), implicit z: Element, _1: Under(y, z)) -> Under(x, z)
-  antisymmetric: (implicit x: Element, implicit y: Element, _: Under(x, y), _1: Under(y, x)) -> Equal(Element, x, y)
+  transitive: (implicit x: Element, implicit y: Element, Under(x, y), implicit z: Element, Under(y, z)) -> Under(x, z)
+  antisymmetric: (implicit x: Element, implicit y: Element, Under(x, y), Under(y, x)) -> Equal(Element, x, y)
 }, class {
   Element: Type
-  Under: (_: Element, _1: Element) -> Type
+  Under: (Element, Element) -> Type
   reflexive: (x: Element) -> Under(x, x)
-  transitive: (implicit x: Element, implicit y: Element, _: Under(x, y), implicit z: Element, _1: Under(y, z)) -> Under(x, z)
-  antisymmetric: (implicit x: Element, implicit y: Element, _: Under(x, y), _1: Under(y, x)) -> Equal(Element, x, y)
+  transitive: (implicit x: Element, implicit y: Element, Under(x, y), implicit z: Element, Under(y, z)) -> Under(x, z)
+  antisymmetric: (implicit x: Element, implicit y: Element, Under(x, y), Under(y, x)) -> Equal(Element, x, y)
 })

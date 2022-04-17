@@ -1,9 +1,9 @@
 "a": String
 "a": String
 "a": String
-(x, y) => sole: (_: Trivial, _1: Trivial) -> Trivial
-(y) => sole: (_1: Trivial) -> Trivial
+(x, y) => sole: (Trivial, Trivial) -> Trivial
+(y) => sole: (Trivial) -> Trivial
 sole: Trivial
-(x, y) => sole: (_: Trivial, _1: Trivial) -> Trivial
-(y) => sole: (_1: Trivial) -> Trivial
+(x, y) => sole: (Trivial, Trivial) -> Trivial
+(y) => sole: (Trivial) -> Trivial
 sole: Trivial
