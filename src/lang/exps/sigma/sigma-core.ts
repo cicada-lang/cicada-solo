@@ -17,6 +17,13 @@ export class SigmaCore extends Core {
     this.cdr_t = cdr_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.car_t.free_names(bound_names),
+      ...this.cdr_t.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   evaluate(env: Env): Value {
     const car_t = evaluate(env, this.car_t)
     return new Exps.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))

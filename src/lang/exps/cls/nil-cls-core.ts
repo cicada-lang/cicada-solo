@@ -3,6 +3,10 @@ import { Env } from "../../env"
 import * as Exps from "../../exps"
 
 export class NilClsCore extends Exps.ClsCore {
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set()
+  }
+
   append(cls: Exps.ClsCore): Exps.ClsCore {
     return cls
   }

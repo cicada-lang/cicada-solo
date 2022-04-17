@@ -12,6 +12,13 @@ export class TheCore extends Core {
     this.x = x
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.t.free_names(bound_names),
+      ...this.x.free_names(bound_names),
+    ])
+  }
+
   evaluate(env: Env): Value {
     return evaluate(env, this.x)
   }

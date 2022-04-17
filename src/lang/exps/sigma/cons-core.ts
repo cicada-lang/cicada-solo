@@ -13,6 +13,13 @@ export class ConsCore extends Core {
     this.cdr = cdr
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.car.free_names(bound_names),
+      ...this.cdr.free_names(bound_names),
+    ])
+  }
+
   evaluate(env: Env): Value {
     return new Exps.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }

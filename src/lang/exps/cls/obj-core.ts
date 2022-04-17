@@ -11,6 +11,14 @@ export class ObjCore extends Core {
     this.properties = properties
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set(
+      Array.from(this.properties.values()).flatMap((property) =>
+        Array.from(property.free_names(bound_names))
+      )
+    )
+  }
+
   evaluate(env: Env): Value {
     const properties = new Map()
 

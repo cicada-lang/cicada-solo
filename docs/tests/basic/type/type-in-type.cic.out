@@ -1,2 +1,2 @@
 Type: Type
-exists (_: Type) Type: Type
+Pair(Type, Type): Type

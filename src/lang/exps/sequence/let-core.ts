@@ -15,6 +15,13 @@ export class LetCore extends Core {
     this.ret = ret
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.exp.free_names(bound_names),
+      ...this.ret.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   evaluate(env: Env): Value {
     const value = evaluate(env, this.exp)
     return evaluate(env.extend(this.name, value), this.ret)

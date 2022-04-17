@@ -3,6 +3,8 @@ import { Value } from "../value"
 
 export abstract class Core {
   instanceofCore = true
+
+  abstract free_names(bound_names: Set<string>): Set<string>
   abstract evaluate(env: Env): Value
   abstract format(): string
   abstract alpha_format(ctx: AlphaCtx): string

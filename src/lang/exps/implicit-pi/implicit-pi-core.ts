@@ -17,6 +17,13 @@ export class ImplicitPiCore extends Core {
     this.ret_t = ret_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.arg_t.free_names(bound_names),
+      ...this.ret_t.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
     const ret_t_cl = new Closure(env, this.name, this.ret_t)

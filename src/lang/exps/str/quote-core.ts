@@ -11,6 +11,10 @@ export class QuoteCore extends Core {
     this.str = str
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set()
+  }
+
   evaluate(env: Env): Value {
     return new Exps.QuoteValue(this.str)
   }

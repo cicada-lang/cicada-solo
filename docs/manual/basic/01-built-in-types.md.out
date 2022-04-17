@@ -6,25 +6,25 @@ String: Type
 Trivial: Type
 sole: Trivial
 sole: Trivial
-exists (_: String) Trivial: Type
-cons("abc", sole): exists (_: String) Trivial
+Pair(String, Trivial): Type
+cons("abc", sole): Pair(String, Trivial)
 "abc": String
 sole: Trivial
-exists (_: String) Trivial: Type
-exists (_: String) Trivial: Type
-exists (_: Type, _1: String) Trivial: Type
-cons(String, cons("abc", sole)): exists (_: Type, _1: String) Trivial
-exists (x: exists (_: Type) Type) car(x): Type
-cons(cons(String, Trivial), "ABC"): exists (x: exists (_: Type) Type) car(x)
-cons(cons(Trivial, String), sole): exists (x: exists (_: Type) Type) car(x)
-refl: Equal(Type, exists (_: String) Trivial, exists (_: String) Trivial)
+Pair(String, Trivial): Type
+Pair(String, Trivial): Type
+Pair(Type, Pair(String, Trivial)): Type
+cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
+exists (x: Pair(Type, Type)) car(x): Type
+cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
+cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
+refl: Equal(Type, Pair(String, Trivial), Pair(String, Trivial))
 (_: String) -> Trivial: Type
-(_: exists (_: String) Trivial) -> exists (_1: Trivial) String: Type
+(_: Pair(String, Trivial)) -> Pair(Trivial, String): Type
 (x) => sole: (_: String) -> Trivial
-(pair1) => cons(sole, car(pair1)): (_: exists (_: String) Trivial) -> exists (_1: Trivial) String
+(pair1) => cons(sole, car(pair1)): (_: Pair(String, Trivial)) -> Pair(Trivial, String)
 sole: Trivial
-cons("abc", sole): exists (_: String) Trivial
-cons(sole, "abc"): exists (_: Trivial) String
+cons("abc", sole): Pair(String, Trivial)
+cons(sole, "abc"): Pair(Trivial, String)
 (T: Type, _: T) -> T: Type
 (T: Type, _: T) -> T: Type
 "abc": String

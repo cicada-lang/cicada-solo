@@ -29,6 +29,52 @@ export class TypeCtorCore extends Core {
     this.data_ctors = data_ctors
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    const result = this.fixed_free_names(bound_names)
+
+    return new Set([
+      ...result.free_names,
+      ...this.varied_free_names(result.bound_names),
+      ...this.data_ctors_free_names(
+        new Set([...result.bound_names, this.name])
+      ),
+    ])
+  }
+
+  private fixed_free_names(bound_names: Set<string>): {
+    bound_names: Set<string>
+    free_names: Set<string>
+  } {
+    let free_names: Set<string> = new Set()
+    for (const [name, exp] of Object.entries(this.fixed)) {
+      free_names = new Set([...free_names, ...exp.free_names(bound_names)])
+      bound_names = new Set([...bound_names, name])
+    }
+
+    return { free_names, bound_names }
+  }
+
+  private varied_free_names(bound_names: Set<string>): Set<string> {
+    // NOTE The `varied` will not be in scope in constructor definitions,
+    //   thus we do not need to return new `bound_names`.
+    let free_names: Set<string> = new Set()
+    for (const [name, exp] of Object.entries(this.varied)) {
+      free_names = new Set([...free_names, ...exp.free_names(bound_names)])
+      bound_names = new Set([...bound_names, name])
+    }
+
+    return free_names
+  }
+
+  private data_ctors_free_names(bound_names: Set<string>): Set<string> {
+    let free_names: Set<string> = new Set()
+    for (const { t } of Object.values(this.data_ctors)) {
+      free_names = new Set([...free_names, ...t.free_names(bound_names)])
+    }
+
+    return free_names
+  }
+
   evaluate(env: Env): Value {
     return new Exps.TypeCtorValue(
       this.name,

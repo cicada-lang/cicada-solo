@@ -12,6 +12,10 @@ export class CdrCore extends Core {
     this.target = target
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([...this.target.free_names(bound_names)])
+  }
+
   evaluate(env: Env): Value {
     return CdrCore.apply(evaluate(env, this.target))
   }

@@ -21,6 +21,16 @@ export class InductionCore extends Core {
     this.case_entries = case_entries
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...(this.motive ? this.motive.free_names(bound_names) : []),
+      ...this.case_entries.flatMap((case_entry) =>
+        Array.from(case_entry.core.free_names(bound_names))
+      ),
+    ])
+  }
+
   evaluate(env: Env): Value {
     return InductionCore.apply(
       evaluate(env, this.target),

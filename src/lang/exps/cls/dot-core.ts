@@ -14,6 +14,10 @@ export class DotCore extends Core {
     this.name = name
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([...this.target.free_names(bound_names)])
+  }
+
   evaluate(env: Env): Value {
     return Exps.DotCore.apply(evaluate(env, this.target), this.name)
   }

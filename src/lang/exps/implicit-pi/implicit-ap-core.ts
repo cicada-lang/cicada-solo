@@ -16,6 +16,13 @@ export class ImplicitApCore extends Core {
     this.arg = arg
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.arg.free_names(bound_names),
+    ])
+  }
+
   evaluate(env: Env): Value {
     return ImplicitApCore.apply(
       evaluate(env, this.target),

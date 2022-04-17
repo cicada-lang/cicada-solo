@@ -7,9 +7,9 @@
 Trivial: Type
 String: Type
 "abc": String
-(implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type: Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type
+(implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type: Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: Pair(A, B)) -> Type
 Trivial: Type
 Trivial: Type
 String: Type

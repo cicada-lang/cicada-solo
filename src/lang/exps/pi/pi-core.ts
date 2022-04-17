@@ -17,6 +17,13 @@ export class PiCore extends Core {
     this.ret_t = ret_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.arg_t.free_names(bound_names),
+      ...this.ret_t.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   evaluate(env: Env): Value {
     return new Exps.PiValue(
       evaluate(env, this.arg_t),

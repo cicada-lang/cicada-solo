@@ -26,6 +26,14 @@ export class FulfilledClsCore extends Exps.ClsCore {
     this.rest_t = rest_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.field_t.free_names(bound_names),
+      ...this.field.free_names(bound_names),
+      ...this.rest_t.free_names(new Set([...bound_names, this.local_name])),
+    ])
+  }
+
   append(cls: Exps.ClsCore): Exps.ClsCore {
     return new FulfilledClsCore(
       this.field_name,
