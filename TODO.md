@@ -1,6 +1,5 @@
 # errors
 
-- [refactor] simplify `ElaborationError`
 - fix error report context on markdown code block syntax error
 
 # manual

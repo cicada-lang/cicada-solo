@@ -31,7 +31,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       )
     }
   } catch (error) {
-    if (error instanceof ElaborationError) throw error.trail(exp)
+    if (error instanceof ElaborationError) error.pushExp(exp)
     throw error
   }
 }

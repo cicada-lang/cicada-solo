@@ -17,7 +17,7 @@ export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
       ].join("\n")
     )
   } catch (error) {
-    if (error instanceof ElaborationError) throw error.trail(exp)
+    if (error instanceof ElaborationError) error.pushExp(exp)
     throw error
   }
 }
