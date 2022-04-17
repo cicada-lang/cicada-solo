@@ -7,35 +7,41 @@ import { Parser } from "../../parser"
 export class MarkdownBlockParser extends BlockParser {
   parseBlocks(text: string): BlockResource {
     const blocks = new BlockResource()
-    const parser = new Parser()
-    for (const { index, code } of collectBlocks(text).filter(
-      ({ info }) => info === "cicada"
-    )) {
-      try {
-        const stmts = parser.parseStmts(code)
-        const entries = stmts.map((stmt) => ({ stmt }))
-        blocks.put(index, code, entries)
-      } catch (error) {
-        if (error instanceof ParsingError) {
-          console.error(pt.report(error.span, text))
-        }
-
-        throw error
+    for (const entry of collect(text)) {
+      if (entry.info === "cicada") {
+        defaultHandler(blocks, entry)
       }
     }
+
     return blocks
   }
 }
 
-function collectBlocks(text: string): Array<{
-  index: number
-  info: string
-  code: string
-}> {
+function defaultHandler(blocks: BlockResource, entry: Entry): void {
+  try {
+    const parser = new Parser()
+    const stmts = parser.parseStmts(entry.code)
+    blocks.put(
+      entry.index,
+      entry.code,
+      stmts.map((stmt) => ({ stmt }))
+    )
+  } catch (error) {
+    if (error instanceof ParsingError) {
+      console.error(pt.report(error.span, entry.code))
+    }
+
+    throw error
+  }
+}
+
+type Entry = { index: number; info: string; code: string }
+
+function collect(text: string): Array<Entry> {
   const reader = new commonmark.Parser()
   const parsed: commonmark.Node = reader.parse(text)
 
-  const blocks = []
+  const entries = []
 
   const walker = parsed.walker()
 
@@ -48,7 +54,7 @@ function collectBlocks(text: string): Array<{
     if (event.entering && node.type === "code_block") {
       const [start_pos, _end_pos] = node.sourcepos
       const [row, col] = start_pos
-      blocks.push({
+      entries.push({
         index: counter++,
         info: node.info || "",
         code: node.literal || "",
@@ -56,5 +62,5 @@ function collectBlocks(text: string): Array<{
     }
   }
 
-  return blocks
+  return entries
 }

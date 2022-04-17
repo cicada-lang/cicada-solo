@@ -59,4 +59,11 @@ export class ParserTester {
     const exp = this.parser.parseExp(text)
     console.log(exp.format())
   }
+
+  echoExps(text: string): void {
+    const exps = this.parser.parseExps(text)
+    for (const exp of exps) {
+      console.log(exp.format())
+    }
+  }
 }
