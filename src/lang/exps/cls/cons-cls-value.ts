@@ -1,7 +1,7 @@
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
@@ -31,7 +31,7 @@ export class ConsClsValue extends Exps.ClsValue {
     const exp = properties.get(this.field_name)
 
     if (exp === undefined) {
-      throw new ExpTrace(`I expect to find field: ${this.field_name}`)
+      throw new ElaborationError(`I expect to find field: ${this.field_name}`)
     }
 
     const field_core = check(ctx, exp, this.field_t)
@@ -58,7 +58,7 @@ export class ConsClsValue extends Exps.ClsValue {
       )
 
       if (!(rest_t instanceof Exps.ClsCore)) {
-        throw new ExpTrace(
+        throw new ElaborationError(
           `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
         )
       }

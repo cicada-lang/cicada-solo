@@ -1,6 +1,6 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
@@ -61,7 +61,7 @@ export class Ap extends Exp {
 
     const inferred_t_core = readback(ctx, new Exps.TypeValue(), inferred.t)
     const inferred_t_format = inferred_t_core.format()
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect the inferred type to be PiValue or ImPiValue`,
         `  class name: ${inferred.t.constructor.name}`,

@@ -2,7 +2,7 @@ import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { Solution } from "../../solution"
 import { conversion, readback, Value } from "../../value"
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
@@ -75,7 +75,7 @@ export class TypeCtorValue extends Value {
     const data_ctor = this.data_ctors[name]
     if (data_ctor === undefined) {
       const names = Object.keys(this.data_ctors).join(", ")
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not find the data constructor named: ${name}`,
           `  type constructor name: ${this.name}`,
@@ -99,7 +99,7 @@ export class TypeCtorValue extends Value {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
     if (fixed_args.length < fixed_entries.length) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I expect number of arguments to be not less than fixed entries`,
           `  fixed_args.length: ${fixed_args.length}`,
@@ -258,7 +258,7 @@ export class TypeCtorValue extends Value {
     while (true) {
       if (datatype instanceof Exps.VarCore) break
       if (!(datatype instanceof Exps.ApCore)) {
-        throw new ExpTrace(
+        throw new ElaborationError(
           [
             `I expect a full type constructor application to be ApCore.`,
             `  datatype: ${datatype.format()}`,
@@ -273,7 +273,7 @@ export class TypeCtorValue extends Value {
       } else if (counter < this.arity) {
         fixed_args.unshift(datatype.arg)
       } else {
-        throw new ExpTrace(
+        throw new ElaborationError(
           [
             `I found that the type constructor application exceed the total arity.`,
             `  datatype: ${datatype.format()}`,

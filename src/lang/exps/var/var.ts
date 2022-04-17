@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check_by_infer, Exp, ExpMeta } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
@@ -64,7 +64,7 @@ export class Var extends Exp {
       return check_by_infer(ctx, this, t)
     }
 
-    throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
+    throw new ElaborationError(`I meet undefined variable name: ${this.name}`)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -84,7 +84,7 @@ export class Var extends Exp {
       }
     }
 
-    throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
+    throw new ElaborationError(`I meet undefined variable name: ${this.name}`)
   }
 
   format(): string {

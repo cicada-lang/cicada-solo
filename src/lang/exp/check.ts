@@ -1,7 +1,7 @@
 import * as ut from "../../ut"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import { Exp } from "../exp"
 import * as Exps from "../exps"
 import { conversion, readback, Value } from "../value"
@@ -21,7 +21,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
     } else if (exp.infer) {
       return check_by_infer(ctx, exp as ExpWithInfer, t)
     } else {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not check the type of:`,
           `${ut.indent(exp.format(), "  ")}`,
@@ -31,7 +31,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       )
     }
   } catch (error) {
-    if (error instanceof ExpTrace) throw error.trail(exp)
+    if (error instanceof ElaborationError) throw error.trail(exp)
     throw error
   }
 }
@@ -54,7 +54,7 @@ export function check_by_infer(ctx: Ctx, exp: ExpWithInfer, t: Value): Core {
     //   console.dir(t, { depth: 4 })
     // }
 
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I infer the type to be:`,
         `${ut.indent(u_exp.format(), "  ")}`,

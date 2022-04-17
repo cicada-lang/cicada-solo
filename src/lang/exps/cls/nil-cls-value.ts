@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
@@ -25,7 +25,7 @@ export class NilClsValue extends Exps.ClsValue {
   }
 
   get_value(target: Value, field_name: string): Value {
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I can not dot the value out of class`,
         `because I meet an unknown field name:`,
@@ -35,7 +35,7 @@ export class NilClsValue extends Exps.ClsValue {
   }
 
   get_type(target: Value, field_name: string): Value {
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I can not dot the type out of class`,
         `because I meet an unknown field name:`,

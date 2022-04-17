@@ -1,7 +1,7 @@
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
@@ -59,13 +59,13 @@ export class Ext extends Exp {
     const rest_t_core = check(result.ctx, rest_t, new Exps.TypeValue())
 
     if (!(rest_t_core instanceof Exps.ClsCore)) {
-      throw new ExpTrace("I expect rest_t_core to be Exps.Cls")
+      throw new ElaborationError("I expect rest_t_core to be Exps.Cls")
     }
 
     const parent_core = readback(ctx, new Exps.TypeValue(), parent_value)
 
     if (!(parent_core instanceof Exps.ClsCore)) {
-      throw new ExpTrace("I expect parent_core to be Exps.Cls")
+      throw new ElaborationError("I expect parent_core to be Exps.Cls")
     }
 
     return {
@@ -79,7 +79,7 @@ export class Ext extends Exp {
     const parent_value = evaluate(ctx.toEnv(), inferred_parent.core)
 
     if (!(parent_value instanceof Exps.ClsValue)) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I expect parent_value to be Exps.ClsValue,`,
           `but I found class name:`,

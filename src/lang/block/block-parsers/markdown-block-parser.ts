@@ -1,7 +1,7 @@
 import pt from "@cicada-lang/partech"
 import * as commonmark from "commonmark"
 import { BlockParser, BlockResource } from "../../block"
-import { ParsingError, InternalError } from "../../errors"
+import { InternalError, ParsingError } from "../../errors"
 import { Parser } from "../../parser"
 import * as Stmts from "../../stmts"
 

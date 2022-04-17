@@ -1,6 +1,6 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
 import { Value } from "../value"
 
@@ -46,7 +46,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     return exp
   } else {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I can not readback value.`,
         `  value class name: ${value.constructor.name}`,

@@ -1,6 +1,6 @@
 import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 
@@ -23,7 +23,7 @@ export class BuiltInCore extends Core {
   evaluate(env: Env): Value {
     const value = Exps.built_ins.find_value(this.name)
     if (value === undefined) {
-      throw new ExpTrace(`I meet undefined built-in name: ${this.name}`)
+      throw new ElaborationError(`I meet undefined built-in name: ${this.name}`)
     }
 
     return value

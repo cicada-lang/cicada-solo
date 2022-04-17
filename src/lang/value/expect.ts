@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
 
@@ -15,7 +15,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
         `I see unexpected value class: ${value.constructor.name},\n` +
         `which reads back to exp: ${exp.format()},\n` +
         `but the asserted class is: ${TheClass.name}.\n`
-      throw new ExpTrace(message)
+      throw new ElaborationError(message)
     } catch (error) {
       // NOTE If the error makes us
       //   not be able to readback the value as `TypeValue`,
@@ -24,7 +24,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
       const message =
         `I see unexpected value class: ${value.constructor.name},\n` +
         `but the asserted class is: ${TheClass.name}.\n`
-      throw new ExpTrace(message)
+      throw new ElaborationError(message)
     }
   }
 }

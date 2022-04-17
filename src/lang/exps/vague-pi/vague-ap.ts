@@ -1,7 +1,7 @@
 import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp, ExpMeta, infer, subst } from "../../exp"
 import { Value } from "../../value"
 import { ApFormater } from "../pi/ap-formater"
@@ -46,7 +46,7 @@ export class VagueAp extends Exp {
       }
     }
 
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect the inferred type to be ImPiValue`,
         `  class name: ${inferred.t.constructor.name}`,

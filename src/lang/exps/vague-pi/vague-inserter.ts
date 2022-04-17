@@ -2,7 +2,7 @@ import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp, infer } from "../../exp"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
@@ -116,7 +116,7 @@ export class VagueInserter {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const vague_arg = solution.find(fresh_name)
     if (vague_arg === undefined) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
@@ -232,7 +232,7 @@ function check_arg_entry(
       t: result.ret_t_cl.apply(arg_value),
     }
   } else {
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
         `  class name: ${t.constructor.name}`,

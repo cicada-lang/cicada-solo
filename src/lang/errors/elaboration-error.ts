@@ -2,7 +2,7 @@ import pt from "@cicada-lang/partech"
 import * as ut from "../../ut"
 import { Exp } from "../exp"
 
-export class ExpTrace extends Error {
+export class ElaborationError extends Error {
   message: string
   previous: Array<Exp> = []
 

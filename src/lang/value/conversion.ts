@@ -1,6 +1,6 @@
 import { AlphaCtx, Core } from "../core"
 import { Ctx } from "../ctx"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
 
@@ -34,7 +34,7 @@ export function check_conversion(
     const from_description = opts.description?.from || ""
     const to_format = readback(ctx, t, to).format()
     const to_description = opts.description?.to || ""
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I am expecting the following two values to be the same ${t_format}.`,
         `But they are not.`,

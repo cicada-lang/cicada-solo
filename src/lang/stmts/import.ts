@@ -19,7 +19,7 @@ export class Import extends Stmt {
   async execute(mod: Mod): Promise<StmtOutput | void> {
     const url = mod.resolve(this.path)
     if (url.href === mod.url.href) {
-      throw new Errors.ExpTrace(
+      throw new Errors.ElaborationError(
         [
           `I can not do circular import.`,
           `  path: ${this.path}`,
@@ -33,7 +33,7 @@ export class Import extends Stmt {
       const t = imported_mod.ctx.findType(name)
       const value = imported_mod.env.findValue(name)
       if (!t || !value) {
-        throw new Errors.ExpTrace(
+        throw new Errors.ElaborationError(
           [
             `I meet undefined name:`,
             `  ${name}`,

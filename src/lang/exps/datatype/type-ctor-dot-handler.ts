@@ -1,6 +1,6 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 import { DotHandler } from "../cls/dot-handler"
@@ -16,7 +16,7 @@ export class TypeCtorDotHandler extends DotHandler {
   get(name: string): Value {
     const data_ctor = this.target.data_ctors[name]
     if (data_ctor === undefined) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not find data constructor on type constructor.`,
           `  data constructor name: ${name}`,
@@ -40,7 +40,7 @@ export class TypeCtorDotHandler extends DotHandler {
   ): { t: Value; core: Core } {
     const data_ctor = this.target.data_ctors[name]
     if (data_ctor === undefined) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not find data constructor on type constructor.`,
           `  data constructor name: ${name}`,

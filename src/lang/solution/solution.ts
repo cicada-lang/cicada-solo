@@ -1,6 +1,6 @@
 import * as ut from "../../ut"
 import { Ctx } from "../ctx"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
 import { Closure } from "../exps/closure"
 import { Neutral } from "../neutral"
@@ -126,7 +126,7 @@ export abstract class Solution {
     if (Solution.failure_p(solution)) {
       const left_core = readback(ctx, new Exps.TypeValue(), left)
       const right_core = readback(ctx, new Exps.TypeValue(), right)
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `Unification fail`,
           `  left  : ${left_core.format()}`,

@@ -1,3 +1,7 @@
+# errors
+
+- [refactor] simplify `ElaborationError`
+- `ParsingError` subclass `pt.ParsingError`
 - fix error report context on markdown code block syntax error
 
 # manual
@@ -59,17 +63,6 @@
     instead of starting a new induction for it.
 
   - https://readonly.link/manuals/gitlab.com/cicada-lang/cicada/-/datatype/01-nat.md#fibonacci
-
-# errors
-
-- improve error classes
-
-  - `SemanticError`
-    - `ElaborationError`
-    - `EvaluationError`
-  - `InternalError`
-
-- improve `expect` error report -- use new error classes
 
 # use `unify` to replace `readback`
 

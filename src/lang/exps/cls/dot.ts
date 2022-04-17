@@ -1,6 +1,6 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
@@ -62,7 +62,7 @@ export class Dot extends Exp {
       }
     }
 
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect the inferred type to be Exps.ClsValue`,
         `  class name: ${inferred.t.constructor.name}`,

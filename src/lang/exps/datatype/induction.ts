@@ -1,6 +1,6 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { expect, readback, Value } from "../../value"
@@ -81,7 +81,7 @@ export class Induction extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     if (this.motive === undefined) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not infer type of induction without a motive`,
           `  induction: ${this.format()}`,
@@ -148,7 +148,7 @@ export class Induction extends Exp {
 
     if (found === undefined) {
       const case_names = this.case_entries.map((case_entry) => case_entry.name)
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `I can not find case of given data constructor name.`,
           `  data constructor name: ${name}`,
@@ -165,7 +165,7 @@ export class Induction extends Exp {
       const data_ctor = datatype.type_ctor.data_ctors[case_entry.name]
       if (data_ctor === undefined) {
         const data_ctor_names = Object.keys(datatype.type_ctor.data_ctors)
-        throw new ExpTrace(
+        throw new ElaborationError(
           [
             `I can not find data constructor from given case name.`,
             `  case name: ${case_entry.name}`,

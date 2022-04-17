@@ -2,7 +2,7 @@ import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp, infer } from "../../exp"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
@@ -76,7 +76,7 @@ export class ImplicitInserter {
         ret_t_cl: ret_t.ret_t_cl,
       }
     } else {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `During application insertion`,
           `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,
@@ -91,7 +91,7 @@ export class ImplicitInserter {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const implicit_arg = solution.find(fresh_name)
     if (implicit_arg === undefined) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
@@ -116,7 +116,7 @@ export class ImplicitInserter {
         inferred_arg_t
       )
     } else {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `During application insertion`,
           `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,

@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
@@ -44,7 +44,7 @@ export abstract class BuiltInValue extends Value {
     let t = this.self_type()
     for (const arg_value_entry of this.arg_value_entries) {
       if (!this.is_pi_like_value(t)) {
-        throw new ExpTrace(
+        throw new ElaborationError(
           [
             `I expect t to be pi-like type`,
             `  class name: ${t.constructor.name}`,

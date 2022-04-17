@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
 import { Value } from "../../value"
@@ -21,7 +21,9 @@ export class ObjValue extends Value {
   get(name: string): Value {
     const value = this.properties.get(name)
     if (value === undefined) {
-      throw new ExpTrace(`The property name: ${name} of object is undefined.`)
+      throw new ElaborationError(
+        `The property name: ${name} of object is undefined.`
+      )
     }
 
     return value

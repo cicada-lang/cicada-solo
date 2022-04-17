@@ -1,6 +1,6 @@
 import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { Value } from "../../value"
 
 export class VarCore extends Core {
@@ -22,7 +22,7 @@ export class VarCore extends Core {
   evaluate(env: Env): Value {
     const value = env.findValue(this.name)
     if (value === undefined) {
-      throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
+      throw new ElaborationError(`I meet undefined variable name: ${this.name}`)
     }
 
     return value

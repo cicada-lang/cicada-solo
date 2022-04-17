@@ -1,7 +1,7 @@
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
@@ -151,7 +151,7 @@ export class TypeCtor extends Exp {
   private data_ctor_bindings(name: string): Array<Exps.DataCtorBinding> {
     const data_ctor = this.data_ctors[name]
     if (data_ctor === undefined) {
-      throw new ExpTrace(`I find undefined data constructor: ${name}`)
+      throw new ElaborationError(`I find undefined data constructor: ${name}`)
     }
 
     const bindings: Array<Exps.DataCtorBinding> = []

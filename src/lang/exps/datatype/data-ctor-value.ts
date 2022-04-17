@@ -2,7 +2,7 @@ import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
@@ -187,7 +187,7 @@ export class DataCtorValue extends Value {
       if (this.is_direct_positive_recursive_arg_t(binding.core)) {
         const original_binding = this.original_bindings[index]
         if (original_binding === undefined) {
-          throw new ExpTrace(
+          throw new ElaborationError(
             `I can not find original binding from binding of name: ${binding.name}`
           )
         }

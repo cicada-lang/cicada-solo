@@ -1,7 +1,7 @@
 import { colors } from "../../ut/colors"
 import { freshen } from "../../ut/freshen"
 import { Env } from "../env"
-import { ExpTrace } from "../errors"
+import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
 import { CtxEvent, CtxObserver } from "./ctx-observer"
@@ -63,7 +63,7 @@ export abstract class Ctx {
 
   extend(name: string, t: Value, value?: Value): Ctx {
     if (this.names.includes(name)) {
-      throw new ExpTrace(
+      throw new ElaborationError(
         [
           `The names in ctx must be distinct.`,
           `But I found duplicated name:`,
@@ -93,7 +93,7 @@ export abstract class Ctx {
     const old_t_format = readback(this, new Exps.TypeValue(), old_t).format()
     const t_format = readback(this, new Exps.TypeValue(), t).format()
     const value_format = readback(this, t, value).format()
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I can not redefine name:`,
         `  ${name}`,

@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { ExpTrace } from "../../errors"
+import { ElaborationError } from "../../errors"
 import { Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
@@ -39,7 +39,7 @@ export class Obj extends Exp {
 
     for (const field_name of field_names) {
       if (occurred.has(field_name)) {
-        throw new ExpTrace(
+        throw new ElaborationError(
           [
             `I found duplicated field name in object`,
             `field name:`,
@@ -66,7 +66,7 @@ export class Obj extends Exp {
       return new Exps.ObjCore(core_properties)
     }
 
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect t to be ClsValue`,
         `but the constructor name I meet is: ${t.constructor.name}`,
@@ -116,7 +116,7 @@ export class SpreadProp extends Prop {
       ])
     }
 
-    throw new ExpTrace(
+    throw new ElaborationError(
       [
         `I expect inferred.t to be an instance of ClsValue`,
         `but the constructor name I meet is: ${inferred.t.constructor.name}`,
