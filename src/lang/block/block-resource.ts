@@ -9,6 +9,10 @@ export class BlockResource {
     return this.blocks.length
   }
 
+  last(): Block {
+    return this.blocks[this.blocks.length - 1]
+  }
+
   put(id: number, code: string, entries: Array<BlockEntry>): Block {
     const block = new Block(this, id, code, entries)
     this.blocks.push(block)
