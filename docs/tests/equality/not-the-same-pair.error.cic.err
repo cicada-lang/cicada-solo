@@ -6,7 +6,6 @@ from left hand side (from) of Equal:
 to right hand side (to) of Equal:
   cons("baguette", "ratatouille")
 
-docs/tests/equality/not-the-same-pair.error.cic:
  3 |    Pair(String, String),
  4 |    cons("ratatouille", "baguette"),
  5 |    cons("baguette", "ratatouille")),

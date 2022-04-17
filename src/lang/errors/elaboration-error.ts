@@ -1,5 +1,4 @@
 import pt from "@cicada-lang/partech"
-import * as ut from "../../ut"
 import { Exp } from "../exp"
 
 export class ElaborationError extends Error {
@@ -16,9 +15,7 @@ export class ElaborationError extends Error {
     return this
   }
 
-  report(opts: { path?: string; text: string }): string {
-    const { path, text } = opts
-
+  report(text: string): string {
     let s = ""
 
     s += this.message
@@ -29,13 +26,7 @@ export class ElaborationError extends Error {
 
       for (const exp of this.previous) {
         if (exp.meta?.span) {
-          if (path) {
-            s += ut.colors.yellow(path + ":")
-            s += "\n"
-          }
-
           s += pt.report(exp.meta?.span, text)
-
           break
         }
       }

@@ -3,9 +3,9 @@ import Path from "path"
 import { StmtOutput } from "src/lang/stmt"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
+import { colors } from "../ut/colors"
 
 export class Runner {
-  reporter = new Errors.ErrorReporter()
   loader = new ModLoader()
 
   constructor() {
@@ -32,14 +32,10 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
-      const path = Path.relative(process.cwd(), url.pathname)
+      if (!Errors.reportable(error)) throw error
       const text = await this.loader.fetcher.fetch(url)
-      const report = this.reporter.report(error, { path, text })
-
-      if (!opts?.silent) {
-        console.error(report)
-      }
-
+      const report = error.report(text)
+      if (!opts?.silent) console.error(report)
       return { error }
     }
   }

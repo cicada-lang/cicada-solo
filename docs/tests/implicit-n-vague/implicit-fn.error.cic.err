@@ -1,6 +1,5 @@
 I meet undefined variable name: C
 
-docs/tests/implicit-n-vague/implicit-fn.error.cic:
   3 |  implicit A,
   4 |  implicit B,
   5 |  triple,

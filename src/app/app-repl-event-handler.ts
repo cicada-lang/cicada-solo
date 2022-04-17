@@ -50,11 +50,9 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      const reporter = new Errors.ErrorReporter()
-      const report = reporter.report(error, { text })
-      if (report.trim()) {
-        console.error(report.trim())
-      }
+      if (!Errors.reportable(error)) throw error
+      const report = error.report(text)
+      if (report.trim()) console.error(report.trim())
       return false
     }
   }

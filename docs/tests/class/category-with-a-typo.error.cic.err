@@ -3,7 +3,6 @@ I infer the type to be:
 But the expected type is:
   Morphism(x, x)
 
-docs/tests/class/category-with-a-typo.error.cic:
  34 |  ): Equal(
  35 |    Morphism(x, w),
  36 |    // compose(x, y, w)(f, compose(y, z, w)(g, h)),

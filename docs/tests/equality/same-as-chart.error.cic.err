@@ -6,7 +6,6 @@ from value at 0:
 to value at 1:
   "abcd"
 
-docs/tests/equality/same-as-chart.error.cic:
  1 |same_as_chart (String) [
  2 |  "abc",
  3 |  "abcd",
