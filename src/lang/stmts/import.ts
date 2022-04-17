@@ -21,9 +21,9 @@ export class Import extends Stmt {
     if (url.href === mod.url.href) {
       throw new Errors.ElaborationError(
         [
+          //
           `I can not do circular import.`,
           `  path: ${this.path}`,
-          `  resolved url: ${url}`,
         ].join("\n")
       )
     }
