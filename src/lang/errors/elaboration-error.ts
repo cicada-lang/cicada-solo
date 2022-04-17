@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
-import { Span } from "../span"
 import { Exp } from "../exp"
+import { Span } from "../span"
 
 export class ElaborationError extends Error {
   message: string
@@ -16,17 +16,11 @@ export class ElaborationError extends Error {
   }
 
   report(text: string): string {
-    let s = ""
-
-    s += this.message
-    s += "\n"
-
     if (this.firstSpan) {
-      s += "\n"
-      s += pt.report(this.firstSpan, text)
+      return [this.message, "", pt.report(this.firstSpan, text)].join("\n")
+    } else {
+      return this.message
     }
-
-    return s
   }
 
   private get firstSpan(): Span | undefined {

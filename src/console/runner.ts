@@ -1,9 +1,7 @@
 import fs from "fs"
-import Path from "path"
 import { StmtOutput } from "src/lang/stmt"
-import * as Errors from "../lang/errors"
+import { LangError } from "../lang/errors"
 import { ModLoader } from "../lang/mod"
-import { colors } from "../ut/colors"
 
 export class Runner {
   loader = new ModLoader()
@@ -32,10 +30,8 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
-      if (!Errors.reportable(error)) throw error
-      const text = await this.loader.fetcher.fetch(url)
-      const report = error.report(text)
-      if (!opts?.silent) console.error(report)
+      if (!(error instanceof LangError)) throw error
+      if (!opts?.silent) console.error(error.message)
       return { error }
     }
   }

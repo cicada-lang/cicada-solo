@@ -4,3 +4,7 @@ field name:
 field names:
   a, b, a, c
 
+ 1 |class Test {
+ 2 |  a: String
+ 3 |  b: String
+ 4 |  a: String

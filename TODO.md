@@ -1,7 +1,3 @@
-# errors
-
-- fix error report context on markdown code block syntax error
-
 # manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`

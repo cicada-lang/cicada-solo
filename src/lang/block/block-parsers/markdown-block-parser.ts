@@ -1,6 +1,6 @@
 import * as commonmark from "commonmark"
 import { BlockParser, BlockResource } from "../../block"
-import { InternalError, ParsingError } from "../../errors"
+import { InternalError, LangError, ParsingError } from "../../errors"
 import { Parser } from "../../parser"
 import * as Stmts from "../../stmts"
 
@@ -32,7 +32,7 @@ function computeHandler(blocks: BlockResource, entry: Entry): void {
     blocks.put(entry.index, entry.code, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
-      console.error(error.report(entry.code))
+      throw new LangError(error.report(entry.code))
     }
 
     throw error
@@ -47,7 +47,7 @@ function defaultHandler(blocks: BlockResource, entry: Entry): void {
     blocks.put(entry.index, entry.code, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
-      console.error(error.report(entry.code))
+      throw new LangError(error.report(entry.code))
     }
 
     throw error

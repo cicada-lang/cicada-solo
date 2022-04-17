@@ -1,5 +1,5 @@
 import { BlockParser, BlockResource } from "../../block"
-import { ParsingError } from "../../errors"
+import { LangError, ParsingError } from "../../errors"
 import { Parser } from "../../parser"
 
 export class WholeBlockParser extends BlockParser {
@@ -14,7 +14,7 @@ export class WholeBlockParser extends BlockParser {
       return blocks
     } catch (error) {
       if (error instanceof ParsingError) {
-        console.error(error.report(text))
+        throw new LangError(error.report(text))
       }
 
       throw error

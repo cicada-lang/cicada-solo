@@ -30,19 +30,6 @@ export class FulfilledCls extends Exps.Cls {
     this.field_t = field_t
     this.field = field
     this.rest_t = rest_t
-
-    if (rest_t.field_names.includes(field_name)) {
-      throw new ElaborationError(
-        [
-          `I found duplicated field name in class`,
-          `field name:`,
-          `  ${field_name}`,
-          `field names:`,
-          `  ${field_name}, ${rest_t.field_names.join(", ")}`,
-        ].join("\n")
-      )
-    }
-
     this.field_names = [field_name, ...rest_t.field_names]
   }
 
@@ -95,7 +82,23 @@ export class FulfilledCls extends Exps.Cls {
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 
+  private assertNoDuplicatedName(): void {
+    if (this.rest_t.field_names.includes(this.field_name)) {
+      throw new ElaborationError(
+        [
+          `I found duplicated field name in class`,
+          `field name:`,
+          `  ${this.field_name}`,
+          `field names:`,
+          `  ${this.field_name}, ${this.rest_t.field_names.join(", ")}`,
+        ].join("\n")
+      )
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
+    this.assertNoDuplicatedName()
+
     const fresh_name = ctx.freshen(this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
     const field_t_value = evaluate(ctx.toEnv(), field_t_core)
