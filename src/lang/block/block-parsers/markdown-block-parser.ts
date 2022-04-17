@@ -1,4 +1,3 @@
-import pt from "@cicada-lang/partech"
 import * as commonmark from "commonmark"
 import { BlockParser, BlockResource } from "../../block"
 import { InternalError, ParsingError } from "../../errors"
@@ -33,7 +32,7 @@ function computeHandler(blocks: BlockResource, entry: Entry): void {
     blocks.put(entry.index, entry.code, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
-      console.error(pt.report(error.span, entry.code))
+      console.error(error.report(entry.code))
     }
 
     throw error
@@ -48,7 +47,7 @@ function defaultHandler(blocks: BlockResource, entry: Entry): void {
     blocks.put(entry.index, entry.code, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
-      console.error(pt.report(error.span, entry.code))
+      console.error(error.report(entry.code))
     }
 
     throw error

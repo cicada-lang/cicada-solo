@@ -1,4 +1,3 @@
-import pt from "@cicada-lang/partech"
 import { BlockParser, BlockResource } from "../../block"
 import { ParsingError } from "../../errors"
 import { Parser } from "../../parser"
@@ -15,7 +14,7 @@ export class WholeBlockParser extends BlockParser {
       return blocks
     } catch (error) {
       if (error instanceof ParsingError) {
-        console.error(pt.report(error.span, text))
+        console.error(error.report(text))
       }
 
       throw error

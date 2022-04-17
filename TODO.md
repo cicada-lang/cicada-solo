@@ -1,7 +1,6 @@
 # errors
 
 - [refactor] simplify `ElaborationError`
-- `ParsingError` subclass `pt.ParsingError`
 - fix error report context on markdown code block syntax error
 
 # manual
