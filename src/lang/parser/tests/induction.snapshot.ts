@@ -1,17 +1,25 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echoExps(`
+tester.echoExp(`
 
 recursion (x) {
   case zero => y
   case add1(_prev, almost) => Nat.add1(almost.prev)
 }
 
+`)
+
+tester.echoExp(`
+
 induction (x) {
   (_) => Nat
   case zero => y
   case add1(_prev, almost) => Nat.add1(almost.prev)
 }
+
+`)
+
+tester.echoExp(`
 
 induction (x) {
   (length, _target) => Vector(E, add(length, yl))

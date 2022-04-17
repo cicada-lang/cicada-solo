@@ -10,13 +10,6 @@ export class Parser {
     matcher: matchers.exp_matcher,
   })
 
-  parseExps = pt.gen_parse({
-    preprocess: pt.preprocess.erase_comment,
-    lexer: pt.lexers.common,
-    grammar: pt.grammar_start(grammars, "exps"),
-    matcher: matchers.exps_matcher,
-  })
-
   parseStmts = pt.gen_parse({
     preprocess: pt.preprocess.erase_comment,
     lexer: pt.lexers.common,

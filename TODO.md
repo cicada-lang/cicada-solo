@@ -1,6 +1,6 @@
-- `markdown-block-parser` -- `computeHandler` -- uses `parseExps`
+- `markdown-block-parser` -- `computeHandler`
 
-  - mark a code block as `cicada compute` to compute expressions
+  - mark a code block as `cicada compute` to compute ONE expression
   - use markdown files in `xieyuheng/cicada-monologues` as tests
 
 - fix error report context on markdown code block syntax error
