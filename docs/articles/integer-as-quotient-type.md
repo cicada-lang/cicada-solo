@@ -32,7 +32,7 @@ after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`
 ```cicada
 function add(x: Nat, y: Nat): Nat {
   return induction (x) {
-    (_) => Nat
+    motive (_) => Nat
     case zero => y
     case add1(prev, almost) => Nat.add1(almost.prev)
   }

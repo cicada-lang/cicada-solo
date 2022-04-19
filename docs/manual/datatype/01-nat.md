@@ -162,7 +162,7 @@ function induction_nat(
   ) -> motive(add1(prev)),
 ): motive(target) {
   return induction (target) {
-    motive
+    motive motive
     case zero => case_of_zero
     case add1(prev, almost) => case_of_add1(prev, almost)
   }

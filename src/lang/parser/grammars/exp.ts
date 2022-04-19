@@ -42,6 +42,7 @@ export const operator = {
       { target: "exp" },
       '")"',
       '"{"',
+      '"motive"',
       { motive: "exp" },
       { case_entries: { $ap: ["zero_or_more", "case_entry"] } },
       '"}"',

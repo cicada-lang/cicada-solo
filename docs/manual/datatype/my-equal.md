@@ -29,7 +29,7 @@ function my_equal_replace(
   base: motive(from),
 ): motive(to) {
   return induction (my_equal) {
-    (from, to, target) => motive(to)
+    motive (from, to, target) => motive(to)
     case refl(vague x) => base
   }
 }

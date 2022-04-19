@@ -26,7 +26,7 @@ function induction_either(
   case_of_inr: (right: R) -> motive(Either.inr(right)),
 ): motive(target) {
   return induction (target) {
-    motive
+    motive motive
     case inl(left) => case_of_inl(left)
     case inr(right) => case_of_inr(right)
   }
@@ -121,7 +121,7 @@ import { Nat, zero, one, two, three, four } from "./01-nat.md"
 ```cicada
 function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
   return induction (index) {
-    (_) => (List(E)) -> Maybe(E)
+    motive (_) => (List(E)) -> Maybe(E)
     case zero => (list) => maybe_head(list)
     case add1(prev, almost) => (list) => {
       return recursion (maybe_tail(list)) {
@@ -146,7 +146,7 @@ compute list_ref_direct(four, abc)
 ```cicada
 function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction (index) {
-    (_) => (List(E)) -> Maybe(E)
+    motive (_) => (List(E)) -> Maybe(E)
     case zero => (list) => maybe_head(list)
     case add1(prev, almost) => (list) => {
       return recursion (maybe_tail(list)) {

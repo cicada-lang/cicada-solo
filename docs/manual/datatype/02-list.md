@@ -48,7 +48,7 @@ function induction_list(
   ) -> motive(List.cons(head, tail)),
 ): motive(target) {
   return induction (target) {
-    motive
+    motive motive
     case null => case_of_null
     case cons(head, tail, almost) => case_of_cons(head, tail, almost)
   }

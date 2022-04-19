@@ -104,7 +104,7 @@ function induction_vector(
   ) -> motive(Nat.add1(prev), Vector.cons(head, tail)),
 ): motive(length, target) {
   return induction (target) {
-    motive
+    motive motive
     case null => case_of_null
     case cons(head, tail, almost) => case_of_cons(head, tail, almost)
   }
@@ -124,7 +124,7 @@ function vector_append(
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
   return induction (x) {
-    (length, _target) => Vector(E, add(length, yl))
+    motive (length, _target) => Vector(E, add(length, yl))
     case null => y
     case cons(head, _tail, almost) => Vector.cons(head, almost.tail)
   }

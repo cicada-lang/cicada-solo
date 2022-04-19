@@ -53,7 +53,7 @@ export class InductionCore extends Core {
       )
       .join(" ")
 
-    return `induction (${target}) { ${motive} ${case_entries} }`
+    return `induction (${target}) { motive ${motive} ${case_entries} }`
   }
 
   alpha_format(ctx: AlphaCtx): string {
@@ -68,7 +68,7 @@ export class InductionCore extends Core {
       )
       .join(" ")
 
-    return `induction (${target}) { ${motive} ${case_entries} }`
+    return `induction (${target}) { motive ${motive} ${case_entries} }`
   }
 
   static apply(
