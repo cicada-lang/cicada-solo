@@ -1,0 +1,38 @@
+class {
+  dom: class {
+    Object: Type
+    Morphism: (Object, Object) -> Type
+    id: (x: Object) -> Morphism(x, x)
+    hom_set: (x: Object, y: Object) -> class {
+      Element: Type = Morphism(x, y)
+      Eq: (Morphism(x, y), Morphism(x, y)) -> Type
+      reflexive: (x1: Morphism(x, y)) -> Eq(x1, x1)
+      transitive: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1), implicit z: Morphism(x, y), Eq(y1, z)) -> Eq(x1, z)
+      symmetric: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1)) -> Eq(y1, x1)
+    }
+    compose: (implicit x: Object, implicit y: Object, Morphism(x, y), implicit z: Object, Morphism(y, z)) -> Morphism(x, z)
+    id_left: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit x, id(x), implicit y, f), f)
+    id_right: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit y, f, implicit y, id(y)), f)
+    compose_associative: (implicit x: Object, implicit y: Object, f: Morphism(x, y), implicit z: Object, g: Morphism(y, z), implicit w: Object, h: Morphism(z, w)) -> hom_set(x, w).Eq(compose(implicit x, implicit y, f, implicit w, compose(implicit y, implicit z, g, implicit w, h)), compose(implicit x, implicit z, compose(implicit x, implicit y, f, implicit z, g), implicit w, h))
+  }
+  cod: class {
+    Object: Type
+    Morphism: (Object, Object) -> Type
+    id: (x: Object) -> Morphism(x, x)
+    hom_set: (x: Object, y: Object) -> class {
+      Element: Type = Morphism(x, y)
+      Eq: (Morphism(x, y), Morphism(x, y)) -> Type
+      reflexive: (x1: Morphism(x, y)) -> Eq(x1, x1)
+      transitive: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1), implicit z: Morphism(x, y), Eq(y1, z)) -> Eq(x1, z)
+      symmetric: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1)) -> Eq(y1, x1)
+    }
+    compose: (implicit x: Object, implicit y: Object, Morphism(x, y), implicit z: Object, Morphism(y, z)) -> Morphism(x, z)
+    id_left: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit x, id(x), implicit y, f), f)
+    id_right: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit y, f, implicit y, id(y)), f)
+    compose_associative: (implicit x: Object, implicit y: Object, f: Morphism(x, y), implicit z: Object, g: Morphism(y, z), implicit w: Object, h: Morphism(z, w)) -> hom_set(x, w).Eq(compose(implicit x, implicit y, f, implicit w, compose(implicit y, implicit z, g, implicit w, h)), compose(implicit x, implicit z, compose(implicit x, implicit y, f, implicit z, g), implicit w, h))
+  }
+  map: (dom.Object) -> cod.Object
+  fmap: (implicit x: dom.Object, implicit y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
+  fmap_respect_compose: (implicit x: dom.Object, implicit y: dom.Object, f: dom.Morphism(x, y), implicit z: dom.Object, g: dom.Morphism(y, z)) -> cod.hom_set(map(x), map(z)).Eq(fmap(implicit x, implicit z, dom.compose(implicit x, implicit y, f, implicit z, g)), cod.compose(implicit map(x), implicit map(y), fmap(implicit x, implicit y, f), implicit map(z), fmap(implicit y, implicit z, g)))
+  fmap_respect_id: (x: dom.Object) -> cod.hom_set(map(x), map(x)).Eq(fmap(implicit x, implicit x, dom.id(x)), cod.id(map(x)))
+}: Type

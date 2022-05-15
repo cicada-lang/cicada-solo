@@ -1,0 +1,4 @@
+datatype Maybe(E: Type) {
+  nothing: Maybe(E)
+  just(x: E): Maybe(E)
+}

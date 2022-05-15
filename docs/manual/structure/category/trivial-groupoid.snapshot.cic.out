@@ -1,0 +1,41 @@
+{ Object: Trivial, Morphism: (dom, cod) => Trivial, id: (x) => sole, hom_set: (x, y) => { Element: Trivial, Eq: (x1, y1) => Equal(Trivial, sole, sole), reflexive: (x1) => refl(vague Trivial, vague sole), transitive: (implicit x1, implicit y1, x_eq_y, implicit z, y_eq_z) => refl(vague Trivial, vague sole), symmetric: (implicit x1, implicit y1, x_eq_y) => refl(vague Trivial, vague sole) }, compose: (implicit x, implicit y, f, implicit z, g) => sole, id_left: (implicit x, implicit y, f) => refl(vague Trivial, vague sole), id_right: (implicit x, implicit y, f) => refl(vague Trivial, vague sole), compose_associative: (implicit x, implicit y, f, implicit z, g, implicit w, h) => refl(vague Trivial, vague sole), inv: (implicit x, implicit y, f) => sole, inv_iso: (implicit x, implicit y, f) => { cat: { Object: Trivial, Morphism: (dom, cod) => Trivial, id: (x1) => sole, hom_set: (x1, y1) => { Element: Trivial, Eq: (x11, y11) => Equal(Trivial, sole, sole), reflexive: (x11) => refl(vague Trivial, vague sole), transitive: (implicit x11, implicit y11, x_eq_y, implicit z, y_eq_z) => refl(vague Trivial, vague sole), symmetric: (implicit x11, implicit y11, x_eq_y) => refl(vague Trivial, vague sole) }, compose: (implicit x1, implicit y1, f1, implicit z, g) => sole, id_left: (implicit x1, implicit y1, f1) => refl(vague Trivial, vague sole), id_right: (implicit x1, implicit y1, f1) => refl(vague Trivial, vague sole), compose_associative: (implicit x1, implicit y1, f1, implicit z, g, implicit w, h) => refl(vague Trivial, vague sole) }, dom: sole, cod: sole, morphism: sole, inverse: sole, inverse_left: refl(vague Trivial, vague sole), inverse_right: refl(vague Trivial, vague sole) } }: class {
+  Object: Type
+  Morphism: (Object, Object) -> Type
+  id: (x: Object) -> Morphism(x, x)
+  hom_set: (x: Object, y: Object) -> class {
+    Element: Type = Morphism(x, y)
+    Eq: (Morphism(x, y), Morphism(x, y)) -> Type
+    reflexive: (x1: Morphism(x, y)) -> Eq(x1, x1)
+    transitive: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1), implicit z: Morphism(x, y), Eq(y1, z)) -> Eq(x1, z)
+    symmetric: (implicit x1: Morphism(x, y), implicit y1: Morphism(x, y), Eq(x1, y1)) -> Eq(y1, x1)
+  }
+  compose: (implicit x: Object, implicit y: Object, Morphism(x, y), implicit z: Object, Morphism(y, z)) -> Morphism(x, z)
+  id_left: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit x, id(x), implicit y, f), f)
+  id_right: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> hom_set(x, y).Eq(compose(implicit x, implicit y, f, implicit y, id(y)), f)
+  compose_associative: (implicit x: Object, implicit y: Object, f: Morphism(x, y), implicit z: Object, g: Morphism(y, z), implicit w: Object, h: Morphism(z, w)) -> hom_set(x, w).Eq(compose(implicit x, implicit y, f, implicit w, compose(implicit y, implicit z, g, implicit w, h)), compose(implicit x, implicit z, compose(implicit x, implicit y, f, implicit z, g), implicit w, h))
+  inv: (implicit x: Object, implicit y: Object, Morphism(x, y)) -> Morphism(y, x)
+  inv_iso: (implicit x: Object, implicit y: Object, f: Morphism(x, y)) -> class {
+    cat: class {
+      Object: Type
+      Morphism: (Object1, Object1) -> Type
+      id: (x1: Object1) -> Morphism1(x1, x1)
+      hom_set: (x1: Object1, y1: Object1) -> class {
+        Element: Type = Morphism1(x1, y1)
+        Eq: (Morphism1(x1, y1), Morphism1(x1, y1)) -> Type
+        reflexive: (x2: Morphism1(x1, y1)) -> Eq(x2, x2)
+        transitive: (implicit x2: Morphism1(x1, y1), implicit y2: Morphism1(x1, y1), Eq(x2, y2), implicit z: Morphism1(x1, y1), Eq(y2, z)) -> Eq(x2, z)
+        symmetric: (implicit x2: Morphism1(x1, y1), implicit y2: Morphism1(x1, y1), Eq(x2, y2)) -> Eq(y2, x2)
+      }
+      compose: (implicit x1: Object1, implicit y1: Object1, Morphism1(x1, y1), implicit z: Object1, Morphism1(y1, z)) -> Morphism1(x1, z)
+      id_left: (implicit x1: Object1, implicit y1: Object1, f1: Morphism1(x1, y1)) -> hom_set1(x1, y1).Eq(compose1(implicit x1, implicit x1, id1(x1), implicit y1, f1), f1)
+      id_right: (implicit x1: Object1, implicit y1: Object1, f1: Morphism1(x1, y1)) -> hom_set1(x1, y1).Eq(compose1(implicit x1, implicit y1, f1, implicit y1, id1(y1)), f1)
+      compose_associative: (implicit x1: Object1, implicit y1: Object1, f1: Morphism1(x1, y1), implicit z: Object1, g: Morphism1(y1, z), implicit w: Object1, h: Morphism1(z, w)) -> hom_set1(x1, w).Eq(compose1(implicit x1, implicit y1, f1, implicit w, compose1(implicit y1, implicit z, g, implicit w, h)), compose1(implicit x1, implicit z, compose1(implicit x1, implicit y1, f1, implicit z, g), implicit w, h))
+    } = { Object: Object, Morphism: (dom, cod) => Morphism(dom, cod), id: (x1) => id(x1), hom_set: (x1, y1) => { Element: Morphism(x1, y1), Eq: (_, _1) => hom_set(x1, y1).Eq(_, _1), reflexive: (x2) => hom_set(x1, y1).reflexive(x2), transitive: (implicit x2, implicit y2, _, implicit z, _1) => hom_set(x1, y1).transitive(implicit x2, implicit y2, _, implicit z, _1), symmetric: (implicit x2, implicit y2, _) => hom_set(x1, y1).symmetric(implicit x2, implicit y2, _) }, compose: (implicit x1, implicit y1, f1, implicit z, g) => compose(implicit x1, implicit y1, f1, implicit z, g), id_left: (implicit x1, implicit y1, f1) => id_left(implicit x1, implicit y1, f1), id_right: (implicit x1, implicit y1, f1) => id_right(implicit x1, implicit y1, f1), compose_associative: (implicit x1, implicit y1, f1, implicit z, g, implicit w, h) => compose_associative(implicit x1, implicit y1, f1, implicit z, g, implicit w, h) }
+    dom: Object = x
+    cod: Object = y
+    morphism: Morphism(x, y) = f
+    inverse: Morphism(y, x) = inv(implicit x, implicit y, f)
+    inverse_left: hom_set(x, x).Eq(compose(implicit x, implicit y, f, implicit x, inv(implicit x, implicit y, f)), id(x))
+    inverse_right: hom_set(y, y).Eq(compose(implicit y, implicit x, inv(implicit x, implicit y, f), implicit y, f), id(y))
+  }
+}

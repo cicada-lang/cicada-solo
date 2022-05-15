@@ -1,0 +1,12 @@
+class {
+  Element: Type
+  mul: (Element, Element) -> Element
+  mul_associative: (x: Element, y: Element, z: Element) -> Equal(Element, mul(x, mul(y, z)), mul(mul(x, y), z))
+  id: Element
+  id_left: (x: Element) -> Equal(Element, mul(id, x), x)
+  id_right: (x: Element) -> Equal(Element, mul(x, id), x)
+  inv: (Element) -> Element
+  inv_left: (x: Element) -> Equal(Element, mul(inv(x), x), id)
+  inv_right: (x: Element) -> Equal(Element, mul(x, inv(x)), id)
+  div: (Element, Element) -> Element
+}: Type

@@ -1,0 +1,3 @@
+import { NaturalTransformation } from "./category.md"
+
+compute NaturalTransformation

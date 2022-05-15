@@ -1,0 +1,17 @@
+import { Category, Isomorphism } from "./category.md"
+
+class GroupoidLexicalScopeTest extends Category {
+  inv(
+    implicit x: Object,
+    implicit y: Object,
+    f: Morphism(x, y),
+  ): Morphism(y, x)
+
+  // NOTE `super` should repsect lexical scope,
+  ///  the `id` in `super` should be different from the `id` in current scope.
+  inv_iso(
+    implicit id: Object,
+    implicit y: Object,
+    f: Morphism(id, y),
+  ): Isomorphism(super, id, y, f, inv(f))
+}

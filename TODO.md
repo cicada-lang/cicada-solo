@@ -1,3 +1,6 @@
+- formalize univalent-axiom
+- formalize boolean-algebra
+
 # manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`
@@ -187,3 +190,7 @@
 - [books] Topology theory
 - [books] Category of Groups
 - [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+
+- [about order] learn from "Introduction to lattices and order"
+
+  - 1.4 Order-isomorphisms
