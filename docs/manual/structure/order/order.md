@@ -17,7 +17,7 @@ Order theory focus on transitive binary relations,
 we start our definitions from a basic one -- `PreOrder`.
 
 ```cicada
-import { Not } from "../logic/basic.cic"
+import { Not } from "../../logic/basic.cic"
 
 class PreOrder {
   Element: Type

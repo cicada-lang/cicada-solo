@@ -1,4 +1,3 @@
-- `manual/logic` standalone
 - `manual/structure/groupoid` standalone
 
 - formalize univalent-axiom
