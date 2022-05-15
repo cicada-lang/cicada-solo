@@ -44,7 +44,6 @@ If a terminal object exists, it is unique up to unique isomorphism.
 import { Isomorphism } from "./category.md"
 import { equal_swap, equal_compose } from "../../equality/01-equal-utilities.md"
 
-
 function terminal_object_isomorphism(
   cat: Category,
   x: Terminal(cat),

@@ -1,9 +1,11 @@
 - fix `cic watch` no such file or directory
 
+# manual
+
+- "Structure" as a section of manual
+
 - formalize univalent-axiom
 - formalize boolean-algebra
-
-# manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`
   - Mathematical Structure as Class
