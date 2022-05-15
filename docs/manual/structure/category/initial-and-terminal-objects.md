@@ -16,7 +16,9 @@ class Initial {
   cat: Category
 
   object: cat.Object
+
   morphism(x: cat.Object): cat.Morphism(object, x)
+
   morphism_unique(
     implicit x: cat.Object,
     f: cat.Morphism(object, x),

@@ -23,7 +23,9 @@ and whose morphisms respect [preserve] it.
 ```cicada
 class Category {
   Object: Type
+
   Morphism(dom: Object, cod: Object): Type
+
   id(x: Object): Morphism(x, x)
 
   compose(

@@ -20,6 +20,7 @@ title: Bishop's Set Theory
 ```cicada
 class Set {
   Element: Type
+
   Eq(Element, Element): Type
 
   reflexive(x: Element): Eq(x, x)
