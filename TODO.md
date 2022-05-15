@@ -1,5 +1,3 @@
-- fix `cic run --watch`
-
 # manual
 
 - "Structure" as a section of manual

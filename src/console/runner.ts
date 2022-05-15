@@ -1,6 +1,5 @@
 import fs from "fs"
 import { StmtOutput } from "src/lang/stmt"
-import { LangError } from "../lang/errors"
 import { ModLoader } from "../lang/mod"
 
 export class Runner {

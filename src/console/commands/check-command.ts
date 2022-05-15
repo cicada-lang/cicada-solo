@@ -8,7 +8,6 @@ import readdirp from "readdirp"
 import app from "../../app/node-app"
 import { BookConfigSchema } from "../../datatypes"
 import * as BlockParsers from "../../lang/block/block-parsers"
-import { ModLoader } from "../../lang/mod"
 import { Runner } from "../runner"
 
 type Args = { book?: string }
@@ -22,13 +21,10 @@ export class CheckCommand extends Command<Args, Opts> {
   args = { book: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
 
-  loader = new ModLoader()
+  runner = new Runner()
 
   constructor() {
     super()
-    this.loader.fetcher.register("file", (url) =>
-      fs.promises.readFile(url.pathname, "utf8")
-    )
   }
 
   // prettier-ignore
@@ -63,11 +59,11 @@ export class CheckCommand extends Command<Args, Opts> {
     app.logger.info(config)
 
     if (argv["watch"]) {
-      await check(root)
+      await this.check(root)
       app.logger.info(`Initial check complete, now watching for file changes.`)
       await this.watch(root)
     } else {
-      const { errors } = await check(root)
+      const { errors } = await this.check(root)
       if (errors.length > 0) {
         process.exit()
       }
@@ -85,15 +81,14 @@ export class CheckCommand extends Command<Args, Opts> {
       const url = new URL(`file:${fullPath}`)
 
       if (event === "remove") {
-        this.loader.cache.delete(url.href)
+        this.runner.loader.cache.delete(url.href)
         app.logger.info({ tag: event, msg: path })
       }
 
       if (event === "update") {
         const t0 = Date.now()
-        const runner = new Runner()
-        this.loader.cache.delete(url.href)
-        const { error } = await runner.run(url)
+        this.runner.loader.cache.delete(url.href)
+        const { error } = await this.runner.run(url)
         const t1 = Date.now()
         const elapse = t1 - t0
         if (error) {
@@ -104,28 +99,27 @@ export class CheckCommand extends Command<Args, Opts> {
       }
     })
   }
-}
 
-async function check(root: string): Promise<{ errors: Array<unknown> }> {
-  let errors: Array<unknown> = []
+  async check(root: string): Promise<{ errors: Array<unknown> }> {
+    let errors: Array<unknown> = []
 
-  for (const { path } of await readdirp.promise(root)) {
-    if (BlockParsers.canHandle(path)) {
-      const fullPath = Path.resolve(root, path)
-      const url = new URL(`file:${fullPath}`)
-      const t0 = Date.now()
-      const runner = new Runner()
-      const { error } = await runner.run(url, { silent: true })
-      if (error) errors.push(error)
-      const t1 = Date.now()
-      const elapse = t1 - t0
-      if (error) {
-        app.logger.error({ tag: "check", elapse, msg: path })
-      } else {
-        app.logger.info({ tag: "check", elapse, msg: path })
+    for (const { path } of await readdirp.promise(root)) {
+      if (BlockParsers.canHandle(path)) {
+        const fullPath = Path.resolve(root, path)
+        const url = new URL(`file:${fullPath}`)
+        const t0 = Date.now()
+        const { error } = await this.runner.run(url, { silent: true })
+        if (error) errors.push(error)
+        const t1 = Date.now()
+        const elapse = t1 - t0
+        if (error) {
+          app.logger.error({ tag: "check", elapse, msg: path })
+        } else {
+          app.logger.info({ tag: "check", elapse, msg: path })
+        }
       }
     }
-  }
 
-  return { errors }
+    return { errors }
+  }
 }
