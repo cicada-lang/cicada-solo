@@ -296,7 +296,7 @@ let's define another very famous function -- the Fibonacci function.
 
 - Thanks `u/hugogrant` for [asking about this example](https://www.reddit.com/r/ProgrammingLanguages/comments/s4crfg/comment/hsqgye6/?utm_source=share&utm_medium=web2x&context=3).
 
-```plaintext
+```
 F(0) = 0
 F(1) = 1
 F(n) = F(n-1) + F(n-2)
@@ -311,7 +311,7 @@ The idea is to use a pair of integers `current` and `next`,
 initialized `F(0) = 1` and `F(0) = 0`,
 and to repeatedly apply the simultaneous transformations:
 
-```plaintext
+```
 current <- next
 next <- current + next
 ```
