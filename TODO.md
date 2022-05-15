@@ -1,4 +1,4 @@
-- `manual/structure/groupoid` standalone
+- fix `cic watch` no such file or directory
 
 - formalize univalent-axiom
 - formalize boolean-algebra
