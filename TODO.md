@@ -1,15 +1,17 @@
-- fix `cic watch` no such file or directory
+- fix `cic run --watch`
 
 # manual
 
 - "Structure" as a section of manual
 
-- formalize univalent-axiom
-- formalize boolean-algebra
+- [manual] `structure/univalent-axiom`
+- [manual] `structure/boolean-algebra`
 
 - [manual] `class/04-mathematical-structure-as-class.md`
   - Mathematical Structure as Class
+
 - [manual] `equality/01-equal-utilities.md`
+
 - [manual] `datatype/02-list.md`
 - [manual] `datatype/03-vector.md`
 

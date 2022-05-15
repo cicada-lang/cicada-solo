@@ -30,8 +30,14 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
-      if (!(error instanceof LangError)) throw error
-      if (!opts?.silent) console.error(error.message)
+      if (!opts?.silent) {
+        if (error instanceof Error) {
+          console.error(error.message)
+        } else {
+          console.error(error)
+        }
+      }
+
       return { error }
     }
   }
