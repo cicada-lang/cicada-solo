@@ -17,13 +17,10 @@ Order theory focus on transitive binary relations,
 we start our definitions from a basic one -- `PreOrder`.
 
 ```cicada
-import { Set } from "../set/set.md"
 import { Not } from "../logic/basic.cic"
 
 class PreOrder {
   Element: Type
-
-  element_set: Set(Element)
 
   Under(Element, Element): Type
 
@@ -56,7 +53,7 @@ class Order extends PreOrder {
     implicit y: Element,
     Under(x, y),
     Under(y, x),
-  ): element_set.Eq(x, y)
+  ): Equal(Element, x, y)
 }
 ```
 
