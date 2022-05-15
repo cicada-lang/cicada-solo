@@ -1,7 +1,5 @@
 ---
 title: Boolean Algebra
-author: Xie Yuheng
-date: 2022-05-14
 ---
 
 ```cicada

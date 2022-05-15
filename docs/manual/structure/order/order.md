@@ -68,7 +68,7 @@ and we can implement topological sort for a partial order.
 # TotalOrder
 
 ```cicada
-import { Either } from "../datatype/either.cic"
+import { Either } from "../../datatype/04-either.md"
 
 class TotalOrder extends Order {
   totality(x: Element, y: Element): Either(Under(x, y), Under(y, x))

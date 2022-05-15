@@ -1,3 +1,0 @@
-import { trivial_groupoid } from "./groupoid.md"
-
-compute trivial_groupoid
