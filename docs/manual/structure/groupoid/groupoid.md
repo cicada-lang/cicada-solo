@@ -1,4 +1,5 @@
 ---
+section: Structure
 title: Groupoid Theory
 ---
 

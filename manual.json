@@ -12,6 +12,7 @@
     "Datatype",
     "Equality",
     "Class",
-    "Implicit & Vague"
+    "Implicit & Vague",
+    "Structure"
   ]
 }

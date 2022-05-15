@@ -1,12 +1,11 @@
 # manual
 
-- "Structure" as a section of manual
-
-- [manual] `structure/univalent-axiom`
-- [manual] `structure/boolean-algebra`
-
 - [manual] `class/04-mathematical-structure-as-class.md`
+
   - Mathematical Structure as Class
+
+- [manual] `structure/univalent-foundations`
+- [manual] `structure/boolean-algebra`
 
 - [manual] `equality/01-equal-utilities.md`
 

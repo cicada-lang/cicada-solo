@@ -1,4 +1,5 @@
 ---
+section: Structure
 title: Initial and Terminal Objects
 ---
 

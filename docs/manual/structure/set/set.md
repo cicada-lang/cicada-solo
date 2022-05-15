@@ -1,7 +1,6 @@
 ---
+section: Structure
 title: Bishop's Set Theory
-author: Xie Yuheng
-date: 2021-10-20
 ---
 
 # Set
