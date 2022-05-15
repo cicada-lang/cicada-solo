@@ -1,3 +1,5 @@
+- order should not depends on `Set`
+
 - formalize univalent-axiom
 - formalize boolean-algebra
 

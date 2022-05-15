@@ -20,14 +20,10 @@ there corresponds a category whose objects have that structure,
 and whose morphisms respect [preserve] it.
 
 ```cicada
-import { Set } from "../set/set.md"
-
 class Category {
   Object: Type
   Morphism(dom: Object, cod: Object): Type
   id(x: Object): Morphism(x, x)
-
-  hom_set(x: Object, y: Object): Set(Morphism(x, y))
 
   compose(
     implicit x: Object,
@@ -41,13 +37,13 @@ class Category {
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y)
-  ): hom_set(x, y).Eq(compose(id(x), f), f)
+  ): Equal(Morphism(x, y), compose(id(x), f), f)
 
   id_right(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
-  ): hom_set(x, y).Eq(compose(f, id(y)), f)
+  ): Equal(Morphism(x, y), compose(f, id(y)), f)
 
   compose_associative(
     implicit x: Object,
@@ -57,7 +53,8 @@ class Category {
     g: Morphism(y, z),
     implicit w: Object,
     h: Morphism(z, w),
-  ): hom_set(x, w).Eq(
+  ): Equal(
+    Morphism(x, w),
     compose(f, compose(g, h)),
     compose(compose(f, g), h)
   )
@@ -124,14 +121,16 @@ class Functor {
     f: dom.Morphism(x, y),
     implicit z: dom.Object,
     g: dom.Morphism(y, z),
-  ): cod.hom_set(map(x), map(z)).Eq(
+  ): Equal(
+    cod.Morphism(map(x), map(z)),
     fmap(dom.compose(f, g)),
     cod.compose(fmap(f), fmap(g))
   )
 
   fmap_respect_id(
     x: dom.Object
-  ): cod.hom_set(map(x), map(x)).Eq(
+  ): Equal(
+    cod.Morphism(map(x), map(x)),
     fmap(dom.id(x)),
     cod.id(map(x)))
 }
@@ -185,7 +184,8 @@ class NaturalTransformation {
     implicit x: dom.Object,
     implicit y: dom.Object,
     f: dom.Morphism(x, y),
-  ): cod.hom_set(src.map(x), tar.map(y)).Eq(
+  ): Equal(
+    cod.Morphism(src.map(x), tar.map(y)),
     cod.compose(component(x), tar.fmap(f)),
     cod.compose(src.fmap(f), component(y))
   )
@@ -205,10 +205,11 @@ class Epimorphism {
     implicit x: cat.Object,
     implicit f: cat.Morphism(cod, x),
     implicit g: cat.Morphism(cod, x),
-    cat.hom_set(dom, x).Eq(
+    Equal(
+      cat.Morphism(dom, x),
       cat.compose(morphism, f),
       cat.compose(morphism, g)),
-  ): cat.hom_set(cod, x).Eq(f, g)
+  ): Equal(cat.Morphism(cod, x), f, g)
 }
 ```
 
@@ -225,10 +226,11 @@ class Monomorphism {
     implicit x: cat.Object,
     implicit f: cat.Morphism(x, dom),
     implicit g: cat.Morphism(x, dom),
-    cat.hom_set(x, cod).Eq(
+    Equal(
+      cat.Morphism(x, cod),
       cat.compose(f, morphism),
       cat.compose(g, morphism)),
-  ): cat.hom_set(x, dom).Eq(f, g)
+  ): Equal(cat.Morphism(x, dom), f, g)
 }
 
 // NOTE example:
@@ -249,12 +251,14 @@ class Isomorphism {
   morphism: cat.Morphism(dom, cod)
   inverse: cat.Morphism(cod, dom)
 
-  inverse_left: cat.hom_set(dom, dom).Eq(
+  inverse_left: Equal(
+    cat.Morphism(dom, dom),
     cat.compose(morphism, inverse),
     cat.id(dom)
   )
 
-  inverse_right: cat.hom_set(cod, cod).Eq(
+  inverse_right: Equal(
+    cat.Morphism(cod, cod),
     cat.compose(inverse, morphism),
     cat.id(cod)
   )

@@ -19,7 +19,7 @@ class Initial {
   morphism_unique(
     implicit x: cat.Object,
     f: cat.Morphism(object, x),
-  ): cat.hom_set(object, x).Eq(f, morphism(x))
+  ): Equal(cat.Morphism(object, x), f, morphism(x))
 }
 ```
 
@@ -34,7 +34,7 @@ class Terminal {
   morphism_unique(
     implicit x: cat.Object,
     f: cat.Morphism(x, object),
-  ): cat.hom_set(x, object).Eq(f, morphism(x))
+  ): Equal(cat.Morphism(x, object), f, morphism(x))
 }
 ```
 
@@ -42,6 +42,8 @@ If a terminal object exists, it is unique up to unique isomorphism.
 
 ```cicada
 import { Isomorphism } from "./category.md"
+import { equal_swap, equal_compose } from "../../equality/01-equal-utilities.md"
+
 
 function terminal_object_isomorphism(
   cat: Category,
@@ -55,32 +57,24 @@ function terminal_object_isomorphism(
     morphism: y.morphism(x.object),
     inverse: x.morphism(y.object),
 
-    inverse_left: cat.hom_set(x.object, x.object).transitive(
+    inverse_left: equal_compose(
       x.morphism_unique(
         cat.compose(
           y.morphism(x.object),
           x.morphism(y.object),
         ),
       ),
-      cat.hom_set(x.object, x.object).symmetric(
-        x.morphism_unique(
-          cat.id(x.object)
-        )
-      )
+      equal_swap(x.morphism_unique(cat.id(x.object)))
     ),
 
-    inverse_right: cat.hom_set(y.object, y.object).transitive(
+    inverse_right: equal_compose(
       y.morphism_unique(
         cat.compose(
           x.morphism(y.object),
           y.morphism(x.object),
         ),
       ),
-      cat.hom_set(y.object, y.object).symmetric(
-        y.morphism_unique(
-          cat.id(y.object)
-        )
-      )
+      equal_swap(y.morphism_unique(cat.id(y.object)))
     ),
   }
 }

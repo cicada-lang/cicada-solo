@@ -1,7 +1,5 @@
 ---
 title: Order Theory
-author: Xie Yuheng
-date: 2021-10-20
 ---
 
 # Introduction
