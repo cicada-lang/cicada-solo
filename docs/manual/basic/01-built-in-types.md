@@ -115,17 +115,17 @@ check cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
 
 # Sigma
 
-We write **`Sigma` type** as `exists (x: A) C`,
+We write **sigma type** as `exists (x: A) C`,
 where `x` might occur in `C`, or say, `C` depends on `x`.
 
-This is why `Sigma` is also called **dependent pair type**.
+This is why sigma type is also called **dependent pair type**.
 
 We read `exists (x: A) C` as
 
 > There exists `x` in `A`, such that `C` is true.
 
 For `Pair` the second type is fixed,
-while for `Sigma`, when the first expression is different,
+while for sigma type, when the first expression is different,
 the second type can change,
 
 ```cicada
@@ -135,7 +135,7 @@ check cons(cons(String, Trivial), "ABC"): exists (x: Pair(Type, Type)) car(x)
 check cons(cons(Trivial, String), sole): exists (x: Pair(Type, Type)) car(x)
 ```
 
-`Pair` is actually a special form of `Sigma`.
+`Pair` is actually a special form of sigma type.
 The following two types are the same.
 
 We can use `same_as_chart` to assert that
@@ -192,11 +192,11 @@ check swap_pair(pair): Pair(Trivial, String)
 
 # Pi
 
-We write **`Pi` type** as `(x: A) -> R`,
+We write **pi type** as `(x: A) -> R`,
 just like function type, `A` is the **argument type**, and `R` is the **return type**,
 but this time, `x` might occur in `R`, or say, `R` depends on `x`.
 
-This is why `Pi` is also called **dependent function type**.
+This is why pi type is also called **dependent function type**.
 
 Another way of writing `(x: A) -> R` is `forall (x: A) R`.
 
@@ -205,7 +205,7 @@ And we read it `forall (x: A) R` as
 > For all `x` in `A`, `R` is true.
 
 For function type the return type is fixed,
-while for `Pi`, when the argument expression is different,
+while for pi type, when the argument expression is different,
 the return type can change.
 
 ```cicada
@@ -213,7 +213,7 @@ check (T: Type) -> (T) -> T: Type
 check forall (T: Type) (T) -> T: Type
 ```
 
-The return type of the above `Pi` is `(T) -> T`,
+The return type of the above pi type is `(T) -> T`,
 it depends on the argument expression `T`.
 
 We have a built-in function of the above type,
