@@ -3,13 +3,13 @@ section: Class
 title: Fulfilling Type
 ---
 
-A `class` is a `Type`.
+A class is a `Type`.
 
 **Fulfilling type** means that,
 
-> A partly fulfilled `class` is also a `Type`.
+> A partly fulfilled class is also a `Type`.
 
-We can partly fulfill a `class` by apply it to arguments,
+We can partly fulfill a class by apply it to arguments,
 its fields will be fulfilled one by one.
 
 ```cicada
@@ -43,7 +43,7 @@ For examples,
 
 # Prefilled Class
 
-Except be fulfilled, a `class` can also be prefilled.
+Except be fulfilled, a class can also be prefilled.
 
 ```cicada todo
 class PrefilledABC {
@@ -79,7 +79,7 @@ check {
 }: PrefilledABCDE
 ```
 
-Prefilled `class` can also be fulfilled by applying the `class` to arguments,
+Prefilled class can also be fulfilled by applying the class to arguments,
 note that the prefilled fields must be the same.
 
 ```cicada

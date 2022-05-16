@@ -4,7 +4,7 @@ title: Class & Object
 ---
 
 Like most of programming languages,
-we use the `class` keyword to define `class`s.
+we use the `class` keyword to define classes.
 
 ```cicada
 class ABC {
@@ -23,10 +23,10 @@ check ABC: Type
 Note that, the field `b` depends on the expression `a` from previous fields,
 this is called **dependent record type**,
 
-A `class` is like a `Sigma` -- **dependent pair type**,
-while the very important difference is that the names of fields are significant.
+A class is like a sigma type (_dependent pair type_),
+while a very important difference is that the names of fields are significant.
 
-For example, the following `class` has similar field types as `ABC`,
+For example, the following class has similar field types as `ABC`,
 but since it has different field names, it is not the same type as `ABC`.
 
 ```cicada
@@ -37,12 +37,10 @@ class DEF {
 }
 ```
 
-We can use `{ ... }` to construct element of a `class`.
+We can use `{ ... }` to construct **objects** of a class.
 
-- Note that, when using `{ ... }` to write objects, the commas between fields is required,
-  while when using `{ ... }` to write classes, the commas are optional.
-
-An element of a `class` is called **object**.
+- Note that, when using `{ ... }` to construct objects, the commas between fields is required,
+  while when using `class { ... }` to construct classes, the commas are optional.
 
 ```cicada
 let my_abc: ABC = {
@@ -60,8 +58,9 @@ check my_abc.b: Trivial
 check my_abc.c: String
 ```
 
-Being **dependent record type** means that
-the expression from previous fields can influence the type of the next fields.
+Being a _dependent record type_ means that
+the type of a field can depends on
+the values of the previous fields.
 
 Here is another `ABC`, note how the type of `b` is different from `my_abc`.
 
@@ -79,10 +78,10 @@ check another_abc.c: String
 
 # Extra Fields
 
-An object can has extra fields not specified by the `class`.
+An object can has extra fields not specified by the class.
 
 When we claim an object is `ABC`,
-as long as the fields specified by the `class` all pass the type check,
+as long as the fields specified by the class all pass the type check,
 we know our claim is right.
 
 ```cicada
@@ -99,7 +98,7 @@ let my_abc_with_extra_fields: ABC = {
 
 # Nested Class
 
-`class` can be nested.
+A class can be nested.
 
 ```cicada
 class XYZ {
@@ -109,7 +108,7 @@ class XYZ {
 }
 ```
 
-Constructing object can also be nested.
+An object can also be nested.
 
 ```cicada
 let my_xyz: XYZ = {

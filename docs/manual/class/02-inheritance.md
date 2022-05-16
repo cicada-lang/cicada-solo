@@ -3,8 +3,7 @@ section: Class
 title: Inheritance
 ---
 
-We can combine `class` and `extends`
-to extend an existing `class`.
+We can use `extends` in `class` to extend an existing class.
 
 ```cicada
 import { ABC } from "./01-class-n-object.md"
@@ -16,8 +15,7 @@ class ABCEFG extends ABC {
 }
 ```
 
-If feels like the fields of the extension
-is merged into the fields of `ABC`.
+As if the fields of the extension is merged into the fields of `ABC`.
 
 Object construction works as usual.
 

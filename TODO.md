@@ -3,10 +3,6 @@
 
 # manual
 
-- [manual] `class/04-mathematical-structure-as-class.md`
-
-  - Mathematical Structure as Class
-
 - [manual] `structure/univalent-foundations`
 - [manual] `structure/boolean-algebra`
 
