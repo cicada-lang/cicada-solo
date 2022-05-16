@@ -37,10 +37,10 @@ class DEF {
 }
 ```
 
-We can use `{ <name>: <exp>, ... }` to construct element of a `class`.
+We can use `{ ... }` to construct element of a `class`.
 
-- Note that, in the `{ ... }` for object, the commas between fields is required,
-  while in the `{ ... }` for class, the commas are optional.
+- Note that, when using `{ ... }` to write objects, the commas between fields is required,
+  while when using `{ ... }` to write classes, the commas are optional.
 
 An element of a `class` is called **object**.
 

@@ -7,12 +7,7 @@ title: Built-in Types
 
 `Type` is a `Type`.
 
-```cicada
-compute Type
-```
-
-We can use `check <exp>: <type>`,
-to make assertion about an expression's type.
+We can use the `check` statement to make assertion about an expression's type.
 
 ```cicada
 check Type: Type
@@ -35,11 +30,15 @@ We use double-quoted `String`.
 check "Hello, World!": String
 ```
 
-We can use `let <name> = <exp>` to do assignment.
+We can use the `let` statement to do assignment.
 
 ```cicada
 let my_name = "Xie Yuheng"
+```
 
+We can use the `compute` statement to compute the value of a expression.
+
+```cicada
 compute my_name
 ```
 
@@ -170,7 +169,7 @@ check (pair) => cons(cdr(pair), car(pair)):
   (Pair(String, Trivial)) -> Pair(Trivial, String)
 ```
 
-We can use `let <name>: <type> = <exp>` to give an anonymous function a name.
+When using the `let` statement, we can give a type.
 
 ```cicada
 let very_trivial: (String) -> Trivial = (x) => sole

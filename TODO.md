@@ -1,3 +1,6 @@
+- `block` has `info`
+- `block.run` depends on `info` -- for example "cicada compute"
+
 # manual
 
 - [manual] `class/04-mathematical-structure-as-class.md`
