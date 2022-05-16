@@ -64,7 +64,7 @@ let result = {
 compute result
 ```
 
-# Pair (Both)
+# Pair
 
 `Pair` taken two `Type`s, is a `Type`.
 
@@ -113,7 +113,7 @@ check Pair(Type, Pair(String, Trivial)): Type
 check cons(String, cons("abc", sole)): Pair(Type, Pair(String, Trivial))
 ```
 
-# Sigma
+# Sigma type
 
 We write **sigma type** as `exists (x: A) C`,
 where `x` might occur in `C`, or say, `C` depends on `x`.
@@ -190,7 +190,7 @@ check pair: Pair(String, Trivial)
 check swap_pair(pair): Pair(Trivial, String)
 ```
 
-# Pi
+# Pi type
 
 We write **pi type** as `(x: A) -> R`,
 just like function type, `A` is the **argument type**, and `R` is the **return type**,
@@ -316,5 +316,5 @@ Not enough, right?
 
 Beside them, we will use `datatype` and `class` to construct new compound types.
 
-But before that, let's see how to view a file as `Module`,
+But before that, let's see how to view a file as a module,
 and use `import` to import published works.
