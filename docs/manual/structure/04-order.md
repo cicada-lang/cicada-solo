@@ -18,7 +18,7 @@ Order theory focus on transitive binary relations,
 we start our definitions from a basic one -- `PreOrder`.
 
 ```cicada
-import { Not } from "../../logic/basic.cic"
+import { Not } from "../logic/basic.cic"
 
 class PreOrder {
   Element: Type
@@ -64,7 +64,7 @@ and we can implement topological sort for a partial order.
 # TotalOrder
 
 ```cicada
-import { Either } from "../../datatype/04-either.md"
+import { Either } from "../datatype/04-either.md"
 
 class TotalOrder extends Order {
   totality(x: Element, y: Element): Either(Under(x, y), Under(y, x))
