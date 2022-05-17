@@ -1,5 +1,4 @@
-import { Command } from "@enchanterjs/enchanter/lib/command"
-import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
+import { Command, CommandRunner } from "@xieyuheng/command-line"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
 import watcher from "node-watch"

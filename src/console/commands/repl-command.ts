@@ -1,5 +1,4 @@
-import { Command } from "@enchanterjs/enchanter/lib/command"
-import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
+import { Command, CommandRunner } from "@xieyuheng/command-line"
 import Path from "path"
 import app from "../../app/node-app"
 import { ReadlineRepl } from "../../infra/repls/readline-repl"
