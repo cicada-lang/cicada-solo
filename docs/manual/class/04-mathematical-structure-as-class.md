@@ -33,4 +33,4 @@ class Semigroup {
 }
 ```
 
-See [structure/01-group.md](../structure/01-group.md) for more examples.
+See [structures/01-group.md](../structures/01-group.md) for more examples.

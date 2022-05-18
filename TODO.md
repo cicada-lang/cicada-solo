@@ -3,18 +3,21 @@
 
 # manual
 
-- [manual] `structure/06-boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
-- [manual] `structure/06-boolean-lattice.md` -- prove `meet_associative` & `meet_associative`
-- [manual] `structure/06-boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
-- [manual] `structure/06-boolean-lattice.md` -- define order relation by lattice operations
-- [manual] `structure/06-boolean-lattice.md` -- prove complement is unique
+- [manual] merge `docs/prelude/datatypes` -- for boolean
+- [manual] merge `docs/prelude/structures`
+
+- [manual] `structures/06-boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
+- [manual] `structures/06-boolean-lattice.md` -- prove `meet_associative` & `meet_associative`
+- [manual] `structures/06-boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
+- [manual] `structures/06-boolean-lattice.md` -- define order relation by lattice operations
+- [manual] `structures/06-boolean-lattice.md` -- prove complement is unique
 
 - [manual] `univalent/01-univalent-foundations.md`
 
 - [manual] `equality/01-equal-utilities.md`
 
-- [manual] `datatype/02-list.md`
-- [manual] `datatype/03-vector.md`
+- [manual] `datatypes/02-list.md`
+- [manual] `datatypes/03-vector.md`
 
 # fixpoint
 
