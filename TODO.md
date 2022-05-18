@@ -3,8 +3,13 @@
 
 # manual
 
-- [manual] `structure/univalent-foundations`
-- [manual] `structure/boolean-algebra`
+- [manual] `structure/06-boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
+- [manual] `structure/06-boolean-lattice.md` -- prove `meet_associative` & `meet_associative`
+- [manual] `structure/06-boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
+- [manual] `structure/06-boolean-lattice.md` -- define order relation by lattice operations
+- [manual] `structure/06-boolean-lattice.md` -- prove complement is unique
+
+- [manual] `univalent/01-univalent-foundations.md`
 
 - [manual] `equality/01-equal-utilities.md`
 
