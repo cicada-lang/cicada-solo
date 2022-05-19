@@ -1,5 +1,4 @@
 ---
-section: Class
 title: Mathematical Structure as Class
 ---
 

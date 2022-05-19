@@ -1,5 +1,4 @@
 ---
-section: Module
 title: Import
 ---
 

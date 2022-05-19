@@ -1,5 +1,4 @@
 ---
-section: Equality
 title: Equal Utilities
 ---
 

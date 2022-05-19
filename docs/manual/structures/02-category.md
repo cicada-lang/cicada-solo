@@ -1,5 +1,4 @@
 ---
-section: Structure
 title: Category Theory
 ---
 

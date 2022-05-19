@@ -1,5 +1,4 @@
 ---
-section: Basic
 title: Built-in Types
 ---
 

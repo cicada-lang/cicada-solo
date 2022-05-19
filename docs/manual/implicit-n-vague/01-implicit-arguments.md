@@ -1,5 +1,4 @@
 ---
-section: Implicit & Vague
 title: Implicit Arguments
 ---
 

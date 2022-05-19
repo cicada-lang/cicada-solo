@@ -1,5 +1,4 @@
 ---
-section: Class
 title: Class & Object
 ---
 

@@ -1,5 +1,4 @@
 ---
-section: Datatype
 title: Natural Number
 ---
 

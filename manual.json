@@ -5,14 +5,37 @@
   "year": "2022",
   "src": "docs/manual",
   "main": "00.1-introduction.md",
-  "sections": [
-    "default",
-    "Basic",
-    "Module",
-    "Datatype",
-    "Equality",
-    "Class",
-    "Implicit & Vague",
-    "Structure"
-  ]
+  "sections": {
+    "default": ["00.0-installation.md", "00.1-introduction.md"],
+    "Basic": ["basic/01-built-in-types.md"],
+    "Module": ["module/01-import.md"],
+    "Datatype": [
+      "datatypes/01.1-proving-theorems-about-nat.md",
+      "datatypes/01-nat.md",
+      "datatypes/02-list.md",
+      "datatypes/03-vector.md",
+      "datatypes/04-either.md"
+    ],
+    "Equality": ["equality/01-equal-utilities.md"],
+    "Class": [
+      "class/01-class-n-object.md",
+      "class/02-inheritance.md",
+      "class/03-fulfilling-type.md",
+      "class/04-mathematical-structure-as-class.md"
+    ],
+    "Implicit & Vague": [
+      "implicit-n-vague/01-implicit-arguments.md",
+      "implicit-n-vague/02-vague-arguments.md"
+    ],
+    "Structure": [
+      "structures/01-group.md",
+      "structures/02.1-initial-and-terminal-objects.md",
+      "structures/02-category.md",
+      "structures/03-groupoid-lexical-scope.test.cic",
+      "structures/03-groupoid.md",
+      "structures/04-order.md",
+      "structures/05-set.md",
+      "structures/06-boolean-lattice.md"
+    ]
+  }
 }

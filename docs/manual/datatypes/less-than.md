@@ -1,5 +1,5 @@
 ---
-section: Datatype
+title: LessThan
 ---
 
 # LessThan
