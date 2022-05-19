@@ -28,13 +28,13 @@ This manual also serve as as the _standard library_ of cicada language.
 Example usage:
 
 ```cicada
-import {
-  Nat, zero, add1, add
-} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/nat.md"
+import { Nat, zero, add1, add } from "./datatypes/nat.md"
 
 check add: (Nat, Nat) -> Nat
 
-compute add(add1(add1(zero)), add1(add1(zero)))
+let two = add1(add1(zero))
+
+compute add(two, two)
 ```
 
 # References
