@@ -1,0 +1,3 @@
+refl: Equal(Boolean, Boolean.false, Boolean.false)
+refl: Equal(Boolean, Boolean.true, Boolean.true)
+refl: Equal(Boolean, Boolean.false, Boolean.false)

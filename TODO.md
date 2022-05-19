@@ -5,6 +5,8 @@
 
 - [manual] clean up `docs/todo/structures`
 
+- [manual] `structures/group-category.md`
+
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
 - [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `meet_associative`
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
