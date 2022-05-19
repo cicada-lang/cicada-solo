@@ -1,7 +1,5 @@
 # manual
 
-- [manual] notes about "manual as standard library"
-
 - [manual] `univalent/univalent-foundations.md`
 
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`

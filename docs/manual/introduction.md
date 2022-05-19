@@ -21,6 +21,22 @@ the `docs/manual/` directory of [cicada repository](https://github.com/cicada-la
 
 Welcame to give feedback :)
 
+# Manual as Standard Library
+
+This manual also serve as as the _standard library_ of cicada language.
+
+Example usage:
+
+```cicada
+import {
+  Nat, zero, add1, add
+} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/nat.md"
+
+check add: (Nat, Nat) -> Nat
+
+compute add(add1(add1(zero)), add1(add1(zero)))
+```
+
 # References
 
 ## The Little Typer
