@@ -2,8 +2,6 @@
 title: Vector
 ---
 
-> **Works on this chapter is not finished yet.**
-
 # Vector
 
 ```cicada

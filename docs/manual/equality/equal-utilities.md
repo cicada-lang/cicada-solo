@@ -2,8 +2,6 @@
 title: Equal Utilities
 ---
 
-> **Works on this chapter is not finished yet.**
-
 In the chapter [Proving Theorems About Nat](../datatypes/proving-theorems-about-nat.md),
 we used some helper functions about `Equal`,
 to prove the **commutative property of addition** for natural number.

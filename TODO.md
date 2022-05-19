@@ -1,9 +1,8 @@
-- `block` has `info`
-- `block.run` depends on `info` -- for example "cicada compute"
-
 # manual
 
-- [manual] `structures/group-category.md`
+- [manual] notes about "manual as standard library"
+
+- [manual] `univalent/univalent-foundations.md`
 
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
 - [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `meet_associative`
@@ -11,12 +10,12 @@
 - [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
 - [manual] `structures/boolean-lattice.md` -- prove complement is unique
 
-- [manual] `univalent/univalent-foundations.md`
+- [manual] `structures/group-category.md`
 
-- [manual] `equality/equal-utilities.md`
+# later
 
-- [manual] `datatypes/list.md`
-- [manual] `datatypes/vector.md`
+- `block` has `info`
+- `block.run` depends on `info` -- for example "cicada compute"
 
 # fixpoint
 

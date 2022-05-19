@@ -2,8 +2,6 @@
 title: Introduction
 ---
 
-> **This manual is currently under active development.**
-
 **Cicada Language** is a
 _dependently typed programming language_ and an
 _interactive theorem prover_.
