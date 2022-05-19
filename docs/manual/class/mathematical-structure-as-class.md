@@ -32,4 +32,4 @@ class Semigroup {
 }
 ```
 
-See [structures/01-group.md](../structures/01-group.md) for more examples.
+See [structures/group.md](../structures/group.md) for more examples.

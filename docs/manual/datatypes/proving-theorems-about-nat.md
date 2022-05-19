@@ -20,7 +20,7 @@ We import `Nat` and `add` from previous chapter first.
 import {
   Nat, add,
   zero, add1,
-} from "./01-nat.md"
+} from "./nat.md"
 ```
 
 - We also imported `zero` and `add1` to simplify our discussion.
@@ -253,7 +253,7 @@ Before we dive into them, we need a utility function about `Equal` first -- `equ
 ```cicada
 import {
   equal_map,
-} from "../equality/01-equal-utilities.md"
+} from "../equality/equal-utilities.md"
 ```
 
 It maps a function to the elements on both sides of an `Equal` type.
@@ -270,7 +270,7 @@ check equal_map(same(zero), add1):
 
 Intuitive, right?
 
-In the chapter [Equal Utilities](../equality/01-equal-utilities.md),
+In the chapter [Equal Utilities](../equality/equal-utilities.md),
 we will discuss the utility functions about `Equal` in details.
 
 **Base case.**
@@ -322,7 +322,7 @@ We need two more utility functions about `Equal`.
 import {
   equal_swap,
   equal_compose,
-} from "../equality/01-equal-utilities.md"
+} from "../equality/equal-utilities.md"
 ```
 
 Let's practice using them.
@@ -330,7 +330,7 @@ Let's practice using them.
 `equal_swap` can swap the left and right hand side of the `Equal`.
 
 ```cicada
-import { one } from "./01-nat.md"
+import { one } from "./nat.md"
 
 check same(add1(zero)):
   Equal(Nat, add(one, zero), add1(zero))
@@ -381,7 +381,7 @@ function add_commute(
 We can import some example `Nat` to test our proof.
 
 ```cicada
-import { two, three, four } from "./01-nat.md"
+import { two, three, four } from "./nat.md"
 
 check add_commute(two, three):
   Equal(Nat, add(two, three), add(three, two))

@@ -10,15 +10,15 @@ Thus one file can be viewed as a _module_ of definitions.
 
 For example,
 
-- The current file is located at `"/module/01-import.md"`,
-- we can use relative path `"../datatypes/01-nat.md"`,
-  to locate `"/module/database/01-nat.md"`,
+- The current file is located at `"/module/import.md"`,
+- we can use relative path `"../datatypes/nat.md"`,
+  to locate `"/module/database/nat.md"`,
 - in which a `datatype` called `Nat` is defined
   (we will talk about `Nat` in the following chapters),
 - and we import this definition.
 
 ```cicada
-import { Nat } from "../datatypes/01-nat.md"
+import { Nat } from "../datatypes/nat.md"
 
 compute Nat.zero
 compute Nat.add1(Nat.zero)
@@ -36,7 +36,7 @@ We use `Nat: NatFromURL` to rename the imported definition.
 ```cicada
 import {
   Nat as NatFromURL
-} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/01-nat.md"
+} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/nat.md"
 
 compute NatFromURL.zero
 compute NatFromURL.add1(NatFromURL.zero)

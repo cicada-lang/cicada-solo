@@ -55,5 +55,5 @@ cic run ~/xieyuheng/the-little-typer-exercises/src/02.md
 and you can also run a URL:
 
 ```
-cic run "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/01-nat.md"
+cic run "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/nat.md"
 ```

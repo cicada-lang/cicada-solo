@@ -7,7 +7,7 @@ title: Vector
 # Vector
 
 ```cicada
-import { Nat, zero, one, two, three, four, five, six } from "./01-nat.md"
+import { Nat, zero, one, two, three, four, five, six } from "./nat.md"
 
 datatype Vector(E: Type) (length: Nat) {
   null: Vector(E, Nat.zero)
@@ -113,7 +113,7 @@ function induction_vector(
 # vector_append
 
 ```cicada
-import { add } from "./01-nat.md"
+import { add } from "./nat.md"
 
 function vector_append(
   implicit E: Type,
@@ -152,7 +152,7 @@ same_as_chart (Vector(Nat, five)) [
 # list_from_vector
 
 ```cicada
-import { List } from "./02-list.md"
+import { List } from "./list.md"
 
 function list_from_vector(
   implicit E: Type,

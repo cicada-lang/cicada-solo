@@ -57,7 +57,7 @@ function induction_list(
 # length
 
 ```cicada
-import { Nat } from "./01-nat.md"
+import { Nat } from "./nat.md"
 
 function length(implicit E: Type, x: List(E)): Nat {
   return recursion (x) {

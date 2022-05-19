@@ -5,7 +5,7 @@ title: LessThan
 # LessThan
 
 ```cicada
-import { Nat, zero, add1 } from "./01-nat.md"
+import { Nat, zero, add1 } from "./nat.md"
 
 datatype LessThan() (j: Nat, k: Nat) {
   zero_smallest(n: Nat): LessThan(zero, add1(n))

@@ -8,7 +8,7 @@ and simply returns it, without doing anything.
 
 Wait a second!
 
-It seems, in the chapter [Built-in Types](../basic/01-built-in-types.md),
+It seems, in the chapter [Built-in Types](../basic/built-in-types.md),
 we already have a function just like this.
 
 Remind the definition of `the`.

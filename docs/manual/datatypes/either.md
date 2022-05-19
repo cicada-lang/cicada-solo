@@ -44,7 +44,7 @@ datatype Maybe(E: Type) {
 # example data
 
 ```cicada
-import { List } from "./02-list.md"
+import { List } from "./list.md"
 
 let a: List(String) = List.cons("a", List.null)
 let ab: List(String) = List.cons("a", List.cons("b", List.null))
@@ -112,7 +112,7 @@ same_as_chart (Maybe(List(String))) [
 # list_ref
 
 ```cicada
-import { Nat, zero, one, two, three, four } from "./01-nat.md"
+import { Nat, zero, one, two, three, four } from "./nat.md"
 ```
 
 ## list_ref_direct

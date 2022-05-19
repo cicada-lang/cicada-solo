@@ -5,7 +5,7 @@ title: Inheritance
 We can use `extends` in `class` to extend an existing class.
 
 ```cicada
-import { ABC } from "./01-class-n-object.md"
+import { ABC } from "./class-n-object.md"
 
 class ABCEFG extends ABC {
   e: Type

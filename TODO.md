@@ -3,8 +3,6 @@
 
 # manual
 
-- [manual] drop order prefix
-
 - [manual] merge `docs/prelude/datatypes` -- for boolean
 - [manual] merge `docs/prelude/structures`
 

@@ -5,7 +5,7 @@ title: Groupoid Theory
 # Dependencies
 
 ```cicada
-import { Category, Isomorphism } from "./02-category.md"
+import { Category, Isomorphism } from "./category.md"
 ```
 
 # Groupoid
@@ -31,7 +31,7 @@ class Groupoid extends Category {
 ## A trivial groupoid
 
 ```cicada
-import { trivial_category } from "./02-category.md"
+import { trivial_category } from "./category.md"
 
 let trivial_isomorphism_t = Isomorphism(trivial_category, sole, sole, sole, sole)
 

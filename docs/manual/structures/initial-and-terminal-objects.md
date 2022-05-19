@@ -5,7 +5,7 @@ title: Initial and Terminal Objects
 # Dependencies
 
 ```cicada
-import { Category } from "./02-category.md"
+import { Category } from "./category.md"
 ```
 
 # Initial
@@ -43,8 +43,8 @@ class Terminal {
 If a terminal object exists, it is unique up to unique isomorphism.
 
 ```cicada
-import { Isomorphism } from "./02-category.md"
-import { equal_swap, equal_compose } from "../equality/01-equal-utilities.md"
+import { Isomorphism } from "./category.md"
+import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
 
 function terminal_object_isomorphism(
   cat: Category,

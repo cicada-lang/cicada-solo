@@ -14,7 +14,7 @@ _interactive theorem prover_.
 > each other, and help each other in very good ways.
 
 [ [**Homepage**](https://cicada-lang.org/)
-| [**Installation**](./00.0-installation.md) ]
+| [**Installation**](./installation.md) ]
 
 # Source Code
 
