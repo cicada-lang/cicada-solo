@@ -1,5 +1,5 @@
 ---
-title: Order Theory TODO
+title: Order Theory
 ---
 
 TODO How to model `StrictUnder`?
