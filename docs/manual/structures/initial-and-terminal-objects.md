@@ -40,7 +40,11 @@ class Terminal {
 }
 ```
 
+# Terminal is an universal construction
+
 If a terminal object exists, it is unique up to unique isomorphism.
+
+<https://github.com/xieyuheng/cat/blob/master/src/category.agda>
 
 ```cicada
 import { Isomorphism } from "./category.md"
@@ -51,6 +55,9 @@ function terminal_object_isomorphism(
   x: Terminal(cat),
   y: Terminal(cat),
 ): Isomorphism(cat, x.object, y.object) {
+  let f = x.morphism(y.object)
+  let g = y.morphism(x.object)
+
   return {
     cat,
     dom: x.object,
@@ -59,24 +66,24 @@ function terminal_object_isomorphism(
     inverse: x.morphism(y.object),
 
     inverse_left: equal_compose(
-      x.morphism_unique(
-        cat.compose(
-          y.morphism(x.object),
-          x.morphism(y.object),
-        ),
-      ),
+      x.morphism_unique(cat.compose(g, f)),
       equal_swap(x.morphism_unique(cat.id(x.object)))
     ),
 
     inverse_right: equal_compose(
-      y.morphism_unique(
-        cat.compose(
-          x.morphism(y.object),
-          y.morphism(x.object),
-        ),
-      ),
+      y.morphism_unique(cat.compose(f, g)),
       equal_swap(y.morphism_unique(cat.id(y.object)))
     ),
   }
+}
+
+function terminal_object_isomorphism_unique(
+  cat: Category,
+  x: Terminal(cat),
+  y: Terminal(cat),
+  f: Isomorphism(cat, x.object, y.object),
+  g: Isomorphism(cat, x.object, y.object),
+): Equal(Isomorphism(cat, x.object, y.object), f, g) {
+  return TODO
 }
 ```

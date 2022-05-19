@@ -70,6 +70,12 @@ class TotalOrder extends Order {
 }
 ```
 
+TODO We can implement sort algorithms for `TotalOrder`:
+
+- quick sort
+- bubble sort
+- merge sort
+
 # Equivalence
 
 From `PreOrder` again, we can get equivalence relation by adding symmetric.

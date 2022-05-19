@@ -3,8 +3,6 @@
 
 # manual
 
-- [manual] clean up `docs/todo/structures`
-
 - [manual] `structures/group-category.md`
 
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
