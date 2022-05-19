@@ -1,0 +1,19 @@
+TODO
+  Equal(class {
+  cat: class {
+    Object: Type
+    Morphism: (Object, Object) -> Type
+    id: (x1: Object) -> Morphism(x1, x1)
+    compose: (implicit x1: Object, implicit y1: Object, Morphism(x1, y1), implicit z: Object, Morphism(y1, z)) -> Morphism(x1, z)
+    id_left: (implicit x1: Object, implicit y1: Object, f1: Morphism(x1, y1)) -> Equal(Morphism(x1, y1), compose(implicit x1, implicit x1, id(x1), implicit y1, f1), f1)
+    id_right: (implicit x1: Object, implicit y1: Object, f1: Morphism(x1, y1)) -> Equal(Morphism(x1, y1), compose(implicit x1, implicit y1, f1, implicit y1, id(y1)), f1)
+    compose_associative: (implicit x1: Object, implicit y1: Object, f1: Morphism(x1, y1), implicit z: Object, g1: Morphism(y1, z), implicit w: Object, h: Morphism(z, w)) -> Equal(Morphism(x1, w), compose(implicit x1, implicit y1, f1, implicit w, compose(implicit y1, implicit z, g1, implicit w, h)), compose(implicit x1, implicit z, compose(implicit x1, implicit y1, f1, implicit z, g1), implicit w, h))
+  } = { Object: cat.Object, Morphism: (dom, cod) => cat.Morphism(dom, cod), id: (x1) => cat.id(x1), compose: (implicit x1, implicit y1, f1, implicit z, g1) => cat.compose(implicit x1, implicit y1, f1, implicit z, g1), id_left: (implicit x1, implicit y1, f1) => cat.id_left(implicit x1, implicit y1, f1), id_right: (implicit x1, implicit y1, f1) => cat.id_right(implicit x1, implicit y1, f1), compose_associative: (implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) => cat.compose_associative(implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) }
+  dom: cat.Object = x.object
+  cod: cat.Object = y.object
+  morphism: cat.Morphism(x.object, y.object)
+  inverse: cat.Morphism(y.object, x.object)
+  inverse_left: Equal(cat.Morphism(x.object, x.object), cat.compose(implicit x.object, implicit y.object, morphism, implicit x.object, inverse), cat.id(x.object))
+  inverse_right: Equal(cat.Morphism(y.object, y.object), cat.compose(implicit y.object, implicit x.object, inverse, implicit y.object, morphism), cat.id(y.object))
+}, { cat: { Object: cat.Object, Morphism: (dom, cod) => cat.Morphism(dom, cod), id: (x1) => cat.id(x1), compose: (implicit x1, implicit y1, f1, implicit z, g1) => cat.compose(implicit x1, implicit y1, f1, implicit z, g1), id_left: (implicit x1, implicit y1, f1) => cat.id_left(implicit x1, implicit y1, f1), id_right: (implicit x1, implicit y1, f1) => cat.id_right(implicit x1, implicit y1, f1), compose_associative: (implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) => cat.compose_associative(implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) }, dom: x.object, cod: y.object, morphism: f.morphism, inverse: f.inverse, inverse_left: f.inverse_left, inverse_right: f.inverse_right }, { cat: { Object: cat.Object, Morphism: (dom, cod) => cat.Morphism(dom, cod), id: (x1) => cat.id(x1), compose: (implicit x1, implicit y1, f1, implicit z, g1) => cat.compose(implicit x1, implicit y1, f1, implicit z, g1), id_left: (implicit x1, implicit y1, f1) => cat.id_left(implicit x1, implicit y1, f1), id_right: (implicit x1, implicit y1, f1) => cat.id_right(implicit x1, implicit y1, f1), compose_associative: (implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) => cat.compose_associative(implicit x1, implicit y1, f1, implicit z, g1, implicit w, h) }, dom: x.object, cod: y.object, morphism: g.morphism, inverse: g.inverse, inverse_left: g.inverse_left, inverse_right: g.inverse_right })
+

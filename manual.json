@@ -36,6 +36,11 @@
       "structures/order.md",
       "structures/set.md",
       "structures/boolean-lattice.md"
+    ],
+    "TODO": [
+      "structures/group-category.md"
+      "structures/semigroup-with-built-in-associative.md"
+      "structures/order-todo.md",
     ]
   }
 }
