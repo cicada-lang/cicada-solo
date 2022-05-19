@@ -3,6 +3,8 @@
 
 # manual
 
+- [manual] `docs/manual/datatypes/list` -- add `map`
+
 - [manual] merge `docs/prelude/datatypes` -- for boolean
 - [manual] merge `docs/prelude/structures`
 
