@@ -99,6 +99,41 @@ same_as_chart (List(String)) [
 ]
 ```
 
+# map
+
+```cicada
+function map(
+  implicit E: Type, x: List(E),
+  implicit R: Type, f: (E) -> R,
+): List(R) {
+  return recursion (x) {
+    case null => List.null
+    case cons(head, _tail, almost) => List.cons(f(head), almost.tail)
+  }
+}
+```
+
+```cicada
+compute {
+  let x: List(Nat) =
+    List.cons(Nat.zero,
+      List.cons(Nat.add1(Nat.zero),
+        List.cons(Nat.add1(Nat.add1(Nat.zero)),
+          List.null)))
+
+  let expected: List(Nat) =
+    List.cons(Nat.add1(Nat.zero),
+      List.cons(Nat.add1(Nat.add1(Nat.zero)),
+        List.cons(Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
+          List.null)))
+
+  return same_as_chart (List(Nat)) [
+    map(x, Nat.add1),
+    expected,
+  ]
+}
+```
+
 # reverse
 
 ```cicada
