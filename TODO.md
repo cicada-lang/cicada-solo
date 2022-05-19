@@ -3,8 +3,7 @@
 
 # manual
 
-- [manual] merge `docs/todo/datatypes` -- for boolean
-- [manual] merge `docs/todo/structures`
+- [manual] clean up `docs/todo/structures`
 
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
 - [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `meet_associative`

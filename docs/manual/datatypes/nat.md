@@ -253,8 +253,6 @@ function gauss(n: Nat): Nat {
 }
 ```
 
-Tests.
-
 ```cicada
 same_as_chart (Nat) [
   gauss(ten),
@@ -278,8 +276,6 @@ function factorial(n: Nat): Nat {
   }
 }
 ```
-
-Tests.
 
 ```cicada
 same_as_chart (Nat) [
@@ -335,8 +331,6 @@ function fibonacci(n: Nat): Nat {
   return fibonacci_iter(n, zero, add1(zero))
 }
 ```
-
-Tests.
 
 ```cicada
 compute fibonacci(zero)

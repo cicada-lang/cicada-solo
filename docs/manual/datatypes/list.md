@@ -67,8 +67,6 @@ function length(implicit E: Type, x: List(E)): Nat {
 }
 ```
 
-Tests.
-
 ```cicada
 same_as_chart (Nat) [
   length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
@@ -86,8 +84,6 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   }
 }
 ```
-
-Tests.
 
 ```cicada
 same_as_chart (List(String)) [
@@ -151,8 +147,6 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
   }
 }
 ```
-
-Tests.
 
 ```cicada
 same_as_chart (List(String)) [
