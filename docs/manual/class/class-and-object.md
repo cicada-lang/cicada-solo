@@ -1,5 +1,5 @@
 ---
-title: Class & Object
+title: Class and Object
 ---
 
 Like most of programming languages,

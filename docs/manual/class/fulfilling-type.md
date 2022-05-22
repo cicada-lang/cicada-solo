@@ -12,7 +12,7 @@ We can partly fulfill a class by apply it to arguments,
 its fields will be fulfilled one by one.
 
 ```cicada
-import { ABC } from "./class-n-object.md"
+import { ABC } from "./class-and-object.md"
 
 check ABC: Type
 

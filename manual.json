@@ -18,14 +18,14 @@
     ],
     "Equality": ["equality/equal-utilities.md"],
     "Class": [
-      "class/class-n-object.md",
+      "class/class-and-object.md",
       "class/inheritance.md",
       "class/fulfilling-type.md",
       "class/mathematical-structure-as-class.md"
     ],
-    "Implicit & Vague": [
-      "implicit-n-vague/implicit-arguments.md",
-      "implicit-n-vague/vague-arguments.md"
+    "Implicit and Vague": [
+      "implicit-and-vague/implicit-arguments.md",
+      "implicit-and-vague/vague-arguments.md"
     ],
     "Structure": [
       "structures/group.md",
