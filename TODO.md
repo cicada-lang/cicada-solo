@@ -1,23 +1,10 @@
-# manual
-
-- [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
-- [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `join_associative`
-
-- [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
-- [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
-- [manual] `structures/boolean-lattice.md` -- prove complement is unique
-
-- [manual] `univalent/univalent-foundations.md`
-
-- [manual] `structures/group-category.md`
+- `block` has `info`
+- `block.run` depends on `info` -- fix "cicada compute" code block
 
 # later
 
 - class's prefulfilled field is not checked -- test by `Group`
 - object should not require prefulfilled fields -- test by `Group`
-
-- `block` has `info`
-- `block.run` depends on `info` -- for example "cicada compute"
 
 # fixpoint
 
@@ -176,31 +163,3 @@
 # problem
 
 - [problem] `exps/variable` -- how to handle `span` when doing a `subst`?
-
-# books
-
-- [books] [EWD1240a] A little bit of lattice theory
-
-  - To test our system.
-  - This paper is about the relation between PartialOrder and Lattice.
-  - Learn from the story line for teaching.
-
-- [book] formalize infinite descent as a consequence of induction on natural number:
-
-  - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
-  - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
-
-- [book] formalize complete induction as a consequence of induction on natural number:
-
-  - https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
-
-- [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
-- [books] Lattice theory
-- [books] Closure system -- for FCA
-- [books] Topology theory
-- [books] Category of Groups
-- [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
-
-- [about order] learn from "Introduction to lattices and order"
-
-  - 1.4 Order-isomorphisms
