@@ -1,14 +1,12 @@
 # manual
 
-- rename `_associative` to  `_is_associative`
-
 - [manual] `structures/boolean-lattice.md` -- `idempotence`
 
 - [manual] `structures/boolean-lattice.md` -- `meet_absorption`
 - [manual] `structures/boolean-lattice.md` -- `join_absorption`
 
-- [manual] `structures/boolean-lattice.md` -- `meet_associative`
-- [manual] `structures/boolean-lattice.md` -- `join_associative`
+- [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
+- [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
 - [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations

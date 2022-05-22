@@ -49,6 +49,6 @@ let group_category: Category(Group, GroupHom) = new Category {
   id_right(f: GroupHom(G, H)) = Same(f)
 
   // given G: Group, H: Group, K: Group, L: Group
-  compose_associative(f: GroupHom(G, H), g: GroupHom(H, K), h: GroupHom(K, L)) = Refl
+  compose_is_associative(f: GroupHom(G, H), g: GroupHom(H, K), h: GroupHom(K, L)) = Refl
 }
 ```

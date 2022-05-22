@@ -6,7 +6,7 @@ class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   cod: class {
     Object: Type
@@ -15,7 +15,7 @@ class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   src: class {
     dom: class {
@@ -25,8 +25,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -34,8 +34,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -49,8 +49,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -58,8 +58,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -76,7 +76,7 @@ class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   cod: class {
     Object: Type
@@ -85,7 +85,7 @@ class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   src: class {
     dom: class {
@@ -95,8 +95,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -104,8 +104,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -119,8 +119,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -128,8 +128,8 @@ class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -146,7 +146,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   cod: class {
     Object: Type
@@ -155,7 +155,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   src: class {
     dom: class {
@@ -165,8 +165,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -174,8 +174,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -189,8 +189,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -198,8 +198,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -215,7 +215,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   cod: class {
     Object: Type
@@ -224,7 +224,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   src: class {
     dom: class {
@@ -234,8 +234,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -243,8 +243,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -258,8 +258,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -267,8 +267,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -284,7 +284,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   cod: class {
     Object: Type
@@ -293,7 +293,7 @@ refl(vague Type, vague class {
     compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
     id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
     id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-    compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
   }
   src: class {
     dom: class {
@@ -303,8 +303,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -312,8 +312,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))
@@ -327,8 +327,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => dom.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: dom.Object, Morphism: (dom1, cod1) => dom.Morphism(dom1, cod1), id: (x) => dom.id(x), compose: (x, y, z, f, g) => dom.compose(x, y, z, f, g), id_left: (x, y, f) => dom.id_left(x, y, f), id_right: (x, y, f) => dom.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => dom.compose_is_associative(x, y, z, w, f, g, h) }
     cod: class {
       Object: Type
       Morphism: (Object, Object) -> Type
@@ -336,8 +336,8 @@ refl(vague Type, vague class {
       compose: (x: Object, y: Object, z: Object, Morphism(x, y), Morphism(y, z)) -> Morphism(x, z)
       id_left: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, x, y, id(x), f), f)
       id_right: (x: Object, y: Object, f: Morphism(x, y)) -> Equal(Morphism(x, y), compose(x, y, y, f, id(y)), f)
-      compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
-    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_associative: (x, y, z, w, f, g, h) => cod.compose_associative(x, y, z, w, f, g, h) }
+      compose_is_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, y, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
+    } = { Object: cod.Object, Morphism: (dom2, cod1) => cod.Morphism(dom2, cod1), id: (x) => cod.id(x), compose: (x, y, z, f, g) => cod.compose(x, y, z, f, g), id_left: (x, y, f) => cod.id_left(x, y, f), id_right: (x, y, f) => cod.id_right(x, y, f), compose_is_associative: (x, y, z, w, f, g, h) => cod.compose_is_associative(x, y, z, w, f, g, h) }
     map: (dom.Object) -> cod.Object
     fmap: (x: dom.Object, y: dom.Object, dom.Morphism(x, y)) -> cod.Morphism(map(x), map(y))
     fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x, y), g: dom.Morphism(y, z)) -> Equal(cod.Morphism(map(x), map(z)), fmap(x, z, dom.compose(x, y, z, f, g)), cod.compose(map(x), map(y), map(z), fmap(x, y, f), fmap(y, z, g)))

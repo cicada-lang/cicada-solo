@@ -23,7 +23,7 @@ class Category {
     f: Morphism(x, y),
   ): Equal(Morphism(x, y), compose(x, y, y)(f, id(y)), f)
 
-  compose_associative(
+  compose_is_associative(
     x: Object,
     y: Object,
     z: Object,

@@ -47,7 +47,7 @@ class Category {
     f: Morphism(x, y),
   ): Equal(Morphism(x, y), compose(f, id(y)), f)
 
-  compose_associative(
+  compose_is_associative(
     implicit x: Object,
     implicit y: Object,
     f: Morphism(x, y),
@@ -86,7 +86,7 @@ let trivial_category: Category = {
   id_left: (f) => refl,
   id_right: (f) => refl,
 
-  compose_associative: (f, g, h) => refl,
+  compose_is_associative: (f, g, h) => refl,
 }
 ```
 
