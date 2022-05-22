@@ -217,7 +217,7 @@ and try to translate it to our programming language.
 The outline of our proof will be
 
 ```
-function add_commute(
+function add_is_commutative(
   x: Nat, y: Nat,
 ): Equal(Nat, add(x, y), add(y, x)) {
   return induction (x) {
@@ -280,7 +280,7 @@ The Base case itself is a meaningful theorem, which reads like
 > For all `x` in `Nat`, `add(zero, x)` is equal to `add(x, zero)`.
 
 ```cicada
-function add_zero_commute(
+function add_is_commutative_on_zero(
   x: Nat
 ): Equal(Nat, add(zero, x), add(x, zero)) {
   return induction (x) {
@@ -302,7 +302,7 @@ i.e. the inner `add1` applied to the second argument of `add`,
 can be moved out of `add`.
 
 ```cicada
-function add_add1_commute(
+function add_is_commutative_on_add1(
   x: Nat, y: Nat,
 ): Equal(Nat, add(x, add1(y)), add1(add(x, y))) {
   return induction (x) {
@@ -357,20 +357,20 @@ check equal_compose(same(add1(zero)), same(add1(zero))):
 Now we can finish the original proof.
 
 ```cicada
-function add_commute(
+function add_is_commutative(
   x: Nat, y: Nat,
 ): Equal(Nat, add(x, y), add(y, x)) {
   return induction (x) {
     motive (x) => Equal(Nat, add(x, y), add(y, x))
     case zero =>
       // Base case.
-      add_zero_commute(y)
+      add_is_commutative_on_zero(y)
     case add1(prev, almost) =>
       // Induction step.
       // `almost.prev` is the inductive hypothesis.
       equal_compose(
         equal_map(almost.prev, add1),
-        equal_swap(add_add1_commute(y, prev)),
+        equal_swap(add_is_commutative_on_add1(y, prev)),
       )
   }
 }
@@ -383,14 +383,14 @@ We can import some example `Nat` to test our proof.
 ```cicada
 import { two, three, four } from "./nat.md"
 
-check add_commute(two, three):
+check add_is_commutative(two, three):
   Equal(Nat, add(two, three), add(three, two))
 
-check add_commute(three, four):
+check add_is_commutative(three, four):
   Equal(Nat, add(three, four), add(four, three))
 ```
 
-Note that, our function `add_commute`
+Note that, our function `add_is_commutative`
 proves the commutative property of addition _for all `Nat`_,
 while applying the function to specific `Nat`s give us,
 commutative property of addition for specific `Nat`s.
