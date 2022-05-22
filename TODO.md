@@ -1,3 +1,5 @@
+- we need a syntax for reasoning about equations
+
 - `block` has `info`
 - `block.run` depends on `info` -- fix "cicada compute" code block
 

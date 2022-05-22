@@ -44,3 +44,13 @@
 - [about order] learn from "Introduction to lattices and order"
 
   - 1.4 Order-isomorphisms
+
+# old
+
+- merge `old/datatypes` to `manual/datatypes`
+
+  - maybe need to design new syntax for natural deduction
+
+- try to merge `old/langs` to `manual/langs`
+
+  - take simply typed lambda calculus for example
