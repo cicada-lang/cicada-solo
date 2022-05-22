@@ -312,11 +312,72 @@ function meet_is_idempotent(
 }
 ```
 
+# Order relation
+
+We can define order relation by lattice operations.
+
+```cicada
+function Under(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Type {
+  return Equal(
+    lattice.Element,
+    lattice.join(x, y),
+    y,
+  )
+}
+```
+
 # Boundaries
 
 <https://en.wikipedia.org/wiki/Bounded_lattice>
 
 ```cicada
+function top_is_at_the_top(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Under(lattice, x, lattice.top) {
+  check refl: Equal(
+    Type,
+    Under(lattice, x, lattice.top),
+    Equal(
+      lattice.Element,
+      lattice.join(x, lattice.top),
+      lattice.top,
+    )
+  )
+
+  check equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.top),
+    lattice.meet(lattice.join(x, lattice.top), lattice.top),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, lattice.top), lattice.top),
+    lattice.meet(lattice.top, lattice.join(x, lattice.top)),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.meet(lattice.top, lattice.join(x, lattice.top)),
+    lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
+  )
+
+  return TODO
+}
+```
+
+```cicada
+function bottom_is_at_the_bottom(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Under(lattice, lattice.bottom, x) {
+  return TODO
+}
 ```
 
 # Absorption law
