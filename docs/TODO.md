@@ -1,10 +1,5 @@
 # manual
 
-- [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
-
-- [manual] `structures/boolean-lattice.md` -- `top_is_at_the_top`
-- [manual] `structures/boolean-lattice.md` -- `bottom_is_at_the_bottom`
-
 - [manual] `structures/boolean-lattice.md` -- `meet_absorption`
 - [manual] `structures/boolean-lattice.md` -- `join_absorption`
 

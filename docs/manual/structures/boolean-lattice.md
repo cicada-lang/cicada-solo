@@ -330,6 +330,20 @@ function Under(
 }
 ```
 
+```cicada
+function Above(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Type {
+  return Under(dual(lattice), x, y)
+}
+```
+
+TODO `Above` is the swap of `Under`
+
+TODO `Under` is the swap of `Above`
+
 # Boundaries
 
 <https://en.wikipedia.org/wiki/Bounded_lattice>
@@ -355,19 +369,80 @@ function top_is_at_the_top(
     lattice.meet(lattice.join(x, lattice.top), lattice.top),
   )
 
-  check TODO: Equal(
+  check lattice.meet_is_commutative(lattice.join(x, lattice.top), lattice.top): Equal(
     lattice.Element,
     lattice.meet(lattice.join(x, lattice.top), lattice.top),
     lattice.meet(lattice.top, lattice.join(x, lattice.top)),
   )
 
-  check TODO: Equal(
+  check equal_map(
+    equal_swap(lattice.complement_join_for_top(x)),
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.meet(z, lattice.join(x, lattice.top)),
+    )
+  ): Equal(
     lattice.Element,
     lattice.meet(lattice.top, lattice.join(x, lattice.top)),
     lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
   )
 
-  return TODO
+  check equal_swap(
+    lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
+  ): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, lattice.complement(x)), lattice.join(x, lattice.top)),
+    lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
+  )
+
+  check equal_map(
+    lattice.top_is_identity_of_meet(lattice.complement(x)),
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(x, z),
+    ),
+  ): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(lattice.complement(x), lattice.top)),
+    lattice.join(x, lattice.complement(x)),
+  )
+
+  check lattice.complement_join_for_top(x): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.complement(x)),
+    lattice.top,
+  )
+
+  return equal_compose(
+    equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, lattice.top))),
+    equal_compose(
+      lattice.meet_is_commutative(lattice.join(x, lattice.top), lattice.top),
+      equal_compose(
+        equal_map(
+          equal_swap(lattice.complement_join_for_top(x)),
+          the(
+            (lattice.Element) -> lattice.Element,
+            (z) => lattice.meet(z, lattice.join(x, lattice.top)),
+          )
+        ),
+        equal_compose(
+          equal_swap(
+            lattice.join_can_distribute_over_meet(x, lattice.complement(x), lattice.top)
+          ),
+          equal_compose(
+            equal_map(
+              lattice.top_is_identity_of_meet(lattice.complement(x)),
+              the(
+                (lattice.Element) -> lattice.Element,
+                (z) => lattice.join(x, z),
+              ),
+            ),
+            lattice.complement_join_for_top(x),
+          )
+        )
+      )
+    )
+  )
 }
 ```
 
@@ -375,8 +450,8 @@ function top_is_at_the_top(
 function bottom_is_at_the_bottom(
   lattice: BooleanLattice,
   x: lattice.Element,
-): Under(lattice, lattice.bottom, x) {
-  return TODO
+): Above(lattice, x, lattice.bottom) {
+  return top_is_at_the_top(dual(lattice), x)
 }
 ```
 
