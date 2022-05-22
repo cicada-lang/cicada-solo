@@ -1,0 +1,12 @@
+TODO
+  Equal(lattice.Element, lattice.meet(x, lattice.join(x, y)), x)
+
+TODO
+  Equal(lattice.Element, lattice.join(x, lattice.meet(x, y)), x)
+
+TODO
+  Equal(lattice.Element, lattice.meet(x, lattice.meet(y, z)), lattice.meet(lattice.meet(x, y), z))
+
+TODO
+  Equal(lattice.Element, lattice.join(x, lattice.join(y, z)), lattice.join(lattice.join(x, y), z))
+

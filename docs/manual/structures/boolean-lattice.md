@@ -20,22 +20,75 @@ class BooleanLattice {
   top: Element
   bottom: Element
 
-  meet_commutative(x: Element, y: Element): Equal(Element, meet(x, y), meet(y, x))
-  join_commutative(x: Element, y: Element): Equal(Element, join(x, y), join(y, x))
+  meet_commutative(
+    x: Element,
+    y: Element,
+  ): Equal(
+    Element,
+    meet(x, y),
+    meet(y, x),
+  )
 
-  top_is_identity_of_meet(x: Element): Equal(Element, meet(x, top), x)
-  bottom_is_identity_of_join(x: Element): Equal(Element, join(x, bottom), x)
+  join_commutative(
+    x: Element,
+    y: Element,
+  ): Equal(
+    Element,
+    join(x, y),
+    join(y, x),
+  )
+
+  top_is_identity_of_meet(
+    x: Element
+  ): Equal(
+    Element,
+    meet(x, top),
+    x,
+  )
+
+  bottom_is_identity_of_join(
+    x: Element
+  ): Equal(
+    Element,
+    join(x, bottom),
+    x,
+  )
 
   meet_distribute_over_join(
-    x: Element, y: Element, z: Element
-  ): Equal(Element, meet(x, join(y, z)), join(meet(x, y), meet(x, z)))
+    x: Element,
+    y: Element,
+    z: Element
+  ): Equal(
+    Element,
+    meet(x, join(y, z)),
+    join(meet(x, y), meet(x, z)),
+  )
 
   join_distribute_over_meet(
-    x: Element, y: Element, z: Element
-  ): Equal(Element, join(x, meet(y, z)), meet(join(x, y), join(x, z)))
+    x: Element,
+    y: Element,
+    z: Element
+  ): Equal(
+    Element,
+    join(x, meet(y, z)),
+    meet(join(x, y), join(x, z)),
+  )
 
-  complement_meet_for_bottom(x: Element): Equal(Element, meet(x, complement(x)), bottom)
-  complement_join_for_top(x: Element): Equal(Element, join(x, complement(x)), top)
+  complement_meet_for_bottom(
+    x: Element
+  ): Equal(
+    Element,
+    meet(x, complement(x)),
+    bottom,
+  )
+
+  complement_join_for_top(
+    x: Element
+  ): Equal(
+    Element,
+    join(x, complement(x)),
+    top,
+  )
 }
 ```
 
@@ -46,7 +99,11 @@ function meet_absorption(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,
-): Equal(lattice.Element, lattice.meet(x, lattice.join(x, y)), x) {
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.join(x, y)),
+  x,
+) {
   return TODO
   // return lattice.meet_distribute_over_join(x, x, y)
 }
@@ -55,7 +112,11 @@ function join_absorption(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,
-): Equal(lattice.Element, lattice.join(x, lattice.meet(x, y)), x) {
+): Equal(
+  lattice.Element,
+  lattice.join(x, lattice.meet(x, y)),
+  x,
+) {
   return TODO
 }
 ```
