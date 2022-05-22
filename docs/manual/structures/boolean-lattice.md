@@ -191,7 +191,11 @@ The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/In
 function dual_is_involutive(
   implicit Element: Type,
   lattice: BooleanLattice(Element)
-): Equal(BooleanLattice(Element), lattice, dual(dual(lattice))) {
+): Equal(
+  BooleanLattice(Element),
+  lattice,
+  dual(dual(lattice)),
+) {
   return refl
 }
 ```
