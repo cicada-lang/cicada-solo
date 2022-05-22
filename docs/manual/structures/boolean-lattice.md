@@ -15,23 +15,14 @@ both set operations and logic operations.
 class BooleanLattice {
   Element: Type
 
-  meet(x: Element, y: Element): Element
   join(x: Element, y: Element): Element
+  meet(x: Element, y: Element): Element
   complement(x: Element): Element
 
-  top: Element
   bottom: Element
+  top: Element
 
-  meet_commutative(
-    x: Element,
-    y: Element,
-  ): Equal(
-    Element,
-    meet(x, y),
-    meet(y, x),
-  )
-
-  join_commutative(
+  join_is_commutative(
     x: Element,
     y: Element,
   ): Equal(
@@ -40,12 +31,13 @@ class BooleanLattice {
     join(y, x),
   )
 
-  top_is_identity_of_meet(
-    x: Element
+  meet_is_commutative(
+    x: Element,
+    y: Element,
   ): Equal(
     Element,
-    meet(x, top),
-    x,
+    meet(x, y),
+    meet(y, x),
   )
 
   bottom_is_identity_of_join(
@@ -56,17 +48,15 @@ class BooleanLattice {
     x,
   )
 
-  meet_distribute_over_join(
-    x: Element,
-    y: Element,
-    z: Element
+  top_is_identity_of_meet(
+    x: Element
   ): Equal(
     Element,
-    meet(x, join(y, z)),
-    join(meet(x, y), meet(x, z)),
+    meet(x, top),
+    x,
   )
 
-  join_distribute_over_meet(
+  join_can_distribute_over_meet(
     x: Element,
     y: Element,
     z: Element
@@ -76,12 +66,14 @@ class BooleanLattice {
     meet(join(x, y), join(x, z)),
   )
 
-  complement_meet_for_bottom(
-    x: Element
+  meet_can_distribute_over_join(
+    x: Element,
+    y: Element,
+    z: Element
   ): Equal(
     Element,
-    meet(x, complement(x)),
-    bottom,
+    meet(x, join(y, z)),
+    join(meet(x, y), meet(x, z)),
   )
 
   complement_join_for_top(
@@ -90,6 +82,14 @@ class BooleanLattice {
     Element,
     join(x, complement(x)),
     top,
+  )
+
+  complement_meet_for_bottom(
+    x: Element
+  ): Equal(
+    Element,
+    meet(x, complement(x)),
+    bottom,
   )
 }
 ```
@@ -101,25 +101,25 @@ function dual(lattice: BooleanLattice): BooleanLattice {
   return {
     Element: lattice.Element,
 
-    meet: lattice.join,
     join: lattice.meet,
+    meet: lattice.join,
 
     complement: lattice.complement,
 
-    top: lattice.bottom,
     bottom: lattice.top,
+    top: lattice.bottom,
 
-    meet_commutative: lattice.join_commutative,
-    join_commutative: lattice.meet_commutative,
+    join_is_commutative: lattice.meet_is_commutative,
+    meet_is_commutative: lattice.join_is_commutative,
 
-    top_is_identity_of_meet: lattice.bottom_is_identity_of_join,
     bottom_is_identity_of_join: lattice.top_is_identity_of_meet,
+    top_is_identity_of_meet: lattice.bottom_is_identity_of_join,
 
-    meet_distribute_over_join: lattice.join_distribute_over_meet,
-    join_distribute_over_meet: lattice.meet_distribute_over_join,
+    join_can_distribute_over_meet: lattice.meet_can_distribute_over_join,
+    meet_can_distribute_over_join: lattice.join_can_distribute_over_meet,
 
-    complement_meet_for_bottom: lattice.complement_join_for_top,
     complement_join_for_top: lattice.complement_meet_for_bottom,
+    complement_meet_for_bottom: lattice.complement_join_for_top,
   }
 }
 ```
@@ -156,7 +156,7 @@ function join_unique_identity(
     lattice.join(lattice.bottom, o),
   )
 
-  check lattice.join_commutative(lattice.bottom, o): Equal(
+  check lattice.join_is_commutative(lattice.bottom, o): Equal(
     lattice.Element,
     lattice.join(lattice.bottom, o),
     lattice.join(o, lattice.bottom),
@@ -172,7 +172,7 @@ function join_unique_identity(
     equal_compose(
       equal_swap(o_is_identity_of_join(lattice.bottom)),
       equal_compose(
-        lattice.join_commutative(lattice.bottom, o),
+        lattice.join_is_commutative(lattice.bottom, o),
         lattice.bottom_is_identity_of_join(o)),
     )
   )
@@ -197,6 +197,15 @@ function meet_unique_identity(
 }
 ```
 
+# idempotent
+
+```cicada
+// function join_is_idempotent
+```
+
+```cicada
+```
+
 # TODO
 
 | Abbreviation | Full name       |
@@ -213,19 +222,6 @@ function meet_unique_identity(
 # absorption
 
 ```cicada
-function meet_absorption(
-  lattice: BooleanLattice,
-  x: lattice.Element,
-  y: lattice.Element,
-): Equal(
-  lattice.Element,
-  lattice.meet(x, lattice.join(x, y)),
-  x,
-) {
-  return TODO
-  // return lattice.meet_distribute_over_join(x, x, y)
-}
-
 function join_absorption(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -237,26 +233,25 @@ function join_absorption(
 ) {
   return TODO
 }
+
+function meet_absorption(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.join(x, y)),
+  x,
+) {
+  return TODO
+  // return lattice.meet_can_distribute_over_join(x, x, y)
+}
 ```
 
 # associative
 
 ```cicada
-
-function meet_associative(
-  lattice: BooleanLattice,
-  x: lattice.Element,
-  y: lattice.Element,
-  z: lattice.Element,
-): Equal(
-  lattice.Element,
-  lattice.meet(x, lattice.meet(y, z)),
-  lattice.meet(lattice.meet(x, y), z),
-) {
-  return TODO
-}
-
-function join_associative(
+function join_is_associative(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,
@@ -265,6 +260,19 @@ function join_associative(
   lattice.Element,
   lattice.join(x, lattice.join(y, z)),
   lattice.join(lattice.join(x, y), z),
+) {
+  return TODO
+}
+
+function meet_is_associative(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+  z: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.meet(y, z)),
+  lattice.meet(lattice.meet(x, y), z),
 ) {
   return TODO
 }

@@ -1,5 +1,9 @@
 # manual
 
+- rename `_associative` to  `_is_associative`
+
+- [manual] `structures/boolean-lattice.md` -- `idempotence`
+
 - [manual] `structures/boolean-lattice.md` -- `meet_absorption`
 - [manual] `structures/boolean-lattice.md` -- `join_absorption`
 
