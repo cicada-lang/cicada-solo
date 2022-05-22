@@ -2,6 +2,8 @@
 title: Boolean Lattice
 ---
 
+# BooleanLattice
+
 A [boolean lattice (or boolean algebra)](<https://en.wikipedia.org/wiki/Boolean_algebra_(structure)>)
 is a _complemented distributive lattice_.
 
@@ -91,6 +93,62 @@ class BooleanLattice {
   )
 }
 ```
+
+# unique identity
+
+```cicada
+import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
+
+function join_unique_identity(
+  lattice: BooleanLattice,
+  o: lattice.Element,
+  o_is_identity_of_join: (x: lattice.Element) -> Equal(
+    lattice.Element,
+    lattice.join(x, o),
+    x,
+  ),
+): Equal(lattice.Element, o, lattice.bottom) {
+  check equal_swap(o_is_identity_of_join(lattice.bottom)): Equal(
+    lattice.Element,
+    lattice.bottom,
+    lattice.join(lattice.bottom, o),
+  )
+
+  check lattice.join_commutative(lattice.bottom, o): Equal(
+    lattice.Element,
+    lattice.join(lattice.bottom, o),
+    lattice.join(o, lattice.bottom),
+  )
+
+  check lattice.bottom_is_identity_of_join(o): Equal(
+    lattice.Element,
+    lattice.join(o, lattice.bottom),
+    o,
+  )
+
+  return equal_swap(
+    equal_compose(
+      equal_swap(o_is_identity_of_join(lattice.bottom)),
+      equal_compose(
+        lattice.join_commutative(lattice.bottom, o),
+        lattice.bottom_is_identity_of_join(o)),
+    )
+  )
+}
+```
+
+# TODO
+
+| Abbreviation | Full name       |
+|--------------|-----------------|
+| UId          | Unique Identity |
+| Idm          | Idempotence     |
+| Bnd          | Boundaries      |
+| Abs          | Absorption law  |
+| UNg          | Unique Negation |
+| DNg          | Double negation |
+| DMg          | De Morgan's Law |
+| Ass          | Associativity   |
 
 # absorption
 
