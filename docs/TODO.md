@@ -1,5 +1,10 @@
 # manual
 
+- [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
+
+- [manual] `structures/boolean-lattice.md` -- `top_is_the_greatest`
+- [manual] `structures/boolean-lattice.md` -- `bottom_is_the_least`
+
 - [manual] `structures/boolean-lattice.md` -- `meet_absorption`
 - [manual] `structures/boolean-lattice.md` -- `join_absorption`
 
@@ -7,7 +12,6 @@
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
-- [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
 - [manual] `structures/boolean-lattice.md` -- prove complement is unique
 
 - [manual] `univalent/univalent-foundations.md`

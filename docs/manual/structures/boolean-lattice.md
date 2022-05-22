@@ -202,6 +202,8 @@ function meet_unique_identity(
 
 # Idempotence
 
+<https://en.wikipedia.org/wiki/Idempotence>
+
 ```cicada
 import { equal_map } from "../equality/equal-utilities.md"
 ```
@@ -310,7 +312,16 @@ function meet_is_idempotent(
 }
 ```
 
+# Boundaries
+
+<https://en.wikipedia.org/wiki/Bounded_lattice>
+
+```cicada
+```
+
 # Absorption law
+
+<https://en.wikipedia.org/wiki/Absorption_law>
 
 ```cicada
 function join_absorption(
