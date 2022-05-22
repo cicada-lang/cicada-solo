@@ -1,12 +1,21 @@
-- we need a syntax for reasoning about equations
-
 - `block` has `info`
 - `block.run` depends on `info` -- fix "cicada compute" code block
 
 # later
 
+- use `develop` to develop a class
+
+  - maybe our module system should resolve directory to `index.cic`
+
+- we need a syntax for reasoning about equations
+
 - class's prefulfilled field is not checked -- test by `Group`
-- object should not require prefulfilled fields -- test by `Group`
+
+- use `new` to create object, which do not require prefulfilled fields -- test by `Group`
+
+  - `new ... {}`
+  - `new ... ()`
+  - `new ... () {}`
 
 # fixpoint
 
