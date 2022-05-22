@@ -1,7 +1,5 @@
 # manual
 
-- [manual] `structures/boolean-lattice.md` -- `idempotence`
-
 - [manual] `structures/boolean-lattice.md` -- `meet_absorption`
 - [manual] `structures/boolean-lattice.md` -- `join_absorption`
 

@@ -17,6 +17,7 @@ class BooleanLattice {
 
   join(x: Element, y: Element): Element
   meet(x: Element, y: Element): Element
+
   complement(x: Element): Element
 
   bottom: Element
@@ -94,7 +95,7 @@ class BooleanLattice {
 }
 ```
 
-# dual
+# Duality
 
 ```cicada
 function dual(lattice: BooleanLattice): BooleanLattice {
@@ -136,11 +137,13 @@ function dual_is_involutive(lattice: BooleanLattice): Equal(
 }
 ```
 
-# unique identity
+# Unique identity
 
 ```cicada
 import { equal_swap, equal_compose } from "../equality/equal-utilities.md"
+```
 
+```cicada
 function join_unique_identity(
   lattice: BooleanLattice,
   o: lattice.Element,
@@ -197,29 +200,117 @@ function meet_unique_identity(
 }
 ```
 
-# idempotent
+# Idempotence
 
 ```cicada
-// function join_is_idempotent
+import { equal_map } from "../equality/equal-utilities.md"
 ```
 
 ```cicada
+function join_is_idempotent(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.join(x, x),
+  x,
+) {
+  check equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, x))): Equal(
+    lattice.Element,
+    lattice.join(x, x),
+    lattice.meet(lattice.join(x, x), lattice.top),
+  )
+
+  check equal_swap(lattice.complement_join_for_top(x)): Equal(
+    lattice.Element,
+    lattice.top,
+    lattice.join(x, lattice.complement(x)),
+  )
+
+  check equal_map(
+    equal_swap(lattice.complement_join_for_top(x)),
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.meet(lattice.join(x, x), z),
+    ),
+  ): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, x), lattice.top),
+    lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
+  )
+
+  check equal_swap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))): Equal(
+    lattice.Element,
+    lattice.meet(lattice.join(x, x), lattice.join(x, lattice.complement(x))),
+    lattice.join(x, lattice.meet(x, lattice.complement(x))),
+  )
+
+  check lattice.complement_meet_for_bottom(x): Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.complement(x)),
+    lattice.bottom,
+  )
+
+  check equal_map(
+    lattice.complement_meet_for_bottom(x),
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(x, z),
+    )
+  ): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(x, lattice.complement(x))),
+    lattice.join(x, lattice.bottom),
+  )
+
+  check lattice.bottom_is_identity_of_join(x): Equal(
+    lattice.Element,
+    lattice.join(x, lattice.bottom),
+    x,
+  )
+
+  return equal_compose(
+    equal_swap(lattice.top_is_identity_of_meet(lattice.join(x, x))),
+    equal_compose(
+      equal_map(
+        equal_swap(lattice.complement_join_for_top(x)),
+        the(
+          (lattice.Element) -> lattice.Element,
+          (z) => lattice.meet(lattice.join(x, x), z),
+        ),
+      ),
+      equal_compose(
+        equal_swap(lattice.join_can_distribute_over_meet(x, x, lattice.complement(x))),
+        equal_compose(
+          equal_map(
+            lattice.complement_meet_for_bottom(x),
+            the(
+              (lattice.Element) -> lattice.Element,
+              (z) => lattice.join(x, z),
+            )
+          ),
+          lattice.bottom_is_identity_of_join(x)
+        )
+      )
+    )
+  )
+}
 ```
 
-# TODO
+```cicada
+function meet_is_idempotent(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, x),
+  x,
+) {
+  return join_is_idempotent(dual(lattice), x)
+}
+```
 
-| Abbreviation | Full name       |
-| ------------ | --------------- |
-| UId          | Unique Identity |
-| Idm          | Idempotence     |
-| Bnd          | Boundaries      |
-| Abs          | Absorption law  |
-| UNg          | Unique Negation |
-| DNg          | Double negation |
-| DMg          | De Morgan's Law |
-| Ass          | Associativity   |
-
-# absorption
+# Absorption law
 
 ```cicada
 function join_absorption(
@@ -248,7 +339,7 @@ function meet_absorption(
 }
 ```
 
-# associative
+# Associativity
 
 ```cicada
 function join_is_associative(
