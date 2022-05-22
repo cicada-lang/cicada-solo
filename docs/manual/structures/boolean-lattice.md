@@ -36,17 +36,58 @@ class BooleanLattice {
 
   complement_meet_for_bottom(x: Element): Equal(Element, meet(x, complement(x)), bottom)
   complement_join_for_top(x: Element): Equal(Element, join(x, complement(x)), top)
+}
+```
 
-  meet_absorption(x: Element, y: Element): Equal(Element, meet(x, join(x, y)), x) {
-    return meet_distribute_over_join(x, x, y)
-  }
+# absorption
 
-  join_absorption(x: Element, y: Element): Equal(Element, join(x, meet(x, y)), x) {
-    return join_distribute_over_join(x, x, y)
-  }
+```cicada
+function meet_absorption(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Equal(lattice.Element, lattice.meet(x, lattice.join(x, y)), x) {
+  return TODO
+  // return lattice.meet_distribute_over_join(x, x, y)
+}
 
-  meet_associative(x: Element, y: Element, z: Element): Equal(Element, meet(x, meet(y, z)), meet(meet(x, y), z))
-  join_associative(x: Element, y: Element, z: Element): Equal(Element, join(x, join(y, z)), join(join(x, y), z))
+function join_absorption(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+): Equal(lattice.Element, lattice.join(x, lattice.meet(x, y)), x) {
+  return TODO
+}
+```
+
+# associative
+
+```cicada
+
+function meet_associative(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+  z: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.meet(x, lattice.meet(y, z)),
+  lattice.meet(lattice.meet(x, y), z),
+) {
+  return TODO
+}
+
+function join_associative(
+  lattice: BooleanLattice,
+  x: lattice.Element,
+  y: lattice.Element,
+  z: lattice.Element,
+): Equal(
+  lattice.Element,
+  lattice.join(x, lattice.join(y, z)),
+  lattice.join(lattice.join(x, y), z),
+) {
+  return TODO
 }
 ```
 
@@ -79,14 +120,6 @@ function dual(
 
     complement_meet_for_bottom: lattice.complement_join_for_top,
     complement_join_for_top: lattice.complement_meet_for_bottom,
-
-    // TODO Should not require prefulfilled fields.
-    meet_absorption: lattice.join_absorption,
-    join_absorption: lattice.meet_absorption,
-
-    // TODO Should not require prefulfilled fields.
-    meet_associative: lattice.join_associative,
-    join_associative: lattice.meet_associative,
   }
 }
 ```

@@ -1,20 +1,20 @@
 # manual
 
-- [manual] `univalent/univalent-foundations.md`
-
+- [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
 - [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `join_associative`
 
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
 - [manual] `structures/boolean-lattice.md` -- define order relation by lattice operations
 - [manual] `structures/boolean-lattice.md` -- prove complement is unique
 
+- [manual] `univalent/univalent-foundations.md`
+
 - [manual] `structures/group-category.md`
 
 # later
 
-- object should not require prefulfilled fields.
-
-  - test by `structures/boolean-lattice.md`
+- class's prefulfilled field is not checked -- test by `Group`
+- object should not require prefulfilled fields -- test by `Group`
 
 - `block` has `info`
 - `block.run` depends on `info` -- for example "cicada compute"
