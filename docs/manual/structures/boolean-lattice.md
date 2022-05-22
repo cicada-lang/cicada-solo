@@ -459,8 +459,12 @@ function bottom_is_at_the_bottom(
 
 <https://en.wikipedia.org/wiki/Absorption_law>
 
+<https://en.wikipedia.org/wiki/Absorption_(logic)>
+
+The terminology, which might be introduced by Russell and Whitehead, is very confusing.
+
 ```cicada
-function join_absorption(
+function join_absorb_over_meet(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,
@@ -469,10 +473,40 @@ function join_absorption(
   lattice.join(x, lattice.meet(x, y)),
   x,
 ) {
+  check TODO: Equal(
+    lattice.Element,
+    lattice.join(x, lattice.meet(x, y)),
+    lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
+    lattice.meet(x, lattice.join(lattice.top, y)),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.join(lattice.top, y)),
+    lattice.meet(x, lattice.join(y, lattice.top)),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.join(y, lattice.top)),
+    lattice.meet(x, lattice.top),
+  )
+
+  check TODO: Equal(
+    lattice.Element,
+    lattice.meet(x, lattice.top),
+    x,
+  )
+
   return TODO
 }
 
-function meet_absorption(
+function meet_absorb_over_join(
   lattice: BooleanLattice,
   x: lattice.Element,
   y: lattice.Element,

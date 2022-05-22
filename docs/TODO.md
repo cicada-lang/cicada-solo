@@ -1,13 +1,19 @@
 # manual
 
-- [manual] `structures/boolean-lattice.md` -- `meet_absorption`
-- [manual] `structures/boolean-lattice.md` -- `join_absorption`
+- [manual] `structures/boolean-lattice.md` -- `join_absorb_over_meet` & `meet_absorb_over_join`
 
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
 - [manual] `structures/boolean-lattice.md` -- two-element boolean algebra as instance of `BooleanLattice`
 - [manual] `structures/boolean-lattice.md` -- prove complement is unique
+
+- [manual] `structures/heyting-algebra`
+
+  <https://en.wikipedia.org/wiki/Heyting_algebra>
+
+  - maybe rename `BooleanLattice` to `BooleanAlgebra`,
+    to be symmetric with `HeytingAlgebra`.
 
 - [manual] `univalent/univalent-foundations.md`
 
