@@ -473,39 +473,65 @@ function join_absorb_over_meet(
   lattice.join(x, lattice.meet(x, y)),
   x,
 ) {
-  check TODO: Equal(
+  let eq1: Equal(
     lattice.Element,
     lattice.join(x, lattice.meet(x, y)),
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
+  ) = equal_map(
+    equal_swap(lattice.top_is_identity_of_meet(x)),
+    the(
+      (lattice.Element) -> lattice.Element,
+      (z) => lattice.join(z, lattice.meet(x, y)),
+    )
   )
 
-  check TODO: Equal(
+  let eq2: Equal(
     lattice.Element,
     lattice.join(lattice.meet(x, lattice.top), lattice.meet(x, y)),
     lattice.meet(x, lattice.join(lattice.top, y)),
-  )
+  ) = equal_swap(lattice.meet_can_distribute_over_join(x, lattice.top, y))
 
-  check TODO: Equal(
+  let eq3: Equal(
     lattice.Element,
     lattice.meet(x, lattice.join(lattice.top, y)),
     lattice.meet(x, lattice.join(y, lattice.top)),
+  ) = equal_map(
+    lattice.join_is_commutative(lattice.top, y),
+    the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
   )
 
-  check TODO: Equal(
+  let eq4: Equal(
     lattice.Element,
     lattice.meet(x, lattice.join(y, lattice.top)),
     lattice.meet(x, lattice.top),
+  ) = equal_map(
+    top_is_at_the_top(lattice, y),
+    the((lattice.Element) -> lattice.Element, (z) => lattice.meet(x, z)),
   )
 
-  check TODO: Equal(
+  let eq5: Equal(
     lattice.Element,
     lattice.meet(x, lattice.top),
     x,
+  ) = lattice.top_is_identity_of_meet(x)
+
+  return equal_compose(
+    eq1,
+    equal_compose(
+      eq2,
+      equal_compose(
+        eq3,
+        equal_compose(
+          eq4,
+          eq5,
+        )
+      )
+    )
   )
-
-  return TODO
 }
+```
 
+```cicada
 function meet_absorb_over_join(
   lattice: BooleanLattice,
   x: lattice.Element,
@@ -515,8 +541,7 @@ function meet_absorb_over_join(
   lattice.meet(x, lattice.join(x, y)),
   x,
 ) {
-  return TODO
-  // return lattice.meet_can_distribute_over_join(x, x, y)
+  return join_absorb_over_meet(dual(lattice), x, y)
 }
 ```
 

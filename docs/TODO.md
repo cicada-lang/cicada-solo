@@ -1,7 +1,5 @@
 # manual
 
-- [manual] `structures/boolean-lattice.md` -- `join_absorb_over_meet` & `meet_absorb_over_join`
-
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
