@@ -94,6 +94,48 @@ class BooleanLattice {
 }
 ```
 
+# dual
+
+```cicada
+function dual(lattice: BooleanLattice): BooleanLattice {
+  return {
+    Element: lattice.Element,
+
+    meet: lattice.join,
+    join: lattice.meet,
+
+    complement: lattice.complement,
+
+    top: lattice.bottom,
+    bottom: lattice.top,
+
+    meet_commutative: lattice.join_commutative,
+    join_commutative: lattice.meet_commutative,
+
+    top_is_identity_of_meet: lattice.bottom_is_identity_of_join,
+    bottom_is_identity_of_join: lattice.top_is_identity_of_meet,
+
+    meet_distribute_over_join: lattice.join_distribute_over_meet,
+    join_distribute_over_meet: lattice.meet_distribute_over_join,
+
+    complement_meet_for_bottom: lattice.complement_join_for_top,
+    complement_join_for_top: lattice.complement_meet_for_bottom,
+  }
+}
+```
+
+The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/Involution_(mathematics)>).
+
+```cicada
+function dual_is_involutive(lattice: BooleanLattice): Equal(
+  BooleanLattice,
+  lattice,
+  dual(dual(lattice)),
+) {
+  return refl
+}
+```
+
 # unique identity
 
 ```cicada
@@ -137,10 +179,28 @@ function join_unique_identity(
 }
 ```
 
+```cicada
+function meet_unique_identity(
+  lattice: BooleanLattice,
+  i: lattice.Element,
+  i_is_identity_of_meet: (x: lattice.Element) -> Equal(
+    lattice.Element,
+    lattice.meet(x, i),
+    x,
+  ),
+): Equal(lattice.Element, i, lattice.top) {
+  return join_unique_identity(
+    dual(lattice),
+    i,
+    i_is_identity_of_meet,
+  )
+}
+```
+
 # TODO
 
 | Abbreviation | Full name       |
-|--------------|-----------------|
+| ------------ | --------------- |
 | UId          | Unique Identity |
 | Idm          | Idempotence     |
 | Bnd          | Boundaries      |
@@ -207,54 +267,6 @@ function join_associative(
   lattice.join(lattice.join(x, y), z),
 ) {
   return TODO
-}
-```
-
-# dual
-
-```cicada
-function dual(
-  implicit Element: Type,
-  lattice: BooleanLattice(Element)
-): BooleanLattice(Element) {
-  return {
-    Element,
-
-    meet: lattice.join,
-    join: lattice.meet,
-
-    complement: lattice.complement,
-
-    top: lattice.bottom,
-    bottom: lattice.top,
-
-    meet_commutative: lattice.join_commutative,
-    join_commutative: lattice.meet_commutative,
-
-    top_is_identity_of_meet: lattice.bottom_is_identity_of_join,
-    bottom_is_identity_of_join: lattice.top_is_identity_of_meet,
-
-    meet_distribute_over_join: lattice.join_distribute_over_meet,
-    join_distribute_over_meet: lattice.meet_distribute_over_join,
-
-    complement_meet_for_bottom: lattice.complement_join_for_top,
-    complement_join_for_top: lattice.complement_meet_for_bottom,
-  }
-}
-```
-
-The `dual` of `BooleanLattice` is [involutive](<https://en.wikipedia.org/wiki/Involution_(mathematics)>).
-
-```cicada
-function dual_is_involutive(
-  implicit Element: Type,
-  lattice: BooleanLattice(Element)
-): Equal(
-  BooleanLattice(Element),
-  lattice,
-  dual(dual(lattice)),
-) {
-  return refl
 }
 ```
 
