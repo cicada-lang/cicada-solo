@@ -1,3 +1,5 @@
+# manual
+
 - [manual] `structures/boolean-lattice.md` -- prove `meet_absorption` & `join_absorption`
 - [manual] `structures/boolean-lattice.md` -- prove `meet_associative` & `join_associative`
 
