@@ -1,16 +1,23 @@
-@module datatype
+---
+title: List Append
+---
 
-// in prolog:
+In Prolog:
 
-// append([], Z, Z).
-// append([H | X], Y, [H | Z]):-
-//   append(X, Y, Z).
+```prolog
+append([], Z, Z).
+append([H | X], Y, [H | Z]):-
+  append(X, Y, Z).
+```
 
-// NOTE Give name to each clause in prolog,
-//   is equivalent to datatype definition in language with dependent type.
-//   When doing so, there will be no computation in the resulting type (only pattern matching)
-//   while dependent type systemt can do more than this.
+Give name to each clause in Prolog, is equivalent to
+inductive datatype definition in language with dependent type.
+When doing so, there will be no computation
+in the resulting type, simple unification is enough
+to solve the type check problem.
+In general, inductive datatype in dependent can have computation.
 
+```cicada todo
 // in cicada:
 
 @given A: Type
@@ -31,3 +38,4 @@
   ------------------------------------------------------ cons
   prev: List.Append(x, y, z)
 }
+```

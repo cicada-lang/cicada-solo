@@ -69,7 +69,9 @@ export class Induction extends Exp {
     t: Value
   ): Core {
     let motive_core = readback(ctx, new Exps.TypeValue(), t)
-    for (const name of Object.keys(datatype.type_ctor.varied)) {
+
+    const varied_entries = Object.keys(datatype.type_ctor.varied).reverse()
+    for (const name of varied_entries) {
       // TODO The name "_" might free occur in `motive_core`.
       motive_core = new Exps.FnCore("_", motive_core)
     }

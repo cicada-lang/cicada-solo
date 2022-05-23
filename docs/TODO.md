@@ -1,8 +1,8 @@
 # manual
 
-- [manual] `univalent/univalent-foundations.md`
+- test `varied_entries` order by `manual/relations/list-length.md`
 
-  - With the definition of `Id` -- debug the `J` function
+- [manual] `univalent/univalent-foundations.md`
 
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`

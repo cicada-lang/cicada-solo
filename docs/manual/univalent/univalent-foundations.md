@@ -28,7 +28,7 @@ But the expected type is:
 
 (maybe an internal error about arguments order.)
 
-```cicada todo
+```cicada
 function J(
   implicit T: Type,
   motive: (from: T, to: T, target: Id(T, from, to)) -> Type,

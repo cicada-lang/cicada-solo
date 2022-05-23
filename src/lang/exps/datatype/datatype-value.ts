@@ -72,7 +72,7 @@ export class DatatypeValue extends Value {
       new Exps.BuiltInCore("Type")
     )
 
-    const varied_entries = Object.entries(this.type_ctor.varied)
+    const varied_entries = Object.entries(this.type_ctor.varied).reverse()
     for (const [varied_arg_name, varied_arg_t_core] of varied_entries) {
       motive_core = new Exps.PiCore(
         varied_arg_name,
