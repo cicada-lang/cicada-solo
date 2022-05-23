@@ -1,0 +1,2 @@
+ListLength.null_zero(vague Trivial): ListLength(Trivial, List.null(vague Trivial), Nat.zero)
+ListLength.cons_add1(vague Trivial, sole, List.null(vague Trivial), Nat.zero, ListLength.null_zero(vague Trivial)): ListLength(Trivial, List.cons(vague Trivial, sole, List.null(vague Trivial)), Nat.add1(Nat.zero))

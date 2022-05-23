@@ -9,13 +9,14 @@
     "default": ["installation.md", "introduction.md"],
     "Basic": ["basic/built-in-types.md"],
     "Module": ["module/import.md"],
-    "Datatype": [
+    "Datatypes": [
       "datatypes/nat.md",
       "datatypes/proving-theorems-about-nat.md",
       "datatypes/list.md",
       "datatypes/vector.md",
       "datatypes/either.md"
     ],
+    "Relations": ["relations/list-length.md", "relations/list-append.md"],
     "Equality": ["equality/equal-utilities.md"],
     "Class": [
       "class/class-and-object.md",
@@ -27,7 +28,7 @@
       "implicit-and-vague/implicit-arguments.md",
       "implicit-and-vague/vague-arguments.md"
     ],
-    "Structure": [
+    "Structures": [
       "structures/group.md",
       "structures/category.md",
       "structures/initial-and-terminal-objects.md",
