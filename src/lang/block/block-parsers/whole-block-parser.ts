@@ -9,8 +9,7 @@ export class WholeBlockParser extends BlockParser {
     try {
       const parser = new Parser()
       const stmts = parser.parseStmts(text)
-      const entries = stmts.map((stmt) => ({ stmt }))
-      blocks.put(0, text, "cicada", entries)
+      blocks.put(0, text, "cicada")
       return blocks
     } catch (error) {
       if (error instanceof ParsingError) {

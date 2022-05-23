@@ -1,8 +1,6 @@
 import * as commonmark from "commonmark"
 import { BlockParser, BlockResource } from "../../block"
-import { InternalError, LangError, ParsingError } from "../../errors"
-import { Parser } from "../../parser"
-import * as Stmts from "../../stmts"
+import { LangError, ParsingError } from "../../errors"
 
 export class MarkdownBlockParser extends BlockParser {
   parseBlocks(text: string): BlockResource {
@@ -10,10 +8,8 @@ export class MarkdownBlockParser extends BlockParser {
     for (const entry of collect(text)) {
       if (!entry.info.startsWith("cicada")) continue
 
-      if (entry.info === "cicada") {
+      if (entry.info === "cicada" || (entry.info + " ").includes(" compute ")) {
         defaultHandler(blocks, entry)
-      } else if ((entry.info + " ").includes(" compute ")) {
-        computeHandler(blocks, entry)
       }
     }
 
@@ -21,30 +17,9 @@ export class MarkdownBlockParser extends BlockParser {
   }
 }
 
-function computeHandler(blocks: BlockResource, entry: Entry): void {
-  try {
-    const parser = new Parser()
-    const exp = parser.parseExp(entry.code)
-    if (exp.meta?.span === undefined)
-      throw new InternalError("I expect exp.meta.span")
-    const stmt = new Stmts.Compute(exp, { span: exp.meta.span })
-    const entries = [{ stmt }]
-    blocks.put(entry.index, entry.code, entry.info, entries)
-  } catch (error) {
-    if (error instanceof ParsingError) {
-      throw new LangError(error.report(entry.code))
-    }
-
-    throw error
-  }
-}
-
 function defaultHandler(blocks: BlockResource, entry: Entry): void {
   try {
-    const parser = new Parser()
-    const stmts = parser.parseStmts(entry.code)
-    const entries = stmts.map((stmt) => ({ stmt }))
-    blocks.put(entry.index, entry.code, entry.info, entries)
+    blocks.put(entry.index, entry.code, entry.info)
   } catch (error) {
     if (error instanceof ParsingError) {
       throw new LangError(error.report(entry.code))

@@ -1,5 +1,4 @@
-- [refactor] `block` should compute `stmts` lazily
-- [refactor] `BlockParser` should not parse `stmt` or `exp`
+- [refactor] `block` simplify methods
 
 # later
 

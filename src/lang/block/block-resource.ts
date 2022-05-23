@@ -1,4 +1,4 @@
-import { Block, BlockEntry } from "../block"
+import { Block } from "../block"
 import { StmtOutput } from "../stmt"
 
 export class BlockResource {
@@ -13,13 +13,8 @@ export class BlockResource {
     return this.blocks[this.blocks.length - 1]
   }
 
-  put(
-    id: number,
-    code: string,
-    info: string,
-    entries: Array<BlockEntry>
-  ): Block {
-    const block = new Block(this, id, code, info, entries)
+  put(id: number, code: string, info: string): Block {
+    const block = new Block(this, id, code, info)
     this.blocks.push(block)
     return block
   }
@@ -68,7 +63,7 @@ export class BlockResource {
 
   create(info: string): Block {
     const id = this.nextId()
-    const block = new Block(this, id, "", info, [])
+    const block = new Block(this, id, "", info)
     this.blocks.push(block)
     return block
   }

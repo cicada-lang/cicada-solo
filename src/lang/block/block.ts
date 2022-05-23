@@ -13,18 +13,16 @@ import * as Stmts from "../stmts"
 export type BlockEntry = {
   stmt: Stmt
   output?: StmtOutput
-  executed?: boolean
 }
 
 export class Block {
-  executed = false
+  executed?: Array<BlockEntry>
 
   constructor(
     public blocks: BlockResource,
     public id: number,
     public code: string,
-    public info: string,
-    public entries: Array<BlockEntry>
+    public info: string
   ) {}
 
   isCompute(): boolean {
@@ -32,7 +30,8 @@ export class Block {
   }
 
   get outputs(): Array<undefined | StmtOutput> {
-    return this.entries.map(({ output }) => output)
+    if (!this.executed) return []
+    return this.executed.map(({ output }) => output)
   }
 
   async run(mod: Mod, code: string): Promise<void> {
@@ -56,29 +55,29 @@ export class Block {
   private async executeOne(mod: Mod): Promise<void> {
     if (this.executed) return
 
-    for (const entry of this.entries) {
-      if (entry.executed) continue
+    this.executed = this.parse()
 
+    for (const entry of this.executed) {
       const output = await entry.stmt.execute(mod)
       if (output) {
         entry.output = output
-        entry.executed = true
       }
     }
-
-    this.executed = true
   }
 
   update(code: string): void {
     this.code = code
+  }
+
+  private parse(): Array<BlockEntry> {
     if (this.isCompute()) {
-      this.reparseCompute()
+      return this.parseCompute()
     } else {
-      this.reparseStmts()
+      return this.parseStmts()
     }
   }
 
-  private reparseCompute(): void {
+  private parseCompute(): Array<BlockEntry> {
     try {
       const parser = new Parser()
       const exp = parser.parseExp(this.code)
@@ -86,18 +85,18 @@ export class Block {
         throw new InternalError("I expect exp.meta.span")
       const stmt = new Stmts.Compute(exp, { span: exp.meta.span })
       const stmts = [stmt]
-      this.entries = stmts.map((stmt) => ({ stmt }))
+      return stmts.map((stmt) => ({ stmt }))
     } catch (error) {
       if (!(error instanceof ParsingError)) throw error
       throw new LangError(error.report(this.code))
     }
   }
 
-  private reparseStmts(): void {
+  private parseStmts(): Array<BlockEntry> {
     try {
       const parser = new Parser()
       const stmts = parser.parseStmts(this.code)
-      this.entries = stmts.map((stmt) => ({ stmt }))
+      return stmts.map((stmt) => ({ stmt }))
     } catch (error) {
       if (!(error instanceof ParsingError)) throw error
       throw new LangError(error.report(this.code))
@@ -112,12 +111,12 @@ export class Block {
   }
 
   private async undoOne(mod: Mod): Promise<void> {
-    for (const entry of this.entries) {
+    if (!this.executed) return
+
+    for (const entry of this.executed) {
       await entry.stmt.undo(mod)
-      delete entry.output
-      entry.executed = false
     }
 
-    this.executed = false
+    delete this.executed
   }
 }
