@@ -1,5 +1,3 @@
-- [refactor] `block` simplify methods
-
 # later
 
 - use `develop` to develop a class
