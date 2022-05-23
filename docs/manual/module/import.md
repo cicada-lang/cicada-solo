@@ -31,7 +31,7 @@ Under some URLs, there are files.
 We can even `import` from them.
 
 Since the name `Nat` is already imported, and we can not redefine names.
-We use `Nat: NatFromURL` to rename the imported definition.
+We use `Nat as NatFromURL` to rename the imported definition.
 
 ```cicada
 import {
