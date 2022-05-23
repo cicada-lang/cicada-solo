@@ -5,11 +5,11 @@
 
 - use `develop` to develop a class
 
-  - maybe our module system should resolve directory to `index.cic`
+  - maybe our can use the convention to import `group/theory.cic`
 
 - we need a syntax for reasoning about equations
 
-- class's prefulfilled field is not checked -- test by `Group`
+- [bug] class's prefulfilled field is not checked -- test by `Group`
 
 - use `new` to create object, which do not require prefulfilled fields -- test by `Group`
 

@@ -2,6 +2,8 @@
 
 - [manual] `univalent/univalent-foundations.md`
 
+- [manual] `relations/list-append.md`
+
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
