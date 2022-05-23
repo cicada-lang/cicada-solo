@@ -1,6 +1,5 @@
-- `block` should compute `stmts` lazily
-
-- `block.run` depends on `info` -- fix "cicada compute" code block
+- [refactor] `block` should compute `stmts` lazily
+- [refactor] `BlockParser` should not parse `stmt` or `exp`
 
 # later
 

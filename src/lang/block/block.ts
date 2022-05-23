@@ -1,8 +1,14 @@
 import { BlockResource } from "../block"
-import { ElaborationError, LangError, ParsingError } from "../errors"
+import {
+  ElaborationError,
+  InternalError,
+  LangError,
+  ParsingError,
+} from "../errors"
 import { Mod } from "../mod"
 import { Parser } from "../parser"
 import { Stmt, StmtOutput } from "../stmt"
+import * as Stmts from "../stmts"
 
 export type BlockEntry = {
   stmt: Stmt
@@ -20,6 +26,10 @@ export class Block {
     public info: string,
     public entries: Array<BlockEntry>
   ) {}
+
+  isCompute(): boolean {
+    return (this.info + " ").includes(" compute ")
+  }
 
   get outputs(): Array<undefined | StmtOutput> {
     return this.entries.map(({ output }) => output)
@@ -61,10 +71,29 @@ export class Block {
 
   update(code: string): void {
     this.code = code
-    this.reparse()
+    if (this.isCompute()) {
+      this.reparseCompute()
+    } else {
+      this.reparseStmts()
+    }
   }
 
-  private reparse(): void {
+  private reparseCompute(): void {
+    try {
+      const parser = new Parser()
+      const exp = parser.parseExp(this.code)
+      if (exp.meta?.span === undefined)
+        throw new InternalError("I expect exp.meta.span")
+      const stmt = new Stmts.Compute(exp, { span: exp.meta.span })
+      const stmts = [stmt]
+      this.entries = stmts.map((stmt) => ({ stmt }))
+    } catch (error) {
+      if (!(error instanceof ParsingError)) throw error
+      throw new LangError(error.report(this.code))
+    }
+  }
+
+  private reparseStmts(): void {
     try {
       const parser = new Parser()
       const stmts = parser.parseStmts(this.code)
