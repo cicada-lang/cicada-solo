@@ -1,5 +1,9 @@
 # manual
 
+- [manual] `univalent/univalent-foundations.md`
+
+  - With the definition of `Id` -- debug the `J` function
+
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
 - [manual] `structures/boolean-lattice.md` -- `join_is_associative`
 
@@ -12,10 +16,6 @@
 
   - maybe rename `BooleanLattice` to `BooleanAlgebra`,
     to be symmetric with `HeytingAlgebra`.
-
-- [manual] `univalent/univalent-foundations.md`
-
-  - With the definition of `Id` -- debug the `J` function
 
 - [manual] `structures/group-category.md`
 

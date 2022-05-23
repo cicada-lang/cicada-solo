@@ -1,2 +1,0 @@
-(vague T, vague x) => Id.refl(vague T, vague x): (vague T: Type, vague x: T) -> Id(T, x, x)
-Id.refl(vague String, vague "a"): Id(String, "a", "a")
