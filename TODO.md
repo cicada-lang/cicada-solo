@@ -1,4 +1,5 @@
-- `block` has `info`
+- `block` should compute `stmts` lazily
+
 - `block.run` depends on `info` -- fix "cicada compute" code block
 
 # later

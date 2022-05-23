@@ -35,7 +35,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     const mod = await this.loader.load(url)
 
     try {
-      const block = mod.blocks.create()
+      const block = mod.blocks.create("cicada")
       block.update(text)
       await mod.execute()
       const outputs = mod.blocks.last().outputs

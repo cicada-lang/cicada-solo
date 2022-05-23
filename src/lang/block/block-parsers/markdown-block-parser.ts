@@ -29,7 +29,7 @@ function computeHandler(blocks: BlockResource, entry: Entry): void {
       throw new InternalError("I expect exp.meta.span")
     const stmt = new Stmts.Compute(exp, { span: exp.meta.span })
     const entries = [{ stmt }]
-    blocks.put(entry.index, entry.code, entries)
+    blocks.put(entry.index, entry.code, entry.info, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
       throw new LangError(error.report(entry.code))
@@ -44,7 +44,7 @@ function defaultHandler(blocks: BlockResource, entry: Entry): void {
     const parser = new Parser()
     const stmts = parser.parseStmts(entry.code)
     const entries = stmts.map((stmt) => ({ stmt }))
-    blocks.put(entry.index, entry.code, entries)
+    blocks.put(entry.index, entry.code, entry.info, entries)
   } catch (error) {
     if (error instanceof ParsingError) {
       throw new LangError(error.report(entry.code))

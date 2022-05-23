@@ -17,6 +17,7 @@ export class Block {
     public blocks: BlockResource,
     public id: number,
     public code: string,
+    public info: string,
     public entries: Array<BlockEntry>
   ) {}
 
