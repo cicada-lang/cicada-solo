@@ -70,6 +70,9 @@ export class Induction extends Exp {
   ): Core {
     let motive_core = readback(ctx, new Exps.TypeValue(), t)
 
+    // NOTE It does not matter we reverse the `entries` or not,
+    //   because the `arg_t`s in the `entries` is not used at all.
+    //   we reverse it anyway.
     const varied_entries = Object.keys(datatype.type_ctor.varied).reverse()
     for (const name of varied_entries) {
       // TODO The name "_" might free occur in `motive_core`.

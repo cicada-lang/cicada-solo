@@ -1,7 +1,5 @@
 # manual
 
-- test `varied_entries` order by `manual/relations/list-length.md`
-
 - [manual] `univalent/univalent-foundations.md`
 
 - [manual] `structures/boolean-lattice.md` -- `meet_is_associative`
