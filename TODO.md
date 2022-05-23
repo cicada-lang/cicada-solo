@@ -1,27 +1,6 @@
-# later
-
-- use `develop` to develop a class
-
-  - maybe our can use the convention to import `group/theory.cic`
-
-- we need a syntax for reasoning about equations
-
-- [bug] class's prefulfilled field is not checked -- test by `Group`
-
-- use `new` to create object, which do not require prefulfilled fields -- test by `Group`
-
-  - `new ... {}`
-  - `new ... ()`
-  - `new ... () {}`
-
-# fixpoint
-
-> Allow recursion.
-
-- the use of fixpoint keyword in coq
-  - can we add this to cicada?
-
 # inductive datatype -- questions
+
+> Understand our code again.
 
 - [question] Is it ok that `TypeCtorValue` should be `readback` to `TypeCtorCore`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
@@ -57,9 +36,62 @@
 
   - Should we support "every thing is object"?
 
-# continued induction
+# bug
 
-- it will be more natural to define fibonacci function by recursion
+- [bug] avoid using `constructor.name` for it will be changed during a build for frontend
+
+- [bug] in `02.md`, in `nat_ind`'s definition, if return `T` instead of `motive(n)`,
+  the error report show some bugs about the scope.
+
+- [bug] `DatatypeValue.build_case_t` -- fix the use of the generated names -- `motive` and `almost`
+
+  - (A) is it enough to generate name that is not valid identifier?
+  - (B) pass `free_names` from `TypeCtor` to `TypeCtorCore` and `TypeCtorValue`
+  - (C) use `nanoid`
+
+- [bug] When error is in an imported file, error report fail to report the right context.
+
+- [bug] When `Valee.unify` take `ctx` and `t`, the `length` if `VecValue.unify` is wrong
+
+- [bug] `11.md` -- the socpe of implicit argument `length` is wrong
+
+  - if we move definition of `our_vector_ind` after `import { length } ...`,
+    lexical scope will fail.
+
+- [bug] fix type check error report on wrong number of elements
+
+  in `07.md`:
+
+  ```cicada
+  drop_last(String, three, Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.cons("d", Vector.null)))))
+  ```
+
+# later
+
+- try to implement `replace` for `Id`
+
+- use `develop` to develop a class
+
+  - maybe our can use the convention to import `group/theory.cic`
+
+- we need a syntax for reasoning about equations
+
+- [bug] class's prefulfilled field is not checked -- test by `Group`
+
+- use `new` to create object, which do not require prefulfilled fields -- test by `Group`
+
+  - `new ... {}`
+  - `new ... ()`
+  - `new ... () {}`
+
+# allow recursive definition of function
+
+- [fixpoint] support single recursive function (no mutual recursive)
+
+  - (A) We can introduce a new keyword `fixpoint` (like coq)
+  - (B) The interpreter can check whether a function is recursive.
+
+- [continued induction] it will be more natural to define fibonacci function by recursion
 
   - we can do this if we can continue an induction for "the previous of the previous",
     instead of starting a new induction for it.
@@ -113,38 +145,11 @@
 
 # refactor
 
-- [refactor] improve normalization from `TypeCtorValue` to `DatatypeValue`
-- [refactor] improve normalization from `DataCtorValue` to `DataValue`
+- [refactor] extract `readback_type`
+- [refactor] extract `ctx.extend_type`
 
-# bug
-
-- [bug] avoid using `constructor.name` for it will be changed during a build for frontend
-
-- [bug] in `02.md`, in `nat_ind`'s definition, if return `T` instead of `motive(n)`,
-  the error report show some bugs about the scope.
-
-- [bug] `DatatypeValue.build_case_t` -- fix the use of the generated names -- `motive` and `almost`
-
-  - (A) is it enough to generate name that is not valid identifier?
-  - (B) pass `free_names` from `TypeCtor` to `TypeCtorCore` and `TypeCtorValue`
-  - (C) use `nanoid`
-
-- [bug] When error is in an imported file, error report fail to report the right context.
-
-- [bug] When `Valee.unify` take `ctx` and `t`, the `length` if `VecValue.unify` is wrong
-
-- [bug] `11.md` -- the socpe of implicit argument `length` is wrong
-
-  - if we move definition of `our_vector_ind` after `import { length } ...`,
-    lexical scope will fail.
-
-- [bug] fix type check error report on wrong number of elements
-
-  in `07.md`:
-
-  ```cicada
-  drop_last(String, three, Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.cons("d", Vector.null)))))
-  ```
+- [refactor] improve the normalization from `TypeCtorValue` to `DatatypeValue`
+- [refactor] improve the normalization from `DataCtorValue` to `DataValue`
 
 # maybe
 
@@ -159,9 +164,6 @@
 - [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
 - [maybe] support using `let name = exp` to do local definitions in class
-
-- [maybe] extract `readback_type`
-- [maybe] extract `ctx.extend_type`
 
 - [maybe] `Fn` be able to annotate argument type and return type
 
