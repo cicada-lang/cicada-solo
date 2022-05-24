@@ -1,5 +1,5 @@
 ---
-title: Univalent Foundations
+title: Univalent Axiom
 ---
 
 # Id
