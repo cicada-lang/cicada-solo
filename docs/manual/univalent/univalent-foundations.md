@@ -17,17 +17,6 @@ check Id.refl: Id(String, "a", "a")
 
 # J
 
-TODO Fail with error message:
-
-```
-I infer the type (of target) to be:
-  Id(T, to, from)
-But the expected type is:
-  Id(T, from, to)
-```
-
-(maybe an internal error about arguments order.)
-
 ```cicada
 function J(
   implicit T: Type,
