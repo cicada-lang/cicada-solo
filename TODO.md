@@ -100,6 +100,10 @@
 
 # use `unify` to replace `readback`
 
+> Unification is about solving equations of types and terms.
+> The idea of equation should be more explicit in our implementation.
+> (Thinking about "Type System as Homomorphism between Monoids")
+
 - `Value.unify` -- pi/fn-value.ts & pi/implicit-fn-value.ts
 
   - bidirectional `unify`
