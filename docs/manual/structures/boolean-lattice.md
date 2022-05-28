@@ -182,6 +182,28 @@ function join_unique_identity(
 }
 ```
 
+```cicada wishful-thinking
+function join_unique_identity(
+  lattice: BooleanLattice,
+  o: lattice.Element,
+  o_is_identity_of_join: (x: lattice.Element) -> Equal(
+    lattice.Element,
+    lattice.join(x, o),
+    x,
+  ),
+): Equal(lattice.Element, o, lattice.bottom) {
+  return equal_rewrite (lattice.Element) {
+    lattice.bottom
+    by equal_swap(o_is_identity_of_join(lattice.bottom))
+    lattice.join(lattice.bottom, o)
+    by lattice.join_is_commutative(lattice.bottom, o)
+    lattice.join(o, lattice.bottom)
+    by lattice.bottom_is_identity_of_join(o)
+    o
+  }
+}
+```
+
 ```cicada
 function meet_unique_identity(
   lattice: BooleanLattice,
