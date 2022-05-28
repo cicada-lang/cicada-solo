@@ -69,7 +69,7 @@ function K(X: Type): Type {
 
 The `K` axiom says that `K(X)` holds for every type `X`.
 
-```cicada
+```cicada wishful-thinking
 function K_axiom(X: Type): K(X) {
   return TODO
 }
@@ -193,7 +193,6 @@ We now need to prove that singleton types are singletons:
 function singleton_types_are_singletons(
   implicit X: Type, x: X,
 ): isSingleton(singletonType(x)) {
-
   function motive(y: X, x: X, p: Id(X, y, x)): Type {
     return Id(singletonType(x), eta(x), cons(y, p))
   }
