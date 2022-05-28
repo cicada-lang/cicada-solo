@@ -31,8 +31,7 @@ after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`
 
 ```cicada
 function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    motive (_) => Nat
+  return recursion (x) {
     case zero => y
     case add1(prev, almost) => Nat.add1(almost.prev)
   }
@@ -69,3 +68,26 @@ This concludes our demonstration of the basic idea of quotient type.
 
 But to work with quotient types well,
 we still need some helps from the language.
+
+# Quotient as a function
+
+We know quotient is about equivalent class,
+and an equivalent class can always be captured by a function,
+say `f: (X) -> Y`,
+the inverse image of `b: Y` can be viewed as a subset of `X`,
+and an equivalent class.
+
+Can we directly define the structure of integer by the built-in equivalent `Equal`,
+and use a function to capture quotient type?
+
+```cicada
+datatype Int {
+  zero: Int
+  add1(n: Nat): Int
+  neg_sub1(n: Nat): Int
+}
+
+function classify(x: Integer): Int {
+  return TODO
+}
+```
