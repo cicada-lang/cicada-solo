@@ -1,3 +1,15 @@
+- we need a syntax for reasoning about equations
+
+- use `new` to create object, which do not require prefulfilled fields -- test by `Group`
+
+  - `new ... {}`
+  - `new ... ()`
+  - `new ... () {}`
+
+- [bug] class's prefulfilled field is not checked -- test by `Group`
+
+- try to implement `replace` for `Id`
+
 # inductive datatype -- questions
 
 > Understand our code again.
@@ -65,24 +77,6 @@
   ```cicada
   drop_last(String, three, Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.cons("d", Vector.null)))))
   ```
-
-# later
-
-- try to implement `replace` for `Id`
-
-- use `develop` to develop a class
-
-  - maybe our can use the convention to import `group/theory.cic`
-
-- we need a syntax for reasoning about equations
-
-- [bug] class's prefulfilled field is not checked -- test by `Group`
-
-- use `new` to create object, which do not require prefulfilled fields -- test by `Group`
-
-  - `new ... {}`
-  - `new ... ()`
-  - `new ... () {}`
 
 # allow recursive definition of function
 
