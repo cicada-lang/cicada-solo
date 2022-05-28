@@ -2,8 +2,7 @@
 
 [ [HOMEPAGE](https://cicada-lang.org)
 | [MANUAL](https://readonly.link/manuals/cicada-lang/cicada)
-| [ABOUT](https://cicada-lang.org/about)
-| [SPONSORS](https://cicada-lang.org/sponsors) ]
+| [ABOUT](https://cicada-lang.org/about) ]
 
 Welcome **\*^-^\*/**
 
