@@ -72,13 +72,16 @@ we still need some helps from the language.
 # Quotient as a function
 
 We know quotient is about equivalent class,
-and an equivalent class can always be captured by a function,
+and an equivalence class can always be captured by a function,
 say `f: (X) -> Y`,
 the inverse image of `b: Y` can be viewed as a subset of `X`,
-and an equivalent class.
+and an equivalence class.
 
 Can we directly define the structure of integer by the built-in equivalent `Equal`,
 and use a function to capture quotient type?
+
+This means that the classification problem of the equivalence class is solved,
+which might not always be the case.
 
 ```cicada
 datatype Int {

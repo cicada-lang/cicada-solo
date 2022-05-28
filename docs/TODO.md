@@ -1,6 +1,6 @@
 # manual
 
-- [manual] `univalent/univalent-foundations.md`
+- [manual] `univalent/univalent-axiom.md`
 
 - [manual] `relations/list-append.md`
 
