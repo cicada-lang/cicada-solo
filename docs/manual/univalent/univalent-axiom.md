@@ -52,6 +52,34 @@ function J(
 }
 ```
 
+- **Xie**: Is it possible to implement `replace` by `J` (or induction of `Id`)?
+
+```cicada error
+function replace(
+  implicit X: Type,
+  implicit from: X,
+  implicit to: X,
+  target: Id(X, from, to),
+  motive: (X) -> Type,
+  base: motive(from),
+): motive(to) {
+  return induction (target) {
+    motive (from, to, target) => motive(to)
+    case refl => base
+    // I infer the type to be:
+    //   motive(from)
+    // But the expected type is:
+    //   motive(x)
+    motive (_from, _to, target) => motive(to)
+    case refl => base
+    // I infer the type to be:
+    //   motive(from)
+    // But the expected type is:
+    //   motive(to)
+  }
+}
+```
+
 Then, in summary, the identity type is given by the data `Id`, `refl`, `J`.
 With this, the exact nature of the type `Id(X, x, y)` is fairly under-specified.
 It is consistent that it is always a subsingleton in the sense that `K(X)` holds.
