@@ -1,4 +1,4 @@
-same_as_chart (String) [
+compute same_as_chart (String) [
   "abc",
   "abcd",
   "abc",

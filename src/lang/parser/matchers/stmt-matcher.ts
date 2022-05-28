@@ -6,7 +6,6 @@ import * as Stmts from "../../stmts"
 import {
   bindings_matcher,
   cls_entry_matcher,
-  exps_matcher,
   exp_matcher,
   operator_matcher,
   pi_handler,
@@ -74,11 +73,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     },
     "stmt:compute": ({ exp }, { span }) =>
       new Stmts.Compute(exp_matcher(exp), { span }),
-    "stmt:same_as_chart": ({ t, exps }, { span }) =>
-      new Stmts.Compute(
-        new Exps.SameAsChart(exp_matcher(t), exps_matcher(exps), { span }),
-        { span }
-      ),
     "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(
         pt.str(name),

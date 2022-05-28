@@ -26,7 +26,7 @@ function not(x: Boolean): Boolean {
 ```
 
 ```cicada
-same_as_chart (Boolean) [
+compute same_as_chart (Boolean) [
   false,
   not(true),
   not(not(false)),
@@ -51,12 +51,12 @@ function and(x: Boolean, y: Boolean): Boolean {
 ```
 
 ```cicada
-same_as_chart (Boolean) [
+compute same_as_chart (Boolean) [
   and(true, true),
   true,
 ]
 
-same_as_chart (Boolean) [
+compute same_as_chart (Boolean) [
   and(true, false),
   and(false, true),
   and(false, false),

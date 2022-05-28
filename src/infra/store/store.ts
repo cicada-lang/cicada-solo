@@ -35,7 +35,7 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
         [
           `I can not get value`,
           `  class name: ${this.constructor.name}`,
-          `  key: ${key}`,
+          `  key: ${key.toString()}`,
         ].join("\n")
       )
     } else {

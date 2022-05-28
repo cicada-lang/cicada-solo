@@ -6,7 +6,7 @@ from value at 0:
 to value at 1:
   "abcd"
 
- 1 |same_as_chart (String) [
+ 1 |compute same_as_chart (String) [
  2 |  "abc",
  3 |  "abcd",
  4 |  "abc",

@@ -129,7 +129,7 @@ function vector_append(
 ```
 
 ```cicada
-same_as_chart (Vector(Nat, five)) [
+compute same_as_chart (Vector(Nat, five)) [
   vector_append(
     the(
       Vector(Nat, two),
@@ -165,7 +165,7 @@ function list_from_vector(
 ```
 
 ```cicada
-same_as_chart (List(Nat)) [
+compute same_as_chart (List(Nat)) [
   list_from_vector(
     the(Vector(Nat, three), Vector.cons(one, Vector.cons(two, Vector.cons(three, Vector.null))))
   ),

@@ -27,15 +27,6 @@ export const stmt = {
       { sequence: "sequence" },
     ],
     "stmt:compute": ['"compute"', { exp: "exp" }],
-    "stmt:same_as_chart": [
-      '"same_as_chart"',
-      '"("',
-      { t: "exp" },
-      '")"',
-      '"["',
-      { exps: "exps" },
-      '"]"',
-    ],
     "stmt:class": [
       '"class"',
       { name: "identifier" },
