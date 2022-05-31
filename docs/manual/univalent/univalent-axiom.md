@@ -3,7 +3,7 @@ title: Univalent Axiom
 ---
 
 This is a formalization of the paper
-"A self-contained, brief and complete formulation of Voevodsky’s Univalence Axiom"
+["A self-contained, brief and complete formulation of Voevodsky’s Univalence Axiom"](https://homotopytypetheory.org/2018/03/07/a-self-contained-brief-and-complete-formulation-of-voevodskys-univalence-axiom)
 by Martín Hötzel Escardó, October 18, 2018.
 
 # Introduction
