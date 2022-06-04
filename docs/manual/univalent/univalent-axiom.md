@@ -163,7 +163,7 @@ its fiber is the type of points `x: X`
 that are mapped to (a point identified with) `y`:
 
 ```cicada
-function fiber(
+function Fiber(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
@@ -182,9 +182,11 @@ function Equivalence(
   implicit Y: Type,
   f: (X) -> Y,
 ): Type {
-  return forall (y: Y) Singleton(fiber(f, y))
+  return forall (y: Y) Singleton(Fiber(f, y))
 }
 ```
+
+- **Xie:** Is the following the normal definition of homotopy equivalence?
 
 ```cicada
 function Iso(
@@ -207,7 +209,14 @@ function retraction(
   return TODO
 }
 
-// function section
+function section(
+  implicit X: Type,
+  implicit Y: Type,
+  f: (X) -> Y,
+  eq: Equivalence(f)
+): Iso(f) {
+  return TODO
+}
 ```
 
 The type of equivalences from `X: Type` to `Y: Type` is
@@ -267,7 +276,7 @@ function point_singleton(
 ```
 
 Now, for any type `X`, its identity function `id(X)`, defined by `id(x) = x`,
-is an equivalence. This is because the `fiber(id, x)` is simply the singleton type
+is an equivalence. This is because the `Fiber(id, x)` is simply the singleton type
 defined above, which we proved to be a singleton.
 We need to name this function:
 
