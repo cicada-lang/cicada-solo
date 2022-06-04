@@ -1,6 +1,6 @@
 # manual
 
-- [manual] `univalent/univalent-axiom.md` -- prove `Ios` is equal to `equivalence`
+- [manual] `univalent/univalent-axiom.md` -- prove `Ios <-> Equivalence`
 
 - [manual] `relations/list-append.md`
 
