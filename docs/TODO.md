@@ -1,7 +1,6 @@
 # manual
 
-- [manual] `univalent/univalent-axiom.md` -- improve naming
-- [manual] `univalent/univalent-axiom.md` -- prove `Ios` is equal to `isEquiv`
+- [manual] `univalent/univalent-axiom.md` -- prove `Ios` is equal to `equivalence`
 
 - [manual] `relations/list-append.md`
 

@@ -106,7 +106,7 @@ function K_axiom(X: Type): K(X) {
 In univalent mathematics, a type `X` that satisfies `K(X)` is called a _set_.
 
 ```cicada
-let isSet = K
+let Set = K
 ```
 
 And with this terminology, the `K` axiom says that all types are sets.
@@ -155,7 +155,7 @@ We say that a type `X` is a singleton if we have an element `c: X`
 with `Id(X, c, x)` for all `x: X`. In Curry-Howard logic, this is
 
 ```cicada
-function isSingleton(X: Type): Type {
+function singleton(X: Type): Type {
   return exists (c: X) forall (x: X) Id(X, c, x)
 }
 ```
@@ -179,20 +179,20 @@ The function f is called an equivalence
 if its fibers are all singletons:
 
 ```cicada
-function isEquiv(
+function equivalence(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
 ): Type {
-  return forall (y: Y) isSingleton(fiber(f, y))
+  return forall (y: Y) singleton(fiber(f, y))
 }
 ```
 
 The type of equivalences from `X: Type` to `Y: Type` is
 
 ```cicada
-function Eq(X: Type, Y: Type): Type {
-  return exists (f: (X) -> Y) isEquiv(f)
+function Equivalent(X: Type, Y: Type): Type {
+  return exists (f: (X) -> Y) equivalence(f)
 }
 ```
 
@@ -202,15 +202,15 @@ Given `x: X`, we have the singleton type
 consisting of the elements `y: X` identified with `x`:
 
 ```cicada
-function singletonType(implicit X: Type, x: X): Type {
-  return exists (y: X) Id(X, y, x)
+function constant_space(implicit X: Type, c: X): Type {
+  return exists (x: X) Id(X, x, c)
 }
 ```
 
 We also have the element `eta(x)` of this type:
 
 ```cicada
-function eta(implicit X: Type, x: X): singletonType(x) {
+function eta(implicit X: Type, x: X): constant_space(x) {
   return cons(x, Id.refl)
 }
 ```
@@ -218,29 +218,29 @@ function eta(implicit X: Type, x: X): singletonType(x) {
 We now need to prove that singleton types are singletons:
 
 ```cicada
-function singleton_types_are_singletons(
-  implicit X: Type, x: X,
-): isSingleton(singletonType(x)) {
+function constant_space_is_singleton(
+  implicit X: Type, c: X,
+): singleton(constant_space(c)) {
   function motive(y: X, x: X, p: Id(X, y, x)): Type {
-    return Id(singletonType(x), eta(x), cons(y, p))
+    return Id(constant_space(x), eta(x), cons(y, p))
   }
 
   function base(x: X): motive(x, x, Id.refl) {
     return Id.refl
   }
 
-  function phi(x: X, y: X, p: Id(X, y, x)): Id(singletonType(x), eta(x), cons(y, p)) {
+  function phi(y: X, x: X, p: Id(X, y, x)): Id(constant_space(x), eta(x), cons(y, p)) {
     return J(motive, base, p)
   }
 
   // Notice the reversal of `y` and `x`.
   //   With this, we can in turn define a function:
 
-  function g(x: X, s: singletonType(x)): Id(singletonType(x), eta(x), s) {
-    return phi(x, car(s), cdr(s))
+  function g(x: X, s: constant_space(x)): Id(constant_space(x), eta(x), s) {
+    return phi(car(s), x, cdr(s))
   }
 
-  return cons(eta(x), g(x))
+  return cons(eta(c), g(c))
 }
 ```
 
@@ -254,8 +254,8 @@ function id(X: Type, x: X): X {
   return x
 }
 
-function idIsEquiv(X: Type): isEquiv(id(X)) {
-  return (y) => singleton_types_are_singletons(y)
+function id_is_equivalence(X: Type): equivalence(id(X)) {
+  return (c) => constant_space_is_singleton(c)
 }
 ```
 
@@ -263,13 +263,13 @@ The identity function `id(X)` should not be confused with the identity type `Id(
 Now we use `J` a second time to define a function
 
 ```cicada
-function IdToEq(X: Type, Y: Type, p: Id(Type, X, Y)): Eq(X, Y) {
+function id_to_equivalent(X: Type, Y: Type, p: Id(Type, X, Y)): Equivalent(X, Y) {
   function motive(X: Type, Y: Type, p: Id(Type, X, Y)): Type {
-    return Eq(X, Y)
+    return Equivalent(X, Y)
   }
 
-  function base(X: Type): Eq(X, X) {
-    return cons(id(X), idIsEquiv(X))
+  function base(X: Type): Equivalent(X, X) {
+    return cons(id(X), id_is_equivalence(X))
   }
 
   return J(motive, base, p)
@@ -277,15 +277,15 @@ function IdToEq(X: Type, Y: Type, p: Id(Type, X, Y)): Eq(X, Y) {
 ```
 
 Finally, we say that the universe `U` is univalent
-if the map `IdToEq(X, Y)` is itself an equivalence:
+if the map `id_to_equivalent(X, Y)` is itself an equivalence:
 
 - **Xie**: `Type` is our only universe.
 
 ```cicada
-let TypeIsUnivalent = forall (X: Type, Y: Type) isEquiv(IdToEq(X, Y))
+let type_is_univalent = forall (X: Type, Y: Type) equivalence(id_to_equivalent(X, Y))
 ```
 
-The type `TypeIsUnivalent` may or may not have an inhabitant.
+The type `type_is_univalent` may or may not have an inhabitant.
 The univalence axiom says that it does.
 The `K` axiom implies that it doesn't.
 Because both univalence and the `K` axiom are consistent,
