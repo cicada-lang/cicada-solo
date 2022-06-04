@@ -34,10 +34,10 @@ compute Id.refl
 check Id.refl: Id(String, "a", "a")
 ```
 
-The induction over the identity type give rise to a function we call `J`.
+The induction over the identity type give rise to a function we call `id_ind`.
 
 ```cicada
-function J(
+function id_ind(
   implicit X: Type,
   motive: (from: X, to: X, target: Id(X, from, to)) -> Type,
   base: (x: X) -> motive(x, x, Id.refl),
@@ -52,7 +52,7 @@ function J(
 }
 ```
 
-- **Xie**: Is it possible to implement `replace` by `J` (or induction of `Id`)?
+- **Xie**: Is it possible to implement `replace` by `id_ind` (or induction of `Id`)?
 
 ```cicada error
 function replace(
@@ -80,7 +80,7 @@ function replace(
 }
 ```
 
-Then, in summary, the identity type is given by the data `Id`, `refl`, `J`.
+Then, in summary, the identity type is given by the data `Id`, `refl`, `id_ind`.
 With this, the exact nature of the type `Id(X, x, y)` is fairly under-specified.
 It is consistent that it is always a subsingleton in the sense that `K(X)` holds.
 
@@ -230,7 +230,7 @@ function constant_space_is_singleton(
   }
 
   function phi(y: X, x: X, p: Id(X, y, x)): Id(constant_space(x), eta(x), cons(y, p)) {
-    return J(motive, base, p)
+    return id_ind(motive, base, p)
   }
 
   // Notice the reversal of `y` and `x`.
@@ -260,7 +260,7 @@ function id_is_equivalence(X: Type): equivalence(id(X)) {
 ```
 
 The identity function `id(X)` should not be confused with the identity type `Id(X)`.
-Now we use `J` a second time to define a function
+Now we use `id_ind` a second time to define a function
 
 ```cicada
 function id_to_equivalent(X: Type, Y: Type, p: Id(Type, X, Y)): Equivalent(X, Y) {
@@ -272,7 +272,7 @@ function id_to_equivalent(X: Type, Y: Type, p: Id(Type, X, Y)): Equivalent(X, Y)
     return cons(id(X), id_is_equivalence(X))
   }
 
-  return J(motive, base, p)
+  return id_ind(motive, base, p)
 }
 ```
 
