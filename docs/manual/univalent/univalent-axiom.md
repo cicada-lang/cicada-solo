@@ -34,7 +34,9 @@ compute Id.refl
 check Id.refl: Id(String, "a", "a")
 ```
 
-The induction over the identity type give rise to a function we call `id_ind`.
+The induction over the identity type
+give rise to a function we call `id_ind`
+(`J` in the paper).
 
 ```cicada
 function id_ind(
@@ -130,10 +132,6 @@ check Type: Type
 ```
 
 - **Xie**: Thus we define a simple universe `U` to be `Type`.
-
-```cicada
-let U = Type
-```
 
 TODO Define `Grp` as is in the paper.
 
