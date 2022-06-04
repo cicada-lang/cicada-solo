@@ -133,12 +133,12 @@ check Type: Type
 
 - **Xie**: Thus we define a simple universe `U` to be `Type`.
 
-TODO Define `Grp` as is in the paper.
+TODO Define `Group` as is in the paper.
 
-With univalence, `Grp` itself will not be a set, but a 1-groupoid instead,
+With univalence, `Group` itself will not be a set, but a 1-groupoid instead,
 namely a type whose identity types are all sets.
-Moreover, if `U` satisfies the univalence axiom, then for `A, B : Grp`,
-the identity type `Id(Grp, A, B)` can be shown to be in bijection
+Moreover, if `U` satisfies the univalence axiom, then for `A: Group, B: Group`,
+the identity type `Id(Group, A, B)` can be shown to be in bijection
 with the group isomorphisms of `A` and `B`.
 
 # Univalence
@@ -153,7 +153,7 @@ We say that a type `X` is a singleton if we have an element `c: X`
 with `Id(X, c, x)` for all `x: X`. In Curry-Howard logic, this is
 
 ```cicada
-function singleton(X: Type): Type {
+function Singleton(X: Type): Type {
   return exists (c: X) forall (x: X) Id(X, c, x)
 }
 ```
@@ -177,20 +177,44 @@ The function f is called an equivalence
 if its fibers are all singletons:
 
 ```cicada
-function equivalence(
+function Equivalence(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
 ): Type {
-  return forall (y: Y) singleton(fiber(f, y))
+  return forall (y: Y) Singleton(fiber(f, y))
 }
+```
+
+```cicada
+function Iso(
+  implicit X: Type,
+  implicit Y: Type,
+  f: (X) -> Y,
+): Type {
+  return exists (g: (Y) -> X) Pair(
+    forall (x: X) Id(X, g(f(x)), x),
+    forall (y: Y) Id(Y, f(g(y)), y),
+  )
+}
+
+function retraction(
+  implicit X: Type,
+  implicit Y: Type,
+  f: (X) -> Y,
+  iso: Iso(f)
+): Equivalence(f) {
+  return TODO
+}
+
+// function section
 ```
 
 The type of equivalences from `X: Type` to `Y: Type` is
 
 ```cicada
 function Equivalent(X: Type, Y: Type): Type {
-  return exists (f: (X) -> Y) equivalence(f)
+  return exists (f: (X) -> Y) Equivalence(f)
 }
 ```
 
@@ -200,7 +224,7 @@ Given `x: X`, we have the singleton type
 consisting of the elements `y: X` identified with `x`:
 
 ```cicada
-function constant_space(implicit X: Type, c: X): Type {
+function Point(implicit X: Type, c: X): Type {
   return exists (x: X) Id(X, x, c)
 }
 ```
@@ -208,7 +232,7 @@ function constant_space(implicit X: Type, c: X): Type {
 We also have the element `eta(x)` of this type:
 
 ```cicada
-function eta(implicit X: Type, x: X): constant_space(x) {
+function eta(implicit X: Type, x: X): Point(x) {
   return cons(x, Id.refl)
 }
 ```
@@ -216,25 +240,25 @@ function eta(implicit X: Type, x: X): constant_space(x) {
 We now need to prove that singleton types are singletons:
 
 ```cicada
-function constant_space_is_singleton(
+function point_singleton(
   implicit X: Type, c: X,
-): singleton(constant_space(c)) {
+): Singleton(Point(c)) {
   function motive(y: X, x: X, p: Id(X, y, x)): Type {
-    return Id(constant_space(x), eta(x), cons(y, p))
+    return Id(Point(x), eta(x), cons(y, p))
   }
 
   function base(x: X): motive(x, x, Id.refl) {
     return Id.refl
   }
 
-  function phi(y: X, x: X, p: Id(X, y, x)): Id(constant_space(x), eta(x), cons(y, p)) {
+  function phi(y: X, x: X, p: Id(X, y, x)): Id(Point(x), eta(x), cons(y, p)) {
     return id_ind(motive, base, p)
   }
 
   // Notice the reversal of `y` and `x`.
   //   With this, we can in turn define a function:
 
-  function g(x: X, s: constant_space(x)): Id(constant_space(x), eta(x), s) {
+  function g(x: X, s: Point(x)): Id(Point(x), eta(x), s) {
     return phi(car(s), x, cdr(s))
   }
 
@@ -252,8 +276,8 @@ function id(X: Type, x: X): X {
   return x
 }
 
-function id_is_equivalence(X: Type): equivalence(id(X)) {
-  return (c) => constant_space_is_singleton(c)
+function id_is_equivalence(X: Type): Equivalence(id(X)) {
+  return (c) => point_singleton(c)
 }
 ```
 
@@ -280,7 +304,7 @@ if the map `id_to_equivalent(X, Y)` is itself an equivalence:
 - **Xie**: `Type` is our only universe.
 
 ```cicada
-let type_is_univalent = forall (X: Type, Y: Type) equivalence(id_to_equivalent(X, Y))
+let type_is_univalent = forall (X: Type, Y: Type) Equivalence(id_to_equivalent(X, Y))
 ```
 
 The type `type_is_univalent` may or may not have an inhabitant.
