@@ -1,3 +1,9 @@
+TODO
+  (y: Y) -> exists (c: exists (x: X) Id(Y, f(x), y)) (x: exists (x: X) Id(Y, f(x), y)) -> Id(exists (x1: X) Id(Y, f(x1), y), cons(car(c), cdr(c)), cons(car(x), cdr(x)))
+
+TODO
+  exists (g: (Y) -> X) Pair((x: X) -> Id(X, g(f(x)), x), (y: Y) -> Id(Y, f(g(y)), y))
+
 (vague X, vague x) => Id.refl(vague X, vague x): (vague X: Type, vague x: X) -> Id(X, x, x)
 Id.refl(vague String, vague "a"): Id(String, "a", "a")
 Type: Type
