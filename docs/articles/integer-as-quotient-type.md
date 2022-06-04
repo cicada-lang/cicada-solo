@@ -84,13 +84,21 @@ This means that the classification problem of the equivalence class is solved,
 which might not always be the case.
 
 ```cicada
-datatype Int {
-  zero: Int
-  add1(n: Nat): Int
-  neg_sub1(n: Nat): Int
+datatype Sign {
+  neutral: Sign
+  positive: Sign
+  negative: Sign
 }
 
-function classify(x: Integer): Int {
-  return TODO
+datatype SignedInt(sign: Sign) {
+  zero: SignedInt(Sign.neutral)
+
+  one: SignedInt(Sign.positive)
+  minus_one: SignedInt(Sign.negative)
+
+  up: (SignedInt(Sign.positive)) -> SignedInt(Sign.positive)
+  down: (SignedInt(Sign.negative)) -> SignedInt(Sign.negative)
 }
+
+let Int = exists (sign: Sign) SignedInt(sign)
 ```

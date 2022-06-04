@@ -82,6 +82,49 @@ function replace(
 }
 ```
 
+- **Xie**: It seems there are many ways to define `id_ind`.
+
+```cicada todo
+function replace_with_id(
+  implicit X: Type,
+  implicit from: X,
+  implicit to: X,
+  target: Id(X, from, to),
+  motive: (x: X, id: Id(X, from, x)) -> Type,
+  base: motive(from, Id.refl),
+): motive(to, target) {
+  return TODO
+}
+```
+
+- **Xie:** The following function shows our definition of `Id` is absurd.
+
+```cicada
+function id_absurd(
+  implicit A: Type,
+  implicit x: A,
+  id: Id(A, x, x),
+  implicit y: A,
+): Id(A, x, y) {
+  return recursion (id) {
+    case refl => Id.refl
+  }
+}
+```
+
+```cicada
+function id_swap(
+  implicit A: Type,
+  implicit x: A,
+  implicit y: A,
+  id: Id(A, x, y),
+): Id(A, y, x) {
+  return recursion (id) {
+    case refl => Id.refl
+  }
+}
+```
+
 Then, in summary, the identity type is given by the data `Id`, `refl`, `id_ind`.
 With this, the exact nature of the type `Id(X, x, y)` is fairly under-specified.
 It is consistent that it is always a subsingleton in the sense that `K(X)` holds.
