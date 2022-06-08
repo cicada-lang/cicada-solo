@@ -10,6 +10,10 @@
 
 - try to implement `replace` for `Id`
 
+# bug
+
+- [bug] fix repl on error -- ones an error occurred the repl can not take next input
+
 # inductive datatype -- questions
 
 > Understand our code again.
