@@ -226,6 +226,13 @@ function Equivalence(
   f: (X) -> Y,
 ): Type {
   return forall (y: Y) Singleton(Fiber(f, y))
+
+  // return forall (y: Y)
+  //   Singleton(exists (x: X) Id(Y, f(x), y))
+
+  // let Z = exists (x: X) Id(Y, f(x), y)
+  // return forall (y: Y) exists (c: Z)
+  //   forall (z: Z) Id(Z, c, z)
 }
 ```
 
