@@ -232,22 +232,29 @@ function Equivalence(
 - **Xie:** Is the following the normal definition of homotopy equivalence?
 
 ```cicada
-function Iso(
+function Isomorphism(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
+  g: (Y) -> X,
 ): Type {
-  return exists (g: (Y) -> X) Pair(
+  return Pair(
     forall (x: X) Id(X, g(f(x)), x),
     forall (y: Y) Id(Y, f(g(y)), y),
   )
+}
+
+function Isomorphic(X: Type, Y: Type): Type {
+  return exists (f: (X) -> Y, g: (Y) -> X)
+    Isomorphism(f, g)
 }
 
 function retraction(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
-  iso: Iso(f)
+  g: (Y) -> X,
+  iso: Isomorphism(f, g)
 ): Equivalence(f) {
   return TODO
 }
@@ -256,8 +263,9 @@ function section(
   implicit X: Type,
   implicit Y: Type,
   f: (X) -> Y,
+  g: (Y) -> X,
   eq: Equivalence(f)
-): Iso(f) {
+): Isomorphism(f, g) {
   return TODO
 }
 ```
