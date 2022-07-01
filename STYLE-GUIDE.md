@@ -11,7 +11,11 @@ that might be extracted to their own packages.
 
 # Hierarchy of resources
 
-Think of the system as a hierarchy of resources: `Library` -> `Module` -> `Stmt` -> `Exp`.
+Think of the system as a hierarchy of resources:
+
+```
+Library -> Mod -> Stmt -> Exp
+```
 
 Top-level syntax of module is statement oriented -- `Stmt`.
 
