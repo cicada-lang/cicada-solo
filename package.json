@@ -23,10 +23,6 @@
     "dist:win": "pkg package.json --no-bytecode --public --public-packages '*' --target win --output dist/cic-win.exe && pushd dist && sha256sum cic-win.exe > cic-win.exe.sha256sum && popd",
     "dist": "npm-run-all dist:*"
   },
-  "prettier": {
-    "semi": false,
-    "trailingComma": "es5"
-  },
   "bin": {
     "cic": "bin/cic.js"
   },
