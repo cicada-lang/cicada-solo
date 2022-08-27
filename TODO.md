@@ -1,7 +1,3 @@
-[refactor] rename names in grammar to naming
-
-- we will have typings vs namings
-
 we need a syntax for reasoning about equations
 
 use `new` to create object, which do not require prefulfilled fields -- test by `Group`

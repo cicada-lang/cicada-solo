@@ -69,7 +69,7 @@ export const operand = {
     ],
     "operand:fn": [
       '"("',
-      { names: "names" },
+      { namings: "namings" },
       '")"',
       '"="',
       '">"',
@@ -78,7 +78,7 @@ export const operand = {
     "operand:fn_function": [
       '"function"',
       '"("',
-      { names: "names" },
+      { namings: "namings" },
       '")"',
       { ret: "exp" },
     ],
@@ -267,21 +267,21 @@ export const typing = {
   },
 }
 
-export const names = {
+export const namings = {
   $grammar: {
-    "names:names": [
-      { entries: { $ap: ["zero_or_more", "name_entry", '","'] } },
-      { last_entry: "name_entry" },
+    "namings:namings": [
+      { entries: { $ap: ["zero_or_more", "naming", '","'] } },
+      { last_entry: "naming" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const name_entry = {
+export const naming = {
   $grammar: {
-    "name_entry:name_entry": [{ name: "identifier" }],
-    "name_entry:implicit_name_entry": ['"implicit"', { name: "identifier" }],
-    "name_entry:vague_name_entry": ['"vague"', { name: "identifier" }],
+    "naming:naming": [{ name: "identifier" }],
+    "naming:implicit_naming": ['"implicit"', { name: "identifier" }],
+    "naming:vague_naming": ['"vague"', { name: "identifier" }],
   },
 }
 
@@ -333,7 +333,7 @@ export const property = {
     "property:method": [
       { name: "identifier" },
       '"("',
-      { names: "names" },
+      { namings: "namings" },
       '")"',
       { sequence: "sequence" },
     ],
