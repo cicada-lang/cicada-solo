@@ -1,3 +1,6 @@
+rename Typing to PiBinding
+rename Naming to FnBinding
+
 we need a syntax for reasoning about equations
 
 use `new` to create object, which do not require prefulfilled fields -- test by `Group`
