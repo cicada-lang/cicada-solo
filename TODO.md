@@ -1,5 +1,3 @@
-[refactor] rename infra to framework
-
 [refactor] rename bindings to typings
 
 - we will have typings vs namings

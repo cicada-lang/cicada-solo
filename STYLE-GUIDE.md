@@ -4,9 +4,9 @@ title: Style Guide
 
 **In general, observe the style of existing code and respect it.**
 
-# About `infra/`
+# About `framework/`
 
-Modules in `infra/` directory are independent helper modules
+Modules in `framework/` directory are independent helper modules
 that might be extracted to their own packages.
 
 # Hierarchy of resources

@@ -1,7 +1,7 @@
 import { Command, CommandRunner } from "@xieyuheng/command-line"
 import Path from "path"
 import app from "../../app/node-app"
-import { ReadlineRepl } from "../../infra/repls/readline-repl"
+import { ReadlineRepl } from "../../framework/repls/readline-repl"
 
 type Args = {}
 

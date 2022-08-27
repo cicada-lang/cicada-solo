@@ -4,8 +4,8 @@ import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
 import { Normal } from "../../normal"
 import { Value } from "../../value"
-import { GlobalApHandler } from "../global/global-ap-handler"
 import { Closure } from "../closure"
+import { GlobalApHandler } from "../global/global-ap-handler"
 
 export class ReplaceValue extends Exps.GlobalValue {
   name = "replace"

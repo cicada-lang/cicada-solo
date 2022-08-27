@@ -1,7 +1,7 @@
 import os from "os"
 import Path from "path"
 import process from "process"
-import { LocalFileStore } from "../infra/file-stores/local-file-store"
+import { LocalFileStore } from "../framework/file-stores/local-file-store"
 
 export class AppHomeFileStore extends LocalFileStore {
   constructor() {
