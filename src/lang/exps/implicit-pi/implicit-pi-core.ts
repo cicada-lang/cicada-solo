@@ -31,7 +31,7 @@ export class ImplicitPiCore extends Core {
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `implicit ${binding}`,
+    decorate_typing: (typing) => `implicit ${typing}`,
   })
 
   format(): string {

@@ -1,4 +1,4 @@
-[refactor] rename bindings to typings
+[refactor] rename names in grammar to naming
 
 - we will have typings vs namings
 

@@ -71,7 +71,7 @@ export class VaguePi extends Exp {
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `vague ${binding}`,
+    decorate_typing: (typing) => `vague ${typing}`,
   })
 
   format(): string {

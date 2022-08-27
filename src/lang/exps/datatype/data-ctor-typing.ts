@@ -2,13 +2,13 @@ import * as Exps from ".."
 import { Core } from "../../core"
 import { Exp } from "../../exp"
 
-export type DataCtorBinding = {
+export type DataCtorTyping = {
   kind: Exps.ArgKind
   name: string
   exp: Exp
 }
 
-export type DataCtorCoreBinding = {
+export type DataCtorCoreTyping = {
   kind: Exps.ArgKind
   name: string
   core: Core

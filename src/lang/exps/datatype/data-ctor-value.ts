@@ -11,19 +11,19 @@ export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
   t: Core
-  original_bindings: Array<Exps.DataCtorBinding>
+  original_typings: Array<Exps.DataCtorTyping>
 
   constructor(
     type_ctor: Exps.TypeCtorValue,
     name: string,
     t: Core,
-    original_bindings: Array<Exps.DataCtorBinding>
+    original_typings: Array<Exps.DataCtorTyping>
   ) {
     super()
     this.type_ctor = type_ctor
     this.name = name
     this.t = t
-    this.original_bindings = original_bindings
+    this.original_typings = original_typings
   }
 
   ap_handler = new DataCtorApHandler(this)
@@ -57,13 +57,13 @@ export class DataCtorValue extends Value {
 
     let env = result.env
     const arg_t_value_entries: Array<{ kind: Exps.ArgKind; arg_t: Value }> = []
-    for (const [index, binding] of this.bindings.entries()) {
+    for (const [index, typing] of this.typings.entries()) {
       if (length && index >= length - this.type_ctor.fixed_arity) break
-      const arg_t = evaluate(env, binding.core)
+      const arg_t = evaluate(env, typing.core)
       const arg =
         args instanceof Array ? args[index] : args(index, { arg_t, env })
-      env = env.extend(binding.name, arg)
-      arg_t_value_entries.push({ kind: binding.kind, arg_t })
+      env = env.extend(typing.name, arg)
+      arg_t_value_entries.push({ kind: typing.kind, arg_t })
     }
 
     return {
@@ -73,34 +73,34 @@ export class DataCtorValue extends Value {
     }
   }
 
-  get bindings(): Array<Exps.DataCtorCoreBinding> {
-    return this.split_type().bindings
+  get typings(): Array<Exps.DataCtorCoreTyping> {
+    return this.split_type().typings
   }
 
   get ret_t(): Core {
     return this.split_type().ret_t
   }
 
-  split_type(): { bindings: Array<Exps.DataCtorCoreBinding>; ret_t: Core } {
-    const bindings: Array<Exps.DataCtorCoreBinding> = []
+  split_type(): { typings: Array<Exps.DataCtorCoreTyping>; ret_t: Core } {
+    const typings: Array<Exps.DataCtorCoreTyping> = []
     let t = this.t
     while (true) {
       if (t instanceof Exps.PiCore) {
-        bindings.push({
+        typings.push({
           kind: "plain",
           name: t.name,
           core: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.ImplicitPiCore) {
-        bindings.push({
+        typings.push({
           kind: "implicit",
           name: t.name,
           core: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.VaguePiCore) {
-        bindings.push({
+        typings.push({
           kind: "vague",
           name: t.name,
           core: t.arg_t,
@@ -111,7 +111,7 @@ export class DataCtorValue extends Value {
       }
     }
 
-    return { bindings, ret_t: t }
+    return { typings, ret_t: t }
   }
 
   private build_data_pattern(fixed_arg_names: Array<string>): Core {
@@ -127,8 +127,8 @@ export class DataCtorValue extends Value {
       )
     }
 
-    for (const binding of this.bindings) {
-      data_core = this.build_ap_from_binding(data_core, binding)
+    for (const typing of this.typings) {
+      data_core = this.build_ap_from_typing(data_core, typing)
     }
 
     return data_core
@@ -154,16 +154,16 @@ export class DataCtorValue extends Value {
   }
 
   get is_direct_positive_recursive(): boolean {
-    return this.direct_positive_recursive_bindings.length > 0
+    return this.direct_positive_recursive_typings.length > 0
   }
 
   is_direct_positive_recursive_position(index: number): boolean {
-    const binding = this.bindings[index]
-    return this.is_direct_positive_recursive_arg_t(binding.core)
+    const typing = this.typings[index]
+    return this.is_direct_positive_recursive_arg_t(typing.core)
   }
 
   direct_positive_recursive_position_name(index: number): string {
-    const binding = this.bindings[index]
+    const typing = this.typings[index]
     if (!this.is_direct_positive_recursive_position(index)) {
       throw new Error(
         [
@@ -173,33 +173,33 @@ export class DataCtorValue extends Value {
       )
     }
 
-    return binding.name
+    return typing.name
   }
 
-  private get direct_positive_recursive_bindings(): Array<
-    Exps.DataCtorCoreBinding & { original_name: string }
+  private get direct_positive_recursive_typings(): Array<
+    Exps.DataCtorCoreTyping & { original_name: string }
   > {
-    const enriched_bindings: Array<
-      Exps.DataCtorCoreBinding & { original_name: string }
+    const enriched_typings: Array<
+      Exps.DataCtorCoreTyping & { original_name: string }
     > = []
 
-    for (const [index, binding] of this.bindings.entries()) {
-      if (this.is_direct_positive_recursive_arg_t(binding.core)) {
-        const original_binding = this.original_bindings[index]
-        if (original_binding === undefined) {
+    for (const [index, typing] of this.typings.entries()) {
+      if (this.is_direct_positive_recursive_arg_t(typing.core)) {
+        const original_typing = this.original_typings[index]
+        if (original_typing === undefined) {
           throw new ElaborationError(
-            `I can not find original binding from binding of name: ${binding.name}`
+            `I can not find original typing from typing of name: ${typing.name}`
           )
         }
 
-        enriched_bindings.push({
-          ...binding,
-          original_name: original_binding.name,
+        enriched_typings.push({
+          ...typing,
+          original_name: original_typing.name,
         })
       }
     }
 
-    return enriched_bindings
+    return enriched_typings
   }
 
   private is_direct_positive_recursive_arg_t(arg_t: Core): boolean {
@@ -222,14 +222,14 @@ export class DataCtorValue extends Value {
   //   will be exposed as part of the public interface of the `datatype`.
   build_almost_t(motive: Core): Exps.ClsCore {
     let almost_t: Exps.ClsCore = new Exps.NilClsCore()
-    for (const binding of [
-      ...this.direct_positive_recursive_bindings,
+    for (const typing of [
+      ...this.direct_positive_recursive_typings,
     ].reverse()) {
-      const target = new Exps.VarCore(binding.name)
-      const case_ret_t = this.build_case_ret_t(motive, binding.core, target)
+      const target = new Exps.VarCore(typing.name)
+      const case_ret_t = this.build_case_ret_t(motive, typing.core, target)
       almost_t = new Exps.ConsClsCore(
-        binding.original_name,
-        binding.name,
+        typing.original_name,
+        typing.name,
         case_ret_t,
         almost_t
       )
@@ -238,22 +238,22 @@ export class DataCtorValue extends Value {
     return almost_t
   }
 
-  private build_ap_from_binding(
+  private build_ap_from_typing(
     core: Core,
-    binding: Exps.DataCtorCoreBinding
+    typing: Exps.DataCtorCoreTyping
   ): Core {
-    switch (binding.kind) {
+    switch (typing.kind) {
       case "plain":
-        return new Exps.ApCore(core, new Exps.VarCore(binding.name))
+        return new Exps.ApCore(core, new Exps.VarCore(typing.name))
       case "implicit":
-        return new Exps.ImplicitApCore(core, new Exps.VarCore(binding.name))
+        return new Exps.ImplicitApCore(core, new Exps.VarCore(typing.name))
       case "vague":
-        return new Exps.VagueApCore(core, new Exps.VarCore(binding.name))
+        return new Exps.VagueApCore(core, new Exps.VarCore(typing.name))
     }
   }
 
   get arity(): number {
-    return this.type_ctor.fixed_arity + this.bindings.length
+    return this.type_ctor.fixed_arity + this.typings.length
   }
 
   readback_t(ctx: Ctx): Core {

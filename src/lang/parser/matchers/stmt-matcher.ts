@@ -4,13 +4,13 @@ import * as Exps from "../../exps"
 import { Stmt } from "../../stmt"
 import * as Stmts from "../../stmts"
 import {
-  bindings_matcher,
   cls_entry_matcher,
   exp_matcher,
   operator_matcher,
   pi_handler,
   sequence_matcher,
-  simple_bindings_matcher,
+  simple_typings_matcher,
+  typings_matcher,
 } from "../matchers"
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
@@ -39,25 +39,25 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
-    "stmt:let_fn": ({ name, bindings, ret_t, sequence }, { span }) => {
+    "stmt:let_fn": ({ name, typings, ret_t, sequence }, { span }) => {
       const init: Exp = sequence_matcher(sequence)
-      const fn = bindings_matcher(bindings)
+      const fn = typings_matcher(typings)
         .reverse()
-        .reduce((result, binding) => {
-          switch (binding.kind) {
+        .reduce((result, typing) => {
+          switch (typing.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.Fn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "implicit": {
-              return new Exps.ImplicitFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.ImplicitFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "vague": {
-              return new Exps.VagueFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.VagueFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
           }
@@ -65,8 +65,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
       return new Stmts.Let(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
-          span: pt.span_closure([bindings.span, ret_t.span, sequence.span]),
+        new Exps.The(pi_handler({ typings, ret_t }, { span }), fn, {
+          span: pt.span_closure([typings.span, ret_t.span, sequence.span]),
         }),
         { span }
       )
@@ -142,7 +142,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_bindings_matcher(fixed).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp])
         ),
         {},
         Object.fromEntries(
@@ -161,10 +161,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_bindings_matcher(fixed).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp])
         ),
         Object.fromEntries(
-          simple_bindings_matcher(varied).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp])
         ),
         Object.fromEntries(
           pt.matchers
@@ -180,7 +180,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         {},
         Object.fromEntries(
-          simple_bindings_matcher(varied).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp])
         ),
         Object.fromEntries(
           pt.matchers
@@ -215,9 +215,9 @@ export function ctor_matcher(tree: pt.Tree): {
       t: exp_matcher(t),
       span,
     }),
-    "ctor:method": ({ name, bindings, ret_t }, { span }) => ({
+    "ctor:method": ({ name, typings, ret_t }, { span }) => ({
       name: pt.str(name),
-      t: pi_handler({ bindings, ret_t }, { span }),
+      t: pi_handler({ typings, ret_t }, { span }),
       span,
     }),
   })(tree)

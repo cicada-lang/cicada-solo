@@ -54,7 +54,7 @@ export const operand = {
   $grammar: {
     "operand:pi": [
       '"("',
-      { bindings: "bindings" },
+      { typings: "typings" },
       '")"',
       '"-"',
       '">"',
@@ -63,7 +63,7 @@ export const operand = {
     "operand:pi_forall": [
       '"forall"',
       '"("',
-      { bindings: "bindings" },
+      { typings: "typings" },
       '")"',
       { ret_t: "exp" },
     ],
@@ -85,7 +85,7 @@ export const operand = {
     "operand:sigma_exists": [
       '"exists"',
       '"("',
-      { bindings: "simple_bindings" },
+      { typings: "simple_typings" },
       '")"',
       { cdr_t: "exp" },
     ],
@@ -179,7 +179,7 @@ export const sequence_entry = {
       '"function"',
       { name: "identifier" },
       '"("',
-      { bindings: "bindings" },
+      { typings: "typings" },
       '")"',
       '":"',
       { ret_t: "exp" },
@@ -208,7 +208,7 @@ export const cls_entry = {
     "cls_entry:method_demanded": [
       { name: "identifier" },
       '"("',
-      { bindings: "bindings" },
+      { typings: "typings" },
       '")"',
       '":"',
       { ret_t: "exp" },
@@ -217,7 +217,7 @@ export const cls_entry = {
     "cls_entry:method_fulfilled": [
       { name: "identifier" },
       '"("',
-      { bindings: "bindings" },
+      { typings: "typings" },
       '")"',
       '":"',
       { ret_t: "exp" },
@@ -227,43 +227,43 @@ export const cls_entry = {
   },
 }
 
-export const simple_bindings = {
+export const simple_typings = {
   $grammar: {
-    "simple_bindings:simple_bindings": [
-      { entries: { $ap: ["zero_or_more", "simple_binding", '","'] } },
-      { last_entry: "simple_binding" },
+    "simple_typings:simple_typings": [
+      { entries: { $ap: ["zero_or_more", "simple_typing", '","'] } },
+      { last_entry: "simple_typing" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const simple_binding = {
+export const simple_typing = {
   $grammar: {
-    "simple_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "simple_typing:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 
-export const bindings = {
+export const typings = {
   $grammar: {
-    "bindings:bindings": [
-      { entries: { $ap: ["zero_or_more", "binding", '","'] } },
-      { last_entry: "binding" },
+    "typings:typings": [
+      { entries: { $ap: ["zero_or_more", "typing", '","'] } },
+      { last_entry: "typing" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const binding = {
+export const typing = {
   $grammar: {
-    "binding:nameless": [{ exp: "exp" }],
-    "binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    "binding:implicit": [
+    "typing:nameless": [{ exp: "exp" }],
+    "typing:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "typing:implicit": [
       '"implicit"',
       { name: "identifier" },
       '":"',
       { exp: "exp" },
     ],
-    "binding:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
+    "typing:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

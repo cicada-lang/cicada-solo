@@ -112,8 +112,8 @@ export class DatatypeValue extends Value {
       )
     }
 
-    for (const binding of [...data_ctor.bindings].reverse()) {
-      case_t = this.build_pi_from_binding(case_t, binding)
+    for (const typing of [...data_ctor.typings].reverse()) {
+      case_t = this.build_pi_from_typing(case_t, typing)
     }
 
     // NOTE We do not add `data_ctor.type_ctor.fixed` to `case_t` as vague-pi,
@@ -123,17 +123,17 @@ export class DatatypeValue extends Value {
     return evaluate(env, case_t)
   }
 
-  private build_pi_from_binding(
+  private build_pi_from_typing(
     core: Core,
-    binding: Exps.DataCtorCoreBinding
+    typing: Exps.DataCtorCoreTyping
   ): Core {
-    switch (binding.kind) {
+    switch (typing.kind) {
       case "plain":
-        return new Exps.PiCore(binding.name, binding.core, core)
+        return new Exps.PiCore(typing.name, typing.core, core)
       case "implicit":
-        return new Exps.ImplicitPiCore(binding.name, binding.core, core)
+        return new Exps.ImplicitPiCore(typing.name, typing.core, core)
       case "vague":
-        return new Exps.VaguePiCore(binding.name, binding.core, core)
+        return new Exps.VaguePiCore(typing.name, typing.core, core)
     }
   }
 }

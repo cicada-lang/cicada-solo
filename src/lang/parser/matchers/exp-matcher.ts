@@ -6,25 +6,25 @@ export function pi_handler(
   body: { [key: string]: pt.Tree },
   meta: { span: pt.Span }
 ): Exp {
-  const { bindings, ret_t } = body
+  const { typings, ret_t } = body
 
-  return bindings_matcher(bindings)
+  return typings_matcher(typings)
     .reverse()
-    .reduce((result, binding) => {
-      switch (binding.kind) {
+    .reduce((result, typing) => {
+      switch (typing.kind) {
         case "named": {
-          return new Exps.Pi(binding.name, binding.exp, result, {
-            span: pt.span_closure([binding.span, ret_t.span]),
+          return new Exps.Pi(typing.name, typing.exp, result, {
+            span: pt.span_closure([typing.span, ret_t.span]),
           })
         }
         case "implicit": {
-          return new Exps.ImplicitPi(binding.name, binding.exp, result, {
-            span: pt.span_closure([binding.span, ret_t.span]),
+          return new Exps.ImplicitPi(typing.name, typing.exp, result, {
+            span: pt.span_closure([typing.span, ret_t.span]),
           })
         }
         case "vague": {
-          return new Exps.VaguePi(binding.name, binding.exp, result, {
-            span: pt.span_closure([binding.span, ret_t.span]),
+          return new Exps.VaguePi(typing.name, typing.exp, result, {
+            span: pt.span_closure([typing.span, ret_t.span]),
           })
         }
       }
@@ -61,13 +61,12 @@ export function sigma_handler(
   body: { [key: string]: pt.Tree },
   meta: { span: pt.Span }
 ): Exp {
-  const { bindings, cdr_t } = body
+  const { typings, cdr_t } = body
 
-  return simple_bindings_matcher(bindings)
+  return simple_typings_matcher(typings)
     .reverse()
     .reduce(
-      (result, binding) =>
-        new Exps.Sigma(binding.name, binding.exp, result, meta),
+      (result, typing) => new Exps.Sigma(typing.name, typing.exp, result, meta),
       exp_matcher(cdr_t)
     )
 }
@@ -249,27 +248,27 @@ export function sequence_entry_matcher(tree: pt.Tree): {
       span,
     }),
     "sequence_entry:let_fn": (
-      { name, bindings, ret_t, sequence, body },
+      { name, typings, ret_t, sequence, body },
       { span }
     ) => {
       const init: Exp = sequence_matcher(sequence)
-      const fn = bindings_matcher(bindings)
+      const fn = typings_matcher(typings)
         .reverse()
-        .reduce((result, binding) => {
-          switch (binding.kind) {
+        .reduce((result, typing) => {
+          switch (typing.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.Fn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "implicit": {
-              return new Exps.ImplicitFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.ImplicitFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "vague": {
-              return new Exps.VagueFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.VagueFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
           }
@@ -277,8 +276,8 @@ export function sequence_entry_matcher(tree: pt.Tree): {
 
       return {
         name: pt.str(name),
-        exp: new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
-          span: pt.span_closure([bindings.span, ret_t.span, sequence.span]),
+        exp: new Exps.The(pi_handler({ typings, ret_t }, { span }), fn, {
+          span: pt.span_closure([typings.span, ret_t.span, sequence.span]),
         }),
         span,
       }
@@ -313,33 +312,33 @@ export function cls_entry_matcher(tree: pt.Tree): {
       field: exp_matcher(exp),
       span,
     }),
-    "cls_entry:method_demanded": ({ name, bindings, ret_t }, { span }) => ({
+    "cls_entry:method_demanded": ({ name, typings, ret_t }, { span }) => ({
       field_name: pt.str(name),
-      field_t: pi_handler({ bindings, ret_t }, { span }),
+      field_t: pi_handler({ typings, ret_t }, { span }),
       span,
     }),
     "cls_entry:method_fulfilled": (
-      { name, bindings, ret_t, sequence },
+      { name, typings, ret_t, sequence },
       { span }
     ) => {
       const init: Exp = sequence_matcher(sequence)
-      const fn = bindings_matcher(bindings)
+      const fn = typings_matcher(typings)
         .reverse()
-        .reduce((result, binding) => {
-          switch (binding.kind) {
+        .reduce((result, typing) => {
+          switch (typing.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.Fn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "implicit": {
-              return new Exps.ImplicitFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.ImplicitFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
             case "vague": {
-              return new Exps.VagueFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
+              return new Exps.VagueFn(typing.name, result, {
+                span: pt.span_closure([typing.span, sequence.span]),
               })
             }
           }
@@ -347,7 +346,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 
       return {
         field_name: pt.str(name),
-        field_t: pi_handler({ bindings, ret_t }, { span }),
+        field_t: pi_handler({ typings, ret_t }, { span }),
         field: fn,
         span,
       }
@@ -355,43 +354,43 @@ export function cls_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-type Binding = {
+type Typing = {
   kind: "named" | "implicit" | "vague"
   name: string
   exp: Exp
   span: pt.Span
 }
 
-export function bindings_matcher(tree: pt.Tree): Array<Binding> {
+export function typings_matcher(tree: pt.Tree): Array<Typing> {
   return pt.matcher({
-    "bindings:bindings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(binding_matcher),
-      binding_matcher(last_entry),
+    "typings:typings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(typing_matcher),
+      typing_matcher(last_entry),
     ],
   })(tree)
 }
 
-export function binding_matcher(tree: pt.Tree): Binding {
-  return pt.matcher<Binding>({
-    "binding:nameless": ({ exp }, { span }) => ({
+export function typing_matcher(tree: pt.Tree): Typing {
+  return pt.matcher<Typing>({
+    "typing:nameless": ({ exp }, { span }) => ({
       kind: "named",
       name: "_",
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:named": ({ name, exp }, { span }) => ({
+    "typing:named": ({ name, exp }, { span }) => ({
       kind: "named",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:implicit": ({ name, exp }, { span }) => ({
+    "typing:implicit": ({ name, exp }, { span }) => ({
       kind: "implicit",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:vague": ({ name, exp }, { span }) => ({
+    "typing:vague": ({ name, exp }, { span }) => ({
       kind: "vague",
       name: pt.str(name),
       exp: exp_matcher(exp),
@@ -400,20 +399,20 @@ export function binding_matcher(tree: pt.Tree): Binding {
   })(tree)
 }
 
-export type SimpleBinding = { name: string; exp: Exp; span: pt.Span }
+export type SimpleTyping = { name: string; exp: Exp; span: pt.Span }
 
-export function simple_bindings_matcher(tree: pt.Tree): Array<SimpleBinding> {
+export function simple_typings_matcher(tree: pt.Tree): Array<SimpleTyping> {
   return pt.matcher({
-    "simple_bindings:simple_bindings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(simple_binding_matcher),
-      simple_binding_matcher(last_entry),
+    "simple_typings:simple_typings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(simple_typing_matcher),
+      simple_typing_matcher(last_entry),
     ],
   })(tree)
 }
 
-export function simple_binding_matcher(tree: pt.Tree): SimpleBinding {
-  return pt.matcher<SimpleBinding>({
-    "simple_binding:named": ({ name, exp }, { span }) => ({
+export function simple_typing_matcher(tree: pt.Tree): SimpleTyping {
+  return pt.matcher<SimpleTyping>({
+    "simple_typing:named": ({ name, exp }, { span }) => ({
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,

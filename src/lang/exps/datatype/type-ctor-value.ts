@@ -21,7 +21,7 @@ export class TypeCtorValue extends Value {
     varied: Record<string, Core>,
     data_ctors: Record<
       string,
-      { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+      { t: Core; original_typings: Array<Exps.DataCtorTyping> }
     >,
     env: Env
   ) {
@@ -34,12 +34,12 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
 
     this.data_ctors = {}
-    for (const [name, { t, original_bindings }] of Object.entries(data_ctors)) {
+    for (const [name, { t, original_typings }] of Object.entries(data_ctors)) {
       this.data_ctors[name] = new Exps.DataCtorValue(
         this,
         name,
         t,
-        original_bindings
+        original_typings
       )
     }
   }
@@ -214,16 +214,13 @@ export class TypeCtorValue extends Value {
 
   private readback_data_ctors(
     ctx: Ctx
-  ): Record<
-    string,
-    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
-  > {
+  ): Record<string, { t: Core; original_typings: Array<Exps.DataCtorTyping> }> {
     return Object.fromEntries(
       Object.entries(this.data_ctors).map(([name, data_ctor]) => [
         name,
         {
           t: data_ctor.readback_t(ctx),
-          original_bindings: data_ctor.original_bindings,
+          original_typings: data_ctor.original_typings,
         },
       ])
     )

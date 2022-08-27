@@ -133,46 +133,43 @@ export class TypeCtor extends Exp {
 
   private infer_data_ctors(
     ctx: Ctx
-  ): Record<
-    string,
-    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
-  > {
+  ): Record<string, { t: Core; original_typings: Array<Exps.DataCtorTyping> }> {
     return Object.fromEntries(
       Object.entries(this.data_ctors).map(([name, t]) => [
         name,
         {
           t: check(ctx, t, new Exps.TypeValue()),
-          original_bindings: this.data_ctor_bindings(name),
+          original_typings: this.data_ctor_typings(name),
         },
       ])
     )
   }
 
-  private data_ctor_bindings(name: string): Array<Exps.DataCtorBinding> {
+  private data_ctor_typings(name: string): Array<Exps.DataCtorTyping> {
     const data_ctor = this.data_ctors[name]
     if (data_ctor === undefined) {
       throw new ElaborationError(`I find undefined data constructor: ${name}`)
     }
 
-    const bindings: Array<Exps.DataCtorBinding> = []
+    const typings: Array<Exps.DataCtorTyping> = []
     let t = data_ctor
     while (true) {
       if (t instanceof Exps.Pi) {
-        bindings.push({
+        typings.push({
           kind: "plain",
           name: t.name,
           exp: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.ImplicitPi) {
-        bindings.push({
+        typings.push({
           kind: "implicit",
           name: t.name,
           exp: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.VaguePi) {
-        bindings.push({
+        typings.push({
           kind: "vague",
           name: t.name,
           exp: t.arg_t,
@@ -183,7 +180,7 @@ export class TypeCtor extends Exp {
       }
     }
 
-    return bindings
+    return typings
   }
 
   format(): string {

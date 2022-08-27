@@ -17,18 +17,18 @@ export class SigmaFormater {
   }
 
   format(): string {
-    const bindings = this.format_bindings().join(", ")
+    const typings = this.format_typings().join(", ")
     const cdr_t = this.format_cdr_t()
-    return `exists (${bindings}) ${cdr_t}`
+    return `exists (${typings}) ${cdr_t}`
   }
 
-  private format_bindings(): Array<string> {
-    const binding = `${this.sigma.name}: ${this.sigma.car_t.format()}`
+  private format_typings(): Array<string> {
+    const typing = `${this.sigma.name}: ${this.sigma.car_t.format()}`
 
     if (this.sigma.cdr_t.sigma_formater) {
-      return [binding, ...this.sigma.cdr_t.sigma_formater.format_bindings()]
+      return [typing, ...this.sigma.cdr_t.sigma_formater.format_typings()]
     } else {
-      return [binding]
+      return [typing]
     }
   }
 

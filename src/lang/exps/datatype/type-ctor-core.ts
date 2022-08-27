@@ -10,7 +10,7 @@ export class TypeCtorCore extends Core {
   varied: Record<string, Core>
   data_ctors: Record<
     string,
-    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+    { t: Core; original_typings: Array<Exps.DataCtorTyping> }
   >
 
   constructor(
@@ -19,7 +19,7 @@ export class TypeCtorCore extends Core {
     varied: Record<string, Core>,
     data_ctors: Record<
       string,
-      { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+      { t: Core; original_typings: Array<Exps.DataCtorTyping> }
     >
   ) {
     super()

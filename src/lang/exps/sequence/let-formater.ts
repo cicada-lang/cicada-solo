@@ -17,18 +17,18 @@ export class LetFormater {
   }
 
   format(): string {
-    const bindings = this.format_bindings().join("; ")
+    const typings = this.format_typings().join("; ")
     const ret = this.format_ret()
-    return `${bindings}; ${ret}`
+    return `${typings}; ${ret}`
   }
 
-  format_bindings(): Array<string> {
-    const binding = `${this.target.name} = ${this.target.exp.format()}`
+  format_typings(): Array<string> {
+    const typing = `${this.target.name} = ${this.target.exp.format()}`
 
     if (this.target.ret.let_formater) {
-      return [binding, ...this.target.ret.let_formater.format_bindings()]
+      return [typing, ...this.target.ret.let_formater.format_typings()]
     } else {
-      return [binding]
+      return [typing]
     }
   }
 

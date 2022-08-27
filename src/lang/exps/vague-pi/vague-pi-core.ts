@@ -32,7 +32,7 @@ export class VaguePiCore extends Core {
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `vague ${binding}`,
+    decorate_typing: (typing) => `vague ${typing}`,
   })
 
   format(): string {

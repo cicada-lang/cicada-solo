@@ -29,7 +29,7 @@ export class TypeCtorDotHandler extends DotHandler {
       this.target,
       name,
       data_ctor.t,
-      data_ctor.original_bindings
+      data_ctor.original_typings
     )
   }
 
