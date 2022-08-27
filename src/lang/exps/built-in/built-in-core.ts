@@ -21,7 +21,7 @@ export class BuiltInCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const value = Exps.built_ins.find_value(this.name)
+    const value = Exps.built_ins.findValue(this.name)
     if (value === undefined) {
       throw new ElaborationError(`I meet undefined built-in name: ${this.name}`)
     }

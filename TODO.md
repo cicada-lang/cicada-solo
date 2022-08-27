@@ -1,3 +1,11 @@
+- [refactor] built_ins to globals
+
+- fix todo list style
+
+- [refactor] rename bindings to typings
+
+  - we will have typings vs namings
+
 - we need a syntax for reasoning about equations
 
 - use `new` to create object, which do not require prefulfilled fields -- test by `Group`

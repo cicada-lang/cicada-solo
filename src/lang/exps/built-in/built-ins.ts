@@ -9,12 +9,12 @@ class BuiltIns {
     this.values = values
   }
 
-  find_value(name: string): Exps.BuiltInValue | undefined {
+  findValue(name: string): Exps.BuiltInValue | undefined {
     return this.values.get(name)
   }
 
   register(value: Exps.BuiltInValue): this {
-    const found = this.find_value(value.name)
+    const found = this.findValue(value.name)
     if (found !== undefined) {
       throw new Error(
         `I can not re-register built-in value of name: ${value.name}`

@@ -47,7 +47,7 @@ export class Var extends Exp {
       return check_by_infer(ctx, this, t)
     }
 
-    const built_in_value = Exps.built_ins.find_value(this.name)
+    const built_in_value = Exps.built_ins.findValue(this.name)
     if (built_in_value !== undefined) {
       built_in_value.before_check(ctx, [], t)
 
@@ -76,7 +76,7 @@ export class Var extends Exp {
       }
     }
 
-    const built_in_value = Exps.built_ins.find_value(this.name)
+    const built_in_value = Exps.built_ins.findValue(this.name)
     if (built_in_value !== undefined) {
       return {
         t: built_in_value.self_type(),
