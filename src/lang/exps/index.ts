@@ -4,10 +4,10 @@ export * from "./var/var"
 export * from "./var/var-core"
 export * from "./var/var-neutral"
 
-export * from "./built-in/built-in-core"
-export * from "./built-in/built-in-value"
+export * from "./global/global-core"
+export * from "./global/global-value"
 
-// NOTE Even with built-in `the`, well still need the following
+// NOTE Even with global `the`, well still need the following
 // - `Exps.The` -- used by matchers to handle `let_the`
 // - `Exps.TheCore` -- used by `Value.readback` to handle special case on `AbsurdValue`
 // TODO Maybe we should improve this by
@@ -129,6 +129,6 @@ export * from "./cls/dot-neutral"
 export * from "./trivial/trivial-value"
 export * from "./trivial/sole-value"
 
-// NOTE `built-ins` imports concrete built-in-values,
+// NOTE `globals` imports concrete global-values,
 //   thus must follow them.
-export * from "./built-in/built-ins"
+export * from "./global/globals"

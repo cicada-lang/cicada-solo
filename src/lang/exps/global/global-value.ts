@@ -4,7 +4,7 @@ import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
-import { GlobalApHandler } from "./built-in-ap-handler"
+import { GlobalApHandler } from "./global-ap-handler"
 
 export abstract class GlobalValue extends Value {
   arg_value_entries: Array<Exps.ArgValueEntry>

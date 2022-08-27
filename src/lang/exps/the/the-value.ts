@@ -2,7 +2,7 @@ import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
-import { GlobalApHandler } from "../built-in/built-in-ap-handler"
+import { GlobalApHandler } from "../global/global-ap-handler"
 
 export class TheValue extends Exps.GlobalValue {
   name = "the"

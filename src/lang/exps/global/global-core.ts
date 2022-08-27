@@ -23,7 +23,7 @@ export class GlobalCore extends Core {
   evaluate(env: Env): Value {
     const value = Exps.globals.findValue(this.name)
     if (value === undefined) {
-      throw new ElaborationError(`I meet undefined built-in name: ${this.name}`)
+      throw new ElaborationError(`I meet undefined global name: ${this.name}`)
     }
 
     return value
@@ -34,6 +34,6 @@ export class GlobalCore extends Core {
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    return `#built-in ${this.name}`
+    return `#global ${this.name}`
   }
 }

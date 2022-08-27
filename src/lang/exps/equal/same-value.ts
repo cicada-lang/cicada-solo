@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { check_conversion, expect, Value } from "../../value"
-import { GlobalApHandler } from "../built-in/built-in-ap-handler"
+import { GlobalApHandler } from "../global/global-ap-handler"
 
 export class SameValue extends Exps.GlobalValue {
   name = "same"

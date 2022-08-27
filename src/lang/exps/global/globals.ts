@@ -1,6 +1,6 @@
 import * as Exps from "../../exps"
 
-// NOTE A built-in name can be redefined at top level, or in local scope.
+// NOTE A global name can be redefined at top level, or in local scope.
 
 class Globals {
   values: Map<string, Exps.GlobalValue>
@@ -17,7 +17,7 @@ class Globals {
     const found = this.findValue(value.name)
     if (found !== undefined) {
       throw new Error(
-        `I can not re-register built-in value of name: ${value.name}`
+        `I can not re-register global value of name: ${value.name}`
       )
     }
 
