@@ -18,7 +18,7 @@ export class FromFalsehoodAnythingNeutral extends Neutral {
   readback_neutral(ctx: Ctx): Core {
     return new Exps.ApCore(
       new Exps.ApCore(
-        new Exps.BuiltInCore("from_falsehood_anything"),
+        new Exps.GlobalCore("from_falsehood_anything"),
         this.target.readback_neutral(ctx)
       ),
       this.motive.readback_normal(ctx)

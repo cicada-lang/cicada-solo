@@ -69,7 +69,7 @@ export class DatatypeValue extends Value {
       //   that does not occur in the return type.
       "_target",
       datatype_core,
-      new Exps.BuiltInCore("Type")
+      new Exps.GlobalCore("Type")
     )
 
     const varied_entries = Object.entries(this.type_ctor.varied).reverse()

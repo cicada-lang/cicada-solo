@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { check_conversion, expect, Value } from "../../value"
 
-export class ReflValue extends Exps.BuiltInValue {
+export class ReflValue extends Exps.GlobalValue {
   name = "refl"
   arity = 2
 
@@ -12,7 +12,7 @@ export class ReflValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new ReflValue(...[...this.arg_value_entries, arg_value_entry])
   }
 
@@ -33,14 +33,14 @@ export class ReflValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.VaguePiCore(
         "T",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.VaguePiCore(
           "x",
           new Exps.VarCore("T"),
           new Exps.ApCore(
             new Exps.ApCore(
               new Exps.ApCore(
-                new Exps.BuiltInCore("Equal"),
+                new Exps.GlobalCore("Equal"),
                 new Exps.VarCore("T")
               ),
               new Exps.VarCore("x")

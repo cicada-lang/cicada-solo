@@ -32,7 +32,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
       return cdr_t.free_names(new Set()).has(fresh_name)
         ? new Exps.SigmaCore(fresh_name, car_t, cdr_t)
         : new Exps.ApCore(
-            new Exps.ApCore(new Exps.BuiltInCore("Pair"), car_t),
+            new Exps.ApCore(new Exps.GlobalCore("Pair"), car_t),
             cdr_t
           )
     }

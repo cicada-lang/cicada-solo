@@ -2,9 +2,9 @@ import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
-import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
+import { GlobalApHandler } from "../built-in/built-in-ap-handler"
 
-export class PairValue extends Exps.BuiltInValue {
+export class PairValue extends Exps.GlobalValue {
   name = "Pair"
   arity = 2
 
@@ -12,7 +12,7 @@ export class PairValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
+  ap_handler: GlobalApHandler = new GlobalApHandler(this, {
     finial_apply: (arg_value_entries) =>
       evaluate(
         Env.init()
@@ -22,7 +22,7 @@ export class PairValue extends Exps.BuiltInValue {
       ),
   })
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new PairValue([...this.arg_value_entries, arg_value_entry])
   }
 
@@ -32,11 +32,11 @@ export class PairValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.PiCore(
         "A",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.PiCore(
           "B",
-          new Exps.BuiltInCore("Type"),
-          new Exps.BuiltInCore("Type")
+          new Exps.GlobalCore("Type"),
+          new Exps.GlobalCore("Type")
         )
       )
     )

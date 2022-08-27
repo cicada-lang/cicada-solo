@@ -1,7 +1,7 @@
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 
-export class TypeValue extends Exps.BuiltInValue {
+export class TypeValue extends Exps.GlobalValue {
   name = "Type"
   arity = 0
 
@@ -9,7 +9,7 @@ export class TypeValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new TypeValue([...this.arg_value_entries, arg_value_entry])
   }
 

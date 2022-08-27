@@ -3,9 +3,9 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { check_conversion, expect, Value } from "../../value"
-import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
+import { GlobalApHandler } from "../built-in/built-in-ap-handler"
 
-export class TheSameValue extends Exps.BuiltInValue {
+export class TheSameValue extends Exps.GlobalValue {
   name = "the_same"
   arity = 2
 
@@ -13,7 +13,7 @@ export class TheSameValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
+  ap_handler: GlobalApHandler = new GlobalApHandler(this, {
     finial_apply: (arg_value_entries) =>
       new Exps.ReflValue(
         ...([
@@ -23,7 +23,7 @@ export class TheSameValue extends Exps.BuiltInValue {
       ),
   })
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new TheSameValue(...[...this.arg_value_entries, arg_value_entry])
   }
 
@@ -44,14 +44,14 @@ export class TheSameValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.PiCore(
         "T",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.PiCore(
           "x",
           new Exps.VarCore("T"),
           new Exps.ApCore(
             new Exps.ApCore(
               new Exps.ApCore(
-                new Exps.BuiltInCore("Equal"),
+                new Exps.GlobalCore("Equal"),
                 new Exps.VarCore("T")
               ),
               new Exps.VarCore("x")

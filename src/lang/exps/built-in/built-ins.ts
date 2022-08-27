@@ -2,18 +2,18 @@ import * as Exps from "../../exps"
 
 // NOTE A built-in name can be redefined at top level, or in local scope.
 
-class BuiltIns {
-  values: Map<string, Exps.BuiltInValue>
+class Globals {
+  values: Map<string, Exps.GlobalValue>
 
-  constructor(values: Map<string, Exps.BuiltInValue> = new Map()) {
+  constructor(values: Map<string, Exps.GlobalValue> = new Map()) {
     this.values = values
   }
 
-  findValue(name: string): Exps.BuiltInValue | undefined {
+  findValue(name: string): Exps.GlobalValue | undefined {
     return this.values.get(name)
   }
 
-  register(value: Exps.BuiltInValue): this {
+  register(value: Exps.GlobalValue): this {
     const found = this.findValue(value.name)
     if (found !== undefined) {
       throw new Error(
@@ -26,7 +26,7 @@ class BuiltIns {
   }
 }
 
-export const built_ins = new BuiltIns()
+export const globals = new Globals()
   .register(new Exps.TheValue([]))
   .register(new Exps.TodoValue([]))
   .register(new Exps.TodoNoteValue([]))

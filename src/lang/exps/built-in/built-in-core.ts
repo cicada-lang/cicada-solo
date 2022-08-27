@@ -4,7 +4,7 @@ import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 
-export class BuiltInCore extends Core {
+export class GlobalCore extends Core {
   name: string
 
   constructor(name: string) {
@@ -21,7 +21,7 @@ export class BuiltInCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const value = Exps.built_ins.findValue(this.name)
+    const value = Exps.globals.findValue(this.name)
     if (value === undefined) {
       throw new ElaborationError(`I meet undefined built-in name: ${this.name}`)
     }

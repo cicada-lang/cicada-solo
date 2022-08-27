@@ -127,7 +127,7 @@ export class TypeCtor extends Exp {
       .reverse()
       .reduce(
         (result, [name, t]) => new Exps.PiCore(name, t, result),
-        new Exps.BuiltInCore("Type")
+        new Exps.GlobalCore("Type")
       )
   }
 

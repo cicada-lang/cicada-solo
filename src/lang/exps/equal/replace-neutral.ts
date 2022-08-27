@@ -21,7 +21,7 @@ export class ReplaceNeutral extends Neutral {
     return new Exps.ApCore(
       new Exps.ApCore(
         new Exps.ApCore(
-          new Exps.BuiltInCore("replace"),
+          new Exps.GlobalCore("replace"),
           this.target.readback_neutral(ctx)
         ),
         this.motive.readback_normal(ctx)

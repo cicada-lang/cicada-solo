@@ -4,9 +4,9 @@ import { ElaborationError } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
-import { BuiltInApHandler } from "./built-in-ap-handler"
+import { GlobalApHandler } from "./built-in-ap-handler"
 
-export abstract class BuiltInValue extends Value {
+export abstract class GlobalValue extends Value {
   arg_value_entries: Array<Exps.ArgValueEntry>
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
@@ -18,9 +18,9 @@ export abstract class BuiltInValue extends Value {
 
   abstract arity: number
 
-  abstract curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue
+  abstract curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue
 
-  ap_handler = new BuiltInApHandler(this)
+  ap_handler = new GlobalApHandler(this)
 
   abstract self_type(): Value
 
@@ -61,7 +61,7 @@ export abstract class BuiltInValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     const arg_t_values = this.arg_t_values()
-    let core: Core = new Exps.BuiltInCore(this.name)
+    let core: Core = new Exps.GlobalCore(this.name)
     for (const [index, arg_value_entry] of this.arg_value_entries.entries()) {
       core = Exps.build_ap_from_arg_core_entry(core, {
         ...arg_value_entry,
@@ -75,7 +75,7 @@ export abstract class BuiltInValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (
       !(
-        that instanceof Exps.BuiltInValue &&
+        that instanceof Exps.GlobalValue &&
         this.name === that.name &&
         this.arity === that.arity &&
         this.arg_value_entries.length === that.arg_value_entries.length

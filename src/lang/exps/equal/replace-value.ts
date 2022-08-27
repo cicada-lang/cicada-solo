@@ -4,10 +4,10 @@ import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
 import { Normal } from "../../normal"
 import { Value } from "../../value"
-import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
+import { GlobalApHandler } from "../built-in/built-in-ap-handler"
 import { Closure } from "../closure"
 
-export class ReplaceValue extends Exps.BuiltInValue {
+export class ReplaceValue extends Exps.GlobalValue {
   name = "replace"
   arity = 6
 
@@ -15,7 +15,7 @@ export class ReplaceValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
+  ap_handler: GlobalApHandler = new GlobalApHandler(this, {
     finial_apply: (arg_value_entries) =>
       // NOTE Be careful about the index.
       replace(
@@ -25,7 +25,7 @@ export class ReplaceValue extends Exps.BuiltInValue {
       ),
   })
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new ReplaceValue([...this.arg_value_entries, arg_value_entry])
   }
 
@@ -45,7 +45,7 @@ export class ReplaceValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.ImplicitPiCore(
         "T",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.ImplicitPiCore(
           "from",
           new Exps.VarCore("T"),
@@ -57,7 +57,7 @@ export class ReplaceValue extends Exps.BuiltInValue {
               new Exps.ApCore(
                 new Exps.ApCore(
                   new Exps.ApCore(
-                    new Exps.BuiltInCore("Equal"),
+                    new Exps.GlobalCore("Equal"),
                     new Exps.VarCore("T")
                   ),
                   new Exps.VarCore("from")
@@ -69,7 +69,7 @@ export class ReplaceValue extends Exps.BuiltInValue {
                 new Exps.PiCore(
                   "_",
                   new Exps.VarCore("T"),
-                  new Exps.BuiltInCore("Type")
+                  new Exps.GlobalCore("Type")
                 ),
                 new Exps.PiCore(
                   "base",
@@ -111,7 +111,7 @@ function replace(target: Value, motive: Value, base: Value): Value {
   const base_t = Exps.ApCore.apply(motive, target.t.from)
   const motive_t = new Exps.PiValue(
     target.t.t,
-    new Closure(Env.init(), "x", new Exps.BuiltInCore("Type"))
+    new Closure(Env.init(), "x", new Exps.GlobalCore("Type"))
   )
   return new Exps.NotYetValue(
     Exps.ApCore.apply(motive, target.t.to),

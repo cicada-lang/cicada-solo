@@ -4,7 +4,7 @@ import * as Exps from "../../exps"
 import { ReadbackEtaExpansion, Value } from "../../value"
 
 export class TrivialValue
-  extends Exps.BuiltInValue
+  extends Exps.GlobalValue
   implements ReadbackEtaExpansion
 {
   name = "Trivial"
@@ -18,10 +18,10 @@ export class TrivialValue
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
-    return new Exps.BuiltInCore("sole")
+    return new Exps.GlobalCore("sole")
   }
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new TrivialValue([...this.arg_value_entries, arg_value_entry])
   }
 

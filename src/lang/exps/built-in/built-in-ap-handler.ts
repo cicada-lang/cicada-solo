@@ -2,12 +2,12 @@ import * as Exps from "../../exps"
 import { Value } from "../../value"
 import { ApHandler } from "../pi/ap-handler"
 
-export class BuiltInApHandler extends ApHandler {
-  target: Exps.BuiltInValue
+export class GlobalApHandler extends ApHandler {
+  target: Exps.GlobalValue
   finial_apply?: (arg_value_entries: Array<Exps.ArgValueEntry>) => Value
 
   constructor(
-    target: Exps.BuiltInValue,
+    target: Exps.GlobalValue,
     opts?: {
       finial_apply?: (arg_value_entries: Array<Exps.ArgValueEntry>) => Value
     }

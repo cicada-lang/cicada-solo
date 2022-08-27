@@ -47,15 +47,15 @@ export class Var extends Exp {
       return check_by_infer(ctx, this, t)
     }
 
-    const built_in_value = Exps.built_ins.findValue(this.name)
-    if (built_in_value !== undefined) {
-      built_in_value.before_check(ctx, [], t)
+    const global_value = Exps.globals.findValue(this.name)
+    if (global_value !== undefined) {
+      global_value.before_check(ctx, [], t)
 
-      const built_in_t = built_in_value.self_type()
-      if (built_in_t instanceof Exps.VaguePiValue) {
-        return built_in_t.vague_inserter.insert_vague_ap(
+      const global_t = global_value.self_type()
+      if (global_t instanceof Exps.VaguePiValue) {
+        return global_t.vague_inserter.insert_vague_ap(
           ctx,
-          new Exps.BuiltInCore(this.name),
+          new Exps.GlobalCore(this.name),
           [],
           t
         )
@@ -76,11 +76,11 @@ export class Var extends Exp {
       }
     }
 
-    const built_in_value = Exps.built_ins.findValue(this.name)
-    if (built_in_value !== undefined) {
+    const global_value = Exps.globals.findValue(this.name)
+    if (global_value !== undefined) {
       return {
-        t: built_in_value.self_type(),
-        core: new Exps.BuiltInCore(this.name),
+        t: global_value.self_type(),
+        core: new Exps.GlobalCore(this.name),
       }
     }
 

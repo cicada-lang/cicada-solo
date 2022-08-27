@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 
-export class EqualValue extends Exps.BuiltInValue {
+export class EqualValue extends Exps.GlobalValue {
   name = "Equal"
   arity = 3
 
@@ -23,7 +23,7 @@ export class EqualValue extends Exps.BuiltInValue {
     return this.arg_value_entries[2].value
   }
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     const values = [
       ...this.arg_value_entries.map(({ value }) => value),
       arg_value_entry.value,
@@ -38,14 +38,14 @@ export class EqualValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.PiCore(
         "T",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.PiCore(
           "from",
           new Exps.VarCore("T"),
           new Exps.PiCore(
             "to",
             new Exps.VarCore("T"),
-            new Exps.BuiltInCore("Type")
+            new Exps.GlobalCore("Type")
           )
         )
       )

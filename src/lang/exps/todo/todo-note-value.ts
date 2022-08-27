@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
 
-export class TodoNoteValue extends Exps.BuiltInValue {
+export class TodoNoteValue extends Exps.GlobalValue {
   name = "TODO_NOTE"
   arity = 2
 
@@ -12,7 +12,7 @@ export class TodoNoteValue extends Exps.BuiltInValue {
     super(arg_value_entries)
   }
 
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.GlobalValue {
     return new TodoNoteValue([...this.arg_value_entries, arg_value_entry])
   }
 
@@ -49,10 +49,10 @@ export class TodoNoteValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.VaguePiCore(
         "T",
-        new Exps.BuiltInCore("Type"),
+        new Exps.GlobalCore("Type"),
         new Exps.PiCore(
           "note",
-          new Exps.BuiltInCore("String"),
+          new Exps.GlobalCore("String"),
           new Exps.VarCore("T")
         )
       )
