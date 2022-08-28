@@ -118,6 +118,51 @@ compute same_as_chart (Nat) [
 ]
 ```
 
+# sub1_saturate
+
+```cicada
+function sub1_saturate(x: Nat): Nat {
+  return recursion (x) {
+    case zero => zero
+    case add1(prev, _almost) => prev
+  }
+}
+
+compute same_as_chart (Nat) [
+  sub1_saturate(two),
+  one,
+]
+
+compute same_as_chart (Nat) [
+  sub1_saturate(sub1_saturate(two)),
+  sub1_saturate(sub1_saturate(sub1_saturate(two))),
+  sub1_saturate(sub1_saturate(sub1_saturate(sub1_saturate(two)))),
+  zero,
+]
+```
+
+# sub_saturate
+
+```cicada
+function sub_saturate(x: Nat, y: Nat): Nat {
+  return recursion (y) {
+    case zero => x
+    case add1(_prev, almost) => sub1_saturate(almost.prev)
+  }
+}
+
+compute same_as_chart (Nat) [
+  sub_saturate(two, two),
+  sub_saturate(one, two),
+  zero,
+]
+
+compute same_as_chart (Nat) [
+  sub_saturate(two, one),
+  one,
+]
+```
+
 # About recursion over Nat
 
 By using `recursion`, we are defining function using **recursive combinator**.
