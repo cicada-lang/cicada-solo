@@ -118,10 +118,10 @@ compute same_as_chart (Nat) [
 ]
 ```
 
-# sub1_saturate
+# saturated_sub1
 
 ```cicada
-function sub1_saturate(x: Nat): Nat {
+function saturated_sub1(x: Nat): Nat {
   return recursion (x) {
     case zero => zero
     case add1(prev, _almost) => prev
@@ -129,36 +129,36 @@ function sub1_saturate(x: Nat): Nat {
 }
 
 compute same_as_chart (Nat) [
-  sub1_saturate(two),
+  saturated_sub1(two),
   one,
 ]
 
 compute same_as_chart (Nat) [
-  sub1_saturate(sub1_saturate(two)),
-  sub1_saturate(sub1_saturate(sub1_saturate(two))),
-  sub1_saturate(sub1_saturate(sub1_saturate(sub1_saturate(two)))),
+  saturated_sub1(saturated_sub1(two)),
+  saturated_sub1(saturated_sub1(saturated_sub1(two))),
+  saturated_sub1(saturated_sub1(saturated_sub1(saturated_sub1(two)))),
   zero,
 ]
 ```
 
-# sub_saturate
+# saturated_sub
 
 ```cicada
-function sub_saturate(x: Nat, y: Nat): Nat {
+function saturated_sub(x: Nat, y: Nat): Nat {
   return recursion (y) {
     case zero => x
-    case add1(_prev, almost) => sub1_saturate(almost.prev)
+    case add1(_prev, almost) => saturated_sub1(almost.prev)
   }
 }
 
 compute same_as_chart (Nat) [
-  sub_saturate(two, two),
-  sub_saturate(one, two),
+  saturated_sub(two, two),
+  saturated_sub(one, two),
   zero,
 ]
 
 compute same_as_chart (Nat) [
-  sub_saturate(two, one),
+  saturated_sub(two, one),
   one,
 ]
 ```
