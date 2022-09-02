@@ -292,7 +292,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
   span: pt.Span
 } {
   return pt.matcher({
-    "cls_entry:field_demanded": ({ name, t }, { span }) => ({
+    "cls_entry:field_abstract": ({ name, t }, { span }) => ({
       field_name: pt.str(name),
       field_t: exp_matcher(t),
       span,
@@ -312,7 +312,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
       field: exp_matcher(exp),
       span,
     }),
-    "cls_entry:method_demanded": ({ name, typings, ret_t }, { span }) => ({
+    "cls_entry:method_abstract": ({ name, typings, ret_t }, { span }) => ({
       field_name: pt.str(name),
       field_t: pi_handler({ typings, ret_t }, { span }),
       span,

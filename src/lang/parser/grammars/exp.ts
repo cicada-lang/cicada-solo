@@ -191,7 +191,7 @@ export const sequence_entry = {
 
 export const cls_entry = {
   $grammar: {
-    "cls_entry:field_demanded": [
+    "cls_entry:field_abstract": [
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -205,7 +205,7 @@ export const cls_entry = {
       { exp: "exp" },
       { $ap: ["optional", '","'] },
     ],
-    "cls_entry:method_demanded": [
+    "cls_entry:method_abstract": [
       { name: "identifier" },
       '"("',
       { typings: "typings" },
