@@ -53,7 +53,7 @@ export class DotCore extends Core {
 
     return new Exps.NotYetValue(
       target.t.get_type(target, name),
-      new Exps.DotNeutral(target.neutral, name)
+      new Exps.DotNeutral(target.neutral, name),
     )
   }
 }

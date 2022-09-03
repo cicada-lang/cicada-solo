@@ -23,7 +23,7 @@ export class ParserTester {
           `---`,
           `${text}`,
           `---`,
-        ].join("\n")
+        ].join("\n"),
       )
     } catch (error) {
       if (error instanceof ParsingError) return
@@ -40,7 +40,7 @@ export class ParserTester {
           `---`,
           `${text}`,
           `---`,
-        ].join("\n")
+        ].join("\n"),
       )
     } catch (error) {
       if (error instanceof ParsingError) return

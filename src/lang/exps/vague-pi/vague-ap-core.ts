@@ -26,7 +26,7 @@ export class VagueApCore extends Core {
   evaluate(env: Env): Value {
     return VagueApCore.apply(
       evaluate(env, this.target),
-      evaluate(env, this.arg)
+      evaluate(env, this.arg),
     )
   }
 
@@ -65,7 +65,7 @@ export class VagueApCore extends Core {
 
     return new Exps.NotYetValue(
       target.t.ret_t_cl.apply(arg),
-      new Exps.VagueApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
+      new Exps.VagueApNeutral(target.neutral, new Normal(target.t.arg_t, arg)),
     )
   }
 }

@@ -14,7 +14,7 @@ export class ConsClsCore extends Exps.ClsCore {
     field_name: string,
     local_name: string,
     field_t: Core,
-    rest_t: Exps.ClsCore
+    rest_t: Exps.ClsCore,
   ) {
     super()
     this.field_name = field_name
@@ -35,7 +35,7 @@ export class ConsClsCore extends Exps.ClsCore {
       this.field_name,
       this.local_name,
       this.field_t,
-      this.rest_t.append(cls)
+      this.rest_t.append(cls),
     )
   }
 
@@ -47,7 +47,7 @@ export class ConsClsCore extends Exps.ClsCore {
     return new Exps.ConsClsValue(
       this.field_name,
       evaluate(env, this.field_t),
-      new ClsClosure(env, this.local_name, this.rest_t)
+      new ClsClosure(env, this.local_name, this.rest_t),
     )
   }
 

@@ -30,7 +30,7 @@ export class NilClsValue extends Exps.ClsValue {
         `I can not dot the value out of class`,
         `because I meet an unknown field name:`,
         `  ${field_name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 
@@ -40,7 +40,7 @@ export class NilClsValue extends Exps.ClsValue {
         `I can not dot the type out of class`,
         `because I meet an unknown field name:`,
         `  ${field_name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 
@@ -50,7 +50,7 @@ export class NilClsValue extends Exps.ClsValue {
 
   extend_ctx(
     ctx: Ctx,
-    renamings: Array<{ field_name: string; local_name: string }>
+    renamings: Array<{ field_name: string; local_name: string }>,
   ): {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>

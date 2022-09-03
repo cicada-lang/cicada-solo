@@ -19,14 +19,14 @@ export class FulfilledClsApHandler extends ApHandler {
       this.target.local_name,
       this.target.field_t,
       this.target.field,
-      this.target.rest_t.ap_handler.apply(arg_value_entry)
+      this.target.rest_t.ap_handler.apply(arg_value_entry),
     )
   }
 
   infer_by_target(
     ctx: Ctx,
     target_core: Core,
-    arg: Exp
+    arg: Exp,
   ): { t: Value; core: Core } {
     return this.target.rest_t.ap_handler.infer_by_target(ctx, target_core, arg)
   }

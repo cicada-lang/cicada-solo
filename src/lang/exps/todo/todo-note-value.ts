@@ -27,7 +27,7 @@ export class TodoNoteValue extends Exps.GlobalValue {
         msg: [
           `${ctx.highlight("warn", "TODO_NOTE")}(${ctx.highlight(
             "note",
-            note.exp.format()
+            note.exp.format(),
           )})`,
           `  ${ctx.highlight("code", t_core.format())}`,
         ].join("\n"),
@@ -53,9 +53,9 @@ export class TodoNoteValue extends Exps.GlobalValue {
         new Exps.PiCore(
           "note",
           new Exps.GlobalCore("String"),
-          new Exps.VarCore("T")
-        )
-      )
+          new Exps.VarCore("T"),
+        ),
+      ),
     )
   }
 }

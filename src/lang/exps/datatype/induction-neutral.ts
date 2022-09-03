@@ -13,7 +13,7 @@ export class InductionNeutral extends Neutral {
   constructor(
     target: Neutral,
     motive: Normal,
-    case_entries: Array<Exps.CaseNormalEntry>
+    case_entries: Array<Exps.CaseNormalEntry>,
   ) {
     super()
     this.target = target
@@ -28,7 +28,7 @@ export class InductionNeutral extends Neutral {
       this.case_entries.map((case_entry) => ({
         ...case_entry,
         core: case_entry.normal.readback_normal(ctx),
-      }))
+      })),
     )
   }
 
@@ -45,7 +45,7 @@ export class InductionNeutral extends Neutral {
       solution,
       ctx,
       this.case_entries,
-      that.case_entries
+      that.case_entries,
     )
 
     return solution
@@ -56,7 +56,7 @@ function unify_case_entries(
   solution: Solution,
   ctx: Ctx,
   this_case_entries: Array<Exps.CaseNormalEntry>,
-  that_case_entries: Array<Exps.CaseNormalEntry>
+  that_case_entries: Array<Exps.CaseNormalEntry>,
 ): Solution {
   this_case_entries = this_case_entries.sort(Exps.compare_case_entries)
   that_case_entries = that_case_entries.sort(Exps.compare_case_entries)
@@ -68,7 +68,7 @@ function unify_case_entries(
         `I expect case entries have the same length.`,
         `  this case entries length: ${this_case_entries.length}`,
         `  that case entries length: ${that_case_entries.length}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 
@@ -77,7 +77,7 @@ function unify_case_entries(
       solution,
       ctx,
       this_case_entries[index],
-      that_case_entries[index]
+      that_case_entries[index],
     )
   }
 
@@ -88,7 +88,7 @@ function unify_case_entry(
   solution: Solution,
   ctx: Ctx,
   this_case_entry: Exps.CaseNormalEntry,
-  that_case_entry: Exps.CaseNormalEntry
+  that_case_entry: Exps.CaseNormalEntry,
 ): Solution {
   if (this_case_entry.name !== that_case_entry.name) {
     return Solution.failure(
@@ -97,13 +97,13 @@ function unify_case_entry(
         `I expect case entry to be the same.`,
         `  this case entry name: ${this_case_entry.name}`,
         `  that case entry name: ${that_case_entry.name}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 
   return solution.unify_normal(
     ctx,
     this_case_entry.normal,
-    that_case_entry.normal
+    that_case_entry.normal,
   )
 }

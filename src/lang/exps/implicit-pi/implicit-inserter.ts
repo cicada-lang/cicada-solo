@@ -25,7 +25,7 @@ export class ImplicitInserter {
   insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(
       exp.free_names(new Set()),
-      ctx.freshen(this.ret_t_cl.name)
+      ctx.freshen(this.ret_t_cl.name),
     )
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
@@ -39,7 +39,7 @@ export class ImplicitInserter {
   insert_implicit_ap(
     ctx: Ctx,
     target_core: Core,
-    arg: Exp
+    arg: Exp,
   ): { t: Value; core: Core } {
     const inferred_arg = infer(ctx, arg)
     const result = this.collect_implicit_ap_entries(ctx, inferred_arg.t, [])
@@ -59,7 +59,7 @@ export class ImplicitInserter {
   collect_implicit_ap_entries(
     ctx: Ctx,
     inferred_arg_t: Value,
-    entries: Array<ImplicitApEntry>
+    entries: Array<ImplicitApEntry>,
   ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
     const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
     const ret_t = this.ret_t_cl.apply(entry.implicit_arg)
@@ -68,7 +68,7 @@ export class ImplicitInserter {
       return ret_t.implicit_inserter.collect_implicit_ap_entries(
         ctx,
         inferred_arg_t,
-        [...entries, entry]
+        [...entries, entry],
       )
     } else if (ret_t instanceof Exps.PiValue) {
       return {
@@ -81,7 +81,7 @@ export class ImplicitInserter {
           `During application insertion`,
           `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,
           `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
   }
@@ -96,7 +96,7 @@ export class ImplicitInserter {
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -113,7 +113,7 @@ export class ImplicitInserter {
         ctx,
         new Exps.TypeValue(),
         ret_t.arg_t,
-        inferred_arg_t
+        inferred_arg_t,
       )
     } else {
       throw new ElaborationError(
@@ -121,7 +121,7 @@ export class ImplicitInserter {
           `During application insertion`,
           `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,
           `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
   }

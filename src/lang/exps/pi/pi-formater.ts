@@ -18,7 +18,7 @@ export class PiFormater {
     pi: PiOptions,
     opts?: {
       decorate_typing?(typing: string): string
-    }
+    },
   ) {
     this.pi = pi
     this.decorate_typing = opts?.decorate_typing

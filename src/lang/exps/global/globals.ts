@@ -17,7 +17,7 @@ class Globals {
     const found = this.findValue(value.name)
     if (found !== undefined) {
       throw new Error(
-        `I can not re-register global value of name: ${value.name}`
+        `I can not re-register global value of name: ${value.name}`,
       )
     }
 

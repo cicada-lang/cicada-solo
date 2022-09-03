@@ -47,7 +47,7 @@ export class CarCore extends Core {
 
     return new Exps.NotYetValue(
       target.t.car_t,
-      new Exps.CarNeutral(target.neutral)
+      new Exps.CarNeutral(target.neutral),
     )
   }
 }

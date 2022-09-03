@@ -30,14 +30,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
           span: pt.span_closure([t.span, exp.span]),
         }),
-        { span }
+        { span },
       ),
     "stmt:check": ({ t, exp }, { span }) =>
       new Stmts.Compute(
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
           span: pt.span_closure([t.span, exp.span]),
         }),
-        { span }
+        { span },
       ),
     "stmt:let_fn": ({ name, typings, ret_t, sequence }, { span }) => {
       const init: Exp = sequence_matcher(sequence)
@@ -68,7 +68,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         new Exps.The(pi_handler({ typings, ret_t }, { span }), fn, {
           span: pt.span_closure([typings.span, ret_t.span, sequence.span]),
         }),
-        { span }
+        { span },
       )
     },
     "stmt:compute": ({ exp }, { span }) =>
@@ -87,11 +87,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 entry.field_name,
                 entry.field_t,
                 rest_t,
-                { span: entry.span }
+                { span: entry.span },
               ),
-            new Exps.NilCls({ span })
+            new Exps.NilCls({ span }),
           ),
-        { span }
+        { span },
       ),
     "stmt:class_extends": ({ name, parent, entries }, { span }) =>
       new Stmts.ClassExtends(
@@ -109,19 +109,19 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   entry.field_name,
                   entry.field_t,
                   rest_t,
-                  { span: entry.span }
+                  { span: entry.span },
                 ),
-              new Exps.NilCls({ span })
+              new Exps.NilCls({ span }),
             ),
-          { span }
+          { span },
         ),
-        { span }
+        { span },
       ),
     "stmt:import": ({ path, entries }, { span }) => {
       return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),
         pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher),
-        { span }
+        { span },
       )
     },
     "stmt:datatype": ({ name, ctors }, { span }) => {
@@ -133,46 +133,46 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers
             .one_or_more_matcher(ctors)
             .map(ctor_matcher)
-            .map(({ name, t }) => [name, t])
+            .map(({ name, t }) => [name, t]),
         ),
-        { span }
+        { span },
       )
     },
     "stmt:datatype_fixed": ({ name, fixed, ctors }, { span }) => {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp]),
         ),
         {},
         Object.fromEntries(
           pt.matchers
             .one_or_more_matcher(ctors)
             .map(ctor_matcher)
-            .map(({ name, t }) => [name, t])
+            .map(({ name, t }) => [name, t]),
         ),
-        { span }
+        { span },
       )
     },
     "stmt:datatype_fixed_and_varied": (
       { name, fixed, varied, ctors },
-      { span }
+      { span },
     ) => {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(fixed).map(({ name, exp }) => [name, exp]),
         ),
         Object.fromEntries(
-          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp]),
         ),
         Object.fromEntries(
           pt.matchers
             .one_or_more_matcher(ctors)
             .map(ctor_matcher)
-            .map(({ name, t }) => [name, t])
+            .map(({ name, t }) => [name, t]),
         ),
-        { span }
+        { span },
       )
     },
     "stmt:datatype_varied": ({ name, varied, ctors }, { span }) => {
@@ -180,15 +180,15 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         {},
         Object.fromEntries(
-          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp])
+          simple_typings_matcher(varied).map(({ name, exp }) => [name, exp]),
         ),
         Object.fromEntries(
           pt.matchers
             .one_or_more_matcher(ctors)
             .map(ctor_matcher)
-            .map(({ name, t }) => [name, t])
+            .map(({ name, t }) => [name, t]),
         ),
-        { span }
+        { span },
       )
     },
   })(tree)

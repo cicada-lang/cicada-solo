@@ -16,7 +16,7 @@ const AuthorSchema = ty.union(
   ty.object({
     name: ty.string(),
     username: ty.string(),
-  })
+  }),
 )
 
 export const BookConfigSchema = ty.object<BookConfig>({

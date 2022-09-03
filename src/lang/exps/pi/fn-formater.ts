@@ -14,7 +14,7 @@ export class FnFormater {
     fn: FnOptions,
     opts?: {
       decorate_name(name: string): string
-    }
+    },
   ) {
     this.fn = fn
     this.decorate_name = opts?.decorate_name

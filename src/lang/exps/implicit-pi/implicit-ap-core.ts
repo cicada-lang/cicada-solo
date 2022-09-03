@@ -26,7 +26,7 @@ export class ImplicitApCore extends Core {
   evaluate(env: Env): Value {
     return ImplicitApCore.apply(
       evaluate(env, this.target),
-      evaluate(env, this.arg)
+      evaluate(env, this.arg),
     )
   }
 
@@ -67,8 +67,8 @@ export class ImplicitApCore extends Core {
       target.t.ret_t_cl.apply(arg),
       new Exps.ImplicitApNeutral(
         target.neutral,
-        new Normal(target.t.arg_t, arg)
-      )
+        new Normal(target.t.arg_t, arg),
+      ),
     )
   }
 }

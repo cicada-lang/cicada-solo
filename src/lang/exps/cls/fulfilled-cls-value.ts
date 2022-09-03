@@ -19,7 +19,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
     local_name: string,
     field_t: Value,
     field: Value,
-    rest_t: Exps.ClsValue
+    rest_t: Exps.ClsValue,
   ) {
     super()
     this.field_name = field_name
@@ -68,12 +68,12 @@ export class FulfilledClsValue extends Exps.ClsValue {
       const rest_t = readback(
         ctx.extend(fresh_name, this.field_t, this.field),
         new Exps.TypeValue(),
-        this.rest_t
+        this.rest_t,
       )
 
       if (!(rest_t instanceof Exps.ClsCore)) {
         throw new ElaborationError(
-          `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
+          `I expect rest_t to be an instance of ${Exps.ClsCore.name}`,
         )
       }
 
@@ -82,7 +82,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
         fresh_name,
         field_t,
         field_core,
-        rest_t
+        rest_t,
       )
     }
   }
@@ -112,7 +112,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
 
   extend_ctx(
     ctx: Ctx,
-    renamings: Array<{ field_name: string; local_name: string }>
+    renamings: Array<{ field_name: string; local_name: string }>,
   ): {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
@@ -121,7 +121,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
 
     return this.rest_t.extend_ctx(
       ctx.extend(fresh_name, this.field_t, this.field),
-      [...renamings, { field_name: this.field_name, local_name: fresh_name }]
+      [...renamings, { field_name: this.field_name, local_name: fresh_name }],
     )
   }
 
@@ -137,7 +137,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
           `I expect this and that to have the same field name`,
           `  this field name: ${this.field_name}`,
           `  that field name: ${that.field_name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 

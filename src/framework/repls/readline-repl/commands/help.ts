@@ -14,7 +14,7 @@ export class Help extends Command {
     const size = Math.max(...repl.commands.map(({ name }) => name.length))
 
     const commands = repl.commands.map(
-      ({ name, description }) => `.${ut.rightPad(name, size)}   ${description}`
+      ({ name, description }) => `.${ut.rightPad(name, size)}   ${description}`,
     )
 
     console.log(
@@ -23,7 +23,7 @@ export class Help extends Command {
         ...commands.map((command) => "  " + command),
         "",
         "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
-      ].join("\n")
+      ].join("\n"),
     )
 
     repl.prompt()

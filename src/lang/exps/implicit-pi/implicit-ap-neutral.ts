@@ -18,7 +18,7 @@ export class ImplicitApNeutral extends Neutral {
   readback_neutral(ctx: Ctx): Core {
     return new Exps.ImplicitApCore(
       this.target.readback_neutral(ctx),
-      this.arg.readback_normal(ctx)
+      this.arg.readback_normal(ctx),
     )
   }
 

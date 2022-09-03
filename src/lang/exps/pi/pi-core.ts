@@ -27,7 +27,7 @@ export class PiCore extends Core {
   evaluate(env: Env): Value {
     return new Exps.PiValue(
       evaluate(env, this.arg_t),
-      new Closure(env, this.name, this.ret_t)
+      new Closure(env, this.name, this.ret_t),
     )
   }
 

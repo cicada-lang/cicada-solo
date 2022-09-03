@@ -25,7 +25,7 @@ export class MultiAp extends Exp {
     return new Set([
       ...this.target.free_names(bound_names),
       ...this.arg_entries.flatMap((entry) =>
-        Array.from(entry.exp.free_names(bound_names))
+        Array.from(entry.exp.free_names(bound_names)),
       ),
     ])
   }
@@ -37,7 +37,7 @@ export class MultiAp extends Exp {
         ...entry,
         exp: subst(entry.exp, name, exp),
       })),
-      this.meta
+      this.meta,
     )
   }
 
@@ -55,7 +55,7 @@ export class MultiAp extends Exp {
         const next_multi_ap = new Exps.MultiAp(
           new Exps.VagueAp(this.target, first_arg_entry.exp, this.meta),
           this.arg_entries.slice(1),
-          this.meta
+          this.meta,
         )
         return check(ctx, next_multi_ap, t)
       } else {
@@ -63,7 +63,7 @@ export class MultiAp extends Exp {
           ctx,
           inferred.core,
           this.arg_entries,
-          t
+          t,
         )
       }
     }
@@ -77,8 +77,8 @@ export class MultiAp extends Exp {
       this.arg_entries.reduce(
         (result, arg_entry) =>
           Exps.build_ap_from_arg_entry(result, arg_entry, this.meta),
-        this.target
-      )
+        this.target,
+      ),
     )
   }
 

@@ -33,7 +33,7 @@ export class Sigma extends Exp {
         this.name,
         subst(this.car_t, name, exp),
         this.cdr_t,
-        this.meta
+        this.meta,
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -45,9 +45,9 @@ export class Sigma extends Exp {
         subst(
           subst(this.cdr_t, this.name, new Exps.Var(fresh_name)),
           name,
-          exp
+          exp,
         ),
-        this.meta
+        this.meta,
       )
     }
   }
@@ -60,7 +60,7 @@ export class Sigma extends Exp {
     const cdr_t_core = check(
       ctx.extend(fresh_name, car_t_value),
       cdr_t,
-      new Exps.TypeValue()
+      new Exps.TypeValue(),
     )
 
     return {

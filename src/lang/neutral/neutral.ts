@@ -11,7 +11,7 @@ export abstract class Neutral {
         `Method not implemented for Neutral.`,
         `  method name: unify`,
         `  class name: ${this.constructor.name}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

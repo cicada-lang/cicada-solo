@@ -16,7 +16,7 @@ export class ApFormater {
     ap: ApOptions,
     opts?: {
       decorate_arg(arg: string): string
-    }
+    },
   ) {
     this.ap = ap
     this.decorate_arg = opts?.decorate_arg

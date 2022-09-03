@@ -21,7 +21,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
         [
           `I expect pi to be PiValue`,
           `  class name: ${pi.constructor.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -37,7 +37,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
         new Exps.TypeValue(),
-        this.ret_t_cl.apply(not_yet_value)
+        this.ret_t_cl.apply(not_yet_value),
       )
       return new Exps.PiCore(fresh_name, arg_t, ret_t)
     }
@@ -59,7 +59,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     const ret = readback(
       ctx.extend(fresh_name, this.arg_t),
       ret_t,
-      Exps.ApCore.apply(value, not_yet_value)
+      Exps.ApCore.apply(value, not_yet_value),
     )
     return new Exps.FnCore(fresh_name, ret)
   }
@@ -76,7 +76,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
         this.arg_t,
         this.ret_t_cl,
         that.arg_t,
-        that.ret_t_cl
+        that.ret_t_cl,
       )
   }
 }

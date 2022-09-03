@@ -14,7 +14,7 @@ export class Datatype extends Stmt {
     fixed: Record<string, Exp>,
     varied: Record<string, Exp>,
     ctors: Record<string, Exp>,
-    meta: StmtMeta
+    meta: StmtMeta,
   ) {
     super()
     this.meta = meta

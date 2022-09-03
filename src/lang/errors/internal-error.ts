@@ -9,7 +9,7 @@ export class InternalError extends Error {
 
   static wrong_target(
     target: Value,
-    opts: { expected: Array<Class<Value>> }
+    opts: { expected: Array<Class<Value>> },
   ): InternalError {
     const expected = opts.expected.map((c) => c.name).join(", ")
 
@@ -18,13 +18,13 @@ export class InternalError extends Error {
         `I expect the target to be an instance of:`,
         `  ${expected}`,
         `but given target class name is: ${target.constructor.name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 
   static wrong_target_t(
     target_t: Value,
-    opts: { expected: Array<Class<Value>> }
+    opts: { expected: Array<Class<Value>> },
   ): InternalError {
     const expected = opts.expected.map((c) => c.name).join(", ")
 
@@ -33,7 +33,7 @@ export class InternalError extends Error {
         `I expect the type of the neutral to be an instance of:`,
         `  ${expected}`,
         `but the given target type class name is: ${target_t.constructor.name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 }

@@ -16,7 +16,7 @@ export class FulfilledClsCore extends Exps.ClsCore {
     local_name: string,
     field_t: Core,
     field: Core,
-    rest_t: Exps.ClsCore
+    rest_t: Exps.ClsCore,
   ) {
     super()
     this.field_name = field_name
@@ -40,7 +40,7 @@ export class FulfilledClsCore extends Exps.ClsCore {
       this.local_name,
       this.field_t,
       this.field,
-      this.rest_t.append(cls)
+      this.rest_t.append(cls),
     )
   }
 
@@ -56,7 +56,7 @@ export class FulfilledClsCore extends Exps.ClsCore {
       this.local_name,
       evaluate(env, this.field_t),
       field,
-      new ClsClosure(env, this.local_name, this.rest_t).apply(field)
+      new ClsClosure(env, this.local_name, this.rest_t).apply(field),
     )
   }
 

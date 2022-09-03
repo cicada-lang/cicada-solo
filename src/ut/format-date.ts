@@ -12,7 +12,7 @@ export function formatDate(t: Date | number): string {
 
 export function formatTime(
   t: Date | number,
-  opts?: { withMilliseconds?: boolean }
+  opts?: { withMilliseconds?: boolean },
 ): string {
   if (typeof t === "number") t = new Date(t)
 
@@ -31,7 +31,7 @@ export function formatTime(
 
 export function formatDateTime(
   t: Date | number,
-  opts?: { withMilliseconds?: boolean }
+  opts?: { withMilliseconds?: boolean },
 ): string {
   if (typeof t === "number") t = new Date(t)
 

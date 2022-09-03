@@ -29,7 +29,7 @@ export class ImplicitAp extends Exp {
     return new ImplicitAp(
       subst(this.target, name, exp),
       subst(this.arg, name, exp),
-      this.meta
+      this.meta,
     )
   }
 
@@ -50,7 +50,7 @@ export class ImplicitAp extends Exp {
       [
         `I expect the inferred type to be ImPiValue`,
         `  class name: ${inferred.t.constructor.name}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 

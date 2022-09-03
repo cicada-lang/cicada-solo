@@ -1,7 +1,7 @@
 export function leftPad(
   line: string,
   size: number,
-  char: string = " "
+  char: string = " ",
 ): string {
   return char.repeat(size - line.length) + line
 }

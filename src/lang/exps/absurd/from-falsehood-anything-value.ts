@@ -19,7 +19,7 @@ export class FromFalsehoodAnythingValue extends Exps.GlobalValue {
       // NOTE Be careful about the index.
       from_falsehood_anything(
         arg_value_entries[0].value,
-        arg_value_entries[1].value
+        arg_value_entries[1].value,
       ),
   })
 
@@ -40,9 +40,9 @@ export class FromFalsehoodAnythingValue extends Exps.GlobalValue {
         new Exps.PiCore(
           "motive",
           new Exps.GlobalCore("Type"),
-          new Exps.VarCore("motive")
-        )
-      )
+          new Exps.VarCore("motive"),
+        ),
+      ),
     )
   }
 }
@@ -64,7 +64,7 @@ function from_falsehood_anything(target: Value, motive: Value): Value {
     motive,
     new Exps.FromFalsehoodAnythingNeutral(
       target.neutral,
-      new Normal(new Exps.TypeValue(), motive)
-    )
+      new Normal(new Exps.TypeValue(), motive),
+    ),
   )
 }

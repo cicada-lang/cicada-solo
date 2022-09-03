@@ -27,7 +27,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
           `${ut.indent(exp.format(), "  ")}`,
           `I also can not check it by infer.`,
           `I suggest you add a type annotation to the expression.`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
   } catch (error) {
@@ -60,7 +60,7 @@ export function check_by_infer(ctx: Ctx, exp: ExpWithInfer, t: Value): Core {
         `${ut.indent(u_exp.format(), "  ")}`,
         `But the expected type is:`,
         `${ut.indent(t_exp.format(), "  ")}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 

@@ -21,7 +21,7 @@ export class ReplaceValue extends Exps.GlobalValue {
       replace(
         arg_value_entries[3].value,
         arg_value_entries[4].value,
-        arg_value_entries[5].value
+        arg_value_entries[5].value,
       ),
   })
 
@@ -58,35 +58,35 @@ export class ReplaceValue extends Exps.GlobalValue {
                 new Exps.ApCore(
                   new Exps.ApCore(
                     new Exps.GlobalCore("Equal"),
-                    new Exps.VarCore("T")
+                    new Exps.VarCore("T"),
                   ),
-                  new Exps.VarCore("from")
+                  new Exps.VarCore("from"),
                 ),
-                new Exps.VarCore("to")
+                new Exps.VarCore("to"),
               ),
               new Exps.PiCore(
                 "motive",
                 new Exps.PiCore(
                   "_",
                   new Exps.VarCore("T"),
-                  new Exps.GlobalCore("Type")
+                  new Exps.GlobalCore("Type"),
                 ),
                 new Exps.PiCore(
                   "base",
                   new Exps.ApCore(
                     new Exps.VarCore("motive"),
-                    new Exps.VarCore("from")
+                    new Exps.VarCore("from"),
                   ),
                   new Exps.ApCore(
                     new Exps.VarCore("motive"),
-                    new Exps.VarCore("to")
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
+                    new Exps.VarCore("to"),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     )
   }
 }
@@ -111,14 +111,14 @@ function replace(target: Value, motive: Value, base: Value): Value {
   const base_t = Exps.ApCore.apply(motive, target.t.from)
   const motive_t = new Exps.PiValue(
     target.t.t,
-    new Closure(Env.init(), "x", new Exps.GlobalCore("Type"))
+    new Closure(Env.init(), "x", new Exps.GlobalCore("Type")),
   )
   return new Exps.NotYetValue(
     Exps.ApCore.apply(motive, target.t.to),
     new Exps.ReplaceNeutral(
       target.neutral,
       new Normal(motive_t, motive),
-      new Normal(base_t, base)
-    )
+      new Normal(base_t, base),
+    ),
   )
 }

@@ -31,7 +31,7 @@ export function apply_args(target: Value, args: Array<Value>): Value {
 
 export function apply_arg_value_entries(
   target: Value,
-  arg_value_entries: Array<ArgValueEntry>
+  arg_value_entries: Array<ArgValueEntry>,
 ): Value {
   let result: Value = target
   for (const arg_value_entry of arg_value_entries) {
@@ -43,7 +43,7 @@ export function apply_arg_value_entries(
 
 export function apply_arg_value_entry(
   target: Value,
-  arg_value_entry: ArgValueEntry
+  arg_value_entry: ArgValueEntry,
 ): Value {
   switch (arg_value_entry.kind) {
     case "plain":
@@ -58,7 +58,7 @@ export function apply_arg_value_entry(
 export function build_ap_from_arg_entry(
   target: Exp,
   arg_entry: ArgEntry,
-  meta: ExpMeta
+  meta: ExpMeta,
 ): Exp {
   switch (arg_entry.kind) {
     case "implicit": {
@@ -75,7 +75,7 @@ export function build_ap_from_arg_entry(
 
 export function build_ap_from_arg_core_entry(
   target_core: Core,
-  arg_core_entry: ArgCoreEntry
+  arg_core_entry: ArgCoreEntry,
 ): Core {
   switch (arg_core_entry.kind) {
     case "implicit": {

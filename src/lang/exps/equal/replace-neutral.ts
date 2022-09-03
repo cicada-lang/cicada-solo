@@ -22,11 +22,11 @@ export class ReplaceNeutral extends Neutral {
       new Exps.ApCore(
         new Exps.ApCore(
           new Exps.GlobalCore("replace"),
-          this.target.readback_neutral(ctx)
+          this.target.readback_neutral(ctx),
         ),
-        this.motive.readback_normal(ctx)
+        this.motive.readback_normal(ctx),
       ),
-      this.base.readback_normal(ctx)
+      this.base.readback_normal(ctx),
     )
   }
 

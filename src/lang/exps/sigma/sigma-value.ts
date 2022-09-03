@@ -20,20 +20,20 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
       const fresh_name = ctx.freshen(this.cdr_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.car_t,
-        new Exps.VarNeutral(fresh_name)
+        new Exps.VarNeutral(fresh_name),
       )
       const car_t = readback(ctx, new Exps.TypeValue(), this.car_t)
       const cdr_t = readback(
         ctx.extend(fresh_name, this.car_t),
         new Exps.TypeValue(),
-        this.cdr_t_cl.apply(variable)
+        this.cdr_t_cl.apply(variable),
       )
 
       return cdr_t.free_names(new Set()).has(fresh_name)
         ? new Exps.SigmaCore(fresh_name, car_t, cdr_t)
         : new Exps.ApCore(
             new Exps.ApCore(new Exps.GlobalCore("Pair"), car_t),
-            cdr_t
+            cdr_t,
           )
     }
   }
@@ -47,7 +47,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
     const cdr = Exps.CdrCore.apply(value)
     return new Exps.ConsCore(
       readback(ctx, this.car_t, car),
-      readback(ctx, this.cdr_t_cl.apply(car), cdr)
+      readback(ctx, this.cdr_t_cl.apply(car), cdr),
     )
   }
 
@@ -63,7 +63,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
         this.car_t,
         this.cdr_t_cl,
         that.car_t,
-        that.cdr_t_cl
+        that.cdr_t_cl,
       )
   }
 }

@@ -20,7 +20,7 @@ export class TypeCtorCore extends Core {
     data_ctors: Record<
       string,
       { t: Core; original_typings: Array<Exps.DataCtorTyping> }
-    >
+    >,
   ) {
     super()
     this.name = name
@@ -36,7 +36,7 @@ export class TypeCtorCore extends Core {
       ...result.free_names,
       ...this.varied_free_names(result.bound_names),
       ...this.data_ctors_free_names(
-        new Set([...result.bound_names, this.name])
+        new Set([...result.bound_names, this.name]),
       ),
     ])
   }
@@ -81,7 +81,7 @@ export class TypeCtorCore extends Core {
       this.fixed,
       this.varied,
       this.data_ctors,
-      env
+      env,
     )
   }
 

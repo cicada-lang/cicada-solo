@@ -27,7 +27,7 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
       const ret_t_core = readback(
         ctx.extend(fresh_name, this.arg_t),
         new Exps.TypeValue(),
-        this.ret_t_cl.apply(not_yet_value)
+        this.ret_t_cl.apply(not_yet_value),
       )
 
       return new Exps.ImplicitPiCore(fresh_name, arg_t, ret_t_core)
@@ -50,7 +50,7 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
     const result = readback(
       ctx.extend(fresh_name, this.arg_t),
       pi,
-      Exps.ImplicitApCore.apply(value, not_yet_value)
+      Exps.ImplicitApCore.apply(value, not_yet_value),
     )
 
     return new Exps.ImplicitFnCore(fresh_name, result)
@@ -68,7 +68,7 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
         this.arg_t,
         this.ret_t_cl,
         that.arg_t,
-        that.ret_t_cl
+        that.ret_t_cl,
       )
   }
 }

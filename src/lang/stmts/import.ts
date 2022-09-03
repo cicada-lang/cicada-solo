@@ -24,7 +24,7 @@ export class Import extends Stmt {
           //
           `I can not do circular import.`,
           `  path: ${this.path}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -39,7 +39,7 @@ export class Import extends Stmt {
             `  ${name}`,
             `when importing from module:`,
             `  ${this.path}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
 

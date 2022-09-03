@@ -22,7 +22,7 @@ export class Fetcher {
         [
           `I can not handle protocol: ${JSON.stringify(url.protocol)},`,
           `  known protocols are: ${JSON.stringify(this.knownProtocols)}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 

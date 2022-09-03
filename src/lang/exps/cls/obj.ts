@@ -18,21 +18,21 @@ export class Obj extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
     return new Set(
       this.properties.flatMap((property) =>
-        Array.from(property.free_names(bound_names))
-      )
+        Array.from(property.free_names(bound_names)),
+      ),
     )
   }
 
   subst(name: string, exp: Exp): Exp {
     return new Obj(
       this.properties.map((property) => property.solution(name, exp)),
-      this.meta
+      this.meta,
     )
   }
 
   private check_duplicated_field_name(ctx: Ctx): void {
     const field_names = this.properties.flatMap((prop) =>
-      prop.to_entries(ctx).map(([name]) => name)
+      prop.to_entries(ctx).map(([name]) => name),
     )
 
     const occurred = new Set()
@@ -46,7 +46,7 @@ export class Obj extends Exp {
             `  ${field_name}`,
             `field name list:`,
             `  ${field_names.join(", ")}`,
-          ].join("\n")
+          ].join("\n"),
         )
       } else {
         occurred.add(field_name)
@@ -58,7 +58,7 @@ export class Obj extends Exp {
     this.check_duplicated_field_name(ctx)
 
     const properties = new Map(
-      this.properties.flatMap((prop) => prop.to_entries(ctx))
+      this.properties.flatMap((prop) => prop.to_entries(ctx)),
     )
 
     if (t instanceof Exps.ClsValue) {
@@ -70,7 +70,7 @@ export class Obj extends Exp {
       [
         `I expect t to be ClsValue`,
         `but the constructor name I meet is: ${t.constructor.name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 
@@ -120,7 +120,7 @@ export class SpreadProp extends Prop {
       [
         `I expect inferred.t to be an instance of ClsValue`,
         `but the constructor name I meet is: ${inferred.t.constructor.name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 

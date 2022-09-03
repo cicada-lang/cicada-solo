@@ -16,7 +16,7 @@ export default class extends TestCase {
     const loader = new ModLoader()
     loader.fetcher.register(
       "mock",
-      (url) => "let id: (A: Type) -> (A) -> A = (A, x) => x"
+      (url) => "let id: (A: Type) -> (A) -> A = (A, x) => x",
     )
 
     const mod = await loader.loadAndExecute(new URL("mock:id.cic"))
@@ -32,7 +32,7 @@ export default class extends TestCase {
         "let id: (A: Type) -> (A) -> A = (A, x) => x",
         "let x = { let y = sole; return y }",
         "```",
-      ].join("\n")
+      ].join("\n"),
     )
 
     const mod = await loader.loadAndExecute(new URL("mock:example.md"))
@@ -58,7 +58,7 @@ export default class extends TestCase {
         "```cicada",
         'let c = "c"',
         "```",
-      ].join("\n")
+      ].join("\n"),
     )
 
     const mod = await loader.loadAndExecute(new URL("mock:example.md"))

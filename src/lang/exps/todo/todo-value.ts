@@ -35,8 +35,8 @@ export class TodoValue extends Exps.GlobalValue {
       new Exps.VaguePiCore(
         "T",
         new Exps.GlobalCore("Type"),
-        new Exps.VarCore("T")
-      )
+        new Exps.VarCore("T"),
+      ),
     )
   }
 }

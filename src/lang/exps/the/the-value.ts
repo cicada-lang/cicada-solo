@@ -27,8 +27,8 @@ export class TheValue extends Exps.GlobalValue {
       new Exps.PiCore(
         "T",
         new Exps.GlobalCore("Type"),
-        new Exps.PiCore("x", new Exps.VarCore("T"), new Exps.VarCore("T"))
-      )
+        new Exps.PiCore("x", new Exps.VarCore("T"), new Exps.VarCore("T")),
+      ),
     )
   }
 }

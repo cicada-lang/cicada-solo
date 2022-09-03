@@ -27,7 +27,7 @@ export class The extends Exp {
     return new The(
       subst(this.t, name, exp),
       subst(this.x, name, exp),
-      this.meta
+      this.meta,
     )
   }
 

@@ -40,7 +40,7 @@ export class Var extends Exp {
           ctx,
           new Exps.VarCore(this.name),
           [],
-          t
+          t,
         )
       }
 
@@ -57,7 +57,7 @@ export class Var extends Exp {
           ctx,
           new Exps.GlobalCore(this.name),
           [],
-          t
+          t,
         )
       }
 

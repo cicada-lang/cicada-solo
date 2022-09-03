@@ -13,14 +13,14 @@ export class NilClsApHandler extends ClsApHandler {
         `I meet the end of ClsValue`,
         `I can not apply arg to it anymore`,
         `arg class name: ${arg_value_entry.value.constructor.name}`,
-      ].join("\n") + "\n"
+      ].join("\n") + "\n",
     )
   }
 
   infer_by_target(
     ctx: Ctx,
     target_core: Core,
-    arg: Exp
+    arg: Exp,
   ): { t: Value; core: Core } {
     throw new ElaborationError(`The telescope is full.`)
   }

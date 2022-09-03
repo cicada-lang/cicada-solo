@@ -17,7 +17,7 @@ export class DataCtorValue extends Value {
     type_ctor: Exps.TypeCtorValue,
     name: string,
     t: Core,
-    original_typings: Array<Exps.DataCtorTyping>
+    original_typings: Array<Exps.DataCtorTyping>,
   ) {
     super()
     this.type_ctor = type_ctor
@@ -117,13 +117,13 @@ export class DataCtorValue extends Value {
   private build_data_pattern(fixed_arg_names: Array<string>): Core {
     let data_core: Core = new Exps.DotCore(
       new Exps.VarCore(this.type_ctor.name),
-      this.name
+      this.name,
     )
 
     for (const fixed_arg_name of fixed_arg_names) {
       data_core = new Exps.VagueApCore(
         data_core,
-        new Exps.VarCore(fixed_arg_name)
+        new Exps.VarCore(fixed_arg_name),
       )
     }
 
@@ -169,7 +169,7 @@ export class DataCtorValue extends Value {
         [
           `I expect position to be direct positive recursive.`,
           `  position index: ${index}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -188,7 +188,7 @@ export class DataCtorValue extends Value {
         const original_typing = this.original_typings[index]
         if (original_typing === undefined) {
           throw new ElaborationError(
-            `I can not find original typing from typing of name: ${typing.name}`
+            `I can not find original typing from typing of name: ${typing.name}`,
           )
         }
 
@@ -231,7 +231,7 @@ export class DataCtorValue extends Value {
         typing.original_name,
         typing.name,
         case_ret_t,
-        almost_t
+        almost_t,
       )
     }
 
@@ -240,7 +240,7 @@ export class DataCtorValue extends Value {
 
   private build_ap_from_typing(
     core: Core,
-    typing: Exps.DataCtorCoreTyping
+    typing: Exps.DataCtorCoreTyping,
   ): Core {
     switch (typing.kind) {
       case "plain":
@@ -263,8 +263,8 @@ export class DataCtorValue extends Value {
       this.type_ctor.name,
       new Exps.NotYetValue(
         this.type_ctor.self_type(),
-        new Exps.VarNeutral(this.type_ctor.name)
-      )
+        new Exps.VarNeutral(this.type_ctor.name),
+      ),
     )
 
     const t = evaluate(env, this.t)

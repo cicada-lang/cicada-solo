@@ -23,7 +23,7 @@ export class TypeCtorValue extends Value {
       string,
       { t: Core; original_typings: Array<Exps.DataCtorTyping> }
     >,
-    env: Env
+    env: Env,
   ) {
     super()
     this.name = name
@@ -39,7 +39,7 @@ export class TypeCtorValue extends Value {
         this,
         name,
         t,
-        original_typings
+        original_typings,
       )
     }
   }
@@ -80,7 +80,7 @@ export class TypeCtorValue extends Value {
           `I can not find the data constructor named: ${name}`,
           `  type constructor name: ${this.name}`,
           `  existing data constructor names: ${names}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -104,7 +104,7 @@ export class TypeCtorValue extends Value {
           `I expect number of arguments to be not less than fixed entries`,
           `  fixed_args.length: ${fixed_args.length}`,
           `  fixed_entries.length: ${fixed_entries.length}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -143,8 +143,8 @@ export class TypeCtorValue extends Value {
         result.ctx.define(
           this.name,
           self_type,
-          new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name))
-        )
+          new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name)),
+        ),
       )
 
       return new Exps.TypeCtorCore(this.name, result.fixed, varied, data_ctors)
@@ -156,7 +156,7 @@ export class TypeCtorValue extends Value {
     //   `PiValue.readback_eta_expansion` can handle it.
     return evaluate(
       this.env,
-      Exps.TypeCtor.self_type_core(this.fixed, this.varied)
+      Exps.TypeCtor.self_type_core(this.fixed, this.varied),
     )
   }
 
@@ -182,7 +182,7 @@ export class TypeCtorValue extends Value {
       fixed_args: (index, { arg_t }) =>
         new Exps.NotYetValue(
           arg_t,
-          new Exps.VarNeutral(this.fixed_arg_names[index])
+          new Exps.VarNeutral(this.fixed_arg_names[index]),
         ),
     })
   }
@@ -213,7 +213,7 @@ export class TypeCtorValue extends Value {
   }
 
   private readback_data_ctors(
-    ctx: Ctx
+    ctx: Ctx,
   ): Record<string, { t: Core; original_typings: Array<Exps.DataCtorTyping> }> {
     return Object.fromEntries(
       Object.entries(this.data_ctors).map(([name, data_ctor]) => [
@@ -222,7 +222,7 @@ export class TypeCtorValue extends Value {
           t: data_ctor.readback_t(ctx),
           original_typings: data_ctor.original_typings,
         },
-      ])
+      ]),
     )
   }
 
@@ -234,7 +234,7 @@ export class TypeCtorValue extends Value {
         [
           `I expect this and that to the same TypeCtorValue,`,
           `but they are not.`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -259,7 +259,7 @@ export class TypeCtorValue extends Value {
           [
             `I expect a full type constructor application to be ApCore.`,
             `  datatype: ${datatype.format()}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
 
@@ -277,7 +277,7 @@ export class TypeCtorValue extends Value {
             `  fixed_arity: ${this.fixed_arity}`,
             `  varied_arity: ${this.varied_arity}`,
             `  total_arity: ${this.arity}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
 

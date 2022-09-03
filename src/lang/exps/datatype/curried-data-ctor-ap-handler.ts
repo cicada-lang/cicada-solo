@@ -27,7 +27,7 @@ export class CurriedDataCtorApHandler extends ApHandler {
     } else {
       return new Exps.CurriedDataCtorValue(
         this.target.data_ctor,
-        arg_value_entries
+        arg_value_entries,
       )
     }
   }

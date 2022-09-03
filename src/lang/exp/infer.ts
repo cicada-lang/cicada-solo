@@ -14,7 +14,7 @@ export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
       [
         `I can not infer the type of ${exp.format()}.`,
         `I suggest you add a type annotation to the expression.`,
-      ].join("\n")
+      ].join("\n"),
     )
   } catch (error) {
     if (error instanceof ElaborationError) error.pushExp(exp)

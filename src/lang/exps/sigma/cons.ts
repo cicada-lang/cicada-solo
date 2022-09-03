@@ -27,7 +27,7 @@ export class Cons extends Exp {
     return new Cons(
       subst(this.car, name, exp),
       subst(this.cdr, name, exp),
-      this.meta
+      this.meta,
     )
   }
 

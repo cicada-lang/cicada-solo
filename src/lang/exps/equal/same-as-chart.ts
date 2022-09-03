@@ -27,7 +27,7 @@ export class SameAsChart extends Exp {
     return new SameAsChart(
       subst(this.t, name, exp),
       this.exps.map((exp) => subst(exp, name, exp)),
-      this.meta
+      this.meta,
     )
   }
 

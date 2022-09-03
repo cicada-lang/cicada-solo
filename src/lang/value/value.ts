@@ -15,7 +15,7 @@ export abstract class Value {
       [
         `Method not implemented: Value.unify`,
         `  class name: ${this.constructor.name}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

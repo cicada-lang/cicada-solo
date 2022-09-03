@@ -11,6 +11,6 @@ export abstract class ClsApHandler extends ApHandler {
   abstract infer_by_target(
     ctx: Ctx,
     target_core: Core,
-    arg: Exp
+    arg: Exp,
   ): { t: Value; core: Core }
 }

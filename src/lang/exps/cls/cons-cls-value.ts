@@ -48,18 +48,18 @@ export class ConsClsValue extends Exps.ClsValue {
       const fresh_name = ut.freshen(new Set(ctx.names), this.rest_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.field_t,
-        new Exps.VarNeutral(fresh_name)
+        new Exps.VarNeutral(fresh_name),
       )
       const field_t = readback(ctx, new Exps.TypeValue(), this.field_t)
       const rest_t = readback(
         ctx.extend(fresh_name, this.field_t),
         new Exps.TypeValue(),
-        this.rest_t_cl.apply(variable)
+        this.rest_t_cl.apply(variable),
       )
 
       if (!(rest_t instanceof Exps.ClsCore)) {
         throw new ElaborationError(
-          `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
+          `I expect rest_t to be an instance of ${Exps.ClsCore.name}`,
         )
       }
 
@@ -98,7 +98,7 @@ export class ConsClsValue extends Exps.ClsValue {
 
   extend_ctx(
     ctx: Ctx,
-    renamings: Array<{ field_name: string; local_name: string }>
+    renamings: Array<{ field_name: string; local_name: string }>,
   ): {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
@@ -106,7 +106,7 @@ export class ConsClsValue extends Exps.ClsValue {
     const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.NotYetValue(
       this.field_t,
-      new Exps.VarNeutral(fresh_name)
+      new Exps.VarNeutral(fresh_name),
     )
 
     return this.rest_t_cl
@@ -129,7 +129,7 @@ export class ConsClsValue extends Exps.ClsValue {
           `I expect this and that to have the same field name`,
           `  this field name: ${this.field_name}`,
           `  that field name: ${that.field_name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -140,7 +140,7 @@ export class ConsClsValue extends Exps.ClsValue {
         this.field_t,
         this.rest_t_cl,
         that.field_t,
-        that.rest_t_cl
+        that.rest_t_cl,
       )
   }
 }

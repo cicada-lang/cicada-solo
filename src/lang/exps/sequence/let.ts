@@ -38,7 +38,7 @@ export class Let extends Exp {
         fresh_name,
         subst(this.exp, name, exp),
         subst(subst(this.ret, this.name, new Exps.Var(fresh_name)), name, exp),
-        this.meta
+        this.meta,
       )
     }
   }

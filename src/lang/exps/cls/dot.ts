@@ -33,7 +33,7 @@ export class Dot extends Exp {
         ctx,
         inferred.core,
         [],
-        t
+        t,
       )
     }
 
@@ -66,7 +66,7 @@ export class Dot extends Exp {
       [
         `I expect the inferred type to be Exps.ClsValue`,
         `  class name: ${inferred.t.constructor.name}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 

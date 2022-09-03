@@ -7,13 +7,13 @@ export class Runner {
 
   constructor() {
     this.loader.fetcher.register("file", (url) =>
-      fs.promises.readFile(url.pathname, "utf8")
+      fs.promises.readFile(url.pathname, "utf8"),
     )
   }
 
   async run(
     url: URL,
-    opts?: { silent?: boolean }
+    opts?: { silent?: boolean },
   ): Promise<{ error?: unknown }> {
     try {
       const mod = await this.loader.loadAndExecute(url)

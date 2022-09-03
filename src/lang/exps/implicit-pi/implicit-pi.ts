@@ -37,7 +37,7 @@ export class ImplicitPi extends Exp {
         this.name,
         subst(this.arg_t, name, exp),
         this.ret_t,
-        this.meta
+        this.meta,
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -48,7 +48,7 @@ export class ImplicitPi extends Exp {
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp),
-        this.meta
+        this.meta,
       )
     }
   }
@@ -61,7 +61,7 @@ export class ImplicitPi extends Exp {
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,
-      new Exps.TypeValue()
+      new Exps.TypeValue(),
     )
 
     return {

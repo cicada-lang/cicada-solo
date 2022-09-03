@@ -19,14 +19,14 @@ export class ConsClsApHandler extends ApHandler {
       this.target.rest_t_cl.name,
       this.target.field_t,
       arg_value_entry.value,
-      this.target.rest_t_cl.apply(arg_value_entry.value)
+      this.target.rest_t_cl.apply(arg_value_entry.value),
     )
   }
 
   infer_by_target(
     ctx: Ctx,
     target_core: Core,
-    arg: Exp
+    arg: Exp,
   ): { t: Value; core: Core } {
     const arg_core = check(ctx, arg, this.target.field_t)
     return {

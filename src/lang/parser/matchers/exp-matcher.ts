@@ -4,7 +4,7 @@ import * as Exps from "../../exps"
 
 export function pi_handler(
   body: { [key: string]: pt.Tree },
-  meta: { span: pt.Span }
+  meta: { span: pt.Span },
 ): Exp {
   const { typings, ret_t } = body
 
@@ -59,7 +59,7 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
 
 export function sigma_handler(
   body: { [key: string]: pt.Tree },
-  meta: { span: pt.Span }
+  meta: { span: pt.Span },
 ): Exp {
   const { typings, cdr_t } = body
 
@@ -67,7 +67,7 @@ export function sigma_handler(
     .reverse()
     .reduce(
       (result, typing) => new Exps.Sigma(typing.name, typing.exp, result, meta),
-      exp_matcher(cdr_t)
+      exp_matcher(cdr_t),
     )
 }
 
@@ -89,7 +89,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .reduce(
           (result, arg_entries) =>
             new Exps.MultiAp(result, arg_entries, { span }),
-          operator_matcher(target)
+          operator_matcher(target),
         ),
     "operator:sequence_begin": ({ sequence }, { span }) =>
       sequence_matcher(sequence),
@@ -108,7 +108,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
             new Exps.MultiAp(result, arg_entries, { span }),
           new Exps.Dot(operator_matcher(target), pt.str(name), {
             span: pt.span_closure([target.span, name.span]),
-          }) as Exp
+          }) as Exp,
         ),
     "operator:the": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
@@ -117,14 +117,14 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(target),
         undefined,
         pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
-        { span }
+        { span },
       ),
     "operator:induction": ({ target, motive, case_entries }, { span }) =>
       new Exps.Induction(
         exp_matcher(target),
         exp_matcher(motive),
         pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
-        { span }
+        { span },
       ),
   })(tree)
 }
@@ -152,16 +152,16 @@ export function operand_matcher(tree: pt.Tree): Exp {
                   entry.field_t,
                   entry.field,
                   rest_t,
-                  { span: entry.span }
+                  { span: entry.span },
                 )
               : new Exps.ConsCls(
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
                   rest_t,
-                  { span: entry.span }
+                  { span: entry.span },
                 ),
-          new Exps.NilCls({ span })
+          new Exps.NilCls({ span }),
         ),
     "operand:ext": ({ parent, entries }, { span }) =>
       new Exps.Ext(
@@ -179,18 +179,18 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     entry.field_t,
                     entry.field,
                     rest_t,
-                    { span: entry.span }
+                    { span: entry.span },
                   )
                 : new Exps.ConsCls(
                     entry.field_name,
                     entry.field_name,
                     entry.field_t,
                     rest_t,
-                    { span: entry.span }
+                    { span: entry.span },
                   ),
-            new Exps.NilCls({ span })
+            new Exps.NilCls({ span }),
           ),
-        { span }
+        { span },
       ),
     "operand:obj": ({ properties, last_property }, { span }) =>
       new Exps.Obj(
@@ -198,7 +198,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
           ...pt.matchers.zero_or_more_matcher(properties).map(property_matcher),
           property_matcher(last_property),
         ],
-        { span }
+        { span },
       ),
     "operand:same_as_chart": ({ t, exps }, { span }) =>
       new Exps.SameAsChart(exp_matcher(t), exps_matcher(exps), { span }),
@@ -249,7 +249,7 @@ export function sequence_entry_matcher(tree: pt.Tree): {
     }),
     "sequence_entry:let_fn": (
       { name, typings, ret_t, sequence, body },
-      { span }
+      { span },
     ) => {
       const init: Exp = sequence_matcher(sequence)
       const fn = typings_matcher(typings)
@@ -310,7 +310,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
     }),
     "cls_entry:method_fulfilled": (
       { name, typings, ret_t, sequence },
-      { span }
+      { span },
     ) => {
       const init: Exp = sequence_matcher(sequence)
       const fn = typings_matcher(typings)

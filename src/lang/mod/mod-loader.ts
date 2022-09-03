@@ -11,7 +11,7 @@ export class ModLoader {
   constructor() {
     this.blockLoader.route(
       (url) => url.href.endsWith(".md"),
-      new BlockParsers.MarkdownBlockParser()
+      new BlockParsers.MarkdownBlockParser(),
     )
     this.blockLoader.fallback(new BlockParsers.WholeBlockParser())
   }

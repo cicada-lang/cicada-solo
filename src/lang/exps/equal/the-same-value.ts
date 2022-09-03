@@ -19,7 +19,7 @@ export class TheSameValue extends Exps.GlobalValue {
         ...([
           { kind: "vague", value: arg_value_entries[0].value },
           { kind: "vague", value: arg_value_entries[1].value },
-        ] as const)
+        ] as const),
       ),
   })
 
@@ -52,14 +52,14 @@ export class TheSameValue extends Exps.GlobalValue {
             new Exps.ApCore(
               new Exps.ApCore(
                 new Exps.GlobalCore("Equal"),
-                new Exps.VarCore("T")
+                new Exps.VarCore("T"),
               ),
-              new Exps.VarCore("x")
+              new Exps.VarCore("x"),
             ),
-            new Exps.VarCore("x")
-          )
-        )
-      )
+            new Exps.VarCore("x"),
+          ),
+        ),
+      ),
     )
   }
 }

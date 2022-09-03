@@ -21,7 +21,7 @@ export class FulfilledCls extends Exps.Cls {
     field_t: Exp,
     field: Exp,
     rest_t: Exps.Cls,
-    meta: ExpMeta
+    meta: ExpMeta,
   ) {
     super()
     this.meta = meta
@@ -49,7 +49,7 @@ export class FulfilledCls extends Exps.Cls {
         subst(this.field_t, name, exp),
         subst(this.field, name, exp),
         this.rest_t,
-        this.meta
+        this.meta,
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -63,9 +63,9 @@ export class FulfilledCls extends Exps.Cls {
         subst(
           subst(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
           name,
-          exp
+          exp,
         ) as Exps.Cls,
-        this.meta
+        this.meta,
       )
     }
   }
@@ -91,7 +91,7 @@ export class FulfilledCls extends Exps.Cls {
           `  ${this.field_name}`,
           `field names:`,
           `  ${this.field_name}, ${this.rest_t.field_names.join(", ")}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
   }
@@ -108,7 +108,7 @@ export class FulfilledCls extends Exps.Cls {
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value, field_value),
       rest_t,
-      new Exps.TypeValue()
+      new Exps.TypeValue(),
     )
 
     if (!(rest_t_core instanceof Exps.ClsCore)) {
@@ -122,7 +122,7 @@ export class FulfilledCls extends Exps.Cls {
         fresh_name,
         field_t_core,
         field_core,
-        rest_t_core
+        rest_t_core,
       ),
     }
   }

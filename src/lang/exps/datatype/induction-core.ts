@@ -13,7 +13,7 @@ export class InductionCore extends Core {
   constructor(
     target: Core,
     motive: Core,
-    case_entries: Array<Exps.CaseCoreEntry>
+    case_entries: Array<Exps.CaseCoreEntry>,
   ) {
     super()
     this.target = target
@@ -26,7 +26,7 @@ export class InductionCore extends Core {
       ...this.target.free_names(bound_names),
       ...(this.motive ? this.motive.free_names(bound_names) : []),
       ...this.case_entries.flatMap((case_entry) =>
-        Array.from(case_entry.core.free_names(bound_names))
+        Array.from(case_entry.core.free_names(bound_names)),
       ),
     ])
   }
@@ -38,7 +38,7 @@ export class InductionCore extends Core {
       this.case_entries.map((case_entry) => ({
         ...case_entry,
         value: evaluate(env, case_entry.core),
-      }))
+      })),
     )
   }
 
@@ -49,7 +49,7 @@ export class InductionCore extends Core {
       .map((case_entry) =>
         case_entry.nullary
           ? `case ${case_entry.name} => ${case_entry.core.format()}`
-          : `case ${case_entry.name}${case_entry.core.format()}`
+          : `case ${case_entry.name}${case_entry.core.format()}`,
       )
       .join(" ")
 
@@ -64,7 +64,7 @@ export class InductionCore extends Core {
       .map((case_entry) =>
         case_entry.nullary
           ? `case ${case_entry.name} => ${case_entry.core.alpha_format(ctx)}`
-          : `case ${case_entry.name}${case_entry.core.alpha_format(ctx)}`
+          : `case ${case_entry.name}${case_entry.core.alpha_format(ctx)}`,
       )
       .join(" ")
 
@@ -74,7 +74,7 @@ export class InductionCore extends Core {
   static apply(
     target: Value,
     motive: Value,
-    case_entries: Array<Exps.CaseValueEntry>
+    case_entries: Array<Exps.CaseValueEntry>,
   ): Value {
     if (target instanceof Exps.DataCtorValue && target.arity === 0) {
       target = target.as_data()
@@ -89,26 +89,26 @@ export class InductionCore extends Core {
     if (target instanceof Exps.DataValue) {
       const data_ctor = target.data_ctor
       const case_entry = case_entries.find(
-        (case_entry) => case_entry.name === data_ctor.name
+        (case_entry) => case_entry.name === data_ctor.name,
       )
 
       if (case_entry === undefined) {
         const case_entries_names = case_entries.map(
-          (case_entry) => case_entry.name
+          (case_entry) => case_entry.name,
         )
         throw new InternalError(
           [
             `I can not find case entry from target data constructor name.`,
             `  target data constructor name: ${data_ctor.name}`,
             `  case entries names: ${case_entries_names.join(", ")}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
 
       // NOTE We need to drop fixed arguments before applying target.
       // - This must be consistent with the implementation of `build_case_t`.
       const arg_value_entries = target.arg_value_entries.slice(
-        data_ctor.type_ctor.fixed_arity
+        data_ctor.type_ctor.fixed_arity,
       )
 
       if (!data_ctor.is_direct_positive_recursive) {
@@ -124,8 +124,8 @@ export class InductionCore extends Core {
             Exps.InductionCore.apply(
               arg_value_entry.value,
               motive,
-              case_entries
-            )
+              case_entries,
+            ),
           )
         }
       }
@@ -166,8 +166,8 @@ export class InductionCore extends Core {
             ...case_entry,
             normal: new Normal(case_t, case_entry.value),
           }
-        })
-      )
+        }),
+      ),
     )
   }
 }

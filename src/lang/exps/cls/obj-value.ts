@@ -22,7 +22,7 @@ export class ObjValue extends Value {
     const value = this.properties.get(name)
     if (value === undefined) {
       throw new ElaborationError(
-        `The property name: ${name} of object is undefined.`
+        `The property name: ${name} of object is undefined.`,
       )
     }
 
@@ -41,7 +41,7 @@ export class ObjValue extends Value {
           ctx,
           Exps.DotCore.apply(t, name),
           this_property,
-          that_property
+          that_property,
         )
       }
     }

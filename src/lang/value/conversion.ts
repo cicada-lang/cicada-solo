@@ -26,7 +26,7 @@ export function check_conversion(
       from: string
       to: string
     }
-  }
+  },
 ): void {
   if (!conversion(ctx, t, from, to)) {
     const t_format = readback(ctx, new Exps.TypeValue(), t).format()
@@ -43,7 +43,7 @@ export function check_conversion(
         `  ${from_format}`,
         `to ${to_description}:`,
         `  ${to_format}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

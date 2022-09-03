@@ -25,7 +25,7 @@ export class VagueInserter {
   insert_vague_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(
       exp.free_names(new Set()),
-      ctx.freshen(this.ret_t_cl.name)
+      ctx.freshen(this.ret_t_cl.name),
     )
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
@@ -40,7 +40,7 @@ export class VagueInserter {
     ctx: Ctx,
     target_core: Core,
     arg_entries: Array<Exps.ArgEntry>,
-    t: Value
+    t: Value,
   ): Core {
     // NOTE The `number_of_solved_args` depends on the given type -- `t`,
     //   which might be a vague-pi type or pi type.
@@ -51,14 +51,14 @@ export class VagueInserter {
     const { solution, number_of_solved_args } = solve_vague_args(
       ctx,
       new Exps.VaguePiValue(this.arg_t, this.ret_t_cl),
-      t
+      t,
     )
 
     const vague_ap_entries = this.collect_vague_ap_entries(
       ctx,
       solution,
       number_of_solved_args,
-      []
+      [],
     )
 
     let result_core = target_core
@@ -72,15 +72,15 @@ export class VagueInserter {
       drop_vague_pi(
         ctx,
         new Exps.VaguePiValue(this.arg_t, this.ret_t_cl),
-        vague_ap_entries
+        vague_ap_entries,
       ),
-      arg_entries
+      arg_entries,
     )
 
     for (const arg_core_entry of arg_core_entries) {
       result_core = Exps.build_ap_from_arg_core_entry(
         result_core,
-        arg_core_entry
+        arg_core_entry,
       )
     }
 
@@ -91,7 +91,7 @@ export class VagueInserter {
     ctx: Ctx,
     solution: Solution,
     number_of_solved_args: number,
-    entries: Array<VagueApEntry>
+    entries: Array<VagueApEntry>,
   ): Array<VagueApEntry> {
     if (entries.length === number_of_solved_args) {
       return entries
@@ -105,7 +105,7 @@ export class VagueInserter {
         ctx,
         solution,
         number_of_solved_args,
-        [...entries, entry]
+        [...entries, entry],
       )
     } else {
       return [...entries, entry]
@@ -121,7 +121,7 @@ export class VagueInserter {
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -133,7 +133,7 @@ function solve_vague_args(
   ctx: Ctx,
   ret_t: Value,
   t: Value,
-  number_of_solved_args: number = 0
+  number_of_solved_args: number = 0,
 ): { solution: Solution; number_of_solved_args: number } {
   if (
     ret_t instanceof Exps.VaguePiValue ||
@@ -157,7 +157,7 @@ function solve_vague_args(
       ctx,
       new Exps.TypeValue(),
       ret_t,
-      t
+      t,
     )
 
     return { solution, number_of_solved_args }
@@ -167,7 +167,7 @@ function solve_vague_args(
 function drop_vague_pi(
   ctx: Ctx,
   ret_t: Value,
-  vague_ap_entries: Array<VagueApEntry>
+  vague_ap_entries: Array<VagueApEntry>,
 ): Value {
   if (ret_t instanceof Exps.VaguePiValue && vague_ap_entries.length > 0) {
     const [entry, ...rest] = vague_ap_entries
@@ -181,7 +181,7 @@ function drop_vague_pi(
 function check_arg_entries(
   ctx: Ctx,
   t: Value,
-  arg_entries: Array<Exps.ArgEntry>
+  arg_entries: Array<Exps.ArgEntry>,
 ): Array<Exps.ArgCoreEntry> {
   const arg_core_entries: Array<Exps.ArgCoreEntry> = []
   for (const arg_entry of arg_entries) {
@@ -196,7 +196,7 @@ function check_arg_entries(
 function check_arg_entry(
   ctx: Ctx,
   t: Value,
-  arg_entry: Exps.ArgEntry
+  arg_entry: Exps.ArgEntry,
 ): { arg_core_entries: Array<Exps.ArgCoreEntry>; t: Value } {
   if (
     t instanceof Exps.PiValue ||
@@ -215,7 +215,7 @@ function check_arg_entry(
     const result = t.implicit_inserter.collect_implicit_ap_entries(
       ctx,
       inferred_arg.t,
-      []
+      [],
     )
     return {
       arg_core_entries: [
@@ -224,7 +224,7 @@ function check_arg_entry(
           core: readback(
             ctx,
             implicit_ap_entry.arg_t,
-            implicit_ap_entry.implicit_arg
+            implicit_ap_entry.implicit_arg,
           ),
         })),
         { kind: arg_entry.kind, core: arg_core },
@@ -238,7 +238,7 @@ function check_arg_entry(
         `  class name: ${t.constructor.name}`,
         `  arg_entry.kind: ${arg_entry.kind}`,
         `  arg_entry.arg: ${arg_entry.exp.format()}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

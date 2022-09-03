@@ -45,10 +45,10 @@ export class EqualValue extends Exps.GlobalValue {
           new Exps.PiCore(
             "to",
             new Exps.VarCore("T"),
-            new Exps.GlobalCore("Type")
-          )
-        )
-      )
+            new Exps.GlobalCore("Type"),
+          ),
+        ),
+      ),
     )
   }
 }

@@ -16,7 +16,7 @@ export class TypeCtor extends Exp {
     name: string,
     fixed: Record<string, Exp>,
     varied: Record<string, Exp>,
-    data_ctors: Record<string, Exp>
+    data_ctors: Record<string, Exp>,
   ) {
     super()
     this.name = name
@@ -32,7 +32,7 @@ export class TypeCtor extends Exp {
       ...result.free_names,
       ...this.varied_free_names(result.bound_names),
       ...this.data_ctors_free_names(
-        new Set([...result.bound_names, this.name])
+        new Set([...result.bound_names, this.name]),
       ),
     ])
   }
@@ -82,10 +82,10 @@ export class TypeCtor extends Exp {
     const varied = this.infer_varied(result.ctx)
     const self_type = evaluate(
       ctx.toEnv(),
-      TypeCtor.self_type_core(result.fixed, varied)
+      TypeCtor.self_type_core(result.fixed, varied),
     )
     const data_ctors = this.infer_data_ctors(
-      result.ctx.extend(this.name, self_type)
+      result.ctx.extend(this.name, self_type),
     )
 
     return {
@@ -121,18 +121,18 @@ export class TypeCtor extends Exp {
 
   static self_type_core(
     fixed: Record<string, Core>,
-    varied: Record<string, Core>
+    varied: Record<string, Core>,
   ): Core {
     return [...Object.entries(fixed), ...Object.entries(varied)]
       .reverse()
       .reduce(
         (result, [name, t]) => new Exps.PiCore(name, t, result),
-        new Exps.GlobalCore("Type")
+        new Exps.GlobalCore("Type"),
       )
   }
 
   private infer_data_ctors(
-    ctx: Ctx
+    ctx: Ctx,
   ): Record<string, { t: Core; original_typings: Array<Exps.DataCtorTyping> }> {
     return Object.fromEntries(
       Object.entries(this.data_ctors).map(([name, t]) => [
@@ -141,7 +141,7 @@ export class TypeCtor extends Exp {
           t: check(ctx, t, new Exps.TypeValue()),
           original_typings: this.data_ctor_typings(name),
         },
-      ])
+      ]),
     )
   }
 

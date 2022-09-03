@@ -11,7 +11,7 @@ export class CurriedDataCtorValue extends Value {
 
   constructor(
     data_ctor: Exps.DataCtorValue,
-    arg_value_entries: Array<Exps.ArgValueEntry>
+    arg_value_entries: Array<Exps.ArgValueEntry>,
   ) {
     super()
     this.data_ctor = data_ctor
@@ -38,7 +38,7 @@ export class CurriedDataCtorValue extends Value {
 
       let result_core: Core = new Exps.DotCore(
         new Exps.VarCore(this.data_ctor.type_ctor.name),
-        this.data_ctor.name
+        this.data_ctor.name,
       )
 
       const arg_t_values = [
@@ -85,7 +85,7 @@ export class CurriedDataCtorValue extends Value {
         ctx,
         entry.arg_t,
         this.arg_value_entries.map((entry) => entry.value)[index],
-        that.arg_value_entries.map((entry) => entry.value)[index]
+        that.arg_value_entries.map((entry) => entry.value)[index],
       )
     }
 

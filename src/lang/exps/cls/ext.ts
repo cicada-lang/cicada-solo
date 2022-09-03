@@ -29,7 +29,7 @@ export class Ext extends Exp {
     return new Ext(
       subst(this.parent, name, exp),
       subst(this.rest_t, name, exp) as Exps.Cls,
-      this.meta
+      this.meta,
     )
   }
 
@@ -50,10 +50,10 @@ export class Ext extends Exp {
         "super",
         new Exps.Obj(
           parent_value.field_names.map(
-            (name) => new Exps.FieldShorthandProp(name)
-          )
-        )
-      )
+            (name) => new Exps.FieldShorthandProp(name),
+          ),
+        ),
+      ),
     )
 
     const rest_t_core = check(result.ctx, rest_t, new Exps.TypeValue())
@@ -84,7 +84,7 @@ export class Ext extends Exp {
           `I expect parent_value to be Exps.ClsValue,`,
           `but I found class name:`,
           `  ${parent_value.constructor.name}`,
-        ].join("\n") + "\n"
+        ].join("\n") + "\n",
       )
     }
 

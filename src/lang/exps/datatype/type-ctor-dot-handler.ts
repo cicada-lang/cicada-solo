@@ -21,7 +21,7 @@ export class TypeCtorDotHandler extends DotHandler {
           `I can not find data constructor on type constructor.`,
           `  data constructor name: ${name}`,
           `  type constructor name: ${this.target.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -29,14 +29,14 @@ export class TypeCtorDotHandler extends DotHandler {
       this.target,
       name,
       data_ctor.t,
-      data_ctor.original_typings
+      data_ctor.original_typings,
     )
   }
 
   infer_by_target(
     ctx: Ctx,
     core: Core,
-    name: string
+    name: string,
   ): { t: Value; core: Core } {
     const data_ctor = this.target.data_ctors[name]
     if (data_ctor === undefined) {
@@ -45,7 +45,7 @@ export class TypeCtorDotHandler extends DotHandler {
           `I can not find data constructor on type constructor.`,
           `  data constructor name: ${name}`,
           `  type constructor name: ${this.target.name}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 

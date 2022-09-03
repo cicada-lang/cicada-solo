@@ -60,7 +60,7 @@ export class ApCore extends Core {
 
     return new Exps.NotYetValue(
       target.t.ret_t_cl.apply(arg),
-      new Exps.ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
+      new Exps.ApNeutral(target.neutral, new Normal(target.t.arg_t, arg)),
     )
   }
 }

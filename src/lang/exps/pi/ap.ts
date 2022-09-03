@@ -29,7 +29,7 @@ export class Ap extends Exp {
     return new Ap(
       subst(this.target, name, exp),
       subst(this.arg, name, exp),
-      this.meta
+      this.meta,
     )
   }
 
@@ -45,7 +45,7 @@ export class Ap extends Exp {
       return inferred.t.implicit_inserter.insert_implicit_ap(
         ctx,
         inferred.core,
-        this.arg
+        this.arg,
       )
     }
 
@@ -67,7 +67,7 @@ export class Ap extends Exp {
         `  class name: ${inferred.t.constructor.name}`,
         `  application: ${this.format()}`,
         `  inferred.t: ${inferred_t_format}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 

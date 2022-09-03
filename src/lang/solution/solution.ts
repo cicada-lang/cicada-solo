@@ -47,7 +47,7 @@ export abstract class Solution {
     ctx: Ctx,
     t: Value,
     x: Value,
-    y: Value
+    y: Value,
   ): FailureSolution {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
     const x_core = readback(ctx, t, x)
@@ -65,7 +65,7 @@ export abstract class Solution {
   static fail_to_be_the_same_neutral(
     ctx: Ctx,
     x: Neutral,
-    y: Neutral
+    y: Neutral,
   ): FailureSolution {
     const x_core = x.readback_neutral(ctx)
     const y_core = y.readback_neutral(ctx)
@@ -133,7 +133,7 @@ export abstract class Solution {
           `  right : ${right_core.format()}`,
           ``,
           solution.message,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -152,7 +152,7 @@ export abstract class Solution {
     ctx: Ctx,
     maybe_pi: Value,
     this_args: Array<Value>,
-    that_args: Array<Value>
+    that_args: Array<Value>,
   ): Solution {
     let solution: Solution = this
 
@@ -162,7 +162,7 @@ export abstract class Solution {
           `I expect args length to be equal.`,
           `  this_args.length: ${this_args.length}`,
           `  that_args.length: ${that_args.length}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -181,7 +181,7 @@ export abstract class Solution {
     x_arg_t: Value,
     x: Closure,
     y_arg_t: Value,
-    y: Closure
+    y: Closure,
   ): Solution {
     const names = new Set([...this.names, x.name, y.name])
     const fresh_name = ut.freshen(names, x.name)
@@ -190,7 +190,7 @@ export abstract class Solution {
       ctx,
       ret_t,
       x.apply(new Exps.NotYetValue(x_arg_t, variable)),
-      y.apply(new Exps.NotYetValue(y_arg_t, variable))
+      y.apply(new Exps.NotYetValue(y_arg_t, variable)),
     )
   }
 
@@ -199,7 +199,7 @@ export abstract class Solution {
     x_arg_t: Value,
     x: Closure,
     y_arg_t: Value,
-    y: Closure
+    y: Closure,
   ): Solution {
     return this.unify_closure(ctx, new Exps.TypeValue(), x_arg_t, x, y_arg_t, y)
   }

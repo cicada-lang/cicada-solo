@@ -47,7 +47,7 @@ export class CdrCore extends Core {
 
     return new Exps.NotYetValue(
       target.t.cdr_t_cl.apply(Exps.CarCore.apply(target)),
-      new Exps.CdrNeutral(target.neutral)
+      new Exps.CdrNeutral(target.neutral),
     )
   }
 }

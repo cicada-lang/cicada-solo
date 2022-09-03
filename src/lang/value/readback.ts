@@ -36,7 +36,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   ) {
     return new Exps.TheCore(
       new Exps.GlobalCore("Absurd"),
-      value.neutral.readback_neutral(ctx)
+      value.neutral.readback_neutral(ctx),
     )
   }
 
@@ -52,7 +52,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
         `  value class name: ${value.constructor.name}`,
         `  type class name: ${t.constructor.name}`,
         `  type: ${t_core.format()}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

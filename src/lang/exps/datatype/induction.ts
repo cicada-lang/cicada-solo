@@ -15,7 +15,7 @@ export class Induction extends Exp {
     target: Exp,
     motive: Exp | undefined,
     case_entries: Array<Exps.CaseEntry>,
-    meta: ExpMeta
+    meta: ExpMeta,
   ) {
     super()
     this.meta = meta
@@ -29,7 +29,7 @@ export class Induction extends Exp {
       ...this.target.free_names(bound_names),
       ...(this.motive ? this.motive.free_names(bound_names) : []),
       ...this.case_entries.flatMap((case_entry) =>
-        Array.from(case_entry.exp.free_names(bound_names))
+        Array.from(case_entry.exp.free_names(bound_names)),
       ),
     ])
   }
@@ -42,7 +42,7 @@ export class Induction extends Exp {
         ...case_entry,
         exp: subst(case_entry.exp, name, exp),
       })),
-      this.meta
+      this.meta,
     )
   }
 
@@ -59,14 +59,14 @@ export class Induction extends Exp {
     return new Exps.InductionCore(
       target_core,
       motive_core,
-      this.check_case_entries(ctx, datatype, motive_value)
+      this.check_case_entries(ctx, datatype, motive_value),
     )
   }
 
   private build_motive_core_from_type(
     ctx: Ctx,
     datatype: Exps.DatatypeValue,
-    t: Value
+    t: Value,
   ): Core {
     let motive_core = readback(ctx, new Exps.TypeValue(), t)
 
@@ -90,7 +90,7 @@ export class Induction extends Exp {
         [
           `I can not infer type of induction without a motive`,
           `  induction: ${this.format()}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -107,7 +107,7 @@ export class Induction extends Exp {
       core: new Exps.InductionCore(
         target_core,
         motive_core,
-        this.check_case_entries(ctx, datatype, motive_value)
+        this.check_case_entries(ctx, datatype, motive_value),
       ),
     }
   }
@@ -134,7 +134,7 @@ export class Induction extends Exp {
   private check_case_entries(
     ctx: Ctx,
     datatype: Exps.DatatypeValue,
-    motive_value: Value
+    motive_value: Value,
   ): Array<Exps.CaseCoreEntry> {
     this.ensure_no_extra_cases(ctx, datatype)
 
@@ -148,7 +148,7 @@ export class Induction extends Exp {
 
   private get_case_entry(name: string): Exps.CaseEntry {
     const found = this.case_entries.find(
-      (case_entry) => case_entry.name === name
+      (case_entry) => case_entry.name === name,
     )
 
     if (found === undefined) {
@@ -158,7 +158,7 @@ export class Induction extends Exp {
           `I can not find case of given data constructor name.`,
           `  data constructor name: ${name}`,
           `  case names: ${case_names.join(", ")}`,
-        ].join("\n")
+        ].join("\n"),
       )
     }
 
@@ -175,7 +175,7 @@ export class Induction extends Exp {
             `I can not find data constructor from given case name.`,
             `  case name: ${case_entry.name}`,
             `  data constructor names: ${data_ctor_names.join(", ")}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
     }
@@ -187,7 +187,7 @@ export class Induction extends Exp {
       .map((case_entry) =>
         case_entry.nullary
           ? `case ${case_entry.name} => ${case_entry.exp.format()}`
-          : `case ${case_entry.name}${case_entry.exp.format()}`
+          : `case ${case_entry.name}${case_entry.exp.format()}`,
       )
       .join(" ")
 

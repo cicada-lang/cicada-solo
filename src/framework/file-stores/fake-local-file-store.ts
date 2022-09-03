@@ -16,7 +16,7 @@ export class FakeLocalFileStore extends LocalFileStore {
 
   async keys(): Promise<Array<string>> {
     return Array.from(
-      new Set([...(await this.fallback.keys()), ...Object.keys(this.faked)])
+      new Set([...(await this.fallback.keys()), ...Object.keys(this.faked)]),
     )
   }
 

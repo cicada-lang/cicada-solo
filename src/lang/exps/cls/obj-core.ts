@@ -14,8 +14,8 @@ export class ObjCore extends Core {
   free_names(bound_names: Set<string>): Set<string> {
     return new Set(
       Array.from(this.properties.values()).flatMap((property) =>
-        Array.from(property.free_names(bound_names))
-      )
+        Array.from(property.free_names(bound_names)),
+      ),
     )
   }
 

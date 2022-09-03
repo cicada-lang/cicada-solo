@@ -30,7 +30,7 @@ export abstract class GlobalValue extends Value {
   }
 
   private is_pi_like_value(
-    value: Value
+    value: Value,
   ): value is Exps.PiValue | Exps.ImplicitPiValue | Exps.VaguePiValue {
     return (
       value instanceof Exps.PiValue ||
@@ -48,7 +48,7 @@ export abstract class GlobalValue extends Value {
           [
             `I expect t to be pi-like type`,
             `  class name: ${t.constructor.name}`,
-          ].join("\n")
+          ].join("\n"),
         )
       }
 
@@ -96,14 +96,14 @@ export abstract class GlobalValue extends Value {
       solution = solution.unify_type(
         ctx,
         this_arg_t_values[index],
-        that_arg_t_values[index]
+        that_arg_t_values[index],
       )
 
       solution = solution.unify(
         ctx,
         this_arg_t_values[index],
         this_arg_value_entry.value,
-        that_arg_value_entry.value
+        that_arg_value_entry.value,
       )
     }
 

@@ -40,7 +40,7 @@ export class DatatypeValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.DatatypeValue)) {
       return Solution.failure(
-        `I expect that to also be DatatypeValue, just like this.`
+        `I expect that to also be DatatypeValue, just like this.`,
       )
     }
 
@@ -69,7 +69,7 @@ export class DatatypeValue extends Value {
       //   that does not occur in the return type.
       "_target",
       datatype_core,
-      new Exps.GlobalCore("Type")
+      new Exps.GlobalCore("Type"),
     )
 
     const varied_entries = Object.entries(this.type_ctor.varied).reverse()
@@ -77,7 +77,7 @@ export class DatatypeValue extends Value {
       motive_core = new Exps.PiCore(
         varied_arg_name,
         varied_arg_t_core,
-        motive_core
+        motive_core,
       )
     }
 
@@ -101,14 +101,14 @@ export class DatatypeValue extends Value {
 
     let case_t = data_ctor.build_ret_t(
       motive_core,
-      this.type_ctor.fixed_arg_names
+      this.type_ctor.fixed_arg_names,
     )
 
     if (data_ctor.is_direct_positive_recursive) {
       case_t = new Exps.PiCore(
         "almost",
         data_ctor.build_almost_t(motive_core),
-        case_t
+        case_t,
       )
     }
 
@@ -125,7 +125,7 @@ export class DatatypeValue extends Value {
 
   private build_pi_from_typing(
     core: Core,
-    typing: Exps.DataCtorCoreTyping
+    typing: Exps.DataCtorCoreTyping,
   ): Core {
     switch (typing.kind) {
       case "plain":

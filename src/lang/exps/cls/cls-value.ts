@@ -18,7 +18,7 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   abstract check_properties(
     ctx: Ctx,
-    properties: Map<string, Exp>
+    properties: Map<string, Exp>,
   ): Map<string, Core>
 
   abstract get_value(target: Value, field_name: string): Value
@@ -32,7 +32,7 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
 
   abstract extend_ctx(
     ctx: Ctx,
-    renamings: Array<{ field_name: string; local_name: string }>
+    renamings: Array<{ field_name: string; local_name: string }>,
   ): {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>

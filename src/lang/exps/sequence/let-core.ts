@@ -38,7 +38,7 @@ export class LetCore extends Core {
       [
         "We should not call LetCore.alpha_format,",
         "because Let expressions should be removed after readback.",
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }

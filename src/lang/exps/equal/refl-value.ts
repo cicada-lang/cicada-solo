@@ -41,14 +41,14 @@ export class ReflValue extends Exps.GlobalValue {
             new Exps.ApCore(
               new Exps.ApCore(
                 new Exps.GlobalCore("Equal"),
-                new Exps.VarCore("T")
+                new Exps.VarCore("T"),
               ),
-              new Exps.VarCore("x")
+              new Exps.VarCore("x"),
             ),
-            new Exps.VarCore("x")
-          )
-        )
-      )
+            new Exps.VarCore("x"),
+          ),
+        ),
+      ),
     )
   }
 }

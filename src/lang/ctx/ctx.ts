@@ -70,7 +70,7 @@ export abstract class Ctx {
           `  ${name}`,
           `existing names:`,
           `  ${this.names.join(", ")}`,
-        ].join("\n") + "\n"
+        ].join("\n") + "\n",
       )
     }
 
@@ -103,7 +103,7 @@ export abstract class Ctx {
         `  ${t_format}`,
         `and the value is:`,
         `  ${value_format}`,
-      ].join("\n")
+      ].join("\n"),
     )
   }
 }
@@ -113,7 +113,7 @@ class ExtendCtx extends Ctx {
     public name: string,
     public t: Value,
     public value: Value | undefined,
-    public rest: Ctx
+    public rest: Ctx,
   ) {
     super()
   }
@@ -138,7 +138,7 @@ class ExtendCtx extends Ctx {
         this.name,
         this.t,
         this.value,
-        this.rest.remove(name)
+        this.rest.remove(name),
       )
     }
   }

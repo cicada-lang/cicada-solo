@@ -10,7 +10,7 @@ export class GlobalApHandler extends ApHandler {
     target: Exps.GlobalValue,
     opts?: {
       finial_apply?: (arg_value_entries: Array<Exps.ArgValueEntry>) => Value
-    }
+    },
   ) {
     super()
     this.target = target
