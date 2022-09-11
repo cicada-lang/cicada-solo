@@ -1,6 +1,6 @@
 # Cicada Language
 
-**This is an old repository for cicada implementation before we have an active team, please see [cicada-lang/cicada](https://github.com/cicada-lang/cicada) for new developments.**
+**This is an old implementation of cicada language before we have an active team, please see [cicada-lang/cicada](https://github.com/cicada-lang/cicada) for new developments.**
 
 [ [HOMEPAGE](https://cicada-lang.org)
 | [MANUAL](https://readonly.link/manuals/cicada-lang/cicada)
