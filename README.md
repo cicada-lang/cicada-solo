@@ -1,6 +1,8 @@
 # Cicada Language
 
-**This is an old implementation of cicada language before we have an active team, please see [cicada-lang/cicada](https://github.com/cicada-lang/cicada) for new developments.**
+**This is an old implementation of cicada language before we have an active team.**
+
+**please see [cicada-lang/cicada](https://github.com/cicada-lang/cicada) for new developments.**
 
 [ [HOMEPAGE](https://cicada-lang.org)
 | [MANUAL](https://readonly.link/manuals/cicada-lang/cicada)
@@ -8,7 +10,7 @@
 
 Welcome **\*^-^\*/**
 
-Cicada language is a *dependently typed programming language* and an *interactive theorem prover*.
+Cicada language is a _dependently typed programming language_ and an _interactive theorem prover_.
 
 > The aim of cicada project is to help people understand that
 > developing software and developing mathematics
