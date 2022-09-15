@@ -1,4 +1,4 @@
-import * as ut from "../../ut"
+import * as ut from "../../utils"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exps"

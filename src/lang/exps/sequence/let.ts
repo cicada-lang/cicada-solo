@@ -1,4 +1,4 @@
-import * as ut from "../../../ut"
+import * as ut from "../../../utils"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, Exp, ExpMeta, infer, subst } from "../../exp"

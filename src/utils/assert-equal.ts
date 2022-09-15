@@ -1,4 +1,4 @@
-import * as ut from "../ut"
+import * as ut from "../utils"
 
 export function assertEqual(x: any, y: any): void {
   if (!ut.equal(x, y)) {

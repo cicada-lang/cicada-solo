@@ -1,6 +1,6 @@
-import { colors } from "../../ut/colors"
-import { formatTime } from "../../ut/format-date"
-import { indent } from "../../ut/indent"
+import { colors } from "../../utils/colors"
+import { formatTime } from "../../utils/format-date"
+import { indent } from "../../utils/indent"
 import { Logger, LogOptions } from "../logger"
 
 export class PrettyLogger extends Logger {

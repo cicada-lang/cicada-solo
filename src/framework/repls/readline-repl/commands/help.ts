@@ -1,4 +1,4 @@
-import * as ut from "../../../../ut"
+import * as ut from "../../../../utils"
 import { Command } from "../command"
 import { ReadlineRepl } from "../readline-repl"
 

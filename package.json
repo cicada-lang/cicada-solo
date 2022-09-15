@@ -5,6 +5,9 @@
   "files": [
     "lib"
   ],
+  "bin": {
+    "cic": "bin/cic.js"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
@@ -18,9 +21,6 @@
     "test:tests-error": "test-runner snapshot-error './bin/cic.js' 'docs/tests/**/*.error.(cic|md)'",
     "test:articles": "test-runner test './bin/cic.js' 'docs/articles/**/*.(cic|md)'",
     "test": "npm-run-all test:*"
-  },
-  "bin": {
-    "cic": "bin/cic.js"
   },
   "devDependencies": {
     "@types/commonmark": "^0.27.5",

@@ -1,5 +1,5 @@
-import { colors } from "../../ut/colors"
-import { freshen } from "../../ut/freshen"
+import { colors } from "../../utils/colors"
+import { freshen } from "../../utils/freshen"
 import { Env } from "../env"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exps"

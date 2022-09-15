@@ -4,7 +4,7 @@ import { ReplEvent, ReplEventHandler } from "../framework/repl"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
-import * as ut from "../ut"
+import * as ut from "../utils"
 
 export class AppReplEventHandler extends ReplEventHandler {
   loader = new ModLoader()
