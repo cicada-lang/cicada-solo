@@ -1,4 +1,5 @@
-import * as ut from "../../../utils"
+import { freshen } from "../../../utils/freshen"
+import { indent } from "../../../utils/indent"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
@@ -53,7 +54,7 @@ export class FulfilledCls extends Exps.Cls {
       )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.local_name)
+      const fresh_name = freshen(free_names, this.local_name)
 
       return new FulfilledCls(
         this.field_name,
@@ -79,7 +80,7 @@ export class FulfilledCls extends Exps.Cls {
 
   format(): string {
     const fields = this.fields_format().join("\n")
-    return `class {\n${ut.indent(fields, "  ")}\n}`
+    return `class {\n${indent(fields, "  ")}\n}`
   }
 
   private assertNoDuplicatedName(): void {

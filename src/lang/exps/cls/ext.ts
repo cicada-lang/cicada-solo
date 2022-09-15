@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { indent } from "../../../utils/indent"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
@@ -36,7 +36,7 @@ export class Ext extends Exp {
   format(): string {
     const parent = this.parent.format()
     const fields = this.rest_t.fields_format().join("\n")
-    return `class extends ${parent} {\n${ut.indent(fields, "  ")}\n}`
+    return `class extends ${parent} {\n${indent(fields, "  ")}\n}`
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

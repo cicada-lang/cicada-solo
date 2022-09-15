@@ -1,5 +1,5 @@
 import * as Exps from ".."
-import * as ut from "../../../utils"
+import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
@@ -23,7 +23,7 @@ export class VagueInserter {
   }
 
   insert_vague_fn(ctx: Ctx, exp: Exp): Core {
-    const fresh_name = ut.freshen(
+    const fresh_name = freshen(
       exp.free_names(new Set()),
       ctx.freshen(this.ret_t_cl.name),
     )

@@ -1,4 +1,4 @@
-import * as ut from "../../utils"
+import { indent } from "../../utils/indent"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
@@ -24,7 +24,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       throw new ElaborationError(
         [
           `I can not check the type of:`,
-          `${ut.indent(exp.format(), "  ")}`,
+          `${indent(exp.format(), "  ")}`,
           `I also can not check it by infer.`,
           `I suggest you add a type annotation to the expression.`,
         ].join("\n"),
@@ -57,9 +57,9 @@ export function check_by_infer(ctx: Ctx, exp: ExpWithInfer, t: Value): Core {
     throw new ElaborationError(
       [
         `I infer the type to be:`,
-        `${ut.indent(u_exp.format(), "  ")}`,
+        `${indent(u_exp.format(), "  ")}`,
         `But the expected type is:`,
-        `${ut.indent(t_exp.format(), "  ")}`,
+        `${indent(t_exp.format(), "  ")}`,
       ].join("\n"),
     )
   }

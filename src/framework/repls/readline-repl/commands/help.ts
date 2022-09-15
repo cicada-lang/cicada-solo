@@ -1,4 +1,4 @@
-import * as ut from "../../../../utils"
+import { rightPad } from "../../../../utils/right-pad"
 import { Command } from "../command"
 import { ReadlineRepl } from "../readline-repl"
 
@@ -14,7 +14,7 @@ export class Help extends Command {
     const size = Math.max(...repl.commands.map(({ name }) => name.length))
 
     const commands = repl.commands.map(
-      ({ name, description }) => `.${ut.rightPad(name, size)}   ${description}`,
+      ({ name, description }) => `.${rightPad(name, size)}   ${description}`,
     )
 
     console.log(

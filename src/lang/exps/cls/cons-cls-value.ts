@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
@@ -45,7 +45,7 @@ export class ConsClsValue extends Exps.ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen(new Set(ctx.names), this.rest_t_cl.name)
+      const fresh_name = freshen(new Set(ctx.names), this.rest_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.field_t,
         new Exps.VarNeutral(fresh_name),

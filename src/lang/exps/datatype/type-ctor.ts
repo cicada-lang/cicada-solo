@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { indent } from "../../../utils/indent"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
@@ -189,7 +189,7 @@ export class TypeCtor extends Exp {
     const i = this.varied_format()
     const head = `datatype ${n} ${p}${i}`
     const c = this.data_ctors_format()
-    const body = ut.indent(c, "  ")
+    const body = indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
 

@@ -1,7 +1,7 @@
-import * as ut from "../utils"
+import { equal } from "./equal"
 
 export function assertEqual(x: any, y: any): void {
-  if (!ut.equal(x, y)) {
+  if (!equal(x, y)) {
     throw new Error(
       [
         "I fail to assert equal, the following two values are not equal.",
@@ -13,7 +13,7 @@ export function assertEqual(x: any, y: any): void {
 }
 
 export function assertNotEqual(x: any, y: any): void {
-  if (ut.equal(x, y)) {
+  if (equal(x, y)) {
     throw new Error(
       [
         "I fail to assert not equal, the following two values are equal.",

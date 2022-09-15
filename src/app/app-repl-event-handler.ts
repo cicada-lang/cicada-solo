@@ -4,7 +4,7 @@ import { ReplEvent, ReplEventHandler } from "../framework/repl"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
-import * as ut from "../utils"
+import { colors } from "../utils/colors"
 
 export class AppReplEventHandler extends ReplEventHandler {
   loader = new ModLoader()
@@ -43,7 +43,7 @@ export class AppReplEventHandler extends ReplEventHandler {
         if (output instanceof StmtOutputs.NormalTerm) {
           const exp = output.exp.format()
           const t = output.t.format()
-          console.log(`${ut.colors.yellow(exp)}: ${ut.colors.blue(t)}`)
+          console.log(`${colors.yellow(exp)}: ${colors.blue(t)}`)
         } else {
           if (output) console.log(output.format().trim())
         }

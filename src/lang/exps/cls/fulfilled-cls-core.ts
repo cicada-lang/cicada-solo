@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { indent } from "../../../utils/indent"
 import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
@@ -69,7 +69,7 @@ export class FulfilledClsCore extends Exps.ClsCore {
 
   format(): string {
     const fields = this.fields_format().join("\n")
-    return `class {\n${ut.indent(fields, "  ")}\n}`
+    return `class {\n${indent(fields, "  ")}\n}`
   }
 
   fields_alpha_format(ctx: AlphaCtx): Array<string> {
@@ -82,6 +82,6 @@ export class FulfilledClsCore extends Exps.ClsCore {
 
   alpha_format(ctx: AlphaCtx): string {
     const fields = this.fields_alpha_format(ctx).join("\n")
-    return `class {\n${ut.indent(fields, "  ")}\n}`
+    return `class {\n${indent(fields, "  ")}\n}`
   }
 }

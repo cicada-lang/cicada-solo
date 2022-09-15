@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { colors } from "../../../utils/colors"
 import { Core } from "../../core"
 import { StmtOutput } from "../stmt-output"
 
@@ -17,8 +17,8 @@ export class NormalTerm extends StmtOutput {
   }
 
   formatForConsole(): string {
-    const exp_format = ut.colors.yellow(this.exp.format())
-    const t_format = ut.colors.blue(this.t.format())
+    const exp_format = colors.yellow(this.exp.format())
+    const t_format = colors.blue(this.t.format())
     return `${exp_format}: ${t_format}`
   }
 }

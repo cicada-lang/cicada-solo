@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { indent } from "../../../utils/indent"
 import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
@@ -95,7 +95,7 @@ export class TypeCtorCore extends Core {
     // NOTE structural typing (do not print `name`)
     const head = `datatype # ${p}${i}`
     const c = this.data_ctors_alpha_format(ctx.extend(this.name))
-    const body = ut.indent(c, "  ")
+    const body = indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
 

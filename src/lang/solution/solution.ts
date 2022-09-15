@@ -1,4 +1,4 @@
-import * as ut from "../../utils"
+import { freshen } from "../../utils/freshen"
 import { Ctx } from "../ctx"
 import { ElaborationError } from "../errors"
 import * as Exps from "../exps"
@@ -184,7 +184,7 @@ export abstract class Solution {
     y: Closure,
   ): Solution {
     const names = new Set([...this.names, x.name, y.name])
-    const fresh_name = ut.freshen(names, x.name)
+    const fresh_name = freshen(names, x.name)
     const variable = new Exps.VarNeutral(fresh_name)
     return this.unify_type(ctx, x_arg_t, y_arg_t).unify(
       ctx,

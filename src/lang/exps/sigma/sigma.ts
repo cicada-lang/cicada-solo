@@ -1,4 +1,4 @@
-import * as ut from "../../../utils"
+import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, Exp, ExpMeta, subst } from "../../exp"
@@ -37,7 +37,7 @@ export class Sigma extends Exp {
       )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.name)
+      const fresh_name = freshen(free_names, this.name)
 
       return new Sigma(
         fresh_name,
