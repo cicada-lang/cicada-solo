@@ -30,10 +30,14 @@ npm run test    # Run test
 
 ## Community
 
-- GitHub: [github.com/cicada-lang](https://github.com/cicada-lang)
-- Telegram: [CicadaLanguage](https://t.me/CicadaLanguage)
-  - 中文 / Chinese: [CicadaLanguageCN](https://t.me/CicadaLanguageCN)
-- IRC: `#cicada-lang` at [libera.chat](https://libera.chat)
+GitHub:
+
+- Main repo: [github.com/cicada-lang](https://github.com/cicada-lang)
+
+Telegram:
+
+- English chat group: [CicadaLanguage](https://t.me/CicadaLanguage)
+- Chinese chat group: [CicadaLanguageCN](https://t.me/CicadaLanguageCN)
 
 ## Thanks
 
