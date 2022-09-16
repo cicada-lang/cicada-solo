@@ -32,7 +32,7 @@ npm run test    # Run test
 
 GitHub:
 
-- Main repo: [github.com/cicada-lang](https://github.com/cicada-lang)
+- Organization: [github.com/cicada-lang](https://github.com/cicada-lang)
 
 Telegram:
 
