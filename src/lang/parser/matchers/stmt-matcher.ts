@@ -197,7 +197,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 export function import_entry_matcher(tree: pt.Tree): Stmts.ImportEntry {
   return pt.matcher({
     "import_entry:name": ({ name }) => ({ name: pt.str(name) }),
-    "import_entry:name_alias": ({ name, alias }) => ({
+    "import_entry:alias": ({ name, alias }) => ({
       name: pt.str(name),
       alias: pt.str(alias),
     }),
