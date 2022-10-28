@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
-    "@types/node": "^18.11.5",
-    "@xieyuheng/test-runner": "^0.2.5",
+    "@types/node": "^18.11.7",
+    "@xieyuheng/test-runner": "^0.2.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.1",
