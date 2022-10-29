@@ -23,7 +23,7 @@
     "test": "npm-run-all test:*"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.22",
+    "@cicada-lang/partech": "^0.1.23",
     "@xieyuheng/command-line": "^0.0.7",
     "@xieyuheng/test-case": "^0.0.14",
     "@xieyuheng/ty": "^0.1.17",

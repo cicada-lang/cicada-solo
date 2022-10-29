@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import * as pt from "@cicada-lang/partech"
 import * as grammars from "./grammars"
 import * as matchers from "./matchers"
 
