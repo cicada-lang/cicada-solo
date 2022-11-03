@@ -1,6 +1,6 @@
 {
   "name": "@cicada-lang/cicada-sole",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "repository": "github:cicada-lang/cicada-sole",
   "files": [
     "lib"
