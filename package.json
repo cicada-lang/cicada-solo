@@ -6,7 +6,7 @@
     "lib"
   ],
   "bin": {
-    "cic-sole": "bin/cic.js"
+    "cic-solo": "bin/cic.js"
   },
   "scripts": {
     "build": "tsc",
