@@ -36,7 +36,7 @@ export class Pi extends Exp {
         this.meta,
       )
     } else {
-      const free_names = exp.free_names(new Set())
+      const free_names = exp.free_names(this.free_names(new Set()))
       const fresh_name = freshen(free_names, this.name)
       const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
 

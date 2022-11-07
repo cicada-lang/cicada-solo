@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch",
+    "build:watch": "tsc --watch",
     "format": "prettier src docs --write",
     "test:test-case": "test-runner test 'test-case run' 'lib/**/*.case.js'",
     "test:js": "test-runner test node 'lib/**/*.test.js'",
