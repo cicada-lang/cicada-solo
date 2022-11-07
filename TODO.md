@@ -1,3 +1,18 @@
+fix `subst`
+
+- shoule be
+
+  ```
+  const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+  ```
+
+  instead of
+
+  ```
+  const freeNames = Exps.freeNames(new Set(), exp)
+  const freeNames = Exps.freeNames(Exps.freeNames(new Set(), body), exp)
+  ```
+
 rename Typing to PiBinding
 rename Naming to FnBinding
 
