@@ -33,10 +33,10 @@ We can even `import` from them.
 Since the name `Nat` is already imported, and we can not redefine names.
 We use `Nat as NatFromURL` to rename the imported definition.
 
-```cicada
+```cicada todo
 import {
   Nat as NatFromURL
-} from "https://readonly.link/files/cicada-lang/cicada/-/docs/manual/datatypes/nat.md"
+} from "https://cdn.cicada-solo.cic.run/docs/manual/datatypes/nat.md"
 
 compute NatFromURL.zero
 compute NatFromURL.add1(NatFromURL.zero)

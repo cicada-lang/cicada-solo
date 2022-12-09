@@ -1,4 +1,2 @@
 Nat.zero: Nat
 Nat.add1(Nat.zero): Nat
-Nat.zero: Nat
-Nat.add1(Nat.zero): Nat
