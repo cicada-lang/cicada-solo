@@ -4,8 +4,8 @@ import { Fetcher } from "../fetcher"
 export default class extends TestCase {
   async "A fetcher can handle http and https by default."() {
     const fetcher = new Fetcher()
-    await fetcher.fetch(new URL("http://example.com"))
-    await fetcher.fetch(new URL("https://example.com"))
+    await fetcher.fetch(new URL("http://bing.com"))
+    await fetcher.fetch(new URL("https://bing.com"))
   }
 
   async "A fetcher can not handler other protocols by default."() {

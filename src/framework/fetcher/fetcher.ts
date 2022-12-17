@@ -1,5 +1,3 @@
-import axios from "axios"
-
 type Handler = (url: URL) => string | Promise<string>
 
 export class Fetcher {
@@ -37,6 +35,6 @@ export class Fetcher {
 }
 
 async function httpHandler(url: URL): Promise<string> {
-  const { data } = await axios.get(url.href)
-  return data
+  const response = await fetch(url.href)
+  return await response.text()
 }
