@@ -32,7 +32,6 @@
       "structures/group.md",
       "structures/category.md",
       "structures/initial-and-terminal-objects.md",
-      "structures/groupoid-lexical-scope.test.cic",
       "structures/groupoid.md",
       "structures/order.md",
       "structures/set.md",
