@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "authors": ["Xie Yuheng"],
   "year": "2022",
-  "src": "docs/manual",
+  "src": "manual",
   "main": "introduction.md",
   "sections": {
     "default": ["installation.md", "introduction.md"],
