@@ -2,9 +2,9 @@ import { indent } from "../../../utils/indent"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { readback, Value } from "../../value"
+import { Value, readback } from "../../value"
 
 export class Ext extends Exp {
   meta: ExpMeta

@@ -1,10 +1,10 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp } from "../../exp"
+import { Exp, check } from "../../exp"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
-import { check_conversion, readback, Value } from "../../value"
+import { Value, check_conversion, readback } from "../../value"
 import { FulfilledClsApHandler } from "./fulfilled-cls-ap-handler"
 
 export class FulfilledClsValue extends Exps.ClsValue {

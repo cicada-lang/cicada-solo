@@ -1,9 +1,9 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check_by_infer, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { readback, Value } from "../../value"
+import { Value, readback } from "../../value"
 
 export class Dot extends Exp {
   meta?: ExpMeta

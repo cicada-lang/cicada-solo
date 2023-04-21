@@ -3,9 +3,9 @@ import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp, infer } from "../../exp"
+import { Exp, check, infer } from "../../exp"
 import { Solution } from "../../solution"
-import { readback, Value } from "../../value"
+import { Value, readback } from "../../value"
 import { Closure } from "../closure"
 
 interface VagueApEntry {

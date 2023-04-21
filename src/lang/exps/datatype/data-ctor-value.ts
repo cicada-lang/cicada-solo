@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { ElaborationError } from "../../errors"
 import { Solution } from "../../solution"
-import { readback, Value } from "../../value"
+import { Value, readback } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
 export class DataCtorValue extends Value {

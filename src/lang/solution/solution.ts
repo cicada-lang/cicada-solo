@@ -6,7 +6,7 @@ import { Closure } from "../exps/closure"
 import { Neutral } from "../neutral"
 import { Normal } from "../normal"
 import { EmptySolution, FailureSolution } from "../solution"
-import { expect, readback, Value } from "../value"
+import { Value, expect, readback } from "../value"
 
 export abstract class Solution {
   abstract extend(name: string, value: Value): Solution

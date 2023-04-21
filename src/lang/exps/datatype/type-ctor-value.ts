@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { ElaborationError } from "../../errors"
 import { Solution } from "../../solution"
-import { conversion, readback, Value } from "../../value"
+import { Value, conversion, readback } from "../../value"
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
 

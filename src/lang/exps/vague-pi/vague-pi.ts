@@ -2,7 +2,7 @@ import * as Exps from ".."
 import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { check, Exp, ExpMeta, subst } from "../../exp"
+import { Exp, ExpMeta, check, subst } from "../../exp"
 import { Value } from "../../value"
 import { PiFormater } from "../pi/pi-formater"
 

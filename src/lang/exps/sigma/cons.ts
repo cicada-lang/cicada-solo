@@ -1,8 +1,8 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { check, Exp, ExpMeta, subst } from "../../exp"
+import { Exp, ExpMeta, check, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { expect, Value } from "../../value"
+import { Value, expect } from "../../value"
 
 export class Cons extends Exp {
   meta: ExpMeta

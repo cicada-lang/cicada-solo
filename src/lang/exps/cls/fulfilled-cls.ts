@@ -3,7 +3,7 @@ import { indent } from "../../../utils/indent"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp, ExpMeta, subst } from "../../exp"
+import { Exp, ExpMeta, check, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 

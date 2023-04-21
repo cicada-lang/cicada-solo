@@ -2,7 +2,7 @@ import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, infer, subst } from "../../exp"
 import { Value } from "../../value"
 import { ApFormater } from "../pi/ap-formater"
 

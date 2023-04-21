@@ -2,7 +2,7 @@ import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Solution } from "../../solution"
-import { expect, readback, Value } from "../../value"
+import { Value, expect, readback } from "../../value"
 
 export class DatatypeValue extends Value {
   type_ctor: Exps.TypeCtorValue

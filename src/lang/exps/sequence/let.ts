@@ -1,7 +1,7 @@
 import { freshen } from "../../../utils/freshen"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 import { LetFormater } from "./let-formater"

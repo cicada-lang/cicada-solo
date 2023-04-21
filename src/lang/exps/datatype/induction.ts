@@ -1,9 +1,9 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, check_by_infer, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { expect, readback, Value } from "../../value"
+import { Value, expect, readback } from "../../value"
 
 export class Induction extends Exp {
   meta: ExpMeta

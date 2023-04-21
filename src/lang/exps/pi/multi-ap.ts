@@ -1,6 +1,6 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { check, check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, check_by_infer, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 

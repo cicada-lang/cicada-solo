@@ -1,8 +1,8 @@
 import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { check, Exp, ExpMeta, subst } from "../../exp"
-import { check_conversion, Value } from "../../value"
+import { Exp, ExpMeta, check, subst } from "../../exp"
+import { Value, check_conversion } from "../../value"
 
 export class SameAsChart extends Exp {
   meta: ExpMeta

@@ -1,9 +1,9 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ElaborationError } from "../../errors"
-import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import { Exp, ExpMeta, check, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { readback, Value } from "../../value"
+import { Value, readback } from "../../value"
 import { ApFormater } from "./ap-formater"
 
 export class Ap extends Exp {

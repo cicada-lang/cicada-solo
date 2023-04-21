@@ -2,7 +2,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { expect, Value } from "../../value"
+import { Value, expect } from "../../value"
 
 export class Car extends Exp {
   meta: ExpMeta
