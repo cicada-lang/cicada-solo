@@ -15,7 +15,11 @@ export abstract class Env {
 }
 
 class ExtendEnv extends Env {
-  constructor(public name: string, public value: Value, public rest: Env) {
+  constructor(
+    public name: string,
+    public value: Value,
+    public rest: Env,
+  ) {
     super()
   }
 
