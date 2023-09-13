@@ -36,7 +36,7 @@ We use `Nat as NatFromURL` to rename the imported definition.
 ```cicada todo
 import {
   Nat as NatFromURL
-} from "https://cdn.cicada-solo.cic.run/docs/manual/datatypes/nat.md"
+} from "https://code-of-cicada-solo.fidb.app/docs/manual/datatypes/nat.md"
 
 compute NatFromURL.zero
 compute NatFromURL.add1(NatFromURL.zero)
