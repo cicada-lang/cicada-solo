@@ -8,7 +8,7 @@ export function createCommandRunner(): CommandRunner {
       new Commands.ReplCommand(),
       new Commands.RunCommand(),
       new Commands.CheckCommand(),
-      new Commands.CommonHelpCommand(),
+      new Commands.CommonHelp(),
     ],
   })
 }

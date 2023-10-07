@@ -9,8 +9,8 @@
     "cic-solo": "bin/cic.js"
   },
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
+    "build": "rm -r lib && tsc",
+    "build:watch": "rm -r lib && tsc --watch",
     "format": "prettier src docs --write",
     "test:test-case": "test-runner test 'test-case run' 'lib/**/*.case.js'",
     "test:js": "test-runner test node 'lib/**/*.test.js'",
@@ -24,23 +24,23 @@
   },
   "dependencies": {
     "@cicada-lang/partech": "^0.2.5",
-    "@xieyuheng/command-line": "^0.0.10",
-    "@xieyuheng/test-case": "^0.0.14",
-    "@xieyuheng/ty": "^0.1.22",
+    "@xieyuheng/command-line": "^0.0.13",
+    "@xieyuheng/test-case": "^0.0.15",
+    "@xieyuheng/ty": "^0.1.26",
     "commonmark": "^0.30.0",
     "fast-deep-equal": "^3.1.3",
-    "node-watch": "^0.7.3",
+    "node-watch": "^0.7.4",
     "picocolors": "^1.0.0",
     "readdirp": "^3.6.0"
   },
   "devDependencies": {
-    "@types/commonmark": "^0.27.6",
-    "@types/node": "^20.4.2",
-    "@xieyuheng/test-runner": "^0.2.7",
+    "@types/commonmark": "^0.27.7",
+    "@types/node": "^20.8.3",
+    "@xieyuheng/test-runner": "^0.2.10",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.0",
+    "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "license": "GPL-3.0-or-later"
 }

@@ -1,4 +1,4 @@
-import ty from "@xieyuheng/ty"
+import { ty } from "@xieyuheng/ty"
 
 type Author = string | { name: string; username: string }
 
@@ -22,7 +22,7 @@ const AuthorSchema = ty.union(
 export const BookConfigSchema = ty.object<BookConfig>({
   title: ty.string(),
   subtitle: ty.optional(ty.string()),
-  version: ty.semver(),
+  version: ty.string(),
   src: ty.optional(ty.string()),
   authors: ty.optional(ty.array(AuthorSchema)),
   date: ty.optional(ty.string()),

@@ -1,5 +1,5 @@
 import { Command, CommandRunner } from "@xieyuheng/command-line"
-import ty from "@xieyuheng/ty"
+import { ty } from "@xieyuheng/ty"
 import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
@@ -90,7 +90,7 @@ export class RunCommand extends Command<Args, Opts> {
 }
 
 function createURL(path: string): URL {
-  if (ty.uri().isValid(path)) {
+  if (ty.url().isValid(path)) {
     return new URL(path)
   }
 
