@@ -8,7 +8,7 @@ title: Installation
 
 We also provide a set of command line tools.
 
-The command line program is called `cic`,
+The command-line program is called `cic`,
 you can install it using `npm` by the follow command:
 
 ```
