@@ -36,17 +36,6 @@ Thank you, [Dan Friedman](https://www.cs.indiana.edu/~dfried), for we learned mo
 
 Thank you, [David Christiansen](https://davidchristiansen.dk), for coauthoring ["The Little Typer"](https://mitpress.mit.edu/9780262536431/the-little-typer) with Dan, and writing up great tutorials ([1](https://davidchristiansen.dk/tutorials/nbe), [2](https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf)) about dependent types.
 
-## Community
-
-GitHub:
-
-- Organization: [github.com/cicada-lang](https://github.com/cicada-lang)
-
-Telegram:
-
-- English chat group: [CicadaLanguage](https://t.me/CicadaLanguage)
-- Chinese chat group: [CicadaLanguageCN](https://t.me/CicadaLanguageCN)
-
 ## Contributions
 
 To make a contribution,
